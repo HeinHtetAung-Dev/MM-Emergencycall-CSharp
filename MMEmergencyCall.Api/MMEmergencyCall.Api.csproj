@@ -11,4 +11,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MMEmergencyCall.Database\MMEmergencyCall.Database.csproj" />
+    <ProjectReference Include="..\MMEmergencyCall.Domain\MMEmergencyCall.Domain.csproj" />
+    <ProjectReference Include="..\MMEmergencyCall.Shared\MMEmergencyCall.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Endpoints\Login\" />
+  </ItemGroup>
+
 </Project>
