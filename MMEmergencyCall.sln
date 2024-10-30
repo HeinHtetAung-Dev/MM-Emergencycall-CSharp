@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMEmergencyCall.Shared", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMEmergencyCall.Domain", "MMEmergencyCall.Domain\MMEmergencyCall.Domain.csproj", "{F691E6F5-E807-4419-A0E1-38078ABFB005}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMEmergencyCall.Console", "MMEMergencyCall.Console\MMEmergencyCall.Console.csproj", "{CF9377EC-7BC2-4E9A-891E-B3D2A47C77E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{F691E6F5-E807-4419-A0E1-38078ABFB005}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F691E6F5-E807-4419-A0E1-38078ABFB005}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F691E6F5-E807-4419-A0E1-38078ABFB005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF9377EC-7BC2-4E9A-891E-B3D2A47C77E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9377EC-7BC2-4E9A-891E-B3D2A47C77E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9377EC-7BC2-4E9A-891E-B3D2A47C77E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9377EC-7BC2-4E9A-891E-B3D2A47C77E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
