@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{BB3851DD-EA6B-49C2-991D-A016846E5A7C}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		script.sql = script.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMEmergencyCall.Shared", "MMEmergencyCall.Shared\MMEmergencyCall.Shared.csproj", "{37F5B8D3-4C8B-4C8E-8054-979C9B1CE4C0}"
