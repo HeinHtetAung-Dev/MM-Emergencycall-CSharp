@@ -17,9 +17,5 @@ public partial class User
 
     public string? EmergencyDetails { get; set; }
 
-    public string? State { get; set; }
-
-    public string? Township { get; set; }
-
-    public virtual ICollection<EmergencyRequest> EmergencyRequests { get; set; } = new List<EmergencyRequest>();
+    public string TownshipCode { get; set; } = null!;
 }

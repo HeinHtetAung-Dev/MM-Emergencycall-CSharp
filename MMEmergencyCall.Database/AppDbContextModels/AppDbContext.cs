@@ -21,6 +21,10 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<ServiceProvider> ServiceProviders { get; set; }
 
+    public virtual DbSet<StateRegion> StateRegions { get; set; }
+
+    public virtual DbSet<Township> Townships { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,23 +44,8 @@ public partial class AppDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.ResponseTime).HasColumnType("datetime");
-            entity.Property(e => e.State).HasMaxLength(100);
             entity.Property(e => e.Status).HasMaxLength(50);
-            entity.Property(e => e.Township).HasMaxLength(100);
-
-            entity.HasOne(d => d.Provider).WithMany(p => p.EmergencyRequests)
-                .HasForeignKey(d => d.ProviderId)
-                .HasConstraintName("FK__Emergency__Provi__2E1BDC42");
-
-            entity.HasOne(d => d.Service).WithMany(p => p.EmergencyRequests)
-                .HasForeignKey(d => d.ServiceId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Emergency__Servi__2D27B809");
-
-            entity.HasOne(d => d.User).WithMany(p => p.EmergencyRequests)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Emergency__UserI__2C3393D0");
+            entity.Property(e => e.TownshipCode).HasMaxLength(100);
         });
 
         modelBuilder.Entity<EmergencyService>(entity =>
@@ -72,8 +61,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.PhoneNumber).HasMaxLength(15);
             entity.Property(e => e.ServiceName).HasMaxLength(100);
             entity.Property(e => e.ServiceType).HasMaxLength(50);
-            entity.Property(e => e.State).HasMaxLength(200);
-            entity.Property(e => e.Township).HasMaxLength(200);
+            entity.Property(e => e.TownshipCode).HasMaxLength(200);
         });
 
         modelBuilder.Entity<ServiceProvider>(entity =>
@@ -88,13 +76,26 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.ProviderName)
                 .HasMaxLength(200)
                 .IsUnicode(false);
-            entity.Property(e => e.State).HasMaxLength(100);
-            entity.Property(e => e.Township).HasMaxLength(100);
+            entity.Property(e => e.TownshipCode).HasMaxLength(100);
+        });
 
-            entity.HasOne(d => d.Service).WithMany(p => p.ServiceProviders)
-                .HasForeignKey(d => d.ServiceId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ServicePr__Servi__286302EC");
+        modelBuilder.Entity<StateRegion>(entity =>
+        {
+            entity.HasKey(e => e.StateRegionId).HasName("PK__StateReg__D8A834D4628417AC");
+
+            entity.Property(e => e.StateRegionCode).HasMaxLength(50);
+            entity.Property(e => e.StateRegionNameEn).HasMaxLength(200);
+            entity.Property(e => e.StateRegionNameMm).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<Township>(entity =>
+        {
+            entity.HasKey(e => e.TownshipId).HasName("PK__Township__8399C0933CD7D010");
+
+            entity.Property(e => e.StateRegionCode).HasMaxLength(50);
+            entity.Property(e => e.TownshipCode).HasMaxLength(50);
+            entity.Property(e => e.TownshipNameEn).HasMaxLength(200);
+            entity.Property(e => e.TownshipNameMm).HasMaxLength(200);
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -107,10 +108,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.EmergencyType).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(200);
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
-            entity.Property(e => e.State)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.Township)
+            entity.Property(e => e.TownshipCode)
                 .HasMaxLength(100)
                 .IsUnicode(false);
         });

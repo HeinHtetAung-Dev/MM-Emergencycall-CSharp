@@ -21,13 +21,5 @@ public partial class EmergencyRequest
 
     public string? Notes { get; set; }
 
-    public string? State { get; set; }
-
-    public string? Township { get; set; }
-
-    public virtual ServiceProvider? Provider { get; set; }
-
-    public virtual EmergencyService Service { get; set; } = null!;
-
-    public virtual User User { get; set; } = null!;
+    public string? TownshipCode { get; set; }
 }
