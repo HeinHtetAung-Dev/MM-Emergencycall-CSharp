@@ -1,11 +1,15 @@
-﻿namespace MMEmergencyCall.Domain.Features.Register;
+﻿using Microsoft.Extensions.Logging;
+
+namespace MMEmergencyCall.Domain.Features.Register;
 
 public class RegisterService
 {
+    private readonly ILogger<RegisterService> _logger;
     private readonly AppDbContext _db;
 
-    public RegisterService(AppDbContext context)
+    public RegisterService(ILogger<RegisterService> logger, AppDbContext context)
     {
+        _logger = logger;
         _db = context;
     }
 
@@ -26,15 +30,13 @@ public class RegisterService
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
 
-            // Return a successful result with the created user
             return new RegisterResponseModel(Result<User>.Success(user));
         }
         catch (Exception ex)
         {
-            // Log the exception as needed
-
-            // Return a failure result with an error message
-            return new RegisterResponseModel(Result<User>.Failure("An error occurred while registering the user: " + ex.Message));
+            string message = "An error occurred while registering the user: " + ex.ToString();
+            _logger.LogError(message);
+            return new RegisterResponseModel(Result<User>.Failure(message));
         }
     }
 }
