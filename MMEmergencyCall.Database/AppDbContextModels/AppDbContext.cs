@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace MMEmergencyCall.Database.AppDbContextModels;
+namespace MMEmergencyCall.Databases.AppDbContextModels;
 
 public partial class AppDbContext : DbContext
 {

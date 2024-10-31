@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MMEmergencyCall.Database.AppDbContextModels;
+namespace MMEmergencyCall.Databases.AppDbContextModels;
 
 public partial class Township
 {

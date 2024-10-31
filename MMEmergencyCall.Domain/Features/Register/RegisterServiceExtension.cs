@@ -1,12 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace MMEmergencyCall.Domain.Features.Register;
 
-namespace MMEmergencyCall.Domain.Features.Register
+public static class RegisterServiceExtension
 {
-    public static class RegisterServiceExtension
+    public static void AddRegisterService(this WebApplicationBuilder builder)
     {
-        public static void AddRegisterService(this IServiceCollection services)
-        {
-            services.AddScoped<RegisterService>();
-        }
+        builder.Services.AddScoped<RegisterService>();
     }
 }

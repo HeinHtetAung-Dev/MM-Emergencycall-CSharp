@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using MMEmergencyCall.Database.AppDbContextModels;
+using MMEmergencyCall.Databases.AppDbContextModels;
 using MMEmergencyCall.Domain.Features.Register;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 });
 
-builder.Services.AddRegisterService();
+builder.AddRegisterService();
 
 var app = builder.Build();
 

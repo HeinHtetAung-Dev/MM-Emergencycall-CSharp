@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MMEmergencyCall.Database\MMEmergencyCall.Database.csproj" />
+    <ProjectReference Include="..\MMEmergencyCall.Database\MMEmergencyCall.Databases.csproj" />
     <ProjectReference Include="..\MMEmergencyCall.Domain\MMEmergencyCall.Domain.csproj" />
     <ProjectReference Include="..\MMEmergencyCall.Shared\MMEmergencyCall.Shared.csproj" />
   </ItemGroup>

@@ -2,23 +2,22 @@
 using Microsoft.AspNetCore.Mvc;
 using MMEmergencyCall.Domain.Features.Register;
 
-namespace MMEmergencyCall.Api.Endpoints.Register
+namespace MMEmergencyCall.Api.Endpoints.Register;
+
+[Route("api/[controller]")]
+[ApiController]
+public class RegisterController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class RegisterController : ControllerBase
+    private readonly RegisterService _registerService;
+
+    public RegisterController(RegisterService registerService)
     {
-        private readonly RegisterService _registerService;
+        _registerService = registerService;
+    }
 
-        public RegisterController(RegisterService registerService)
-        {
-            _registerService = registerService;
-        }
-
-        [HttpPost]
-        public IActionResult Register(RegisterRequestModel requestModel)
-        {
-            return Ok(_registerService.Register(requestModel)); 
-        }
+    [HttpPost]
+    public async Task<IActionResult> Register(RegisterRequestModel requestModel)
+    {
+        return Ok(await _registerService.RegisterUserAsync(requestModel)); 
     }
 }

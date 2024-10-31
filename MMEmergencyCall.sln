@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35417.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMEmergencyCall.Api", "MMEmergencyCall.Api\MMEmergencyCall.Api.csproj", "{BCD10C76-700F-4372-9967-6F3279FF5332}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMEmergencyCall.Database", "MMEmergencyCall.Database\MMEmergencyCall.Database.csproj", "{B626FCEB-10A6-40B7-AB20-F3C810CCF15F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMEmergencyCall.Databases", "MMEmergencyCall.Database\MMEmergencyCall.Databases.csproj", "{B626FCEB-10A6-40B7-AB20-F3C810CCF15F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{BB3851DD-EA6B-49C2-991D-A016846E5A7C}"
 	ProjectSection(SolutionItems) = preProject
