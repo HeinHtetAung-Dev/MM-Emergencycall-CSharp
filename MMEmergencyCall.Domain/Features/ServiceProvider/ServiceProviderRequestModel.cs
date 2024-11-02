@@ -1,9 +1,7 @@
-﻿namespace MMEmergencyCall.Databases.AppDbContextModels;
+﻿namespace MMEmergencyCall.Domain.Features.ServiceProvider;
 
-public partial class ServiceProvider
+public class ServiceProviderRequestModel
 {
-    public int ProviderId { get; set; }
-
     public string ProviderName { get; set; } = null!;
 
     public int ServiceId { get; set; }
