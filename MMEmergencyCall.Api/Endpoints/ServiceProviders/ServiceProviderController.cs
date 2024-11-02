@@ -21,4 +21,34 @@ public class ServiceProviderController : ControllerBase
         var response = await _serviceProviderService.GetServiceProviders();
         return Ok(response);
     }
+
+    [HttpGet("{providerId}")]
+    public async Task<IActionResult> GetServiceProviderById(int providerId)
+    {
+        var response = await _serviceProviderService.GetServiceProviderById(providerId);
+        return Ok(response);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddServiceProvider(ServiceProviderRequestModel request)
+    {
+        if (request == null) {
+            return BadRequest("Request model cannot be null");
+        }
+
+        var response = await _serviceProviderService.AddServiceProvider(request);
+        return Ok(response);
+    }
+
+    [HttpPut("{providerId}")]
+    public async Task<IActionResult> UpdateServiceProvider(int providerId,  ServiceProviderRequestModel request)
+    {
+        if (request == null)
+        {
+            return BadRequest("Request model cannot be null");
+        }
+
+        var response = await _serviceProviderService.UpdateServiceProvider(providerId, request);
+        return Ok(response);
+    }
 }

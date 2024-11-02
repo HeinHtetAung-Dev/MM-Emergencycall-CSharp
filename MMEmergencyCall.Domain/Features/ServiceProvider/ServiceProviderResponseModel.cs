@@ -2,9 +2,9 @@
 
 public class ServiceProviderResponseModel
 {
-    public Result<List<Databases.AppDbContextModels.ServiceProvider>> Result { get; set; }
+    public Result<Databases.AppDbContextModels.ServiceProvider> Result { get; set; }
 
-    public ServiceProviderResponseModel(Result<List<Databases.AppDbContextModels.ServiceProvider>> result)
+    public ServiceProviderResponseModel(Result<Databases.AppDbContextModels.ServiceProvider> result)
     {
         Result = result;
     }
