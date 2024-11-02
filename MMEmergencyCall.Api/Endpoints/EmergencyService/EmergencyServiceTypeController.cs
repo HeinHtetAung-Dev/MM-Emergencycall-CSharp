@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Features.EmergencyService;
 using MMEmergencyCall.Domain.Features.EmergencyServiceType;
 
 namespace MMEmergencyCall.Api.Endpoints.EmergencyService
