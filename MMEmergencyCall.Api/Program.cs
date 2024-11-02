@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MMEmergencyCall.Databases.AppDbContextModels;
+using MMEmergencyCall.Domain.Features.EmergencyServiceType;
 using MMEmergencyCall.Domain.Features.Register;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 
 builder.AddRegisterService();
+builder.AddEmergencyServiceType();
 
 var app = builder.Build();
 
