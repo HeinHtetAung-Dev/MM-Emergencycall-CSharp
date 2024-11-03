@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Domain.Features.Register;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,12 @@ public class SigninService
         _db = db;
     }
 
-    public SigninResponseModel Signin(SigninRequestModel requestModel)
+    public async Task<SigninResponseModel> SigninAsync(SigninRequestModel requestModel)
     {        
-        var user = _db.Users
+        var user = await _db.Users.AsNoTracking()
             .Where(u => u.Email == requestModel.Email
                     && u.Password == requestModel.Password)
-            .FirstOrDefault();
+            .FirstOrDefaultAsync();
 
         if (user is null)
         {

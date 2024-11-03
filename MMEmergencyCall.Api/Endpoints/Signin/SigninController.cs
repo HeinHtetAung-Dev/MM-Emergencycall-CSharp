@@ -16,9 +16,9 @@ public class SigninController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Signin(SigninRequestModel requestModel)
+    public async Task<IActionResult> SigninAsync(SigninRequestModel requestModel)
     {
-        var response = _signinService.Signin(requestModel);
+        var response = await _signinService.SigninAsync(requestModel);
         return Ok(response.Result);
     }
 }

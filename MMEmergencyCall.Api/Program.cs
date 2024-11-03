@@ -27,6 +27,7 @@ builder.AddEmergencyServiceService();
 builder.AddEmergencyServiceType();
 builder.AddServiceProviderType();
 builder.AddEmergencyRequest();
+builder.AddSigninService();
 
 var app = builder.Build();
 
