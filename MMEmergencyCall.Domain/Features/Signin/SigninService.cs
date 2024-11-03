@@ -23,8 +23,8 @@ public class SigninService
     public SigninResponseModel Signin(SigninRequestModel requestModel)
     {        
         var user = _db.Users
-            .Where(u => u.Name == requestModel.Name
-                    && u.PhoneNumber == requestModel.PhoneNumber)
+            .Where(u => u.Email == requestModel.Email
+                    && u.Password == requestModel.Password)
             .FirstOrDefault();
 
         if (user is null)
