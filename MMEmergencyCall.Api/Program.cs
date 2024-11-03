@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MMEmergencyCall.Databases.AppDbContextModels;
+using MMEmergencyCall.Domain.Features.EmergencyRequests;
 using MMEmergencyCall.Domain.Features.EmergencyServices;
 using MMEmergencyCall.Domain.Features.EmergencyServiceType;
 using MMEmergencyCall.Domain.Features.Register;
@@ -24,6 +25,7 @@ builder.AddRegisterService();
 builder.AddEmergencyServiceService();
 builder.AddEmergencyServiceType();
 builder.AddServiceProviderType();
+builder.AddEmergencyRequest();
 
 
 var app = builder.Build();
