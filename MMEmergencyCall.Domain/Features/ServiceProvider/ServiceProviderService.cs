@@ -44,11 +44,11 @@ public class ServiceProviderService
         {
             var serviceProvider = await _db.ServiceProviders.AsNoTracking().FirstOrDefaultAsync(x => x.ProviderId == id);
 
-            if (serviceProvider is null)
+            if(serviceProvider is null)
             {
                 return new ServiceProviderResponseModel(
                            Result<Databases.AppDbContextModels.ServiceProvider>
-                           .Success(serviceProvider, "Service Provider with Id " + id + " not found."));
+                           .Success(serviceProvider,"Service Provider with Id "+ id + " not found." ));
             }
 
             var response = new ServiceProviderResponseModel(
@@ -59,7 +59,7 @@ public class ServiceProviderService
         catch (Exception ex)
         {
 
-            string message = "An error occurred while getting the service provider by id " + id + " : " + ex.Message;
+            string message = "An error occurred while getting the service provider by id: " + ex.Message;
             _logger.LogError(message);
             return new ServiceProviderResponseModel(
                 Result<Databases.AppDbContextModels.ServiceProvider>.Failure(message));
@@ -88,21 +88,20 @@ public class ServiceProviderService
         }
         catch (Exception ex)
         {
-            string message = "An error occurred while adding the service provider: " + ex.Message;
+            string message = "An error occurred while adding the service providers: " + ex.Message;
             _logger.LogError(message);
             return new ServiceProviderResponseModel(
                 Result<Databases.AppDbContextModels.ServiceProvider>.Failure(message));
         }
     }
 
-    public async Task<ServiceProviderResponseModel> UpdateServiceProvider(int id, ServiceProviderRequestModel request)
+    public async Task<ServiceProviderResponseModel> UpdateServiceProvider(int id,ServiceProviderRequestModel request)
     {
         try
         {
             var existingServiceProvider = await _db.ServiceProviders.AsNoTracking().FirstOrDefaultAsync(x => x.ProviderId == id);
-
-            if (existingServiceProvider == null)
-            {
+            
+            if (existingServiceProvider == null) {
                 return new ServiceProviderResponseModel(
                           Result<Databases.AppDbContextModels.ServiceProvider>
                           .Success(existingServiceProvider, "Service Provider with Id " + id + " not found."));
@@ -127,7 +126,7 @@ public class ServiceProviderService
         }
         catch (Exception ex)
         {
-            string message = "An error occurred while updating the service provider with id " + id + " : " + ex.Message;
+            string message = "An error occurred while updating the service providers: " + ex.Message;
             _logger.LogError(message);
             return new ServiceProviderResponseModel(
                 Result<Databases.AppDbContextModels.ServiceProvider>.Failure(message));
