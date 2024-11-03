@@ -55,9 +55,9 @@ public class EmergencyRequestController : ControllerBase
         return Ok(response);
     }
 
-    private IActionResult ValidateEmergencyRequest(EmergencyRequestRequestModel request)
+    private IActionResult? ValidateEmergencyRequest(EmergencyRequestRequestModel? request)
     {
-        if(request == null)
+        if(request is null)
         {
             return BadRequest("Request model cannot be null");
         }

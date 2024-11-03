@@ -54,9 +54,9 @@ public class ServiceProviderController : ControllerBase
         return Ok(response);
     }
 
-    private IActionResult ValidateServiceProviderRequestModel(ServiceProviderRequestModel request)
+    private IActionResult? ValidateServiceProviderRequestModel(ServiceProviderRequestModel? request)
     {
-        if (request == null)
+        if (request is null)
         {
             return BadRequest("Request model cannot be null");
         }
