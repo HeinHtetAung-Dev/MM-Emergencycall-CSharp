@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MMEmergencyCall.Domain.Features.EmergencyServices;
 
-public class EmergencyServiceReponseModel
+public class EmergencyServiceListResponseModel
 {
-    public Result<EmergencyService> Result { get; set; }
+    public Result<List<EmergencyService>> Result { get; set; }
 
-    public EmergencyServiceReponseModel(Result<EmergencyService> result)
+    public EmergencyServiceListResponseModel(Result<List<EmergencyService>> result)
     {
         Result = result;
     }

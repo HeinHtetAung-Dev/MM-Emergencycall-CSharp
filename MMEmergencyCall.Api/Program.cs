@@ -27,7 +27,6 @@ builder.AddEmergencyServiceType();
 builder.AddServiceProviderType();
 builder.AddEmergencyRequest();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
+using MMEmergencyCall.Domain.Features.ServiceProvider;
 
 namespace MMEmergencyCall.Domain.Features.EmergencyServices;
 
@@ -20,7 +23,74 @@ public class EmergencyServiceService
         _db = db;
     }
 
-    public async Task<EmergencyServiceReponseModel> CreateEmergencyServiceAsync(
+    public async Task<EmergencyServiceResponseModel> GetEmergencyServiceById(int serviceId)
+    {
+        try
+        {
+            var emergencyService = await _db
+                .EmergencyServices.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.ServiceId == serviceId);
+            if (emergencyService == null)
+            {
+                return new EmergencyServiceResponseModel(
+                    Result<EmergencyService>.Success(
+                        emergencyService,
+                        "Emergency Service with Id: " + serviceId + " not found."
+                    )
+                );
+            }
+
+            var response = new EmergencyServiceResponseModel(
+                Result<EmergencyService>.Success(emergencyService)
+            );
+            return response;
+        }
+        catch (Exception ex)
+        {
+            string message =
+                "An error occurred while getting emergency service by ID: " + ex.ToString();
+            _logger.LogError(message);
+            return new EmergencyServiceResponseModel(Result<EmergencyService>.Failure(message));
+        }
+    }
+
+    public async Task<EmergencyServiceListResponseModel> GetEmergencyServiceByServiceType(
+        string serviceType
+    )
+    {
+        try
+        {
+            var lst = await _db
+                .EmergencyServices.AsNoTracking()
+                .Where(x => x.ServiceType == serviceType)
+                .ToListAsync();
+            if (lst == null)
+            {
+                return new EmergencyServiceListResponseModel(
+                    Result<List<EmergencyService>>.Failure(
+                        "Emergency Service with service type: " + serviceType + " not found."
+                    )
+                );
+            }
+
+            var response = new EmergencyServiceListResponseModel(
+                Result<List<EmergencyService>>.Success(lst)
+            );
+            return response;
+        }
+        catch (Exception ex)
+        {
+            string message =
+                "An error occurred while getting emergency service by service type: "
+                + ex.ToString();
+            _logger.LogError(message);
+            return new EmergencyServiceListResponseModel(
+                Result<List<EmergencyService>>.Failure(message)
+            );
+        }
+    }
+
+    public async Task<EmergencyServiceResponseModel> CreateEmergencyServiceAsync(
         EmergencyServiceRequestModel request
     )
     {
@@ -38,7 +108,7 @@ public class EmergencyServiceService
 
             _db.EmergencyServices.Add(emergencyService);
             await _db.SaveChangesAsync();
-            return new EmergencyServiceReponseModel(
+            return new EmergencyServiceResponseModel(
                 Result<EmergencyService>.Success(emergencyService)
             );
         }
@@ -46,7 +116,7 @@ public class EmergencyServiceService
         {
             string message = "An error occurred while creating emergency service: " + ex.ToString();
             _logger.LogError(message);
-            return new EmergencyServiceReponseModel(Result<EmergencyService>.Failure(message));
+            return new EmergencyServiceResponseModel(Result<EmergencyService>.Failure(message));
         }
     }
 }
