@@ -32,8 +32,9 @@ public class ServiceProviderController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddServiceProvider(ServiceProviderRequestModel request)
     {
-        if (request == null) {
-            return BadRequest("Request model cannot be null");
+        var validateResult = ValidateServiceProviderRequestModel(request);
+        if (validateResult != null) {
+            return validateResult;
         }
 
         var response = await _serviceProviderService.AddServiceProvider(request);
@@ -43,12 +44,33 @@ public class ServiceProviderController : ControllerBase
     [HttpPut("{providerId}")]
     public async Task<IActionResult> UpdateServiceProvider(int providerId,  ServiceProviderRequestModel request)
     {
+        var validateResult = ValidateServiceProviderRequestModel(request);
+        if (validateResult != null)
+        {
+            return validateResult;
+        }
+
+        var response = await _serviceProviderService.UpdateServiceProvider(providerId, request);
+        return Ok(response);
+    }
+
+    private IActionResult ValidateServiceProviderRequestModel(ServiceProviderRequestModel request)
+    {
         if (request == null)
         {
             return BadRequest("Request model cannot be null");
         }
 
-        var response = await _serviceProviderService.UpdateServiceProvider(providerId, request);
-        return Ok(response);
+        if(request.ServiceId < 1)
+        {
+            return BadRequest("Invalid ServiceId");
+        }
+
+        if(request.Availability != "Y" && request.Availability != "N")
+        {
+            return BadRequest("Availability should be either 'Y' or 'N'");
+        }
+
+        return null;
     }
 }
