@@ -5,6 +5,7 @@ using MMEmergencyCall.Domain.Features.EmergencyServices;
 using MMEmergencyCall.Domain.Features.EmergencyServiceType;
 using MMEmergencyCall.Domain.Features.Register;
 using MMEmergencyCall.Domain.Features.ServiceProvider;
+using MMEmergencyCall.Domain.Features.Signin;
 
 var builder = WebApplication.CreateBuilder(args);
 

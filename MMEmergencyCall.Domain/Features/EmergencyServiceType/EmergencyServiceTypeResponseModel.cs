@@ -8,7 +8,7 @@ namespace MMEmergencyCall.Domain.Features.EmergencyServiceType;
 
 public class EmergencyServiceTypeResponseModel
 {
-    public Result<List<string>> Result;
+    public readonly Result<List<string>> Result;
 
     public EmergencyServiceTypeResponseModel(Result<List<string>> result)
     {
