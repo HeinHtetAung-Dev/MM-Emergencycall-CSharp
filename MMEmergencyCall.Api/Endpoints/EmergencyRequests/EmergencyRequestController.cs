@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MMEmergencyCall.Domain.Features.EmergencyRequests;
+using MMEmergencyCall.Api.Middlewares;
 
 namespace MMEmergencyCall.Api.Endpoints.EmergencyRequests;
 
 [Route("api/[controller]")]
 [ApiController]
+[CustomAuthorize]
 public class EmergencyRequestController : ControllerBase
 {
     private readonly EmergencyRequestService _emergencyRequestService;

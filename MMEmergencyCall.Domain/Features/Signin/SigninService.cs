@@ -30,9 +30,20 @@ public class SigninService
 
         if (user is null)
         {
-            return new SigninResponseModel(Result<User>.Failure("Username or Password is incorrect."));
-        }      
+            return new SigninResponseModel(Result<SigninModel>.Failure("Username or Password is incorrect."));
+        }
 
-        return new SigninResponseModel(Result<User>.Success(user));
+        SigninModel signin = new SigninModel
+        {
+            Email = user.Email,
+            Name = user.Name,
+            SessionExpiredTime = DateTime.Now.AddMinutes(5),
+            UserId = user.UserId
+        };
+
+        var token = signin.ToJson().ToEncrypt();
+        signin.Token = token;
+
+        return new SigninResponseModel(Result<SigninModel>.Success(signin));
     } 
 }
