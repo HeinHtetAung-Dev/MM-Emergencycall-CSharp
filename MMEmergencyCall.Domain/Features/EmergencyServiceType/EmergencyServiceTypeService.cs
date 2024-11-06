@@ -27,8 +27,8 @@ public class EmergencyServiceTypeService
         try
         {
             List<string> lst = _db.EmergencyServices.Select(s => s.ServiceType).Distinct().ToList();
-
-            return new EmergencyServiceTypeResponseModel(Result<List<string>>.Success(lst));
+            var model = new EmergencyServiceTypeResponseModel(Result<List<string>>.Success(lst));
+            return model;
         }
         catch (Exception ex)
         {

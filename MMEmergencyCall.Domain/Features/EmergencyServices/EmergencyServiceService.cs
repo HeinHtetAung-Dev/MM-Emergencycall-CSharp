@@ -33,8 +33,7 @@ public class EmergencyServiceService
             if (emergencyService == null)
             {
                 return new EmergencyServiceResponseModel(
-                    Result<EmergencyService>.Success(
-                        emergencyService,
+                    Result<EmergencyService>.Failure(
                         "Emergency Service with Id: " + serviceId + " not found."
                     )
                 );

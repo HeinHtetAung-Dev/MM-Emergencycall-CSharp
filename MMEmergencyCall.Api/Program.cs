@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
+    opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 });
 

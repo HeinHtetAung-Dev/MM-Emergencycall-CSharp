@@ -123,7 +123,8 @@ public class EmergencyRequestService
                 TownshipCode = request.TownshipCode
             };
 
-            _db.EmergencyRequests.Update(emergencyRequest);
+            _db.Entry(emergencyRequest).State = EntityState.Modified;
+            //_db.EmergencyRequests.Update(emergencyRequest);
             await _db.SaveChangesAsync();
 
             return new EmergencyRequestResponseModel(

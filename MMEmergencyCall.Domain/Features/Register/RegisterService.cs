@@ -30,7 +30,8 @@ public class RegisterService
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
 
-            return new RegisterResponseModel(Result<User>.Success(user));
+            var model = new RegisterResponseModel(Result<User>.Success(user));
+            return model;
         }
         catch (Exception ex)
         {
