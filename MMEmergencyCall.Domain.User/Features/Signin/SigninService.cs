@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMEmergencyCall.Domain.Features.Signin;
+namespace MMEmergencyCall.Domain.User.Features.Signin;
 
 public class SigninService
 {
@@ -22,7 +22,7 @@ public class SigninService
     }
 
     public async Task<SigninResponseModel> SigninAsync(SigninRequestModel requestModel)
-    {        
+    {
         var user = await _db.Users.AsNoTracking()
             .Where(u => u.Email == requestModel.Email
                     && u.Password == requestModel.Password)
@@ -45,5 +45,5 @@ public class SigninService
         signin.Token = token;
 
         return new SigninResponseModel(Result<SigninModel>.Success(signin));
-    } 
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace MMEmergencyCall.Domain.Features.EmergencyRequests;
+﻿namespace MMEmergencyCall.Domain.User.Features.EmergencyRequests;
 
 public class EmergencyRequestListResponseModel
 {

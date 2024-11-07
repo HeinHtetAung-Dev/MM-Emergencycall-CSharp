@@ -1,4 +1,4 @@
-﻿namespace MMEmergencyCall.Domain.Features.Register;
+﻿namespace MMEmergencyCall.Domain.User.Features.Register;
 
 public static class RegisterServiceExtension
 {

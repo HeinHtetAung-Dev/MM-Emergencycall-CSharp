@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace MMEmergencyCall.Domain.Features.Register;
+namespace MMEmergencyCall.Domain.User.Features.Register;
 
 public class RegisterService
 {

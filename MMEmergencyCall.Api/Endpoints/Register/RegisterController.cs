@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Features.Register;
+using MMEmergencyCall.Domain.User.Features.Register;
 
 namespace MMEmergencyCall.Api.Endpoints.Register;
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Features.Signin;
+using MMEmergencyCall.Domain.User.Features.Signin;
 
 namespace MMEmergencyCall.Api.Endpoints.Signin;
 
