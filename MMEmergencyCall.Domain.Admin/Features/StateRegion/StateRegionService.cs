@@ -26,10 +26,13 @@ public class StateRegionService
 
         var response = new StateRegionResponseModel
         {
-            StateRegionId = stateRegion.StateRegionId,
-            StateRegionCode = stateRegion.StateRegionCode,
-            StateRegionNameEn = stateRegion.StateRegionNameEn,
-            StateRegionNameMm = stateRegion.StateRegionNameMm
+            Data = new StateRegionModel
+            {
+                StateRegionId = stateRegion.StateRegionId,
+                StateRegionCode = stateRegion.StateRegionCode,
+                StateRegionNameEn = stateRegion.StateRegionNameEn,
+                StateRegionNameMm = stateRegion.StateRegionNameMm
+            }
         };
 
         return Result<StateRegionResponseModel>.Success(response, "State region created successfully.");
@@ -43,10 +46,13 @@ public class StateRegionService
 
         var response = new StateRegionResponseModel
         {
-            StateRegionId = stateRegion.StateRegionId,
-            StateRegionCode = stateRegion.StateRegionCode,
-            StateRegionNameEn = stateRegion.StateRegionNameEn,
-            StateRegionNameMm = stateRegion.StateRegionNameMm
+            Data = new StateRegionModel
+            {
+                StateRegionId = stateRegion.StateRegionId,
+                StateRegionCode = stateRegion.StateRegionCode,
+                StateRegionNameEn = stateRegion.StateRegionNameEn,
+                StateRegionNameMm = stateRegion.StateRegionNameMm
+            }
         };
 
         return Result<StateRegionResponseModel>.Success(response);
@@ -66,10 +72,13 @@ public class StateRegionService
 
         var response = new StateRegionResponseModel
         {
-            StateRegionId = stateRegion.StateRegionId,
-            StateRegionCode = stateRegion.StateRegionCode,
-            StateRegionNameEn = stateRegion.StateRegionNameEn,
-            StateRegionNameMm = stateRegion.StateRegionNameMm
+            Data = new StateRegionModel
+            {
+                StateRegionId = stateRegion.StateRegionId,
+                StateRegionCode = stateRegion.StateRegionCode,
+                StateRegionNameEn = stateRegion.StateRegionNameEn,
+                StateRegionNameMm = stateRegion.StateRegionNameMm
+            }
         };
 
         return Result<StateRegionResponseModel>.Success(response, "State region updated successfully.");
@@ -93,14 +102,13 @@ public class StateRegionService
 
         var response = new StateRegionListResponseModel
         {
-            StateRegions = stateRegions.Select(sr => new StateRegionResponseModel
+            Data = stateRegions.Select(sr => new StateRegionModel
             {
                 StateRegionId = sr.StateRegionId,
                 StateRegionCode = sr.StateRegionCode,
                 StateRegionNameEn = sr.StateRegionNameEn,
                 StateRegionNameMm = sr.StateRegionNameMm
             }).ToList(),
-            TotalCount = stateRegions.Count
         };
 
         return Result<StateRegionListResponseModel>.Success(response);

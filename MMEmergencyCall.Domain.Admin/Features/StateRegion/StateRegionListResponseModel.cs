@@ -2,6 +2,5 @@
 
 public class StateRegionListResponseModel
 {
-    public List<StateRegionResponseModel> StateRegions { get; set; } = new List<StateRegionResponseModel>();
-    public int TotalCount { get; set; }
+    public List<StateRegionModel> Data { get; set; } = new List<StateRegionModel>();
 }
