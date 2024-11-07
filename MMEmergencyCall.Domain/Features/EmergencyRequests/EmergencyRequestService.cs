@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MMEmergencyCall.Domain.Features.ServiceProvider;
 
 namespace MMEmergencyCall.Domain.Features.EmergencyRequests;
 

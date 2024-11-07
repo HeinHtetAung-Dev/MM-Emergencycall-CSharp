@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
-using MMEmergencyCall.Domain.Features.ServiceProvider;
 
 namespace MMEmergencyCall.Domain.Features.EmergencyServices;
 
