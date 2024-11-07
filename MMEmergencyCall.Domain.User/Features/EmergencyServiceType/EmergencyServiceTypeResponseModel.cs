@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMEmergencyCall.Domain.User.Features.EmergencyServiceType;
+namespace MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;
 
 public class EmergencyServiceTypeResponseModel
 {

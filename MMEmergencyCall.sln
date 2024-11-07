@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMEmergencyCall.Shared", "MMEmergencyCall.Shared\MMEmergencyCall.Shared.csproj", "{37F5B8D3-4C8B-4C8E-8054-979C9B1CE4C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMEmergencyCall.Domain.User", "MMEmergencyCall.Domain.User\MMEmergencyCall.Domain.User.csproj", "{F691E6F5-E807-4419-A0E1-38078ABFB005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMEmergencyCall.Domain.Client", "MMEmergencyCall.Domain.User\MMEmergencyCall.Domain.Client.csproj", "{F691E6F5-E807-4419-A0E1-38078ABFB005}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMEmergencyCall.Console", "MMEMergencyCall.Console\MMEmergencyCall.Console.csproj", "{CF9377EC-7BC2-4E9A-891E-B3D2A47C77E6}"
 EndProject

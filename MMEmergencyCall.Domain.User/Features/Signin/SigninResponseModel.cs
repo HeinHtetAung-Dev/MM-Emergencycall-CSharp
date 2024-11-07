@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMEmergencyCall.Domain.User.Features.Signin;
+namespace MMEmergencyCall.Domain.Client.Features.Signin;
 
 public class SigninResponseModel
 {
@@ -14,17 +14,4 @@ public class SigninResponseModel
     {
         Result = result;
     }
-}
-
-public class SigninModel
-{
-    public int UserId { get; set; }
-
-    public string Name { get; set; } = null!;
-
-    public string Email { get; set; } = null!;
-
-    public DateTime? SessionExpiredTime { get; set; }
-
-    public string Token { get; set; } = null!;
 }

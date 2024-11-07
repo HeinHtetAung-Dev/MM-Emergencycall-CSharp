@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using MMEmergencyCall.Shared;
-using MMEmergencyCall.Domain.User.Features.Signin;
+using MMEmergencyCall.Domain.Client.Features.Signin;
 
 namespace MMEmergencyCall.Api.Middlewares
 {

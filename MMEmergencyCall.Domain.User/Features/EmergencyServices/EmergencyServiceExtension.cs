@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMEmergencyCall.Domain.User.Features.EmergencyServices;
+namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 
 public static class EmergencyServiceExtension
 {

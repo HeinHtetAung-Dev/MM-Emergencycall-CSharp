@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using MMEmergencyCall.Databases.AppDbContextModels;
-using MMEmergencyCall.Domain.Features.ServiceProvider;
-using MMEmergencyCall.Domain.User.Features.EmergencyRequests;
-using MMEmergencyCall.Domain.User.Features.EmergencyServices;
-using MMEmergencyCall.Domain.User.Features.EmergencyServiceType;
+using MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
+using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
+using MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;
+using MMEmergencyCall.Domain.Client.Features.Register;
+using MMEmergencyCall.Domain.Client.Features.Signin;
 using MMEmergencyCall.Domain.User.Features.Register;
-using MMEmergencyCall.Domain.User.Features.Signin;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,9 +28,9 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.AddRegisterService();
 builder.AddEmergencyServiceService();
 builder.AddEmergencyServiceType();
-builder.AddServiceProviderType();
 builder.AddEmergencyRequest();
 builder.AddSigninService();
+builder.AddStateRegionService();
 
 var app = builder.Build();
 

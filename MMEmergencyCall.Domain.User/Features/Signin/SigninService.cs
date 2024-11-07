@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MMEmergencyCall.Domain.Features.Register;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MMEmergencyCall.Databases.AppDbContextModels;
 
-namespace MMEmergencyCall.Domain.User.Features.Signin;
+namespace MMEmergencyCall.Domain.Client.Features.Signin;
 
 public class SigninService
 {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace MMEmergencyCall.Domain.User.Features.EmergencyServiceType;
+namespace MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;
 
 public class EmergencyServiceTypeService
 {

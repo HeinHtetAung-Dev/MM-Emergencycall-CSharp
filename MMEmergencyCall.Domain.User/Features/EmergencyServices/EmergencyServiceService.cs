@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
 
-namespace MMEmergencyCall.Domain.User.Features.EmergencyServices;
+namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 
 public class EmergencyServiceService
 {
