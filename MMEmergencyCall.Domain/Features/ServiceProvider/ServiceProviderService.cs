@@ -22,12 +22,12 @@ public class ServiceProviderService
     {
         try
         {
-            var serviceProviders = await _db.ServiceProviders.AsNoTracking().ToListAsync();
-            var response = new ServiceProviderListResponseModel(
-                Result<List<Databases.AppDbContextModels.ServiceProvider>>
-                    .Success(serviceProviders));
+            var serviceProviders = await _db.ServiceProviders.ToListAsync();
+            var model = new ServiceProviderListResponseModel(
+                           Result<List<Databases.AppDbContextModels.ServiceProvider>>
+                           .Success(serviceProviders));
 
-            return response;
+            return model;
         }
         catch (Exception ex)
         {
@@ -42,8 +42,7 @@ public class ServiceProviderService
     {
         try
         {
-            var serviceProvider =
-                await _db.ServiceProviders.AsNoTracking().FirstOrDefaultAsync(x => x.ProviderId == id);
+            var serviceProvider = await _db.ServiceProviders.FirstOrDefaultAsync(x => x.ProviderId == id);
 
             if (serviceProvider is null)
             {
@@ -52,10 +51,10 @@ public class ServiceProviderService
                         .Failure("Service Provider with Id " + id + " not found."));
             }
 
-            var response = new ServiceProviderResponseModel(
-                Result<Databases.AppDbContextModels.ServiceProvider>
-                    .Success(serviceProvider));
-            return response;
+            var model = new ServiceProviderResponseModel(
+                        Result<Databases.AppDbContextModels.ServiceProvider>
+                       .Success(serviceProvider));
+            return model;
         }
         catch (Exception ex)
         {
@@ -82,8 +81,9 @@ public class ServiceProviderService
             _db.ServiceProviders.Add(serviceProvider);
             await _db.SaveChangesAsync();
 
-            return new ServiceProviderResponseModel(
-                Result<Databases.AppDbContextModels.ServiceProvider>.Success(serviceProvider));
+            var model = new ServiceProviderResponseModel(
+                        Result<Databases.AppDbContextModels.ServiceProvider>.Success(serviceProvider));
+            return model;
         }
         catch (Exception ex)
         {
@@ -98,8 +98,7 @@ public class ServiceProviderService
     {
         try
         {
-            var existingServiceProvider =
-                await _db.ServiceProviders.AsNoTracking().FirstOrDefaultAsync(x => x.ProviderId == id);
+            var existingServiceProvider = await _db.ServiceProviders.FirstOrDefaultAsync(x => x.ProviderId == id);
 
             if (existingServiceProvider == null)
             {
@@ -118,12 +117,14 @@ public class ServiceProviderService
                 TownshipCode = request.TownshipCode,
             };
 
-            _db.ServiceProviders.Update(serviceProvider);
+            _db.Entry(serviceProvider).State = EntityState.Modified;
             await _db.SaveChangesAsync();
 
-            return new ServiceProviderResponseModel(
-                Result<Databases.AppDbContextModels.ServiceProvider>
-                    .Success(serviceProvider));
+            var model = new ServiceProviderResponseModel(
+                        Result<Databases.AppDbContextModels.ServiceProvider>
+                       .Success(serviceProvider));
+
+            return model;
         }
         catch (Exception ex)
         {
