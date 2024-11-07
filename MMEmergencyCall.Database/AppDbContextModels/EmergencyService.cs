@@ -7,6 +7,8 @@ public partial class EmergencyService
 {
     public int ServiceId { get; set; }
 
+    public string ServiceGroup { get; set; } = null!;
+
     public string ServiceType { get; set; } = null!;
 
     public string ServiceName { get; set; } = null!;
