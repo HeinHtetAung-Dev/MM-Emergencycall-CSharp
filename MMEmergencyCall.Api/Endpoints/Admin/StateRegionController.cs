@@ -96,10 +96,10 @@ public class StateRegionController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var result = await _stateRegionService.DeleteAsync(id);
-        if (!result.IsSuccess)
-            return NotFound(result);
+        var model = await _stateRegionService.DeleteAsync(id);
+        if (!model.IsSuccess)
+            return NotFound(model);
 
-        return Ok(result);
+        return Ok(model);
     }
 }
