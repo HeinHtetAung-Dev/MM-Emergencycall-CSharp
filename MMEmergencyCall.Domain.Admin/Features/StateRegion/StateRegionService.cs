@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MMEmergencyCall.Databases.AppDbContextModels;
 using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Domain.Admin.Features.StateRegion;
 
 public class StateRegionService
 {
-    private readonly DbContext _context;
+    private readonly AppDbContext _context;
 
-    public StateRegionService(DbContext context)
+    public StateRegionService(AppDbContext context)
     {
         _context = context;
     }
