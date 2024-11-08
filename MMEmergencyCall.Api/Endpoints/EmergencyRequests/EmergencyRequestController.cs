@@ -7,7 +7,7 @@ namespace MMEmergencyCall.Api.Endpoints.EmergencyRequests;
 
 [Route("api/[controller]")]
 [ApiController]
-[CustomAuthorize]
+//[CustomAuthorize]
 public class EmergencyRequestController : ControllerBase
 {
     private readonly EmergencyRequestService _emergencyRequestService;

@@ -2,10 +2,21 @@
 
 public class EmergencyRequestResponseModel
 {
-    public Result<EmergencyRequest> Result { get; set; }
+    public int RequestId { get; set; }
 
-    public EmergencyRequestResponseModel(Result<EmergencyRequest> result)
-    {
-        Result = result;
-    }
+    public int UserId { get; set; }
+
+    public int ServiceId { get; set; }
+
+    public int? ProviderId { get; set; }
+
+    public DateTime RequestTime { get; set; }
+
+    public string Status { get; set; } = null!;
+
+    public DateTime? ResponseTime { get; set; }
+
+    public string? Notes { get; set; }
+
+    public string? TownshipCode { get; set; }
 }
