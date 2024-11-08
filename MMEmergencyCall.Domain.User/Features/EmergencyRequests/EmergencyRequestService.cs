@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MMEmergencyCall.Databases.AppDbContextModels;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
@@ -14,55 +15,70 @@ public class EmergencyRequestService
         _db = context;
     }
 
-    public async Task<EmergencyRequestListResponseModel> GetEmergencyRequests()
+    public async Task<Result<List<EmergencyRequestResponseModel>>> GetEmergencyRequests()
     {
         try
         {
             var emergencyRequests = await _db.EmergencyRequests.AsNoTracking().ToListAsync();
-            var response = new EmergencyRequestListResponseModel(
-                Result<List<EmergencyRequest>>
-                    .Success(emergencyRequests));
+            var response = emergencyRequests.Select(er => new EmergencyRequestResponseModel
+            {
+                RequestId = er.RequestId,
+                UserId = er.UserId,
+                ServiceId = er.ServiceId,
+                ProviderId = er.ProviderId,
+                RequestTime = er.RequestTime,
+                Status = er.Status,
+                ResponseTime = er.ResponseTime,
+                Notes = er.Notes,
+                TownshipCode = er.TownshipCode
+            }).ToList();
 
-            return response;
+            return Result<List<EmergencyRequestResponseModel>>.Success(response);
         }
         catch (Exception ex)
         {
             string message = "An error occurred while getting the emergency requests: " + ex.Message;
             _logger.LogError(message);
-            return new EmergencyRequestListResponseModel(
-                Result<List<EmergencyRequest>>.Failure(message));
+            return Result<List<EmergencyRequestResponseModel>>.Failure(message);
         }
     }
 
-    public async Task<EmergencyRequestResponseModel> GetEmergencyRequestById(int id)
+    public async Task<Result<EmergencyRequestResponseModel>> GetEmergencyRequestById(int id)
     {
         try
         {
-            var emergencyRequest =
-                await _db.EmergencyRequests.AsNoTracking().FirstOrDefaultAsync(x => x.RequestId == id);
+            var emergencyRequest = await _db.EmergencyRequests.FirstOrDefaultAsync(x => x.RequestId == id);
 
             if (emergencyRequest is null)
             {
-                return new EmergencyRequestResponseModel(
-                    Result<EmergencyRequest>
-                        .Failure("Emergency Request with Id " + id + " not found."));
+                return Result<EmergencyRequestResponseModel>
+                        .Failure("Emergency Request with Id " + id + " not found.");
             }
 
-            var response = new EmergencyRequestResponseModel(
-                Result<EmergencyRequest>
-                    .Success(emergencyRequest));
-            return response;
+
+            var response = new EmergencyRequestResponseModel()
+            {
+                RequestId = emergencyRequest.RequestId,
+                UserId = emergencyRequest.UserId,
+                ServiceId = emergencyRequest.ServiceId,
+                ProviderId = emergencyRequest.ProviderId,
+                RequestTime = emergencyRequest.RequestTime,
+                Status = emergencyRequest.Status,
+                ResponseTime = emergencyRequest.ResponseTime,
+                Notes = emergencyRequest.Notes,
+                TownshipCode = emergencyRequest.TownshipCode
+            };
+            return Result<EmergencyRequestResponseModel>.Success(response);
         }
         catch (Exception ex)
         {
             string message = "An error occurred while getting the emergency request with id " + id + " : " + ex.Message;
             _logger.LogError(message);
-            return new EmergencyRequestResponseModel(
-                Result<EmergencyRequest>.Failure(message));
+            return Result<EmergencyRequestResponseModel>.Failure(message);
         }
     }
 
-    public async Task<EmergencyRequestResponseModel> AddEmergencyRequest(EmergencyRequestRequestModel request)
+    public async Task<Result<EmergencyRequestResponseModel>> AddEmergencyRequest(EmergencyRequestRequestModel request)
     {
         try
         {
@@ -81,19 +97,29 @@ public class EmergencyRequestService
             _db.EmergencyRequests.Add(emergencyRequest);
             await _db.SaveChangesAsync();
 
-            return new EmergencyRequestResponseModel(
-                Result<EmergencyRequest>.Success(emergencyRequest));
+            var response = new EmergencyRequestResponseModel()
+            {
+                RequestId = emergencyRequest.RequestId,
+                UserId = emergencyRequest.UserId,
+                ServiceId = emergencyRequest.ServiceId,
+                ProviderId = emergencyRequest.ProviderId,
+                RequestTime = emergencyRequest.RequestTime,
+                Status = emergencyRequest.Status,
+                ResponseTime = emergencyRequest.ResponseTime,
+                Notes = emergencyRequest.Notes,
+                TownshipCode = emergencyRequest.TownshipCode
+            };
+            return Result<EmergencyRequestResponseModel>.Success(response);
         }
         catch (Exception ex)
         {
             string message = "An error occurred while adding the emergency request : " + ex.Message;
             _logger.LogError(message);
-            return new EmergencyRequestResponseModel(
-                Result<EmergencyRequest>.Failure(message));
+            return Result<EmergencyRequestResponseModel>.Failure(message);
         }
     }
 
-    public async Task<EmergencyRequestResponseModel> UpdateEmergencyRequest(int id,
+    public async Task<Result<EmergencyRequestResponseModel>> UpdateEmergencyRequest(int id,
         EmergencyRequestRequestModel request)
     {
         try
@@ -103,9 +129,8 @@ public class EmergencyRequestService
 
             if (existingEmergencyRequest is null)
             {
-                return new EmergencyRequestResponseModel(
-                    Result<EmergencyRequest>
-                        .Failure("Emergency Request with Id " + id + " not found."));
+                return Result<EmergencyRequestResponseModel>
+                      .Failure("Emergency Request with Id " + id + " not found.");
             }
 
 
@@ -126,16 +151,27 @@ public class EmergencyRequestService
             //_db.EmergencyRequests.Update(emergencyRequest);
             await _db.SaveChangesAsync();
 
-            return new EmergencyRequestResponseModel(
-                Result<EmergencyRequest>.Success(emergencyRequest));
+            var response = new EmergencyRequestResponseModel()
+            {
+                RequestId = emergencyRequest.RequestId,
+                UserId = emergencyRequest.UserId,
+                ServiceId = emergencyRequest.ServiceId,
+                ProviderId = emergencyRequest.ProviderId,
+                RequestTime = emergencyRequest.RequestTime,
+                Status = emergencyRequest.Status,
+                ResponseTime = emergencyRequest.ResponseTime,
+                Notes = emergencyRequest.Notes,
+                TownshipCode = emergencyRequest.TownshipCode
+            };
+
+            return Result<EmergencyRequestResponseModel>.Success(response);
         }
         catch (Exception ex)
         {
             string message = "An error occurred while updating the emergency request with id " + id + " : " +
                              ex.Message;
             _logger.LogError(message);
-            return new EmergencyRequestResponseModel(
-                Result<EmergencyRequest>.Failure(message));
+            return Result<EmergencyRequestResponseModel>.Failure(message);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
 using MMEmergencyCall.Shared;
 
@@ -6,83 +7,107 @@ namespace MMEmergencyCall.Domain.Admin.Features.StateRegion;
 
 public class StateRegionService
 {
+    private readonly ILogger<StateRegionService> _logger;
     private readonly AppDbContext _context;
 
-    public StateRegionService(AppDbContext context)
+    public StateRegionService(ILogger<StateRegionService> logger, AppDbContext context)
     {
+        _logger = logger;
         _context = context;
     }
 
-    public async Task<Result<StateRegionResponseModel>> CreateAsync(StateRegionRequestModel model)
+    public async Task<Result<StateRegionResponseModel>> CreateAsync(StateRegionRequestModel requestModel)
     {
-        var stateRegion = new Databases.AppDbContextModels.StateRegion
+        try
         {
-            StateRegionCode = model.StateRegionCode,
-            StateRegionNameEn = model.StateRegionNameEn,
-            StateRegionNameMm = model.StateRegionNameMm
-        };
+            var stateRegion = new Databases.AppDbContextModels.StateRegion
+            {
+                StateRegionCode = requestModel.StateRegionCode,
+                StateRegionNameEn = requestModel.StateRegionNameEn,
+                StateRegionNameMm = requestModel.StateRegionNameMm
+            };
 
-        _context.Add(stateRegion);
-        await _context.SaveChangesAsync();
+            _context.Add(stateRegion);
+            await _context.SaveChangesAsync();
 
-        var response = new StateRegionResponseModel
-        {
-            Data = new StateRegionModel
+            var model = new StateRegionResponseModel
             {
                 StateRegionId = stateRegion.StateRegionId,
                 StateRegionCode = stateRegion.StateRegionCode,
                 StateRegionNameEn = stateRegion.StateRegionNameEn,
                 StateRegionNameMm = stateRegion.StateRegionNameMm
-            }
-        };
+            };
 
-        return Result<StateRegionResponseModel>.Success(response, "State region created successfully.");
+            return Result<StateRegionResponseModel>.Success(model, "State region created successfully.");
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while creating the state region requests: " + ex.Message;
+            _logger.LogError(message);
+            return Result<StateRegionResponseModel>.Failure(message);
+        }
     }
 
     public async Task<Result<StateRegionResponseModel>> GetByIdAsync(int id)
     {
-        var stateRegion = await _context.Set<Databases.AppDbContextModels.StateRegion>().FindAsync(id);
-        if (stateRegion == null)
-            return Result<StateRegionResponseModel>.Failure("State region not found.");
-
-        var response = new StateRegionResponseModel
+        try
         {
-            Data = new StateRegionModel
+            var stateRegion = await _context.Set<Databases.AppDbContextModels.StateRegion>().FindAsync(id);
+            if (stateRegion == null)
+            {
+                return Result<StateRegionResponseModel>.Failure("State region not found.");
+            }
+
+            var model = new StateRegionResponseModel
             {
                 StateRegionId = stateRegion.StateRegionId,
                 StateRegionCode = stateRegion.StateRegionCode,
                 StateRegionNameEn = stateRegion.StateRegionNameEn,
                 StateRegionNameMm = stateRegion.StateRegionNameMm
-            }
-        };
+            };
 
-        return Result<StateRegionResponseModel>.Success(response);
+            return Result<StateRegionResponseModel>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while getting the state region requests for id " + id + " : " + ex.Message;
+            _logger.LogError(message);
+            return Result<StateRegionResponseModel>.Failure(message);
+        }
     }
 
-    public async Task<Result<StateRegionResponseModel>> UpdateAsync(int id, StateRegionRequestModel model)
+    public async Task<Result<StateRegionResponseModel>> UpdateAsync(int id, StateRegionRequestModel requestModel)
     {
-        var stateRegion = await _context.Set<Databases.AppDbContextModels.StateRegion>().FindAsync(id);
-        if (stateRegion == null)
-            return Result<StateRegionResponseModel>.Failure("State region not found.");
-
-        stateRegion.StateRegionCode = model.StateRegionCode;
-        stateRegion.StateRegionNameEn = model.StateRegionNameEn;
-        stateRegion.StateRegionNameMm = model.StateRegionNameMm;
-
-        await _context.SaveChangesAsync();
-
-        var response = new StateRegionResponseModel
+        try
         {
-            Data = new StateRegionModel
+            var stateRegion = await _context.Set<Databases.AppDbContextModels.StateRegion>().FindAsync(id);
+            if (stateRegion == null)
+            {
+                return Result<StateRegionResponseModel>.Failure("State region with id " + id + " not found.");
+            }
+
+            stateRegion.StateRegionCode = requestModel.StateRegionCode;
+            stateRegion.StateRegionNameEn = requestModel.StateRegionNameEn;
+            stateRegion.StateRegionNameMm = requestModel.StateRegionNameMm;
+
+            await _context.SaveChangesAsync();
+
+            var model = new StateRegionResponseModel
             {
                 StateRegionId = stateRegion.StateRegionId,
                 StateRegionCode = stateRegion.StateRegionCode,
                 StateRegionNameEn = stateRegion.StateRegionNameEn,
                 StateRegionNameMm = stateRegion.StateRegionNameMm
-            }
-        };
+            };
 
-        return Result<StateRegionResponseModel>.Success(response, "State region updated successfully.");
+            return Result<StateRegionResponseModel>.Success(model, "State region updated successfully.");
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while updating the state region requests for id " + id + " : " + ex.Message;
+            _logger.LogError(message);
+            return Result<StateRegionResponseModel>.Failure(message);
+        }
     }
 
     public async Task<Result<bool>> DeleteAsync(int id)
@@ -97,21 +122,18 @@ public class StateRegionService
         return Result<bool>.Success(true, "State region deleted successfully.");
     }
 
-    public async Task<Result<StateRegionListResponseModel>> GetAllAsync()
+    public async Task<Result<List<StateRegionResponseModel>>> GetAllAsync()
     {
         var stateRegions = await _context.Set<Databases.AppDbContextModels.StateRegion>().ToListAsync();
 
-        var response = new StateRegionListResponseModel
+        var model = stateRegions.Select(sr => new StateRegionResponseModel
         {
-            Data = stateRegions.Select(sr => new StateRegionModel
-            {
-                StateRegionId = sr.StateRegionId,
-                StateRegionCode = sr.StateRegionCode,
-                StateRegionNameEn = sr.StateRegionNameEn,
-                StateRegionNameMm = sr.StateRegionNameMm
-            }).ToList(),
-        };
+            StateRegionId = sr.StateRegionId,
+            StateRegionCode = sr.StateRegionCode,
+            StateRegionNameEn = sr.StateRegionNameEn,
+            StateRegionNameMm = sr.StateRegionNameMm
+        }).ToList();
 
-        return Result<StateRegionListResponseModel>.Success(response);
+        return Result<List<StateRegionResponseModel>>.Success(model);
     }
 }
