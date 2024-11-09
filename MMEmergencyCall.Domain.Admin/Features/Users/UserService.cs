@@ -19,15 +19,23 @@ public class UserService
         _context = context;
     }
 
-    public async Task<Result<UserListResponseModel>> GetAllAsync()
+    public async Task<Result<List<UserResponseModel>>> GetAllAsync()
     {
         var users = await _context.Set<User>().ToListAsync();
 
-        var response = new UserListResponseModel
+        var response = users.Select(u => new UserResponseModel
         {
-            UserList = users
-        };
+            UserId = u.UserId,
+            Name = u.Name,
+            Email = u.Email,
+            Password = u.Password,
+            PhoneNumber = u.PhoneNumber,
+            Address = u.Address,
+            EmergencyType = u.EmergencyType,
+            EmergencyDetails = u.EmergencyDetails,
+            TownshipCode = u.TownshipCode
+        }).ToList();
 
-        return Result<UserListResponseModel>.Success(response);
+        return Result<List<UserResponseModel>>.Success(response);
     }
 }
