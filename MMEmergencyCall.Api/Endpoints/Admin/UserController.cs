@@ -19,9 +19,18 @@ public class UserController : ControllerBase
     {
         var model = await _userService.GetAllAsync();
         if (!model.IsSuccess)
-        {
             return NotFound(model);
-        }
+
+        return Ok(model);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByIdAsync(int id)
+    {
+        var model = await _userService.GetByIdAsync(id);
+        if(!model.IsSuccess)
+            return NotFound(model);
+
         return Ok(model);
     }
 }
