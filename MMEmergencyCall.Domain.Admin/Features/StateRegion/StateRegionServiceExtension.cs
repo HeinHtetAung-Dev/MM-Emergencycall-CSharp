@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using MMEmergencyCall.Domain.Admin.Features.StateRegion;
 
-namespace MMEmergencyCall.Domain.User.Features.Register;
+namespace MMEmergencyCall.Domain.Admin.Features.StateRegion;
 
 public static class StateRegionServiceExtension
 {
