@@ -2,12 +2,20 @@
 using Microsoft.AspNetCore.Mvc;
 using MMEmergencyCall.Shared;
 using MMEmergencyCall.Domain.Client.Features.Signin;
+using MMEmergencyCall.Domain.Admin.Features.Users;
 
 namespace MMEmergencyCall.Api.Middlewares
 {
-    public class CustomAuthorizeAttribute : Attribute, IAuthorizationFilter
+    public class CustomAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
     {
-        public void OnAuthorization(AuthorizationFilterContext context)
+        private readonly UserService _userService;
+
+        public CustomAuthorizeAttribute(UserService userService)
+        {
+            _userService = userService;
+        }
+
+        public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             if (!context.HttpContext!.Request.Headers["Token"].Any())
             {
@@ -15,24 +23,36 @@ namespace MMEmergencyCall.Api.Middlewares
                 return;
             }
 
-            // ToJson => ToEncrypt
-            // ToDecrypt => ToObject
-
             try
             {
                 var signin = context.HttpContext!.Request.Headers["Token"]
-                    .ToString()
-                    .ToDecrypt()
-                    .ToObject<SigninModel>();
+                            .ToString()
+                            .ToDecrypt()
+                            .ToObject<SigninModel>();
 
-                // if (signin.UserId) // if exist in db?
-                //if(signin.SessionExpiredTime > DateTime.Now)
+                if (!await IsUserExist(signin.UserId))
+                {
+                    context.Result = new UnauthorizedObjectResult("User does not exist.");
+                    return;
+                }
+
+                if (signin.SessionExpiredTime <= DateTime.Now)
+                {
+                    context.Result = new UnauthorizedObjectResult("Session has expired.");
+                    return;
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                context.Result = new UnauthorizedObjectResult(string.Empty);
+                context.Result = new UnauthorizedObjectResult("Invalid token.");
                 return;
             }
+        }
+
+        private async Task<bool> IsUserExist(int userId)
+        {
+            var user = await _userService.GetByIdAsync(userId);
+            return user != null;
         }
     }
 }
