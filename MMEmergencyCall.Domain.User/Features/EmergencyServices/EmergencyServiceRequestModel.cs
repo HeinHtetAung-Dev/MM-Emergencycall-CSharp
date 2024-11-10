@@ -9,6 +9,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 public class EmergencyServiceRequestModel
 {
     public string ServiceType { get; set; } = null!;
+    public string ServiceGroup { get; set; } = null!;
 
     public string ServiceName { get; set; } = null!;
 

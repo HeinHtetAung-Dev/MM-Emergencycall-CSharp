@@ -26,11 +26,14 @@ public class EmergencyServiceService
     {
         try
         {
-            var emergencyService = await _db.EmergencyServices.FirstOrDefaultAsync(x => x.ServiceId == serviceId);
+            var emergencyService = await _db.EmergencyServices.FirstOrDefaultAsync(x =>
+                x.ServiceId == serviceId
+            );
             if (emergencyService == null)
             {
                 return Result<EmergencyServiceResponseModel>.Failure(
-                        "Emergency Service with Id: " + serviceId + " not found.");
+                    "Emergency Service with Id: " + serviceId + " not found."
+                );
             }
 
             var model = new EmergencyServiceResponseModel
@@ -49,50 +52,62 @@ public class EmergencyServiceService
         }
         catch (Exception ex)
         {
-            string message = "An error occurred while getting emergency service by ID for id "
-                            + serviceId + " : " + ex.ToString();
+            string message =
+                "An error occurred while getting emergency service by ID for id "
+                + serviceId
+                + " : "
+                + ex.ToString();
             _logger.LogError(message);
             return Result<EmergencyServiceResponseModel>.Failure(message);
         }
     }
 
-    public async Task<Result<List<EmergencyServiceResponseModel>>> GetEmergencyServiceByServiceType(string serviceType)
+    public async Task<Result<List<EmergencyServiceResponseModel>>> GetEmergencyServiceByServiceType(
+        string serviceType
+    )
     {
         try
         {
-            var emergencyServices = await _db.EmergencyServices
-                                    .Where(x => x.ServiceType == serviceType)
-                                    .ToListAsync();
+            var emergencyServices = await _db
+                .EmergencyServices.Where(x => x.ServiceType == serviceType)
+                .ToListAsync();
 
             if (emergencyServices == null)
             {
-                return Result<List<EmergencyServiceResponseModel>>
-                    .Failure("Emergency Service with service type: " + serviceType + " not found.");
+                return Result<List<EmergencyServiceResponseModel>>.Failure(
+                    "Emergency Service with service type: " + serviceType + " not found."
+                );
             }
 
-            var model = emergencyServices.Select(emergencyService => new EmergencyServiceResponseModel
-            {
-                ServiceId = emergencyService.ServiceId,
-                ServiceGroup = emergencyService.ServiceGroup,
-                ServiceType = emergencyService.ServiceType,
-                ServiceName = emergencyService.ServiceName,
-                PhoneNumber = emergencyService.PhoneNumber,
-                Location = emergencyService.Location,
-                Availability = emergencyService.Availability,
-                TownshipCode = emergencyService.TownshipCode
-            }).ToList();
+            var model = emergencyServices
+                .Select(emergencyService => new EmergencyServiceResponseModel
+                {
+                    ServiceId = emergencyService.ServiceId,
+                    ServiceGroup = emergencyService.ServiceGroup,
+                    ServiceType = emergencyService.ServiceType,
+                    ServiceName = emergencyService.ServiceName,
+                    PhoneNumber = emergencyService.PhoneNumber,
+                    Location = emergencyService.Location,
+                    Availability = emergencyService.Availability,
+                    TownshipCode = emergencyService.TownshipCode
+                })
+                .ToList();
 
             return Result<List<EmergencyServiceResponseModel>>.Success(model);
         }
         catch (Exception ex)
         {
-            string message = "An error occurred while getting emergency service by service type: " + ex.ToString();
+            string message =
+                "An error occurred while getting emergency service by service type: "
+                + ex.ToString();
             _logger.LogError(message);
             return Result<List<EmergencyServiceResponseModel>>.Failure(message);
         }
     }
 
-    public async Task<Result<EmergencyServiceResponseModel>> CreateEmergencyServiceAsync(EmergencyServiceRequestModel request)
+    public async Task<Result<EmergencyServiceResponseModel>> CreateEmergencyServiceAsync(
+        EmergencyServiceRequestModel request
+    )
     {
         try
         {
@@ -122,11 +137,60 @@ public class EmergencyServiceService
             };
 
             return Result<EmergencyServiceResponseModel>.Success(model);
-
         }
         catch (Exception ex)
         {
             string message = "An error occurred while creating emergency service: " + ex.ToString();
+            _logger.LogError(message);
+            return Result<EmergencyServiceResponseModel>.Failure(message);
+        }
+    }
+
+    public async Task<Result<EmergencyServiceResponseModel>> UpdateEmergencyService(
+        int id,
+        EmergencyServiceRequestModel requestModel
+    )
+    {
+        try
+        {
+            var emergencyService = await _db.Set<EmergencyService>().FindAsync(id);
+            if (emergencyService == null)
+            {
+                return Result<EmergencyServiceResponseModel>.Failure(
+                    "Emergency Service with id " + id + " not found."
+                );
+            }
+
+            emergencyService.ServiceType = requestModel.ServiceType;
+            emergencyService.ServiceGroup = requestModel.ServiceGroup;
+            emergencyService.ServiceName = requestModel.ServiceName;
+            emergencyService.PhoneNumber = requestModel.PhoneNumber;
+            emergencyService.Location = requestModel.Location;
+            emergencyService.Availability = requestModel.Availability;
+            emergencyService.TownshipCode = requestModel.TownshipCode;
+            _db.Entry(emergencyService).State = EntityState.Modified;
+            var result = await _db.SaveChangesAsync();
+
+            var model = new EmergencyServiceResponseModel
+            {
+                ServiceId = emergencyService.ServiceId,
+                ServiceType = emergencyService.ServiceType,
+                ServiceGroup = emergencyService.ServiceGroup,
+                ServiceName = emergencyService.ServiceName,
+                PhoneNumber = emergencyService.PhoneNumber,
+                Location = emergencyService.Location,
+                Availability = emergencyService.Availability,
+                TownshipCode = emergencyService.TownshipCode
+            };
+            return Result<EmergencyServiceResponseModel>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            string message =
+                "An error occurred while updating the emergency service for id "
+                + id
+                + ": "
+                + ex.Message;
             _logger.LogError(message);
             return Result<EmergencyServiceResponseModel>.Failure(message);
         }
