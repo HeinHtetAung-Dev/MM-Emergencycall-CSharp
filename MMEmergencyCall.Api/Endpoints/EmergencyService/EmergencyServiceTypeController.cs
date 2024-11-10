@@ -4,7 +4,7 @@ using MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;
 
 namespace MMEmergencyCall.Api.Endpoints.EmergencyService
 {
-    [Route("api/[controller]")]
+    [Route("api/EmergencyService/ServiceType")]
     [ApiController]
     public class EmergencyServiceTypeController : ControllerBase
     {
@@ -18,10 +18,10 @@ namespace MMEmergencyCall.Api.Endpoints.EmergencyService
         }
 
         [HttpGet]
-        public IActionResult GetEmergencyServiceTypes()
+        public async Task<IActionResult> GetEmergencyServiceTypesAsync()
         {
-            var response = _emergencyServiceTypeService.GetServiceTypes();
-            return Ok(response.Result);
+            var response = await _emergencyServiceTypeService.GetServiceTypesAsync();
+            return Ok(response);
         }
     }
 }
