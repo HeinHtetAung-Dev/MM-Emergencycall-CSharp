@@ -19,8 +19,4 @@
     <ProjectReference Include="..\MMEmergencyCall.Shared\MMEmergencyCall.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Endpoints\Login\" />
-  </ItemGroup>
-
 </Project>

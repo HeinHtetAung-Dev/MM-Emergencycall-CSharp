@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Admin.Features.Users;
 
-namespace MMEmergencyCall.Api.Endpoints.Admin;
+namespace MMEmergencyCall.Domain.Admin.Features.Users;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -28,7 +27,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetByIdAsync(int id)
     {
         var model = await _userService.GetByIdAsync(id);
-        if(!model.IsSuccess)
+        if (!model.IsSuccess)
             return NotFound(model);
 
         return Ok(model);
