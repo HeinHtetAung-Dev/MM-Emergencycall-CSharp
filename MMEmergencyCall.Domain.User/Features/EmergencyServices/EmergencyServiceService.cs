@@ -45,7 +45,8 @@ public class EmergencyServiceService
                 PhoneNumber = emergencyService.PhoneNumber,
                 Location = emergencyService.Location,
                 Availability = emergencyService.Availability,
-                TownshipCode = emergencyService.TownshipCode
+                TownshipCode = emergencyService.TownshipCode,
+                ServiceStatus = emergencyService.ServiceStatus
             };
 
             return Result<EmergencyServiceResponseModel>.Success(model);
@@ -89,7 +90,8 @@ public class EmergencyServiceService
                     PhoneNumber = emergencyService.PhoneNumber,
                     Location = emergencyService.Location,
                     Availability = emergencyService.Availability,
-                    TownshipCode = emergencyService.TownshipCode
+                    TownshipCode = emergencyService.TownshipCode,
+                    ServiceStatus = emergencyService.ServiceStatus
                 })
                 .ToList();
 
@@ -114,11 +116,12 @@ public class EmergencyServiceService
             var emergencyService = new EmergencyService
             {
                 ServiceType = request.ServiceType,
+                ServiceGroup = request.ServiceGroup,
                 ServiceName = request.ServiceName,
                 PhoneNumber = request.PhoneNumber,
                 Location = request.Location,
                 Availability = request.Availability,
-                TownshipCode = request.TownshipCode
+                TownshipCode = request.TownshipCode,
             };
 
             _db.EmergencyServices.Add(emergencyService);
@@ -133,7 +136,8 @@ public class EmergencyServiceService
                 PhoneNumber = emergencyService.PhoneNumber,
                 Location = emergencyService.Location,
                 Availability = emergencyService.Availability,
-                TownshipCode = emergencyService.TownshipCode
+                TownshipCode = emergencyService.TownshipCode,
+                ServiceStatus = emergencyService.ServiceStatus
             };
 
             return Result<EmergencyServiceResponseModel>.Success(model);
@@ -168,6 +172,8 @@ public class EmergencyServiceService
             emergencyService.Location = requestModel.Location;
             emergencyService.Availability = requestModel.Availability;
             emergencyService.TownshipCode = requestModel.TownshipCode;
+            emergencyService.ServiceStatus = requestModel.ServiceStatus;
+
             _db.Entry(emergencyService).State = EntityState.Modified;
             var result = await _db.SaveChangesAsync();
 
@@ -180,7 +186,8 @@ public class EmergencyServiceService
                 PhoneNumber = emergencyService.PhoneNumber,
                 Location = emergencyService.Location,
                 Availability = emergencyService.Availability,
-                TownshipCode = emergencyService.TownshipCode
+                TownshipCode = emergencyService.TownshipCode,
+                ServiceStatus = emergencyService.ServiceStatus,
             };
             return Result<EmergencyServiceResponseModel>.Success(model);
         }
@@ -221,7 +228,8 @@ public class EmergencyServiceService
                 PhoneNumber = sr.PhoneNumber,
                 Location = sr.Location,
                 Availability = sr.Availability,
-                TownshipCode = sr.TownshipCode
+                TownshipCode = sr.TownshipCode,
+                ServiceStatus = sr.ServiceStatus
             })
             .ToList();
 

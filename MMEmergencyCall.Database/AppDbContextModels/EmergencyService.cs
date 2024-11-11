@@ -21,5 +21,5 @@ public partial class EmergencyService
 
     public string? TownshipCode { get; set; }
 
-    public string? ServiceStatus { get; set; }
+    public string? ServiceStatus { get; set; } = "Pending";
 }
