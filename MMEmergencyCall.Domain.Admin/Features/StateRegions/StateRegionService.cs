@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
 using MMEmergencyCall.Shared;
 
-namespace MMEmergencyCall.Domain.Admin.Features.StateRegion;
+namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 
 public class StateRegionService
 {
@@ -20,7 +20,7 @@ public class StateRegionService
     {
         try
         {
-            var stateRegion = new Databases.AppDbContextModels.StateRegion
+            var stateRegion = new StateRegion
             {
                 StateRegionCode = requestModel.StateRegionCode,
                 StateRegionNameEn = requestModel.StateRegionNameEn,
@@ -52,7 +52,7 @@ public class StateRegionService
     {
         try
         {
-            var stateRegion = await _context.Set<Databases.AppDbContextModels.StateRegion>().FindAsync(id);
+            var stateRegion = await _context.Set<StateRegion>().FindAsync(id);
             if (stateRegion == null)
             {
                 return Result<StateRegionResponseModel>.Failure("State region not found.");
@@ -80,7 +80,7 @@ public class StateRegionService
     {
         try
         {
-            var stateRegion = await _context.Set<Databases.AppDbContextModels.StateRegion>().FindAsync(id);
+            var stateRegion = await _context.Set<StateRegion>().FindAsync(id);
             if (stateRegion == null)
             {
                 return Result<StateRegionResponseModel>.Failure("State region with id " + id + " not found.");
@@ -112,7 +112,7 @@ public class StateRegionService
 
     public async Task<Result<bool>> DeleteAsync(int id)
     {
-        var stateRegion = await _context.Set<Databases.AppDbContextModels.StateRegion>().FindAsync(id);
+        var stateRegion = await _context.Set<StateRegion>().FindAsync(id);
         if (stateRegion == null)
             return Result<bool>.Failure("State region not found.");
 
@@ -124,7 +124,7 @@ public class StateRegionService
 
     public async Task<Result<List<StateRegionResponseModel>>> GetAllAsync()
     {
-        var stateRegions = await _context.Set<Databases.AppDbContextModels.StateRegion>().ToListAsync();
+        var stateRegions = await _context.Set<StateRegion>().ToListAsync();
 
         var model = stateRegions.Select(sr => new StateRegionResponseModel
         {

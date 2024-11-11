@@ -25,18 +25,18 @@ namespace MMEmergencyCall.Api.Middlewares
 
             try
             {
-                var signin = context.HttpContext!.Request.Headers["Token"]
+                var item = context.HttpContext!.Request.Headers["Token"]
                             .ToString()
                             .ToDecrypt()
                             .ToObject<SigninModel>();
 
-                if (!await IsUserExist(signin.UserId))
+                if (!await IsUserExist(item.UserId))
                 {
                     context.Result = new UnauthorizedObjectResult("User does not exist.");
                     return;
                 }
 
-                if (signin.SessionExpiredTime <= DateTime.Now)
+                if (item.SessionExpiredTime <= DateTime.Now)
                 {
                     context.Result = new UnauthorizedObjectResult("Session has expired.");
                     return;
@@ -52,7 +52,7 @@ namespace MMEmergencyCall.Api.Middlewares
         private async Task<bool> IsUserExist(int userId)
         {
             var user = await _userService.GetByIdAsync(userId);
-            return user != null;
+            return user is not null;
         }
     }
 }

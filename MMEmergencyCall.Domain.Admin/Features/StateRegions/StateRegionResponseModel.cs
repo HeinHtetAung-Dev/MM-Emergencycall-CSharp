@@ -1,6 +1,8 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.StateRegion;
+﻿using MMEmergencyCall.Shared;
 
-public class StateRegionModel
+namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
+
+public class StateRegionResponseModel
 {
     public int StateRegionId { get; set; }
     public string StateRegionCode { get; set; } = null!;

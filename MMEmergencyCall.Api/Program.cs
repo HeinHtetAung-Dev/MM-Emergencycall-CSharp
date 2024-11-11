@@ -1,12 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using MMEmergencyCall.Databases.AppDbContextModels;
-using MMEmergencyCall.Domain.Admin.Features.StateRegion;
-using MMEmergencyCall.Domain.Admin.Features.Users;
-using MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
-using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
-using MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;
-using MMEmergencyCall.Domain.Client.Features.Register;
-using MMEmergencyCall.Domain.Client.Features.Signin;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
