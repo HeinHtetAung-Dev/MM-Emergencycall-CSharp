@@ -17,4 +17,6 @@ public class EmergencyServiceResponseModel
     public string? Availability { get; set; }
 
     public string? TownshipCode { get; set; }
+
+    public string? ServiceStatus { get; set; }
 }

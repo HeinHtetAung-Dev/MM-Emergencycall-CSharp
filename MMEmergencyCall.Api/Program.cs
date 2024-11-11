@@ -1,4 +1,4 @@
-
+using MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +25,7 @@ builder.AddEmergencyRequest();
 builder.AddSigninService();
 builder.AddStateRegionService();
 builder.AddUserService();
+builder.AddAdminEmergencyServicesService();
 
 var app = builder.Build();
 
