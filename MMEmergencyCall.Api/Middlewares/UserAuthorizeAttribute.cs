@@ -6,11 +6,11 @@ using MMEmergencyCall.Domain.Admin.Features.Users;
 
 namespace MMEmergencyCall.Api.Middlewares
 {
-    public class CustomAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
+    public class UserAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
     {
         private readonly UserService _userService;
 
-        public CustomAuthorizeAttribute(UserService userService)
+        public UserAuthorizeAttribute(UserService userService)
         {
             _userService = userService;
         }

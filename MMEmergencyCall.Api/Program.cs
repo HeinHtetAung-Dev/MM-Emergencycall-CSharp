@@ -16,7 +16,9 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
-});
+},
+ServiceLifetime.Transient,
+ServiceLifetime.Transient);
 
 builder.AddRegisterService();
 builder.AddEmergencyServiceService();
