@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Client.Features.Signin;
-
-namespace MMEmergencyCall.Api.Endpoints.Signin;
+﻿namespace MMEmergencyCall.Domain.Client.Features.Signin;
 
 [Route("api/[controller]")]
 [ApiController

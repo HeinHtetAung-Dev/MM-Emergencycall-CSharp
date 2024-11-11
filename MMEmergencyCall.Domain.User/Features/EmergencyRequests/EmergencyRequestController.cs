@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
-
-namespace MMEmergencyCall.Api.Endpoints.EmergencyRequests;
+﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
 [Route("api/[controller]")]
 [ApiController]

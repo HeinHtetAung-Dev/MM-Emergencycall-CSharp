@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices
+namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
+
+public static class AdminEmergencyServicesExtension
 {
-    public static class AdminEmergencyServicesExtension
+    public static void AddAdminEmergencyServicesService(this WebApplicationBuilder builder)
     {
-        public static void AddAdminEmergencyServicesService(this WebApplicationBuilder builder)
-        {
-            builder.Services.AddScoped<AdminEmergencyServicesService>();
-        }
+        builder.Services.AddScoped<AdminEmergencyServicesService>();
     }
 }

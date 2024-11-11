@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Client.Features.Register;
-
-namespace MMEmergencyCall.Api.Endpoints.Register;
+﻿namespace MMEmergencyCall.Domain.Client.Features.Register;
 
 [Route("api/[controller]")]
 [ApiController]

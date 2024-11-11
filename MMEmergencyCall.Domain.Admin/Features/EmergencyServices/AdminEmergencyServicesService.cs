@@ -7,66 +7,65 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Shared;
 
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices
+namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
+
+public class AdminEmergencyServicesService
 {
-    public class AdminEmergencyServicesService
+    private readonly ILogger<AdminEmergencyServicesService> _logger;
+
+    private readonly AppDbContext _db;
+
+    public AdminEmergencyServicesService(
+        ILogger<AdminEmergencyServicesService> logger,
+        AppDbContext db
+    )
     {
-        private readonly ILogger<AdminEmergencyServicesService> _logger;
+        _logger = logger;
+        _db = db;
+    }
 
-        private readonly AppDbContext _db;
-
-        public AdminEmergencyServicesService(
-            ILogger<AdminEmergencyServicesService> logger,
-            AppDbContext db
-        )
+    public async Task<
+        Result<List<AdminEmergencyServicesResponseModel>>
+    > GetEmergencyServicesByStatus(string status)
+    {
+        try
         {
-            _logger = logger;
-            _db = db;
-        }
+            var emergencyServices = await _db
+                .EmergencyServices.Where(x => x.ServiceStatus == status)
+                .ToListAsync();
 
-        public async Task<
-            Result<List<AdminEmergencyServicesResponseModel>>
-        > GetEmergencyServicesByStatus(string status)
-        {
-            try
+            if (emergencyServices == null)
             {
-                var emergencyServices = await _db
-                    .EmergencyServices.Where(x => x.ServiceStatus == status)
-                    .ToListAsync();
+                return Result<List<AdminEmergencyServicesResponseModel>>.Failure(
+                    "Emergency Service with service status: " + status + " not found."
+                );
+            }
 
-                if (emergencyServices == null)
+            var model = emergencyServices
+                .Select(emergencyService => new AdminEmergencyServicesResponseModel
                 {
-                    return Result<List<AdminEmergencyServicesResponseModel>>.Failure(
-                        "Emergency Service with service status: " + status + " not found."
-                    );
-                }
+                    ServiceId = emergencyService.ServiceId,
+                    ServiceGroup = emergencyService.ServiceGroup,
+                    ServiceType = emergencyService.ServiceType,
+                    ServiceName = emergencyService.ServiceName,
+                    PhoneNumber = emergencyService.PhoneNumber,
+                    Location = emergencyService.Location,
+                    Availability = emergencyService.Availability,
+                    TownshipCode = emergencyService.TownshipCode,
+                    ServiceStatus = emergencyService.ServiceStatus,
+                })
+                .ToList();
 
-                var model = emergencyServices
-                    .Select(emergencyService => new AdminEmergencyServicesResponseModel
-                    {
-                        ServiceId = emergencyService.ServiceId,
-                        ServiceGroup = emergencyService.ServiceGroup,
-                        ServiceType = emergencyService.ServiceType,
-                        ServiceName = emergencyService.ServiceName,
-                        PhoneNumber = emergencyService.PhoneNumber,
-                        Location = emergencyService.Location,
-                        Availability = emergencyService.Availability,
-                        TownshipCode = emergencyService.TownshipCode,
-                        ServiceStatus = emergencyService.ServiceStatus,
-                    })
-                    .ToList();
+            return Result<List<AdminEmergencyServicesResponseModel>>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            string message =
+                "An error occurred while getting emergency service by service status: "
+                + ex.ToString();
+            _logger.LogError(message);
 
-                return Result<List<AdminEmergencyServicesResponseModel>>.Success(model);
-            }
-            catch (Exception ex)
-            {
-                string message =
-                    "An error occurred while getting emergency service by service status: "
-                    + ex.ToString();
-                _logger.LogError(message);
-
-                return Result<List<AdminEmergencyServicesResponseModel>>.Failure(message);
-            }
+            return Result<List<AdminEmergencyServicesResponseModel>>.Failure(message);
         }
     }
 }

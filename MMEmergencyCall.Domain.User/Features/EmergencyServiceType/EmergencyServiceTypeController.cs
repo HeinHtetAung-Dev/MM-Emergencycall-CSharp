@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;
-
-namespace MMEmergencyCall.Api.Endpoints.EmergencyService
+﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyServiceType
 {
     [Route("api/EmergencyService/ServiceType")]
     [ApiController]
