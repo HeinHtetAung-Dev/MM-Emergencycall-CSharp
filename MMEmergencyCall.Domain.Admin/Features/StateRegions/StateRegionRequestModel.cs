@@ -1,4 +1,4 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.StateRegion;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 
 public class StateRegionRequestModel
 {

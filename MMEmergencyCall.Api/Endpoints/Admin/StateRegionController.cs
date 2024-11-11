@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Admin.Features.StateRegion;
+using MMEmergencyCall.Domain.Admin.Features.StateRegions;
 using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Api.Endpoints.Admin;

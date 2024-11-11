@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
@@ -24,7 +25,7 @@ public class UserService
 
     public async Task<Result<List<UserResponseModel>>> GetAllAsync()
     {
-        var users = await _context.Set<User>().ToListAsync();
+        var users = await _context.Users.ToListAsync();
 
         var response = users.Select(u => new UserResponseModel
         {
@@ -46,7 +47,7 @@ public class UserService
     {
         try
         {
-            var user = await _context.Set<User>().FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
             if (user is null)
                 return Result<UserResponseModel>.Failure("User not found.");
 
@@ -71,6 +72,19 @@ public class UserService
             string message = "An error occurred while getting the user requests for id " + id + " : " + ex.Message;
             _logger.LogError(message);
             return Result<UserResponseModel>.Failure(message);
+        }
+    }
+
+    public async Task<Result<bool>> IsExistUser(int id)
+    {
+        try
+        {
+            var isExist = await _context.Users.AnyAsync(x => x.UserId == id);
+            return Result<bool>.Success(isExist);
+        }
+        catch (Exception ex)
+        {
+            return Result<bool>.Failure("User doesn't exist.");
         }
     }
 }
