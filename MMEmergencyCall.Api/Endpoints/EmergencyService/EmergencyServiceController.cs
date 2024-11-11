@@ -91,5 +91,12 @@ namespace MMEmergencyCall.Api.Endpoints.EmergencyService
                 return NotFound(model);
             return Ok(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllEmergencyServiceAsync()
+        {
+            var model = await _emergencyServiceService.GetAllEmergencyService();
+            return Ok(model);
+        }
     }
 }

@@ -206,4 +206,25 @@ public class EmergencyServiceService
         await _db.SaveChangesAsync();
         return Result<bool>.Success(true, "Emergency Service deleted successfully.");
     }
+
+    public async Task<Result<List<EmergencyService>>> GetAllEmergencyService()
+    {
+        var emergencyService = await _db.Set<EmergencyService>().ToListAsync();
+
+        var model = emergencyService
+            .Select(sr => new EmergencyServiceResponseModel
+            {
+                ServiceId = sr.ServiceId,
+                ServiceType = sr.ServiceType,
+                ServiceGroup = sr.ServiceGroup,
+                ServiceName = sr.ServiceName,
+                PhoneNumber = sr.PhoneNumber,
+                Location = sr.Location,
+                Availability = sr.Availability,
+                TownshipCode = sr.TownshipCode
+            })
+            .ToList();
+
+        return Result<List<EmergencyService>>.Success(emergencyService);
+    }
 }
