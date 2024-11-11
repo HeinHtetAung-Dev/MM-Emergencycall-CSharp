@@ -195,4 +195,15 @@ public class EmergencyServiceService
             return Result<EmergencyServiceResponseModel>.Failure(message);
         }
     }
+
+    public async Task<Result<bool>> DeleteEmergencyService(int id)
+    {
+        var emergencyService = await _db.Set<EmergencyService>().FindAsync(id);
+        if (emergencyService == null)
+            return Result<bool>.Failure("Emergency Service not found.");
+
+        _db.Remove(emergencyService);
+        await _db.SaveChangesAsync();
+        return Result<bool>.Success(true, "Emergency Service deleted successfully.");
+    }
 }

@@ -82,5 +82,14 @@ namespace MMEmergencyCall.Api.Endpoints.EmergencyService
             BadRequest:
             return BadRequest(model);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEmergencyService(int id)
+        {
+            var model = await _emergencyServiceService.DeleteEmergencyService(id);
+            if (!model.IsSuccess)
+                return NotFound(model);
+            return Ok(model);
+        }
     }
 }
