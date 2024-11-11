@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Api.Middlewares;
 using MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
 namespace MMEmergencyCall.Api.Endpoints.EmergencyRequests;
