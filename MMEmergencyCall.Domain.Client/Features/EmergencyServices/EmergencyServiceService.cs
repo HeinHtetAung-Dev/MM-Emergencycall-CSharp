@@ -235,4 +235,48 @@ public class EmergencyServiceService
 
         return Result<List<EmergencyService>>.Success(emergencyService);
     }
+
+    public async Task<
+        Result<EmergencyServicePaginationResponseModel>
+    > GetAllEmergencyServiceWithPagination(int pageNo, int pageSize)
+    {
+        int rowCount = _db.EmergencyServices.Count();
+
+        int pageCount = rowCount / pageSize;
+        if (rowCount % pageSize > 0)
+            pageCount++;
+
+        if (pageNo > pageCount)
+        {
+            return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        var emergencyService = await _db
+            .EmergencyServices.Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var lst = emergencyService
+            .Select(sr => new EmergencyServiceResponseModel
+            {
+                ServiceId = sr.ServiceId,
+                ServiceType = sr.ServiceType,
+                ServiceGroup = sr.ServiceGroup,
+                ServiceName = sr.ServiceName,
+                PhoneNumber = sr.PhoneNumber,
+                Location = sr.Location,
+                Availability = sr.Availability,
+                TownshipCode = sr.TownshipCode,
+                ServiceStatus = sr.ServiceStatus
+            })
+            .ToList();
+
+        EmergencyServicePaginationResponseModel model = new();
+        model.Data = lst;
+        model.PageSize = pageSize;
+        model.PageNo = pageNo;
+        model.PageCount = pageCount;
+
+        return Result<EmergencyServicePaginationResponseModel>.Success(model);
+    }
 }

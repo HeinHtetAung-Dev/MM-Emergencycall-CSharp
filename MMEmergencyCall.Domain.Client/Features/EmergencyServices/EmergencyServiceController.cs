@@ -97,5 +97,16 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             var model = await _emergencyServiceService.GetAllEmergencyService();
             return Ok(model);
         }
+
+        [HttpGet("{pageNo}/{pageSize}")]
+        [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
+        public async Task<IActionResult> GetAllByPaginationAsync(int pageNo, int pageSize)
+        {
+            var model = await _emergencyServiceService.GetAllEmergencyServiceWithPagination(
+                pageNo,
+                pageSize
+            );
+            return Ok(model);
+        }
     }
 }
