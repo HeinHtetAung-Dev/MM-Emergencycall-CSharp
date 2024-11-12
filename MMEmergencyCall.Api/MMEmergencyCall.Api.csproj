@@ -14,7 +14,8 @@
   <ItemGroup>
     <ProjectReference Include="..\MMEmergencyCall.Database\MMEmergencyCall.Databases.csproj" />
     <ProjectReference Include="..\MMEmergencyCall.Domain.Admin\MMEmergencyCall.Domain.Admin.csproj" />
-    <ProjectReference Include="..\MMEmergencyCall.Domain.User\MMEmergencyCall.Domain.Client.csproj" />
+    <ProjectReference Include="..\MMEmergencyCall.Domain.Client\MMEmergencyCall.Domain.Client.csproj" />
+    <ProjectReference Include="..\MMEmergencyCall.Domain.Client\MMEmergencyCall.Domain.Client.csproj" />
     <!--<ProjectReference Include="..\MMEmergencyCall.Domain\MMEmergencyCall.Domain.User.csproj" />-->
     <ProjectReference Include="..\MMEmergencyCall.Shared\MMEmergencyCall.Shared.csproj" />
   </ItemGroup>
