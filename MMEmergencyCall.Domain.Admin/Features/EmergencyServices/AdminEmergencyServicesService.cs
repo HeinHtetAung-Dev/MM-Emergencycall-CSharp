@@ -45,6 +45,7 @@ public class AdminEmergencyServicesService
                 .Select(emergencyService => new AdminEmergencyServicesResponseModel
                 {
                     ServiceId = emergencyService.ServiceId,
+                    UserId = emergencyService.UserId,
                     ServiceGroup = emergencyService.ServiceGroup,
                     ServiceType = emergencyService.ServiceType,
                     ServiceName = emergencyService.ServiceName,
