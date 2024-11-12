@@ -246,6 +246,11 @@ public class EmergencyServiceService
         if (rowCount % pageSize > 0)
             pageCount++;
 
+        if (pageNo < 1)
+        {
+            return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
         if (pageNo > pageCount)
         {
             return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
