@@ -47,10 +47,18 @@ public class UserController : ControllerBase
         var model = await _userService.CreateUserAsync(requestModel);
         return Ok(model);
     }
+
     [HttpGet("role/{role}/pageNo/{pageNo}/pageSize/{pageSize}")]
     public async Task<IActionResult> GetUsersByRoleAsync(string role, int pageNo, int pageSize)
     {
         var model = await _userService.GetUsersByRoleAsync(role, pageNo, pageSize);
+        return Ok(model);
+    }
+
+    [HttpGet("userStatus/{userStatus}/pageNo/{pageNo}/pageSize/{pageSize}")]
+    public async Task<IActionResult> GetUsersByUserStatusAsync(string userStatus, int pageNo, int pageSize)
+    {
+        var model = await _userService.GetUsersByUserStatusAsync(userStatus, pageNo, pageSize);
         return Ok(model);
     }
 }

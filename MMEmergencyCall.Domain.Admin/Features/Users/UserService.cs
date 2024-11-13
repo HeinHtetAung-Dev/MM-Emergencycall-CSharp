@@ -184,6 +184,59 @@ public class UserService
         return Result<UserPaginationResponseModel>.Success(model);
     }
 
+    public async Task<Result<UserPaginationResponseModel>> GetUsersByUserStatusAsync(string userStatus, int pageNo, int pageSize)
+    {
+        int rowCount = _context.Users.Count();
+
+        int pageCount = rowCount / pageSize;
+
+        if (pageNo < 1)
+        {
+            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        if (pageNo > pageCount)
+        {
+            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        var user = await _context
+            .Users.Where(u => u.UserStatus == userStatus)
+            .Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        if (user.Count() < 1)
+        {
+            return Result<UserPaginationResponseModel>.Failure("No data found.");
+        }
+
+        var lst = user
+            .Select(u => new UserResponseModel
+            {
+                UserId = u.UserId,
+                Name = u.Name,
+                Email = u.Email,
+                Password = u.Password,
+                PhoneNumber = u.PhoneNumber,
+                Address = u.Address,
+                EmergencyType = u.EmergencyType,
+                EmergencyDetails = u.EmergencyDetails,
+                TownshipCode = u.TownshipCode,
+                Role = u.Role,
+                UserStatus = u.UserStatus
+            })
+            .ToList();
+
+        UserPaginationResponseModel model = new UserPaginationResponseModel();
+        model.Data = lst;
+        model.PageNo = pageNo;
+        model.PageSize = pageSize;
+        model.PageCount = pageCount;
+
+        return Result<UserPaginationResponseModel>.Success(model);
+    }
+
     public async Task<Result<UserResponseModel>> CreateUserAsync(UserRequestModel request)
     {
         try
