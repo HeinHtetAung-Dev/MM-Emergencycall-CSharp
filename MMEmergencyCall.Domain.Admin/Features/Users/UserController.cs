@@ -32,4 +32,12 @@ public class UserController : ControllerBase
 
         return Ok(model);
     }
+
+    [HttpGet("{pageNo}/{pageSize}")]
+    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
+    public async Task<IActionResult> GetAllByPiginationAsync(int pageNo, int pageSize)
+    {
+        var model = await _userService.GetAllUsersWithPaginationAsync(pageNo, pageSize);
+        return Ok(model);
+    }
 }

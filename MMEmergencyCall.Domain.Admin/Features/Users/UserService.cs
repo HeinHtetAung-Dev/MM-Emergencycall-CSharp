@@ -7,6 +7,7 @@ using MMEmergencyCall.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -86,5 +87,50 @@ public class UserService
         {
             return Result<bool>.Failure("User doesn't exist.");
         }
+    }
+
+    public async Task<Result<UserPaginationResponseModel>> GetAllUsersWithPaginationAsync(int pageNo, int pageSize)
+    {
+        int rowCount = _context.Users.Count();
+
+        int pageCount = rowCount / pageSize;
+
+        if (pageNo < 1)
+        {
+            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        if (pageNo > pageCount)
+        {
+            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        var user = await _context
+            .Users.Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var lst = user
+            .Select(u => new UserResponseModel
+            {
+                UserId = u.UserId,
+                Name = u.Name,
+                Email = u.Email,
+                Password = u.Password,
+                PhoneNumber = u.PhoneNumber,
+                Address = u.Address,
+                EmergencyType = u.EmergencyType,
+                EmergencyDetails = u.EmergencyDetails,
+                TownshipCode = u.TownshipCode
+            })
+            .ToList();
+
+        UserPaginationResponseModel model = new UserPaginationResponseModel();
+        model.Data = lst;
+        model.PageNo = pageNo;
+        model.PageSize = pageSize;
+        model.PageCount = pageCount;
+
+        return Result<UserPaginationResponseModel>.Success(model);
     }
 }
