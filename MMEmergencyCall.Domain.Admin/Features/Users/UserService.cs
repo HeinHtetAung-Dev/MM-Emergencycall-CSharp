@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -6,8 +7,10 @@ using MMEmergencyCall.Databases.AppDbContextModels;
 using MMEmergencyCall.Shared;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,7 +66,9 @@ public class UserService
                 Address = user.Address,
                 EmergencyType = user.EmergencyType,
                 EmergencyDetails = user.EmergencyDetails,
-                TownshipCode = user.TownshipCode
+                TownshipCode = user.TownshipCode,
+                Role = user.Role,
+                UserStatus = user.UserStatus
             };
 
             return Result<UserResponseModel>.Success(model);
@@ -277,6 +282,53 @@ public class UserService
         catch (Exception ex)
         {
             var message = "An error occurred while creating User: " + ex.ToString();
+            _logger.LogError(message);
+            return Result<UserResponseModel>.Failure(message);
+        }
+    }
+
+    public async Task<Result<UserResponseModel>> UpdateUserAsync(int id, UserRequestModel requestModel)
+    {
+        try
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
+            if (user is null)
+            {
+                return Result<UserResponseModel>.Failure("User with id " + id + " not found.");
+            }
+
+            user.Name = requestModel.Name;
+            user.Email = requestModel.Email;
+            user.PhoneNumber = requestModel.PhoneNumber;
+            user.Address = requestModel.Address;
+            user.EmergencyType = requestModel.EmergencyType;
+            user.EmergencyDetails = requestModel.EmergencyDetails;
+            user.TownshipCode = requestModel.TownshipCode;
+            user.Role = requestModel.Role;
+            user.UserStatus = requestModel.UserStatus;
+
+            _context.Entry(user).State = EntityState.Modified;
+            var result = await _context.SaveChangesAsync();
+
+            var model = new UserResponseModel
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address,
+                EmergencyType = user.EmergencyType,
+                EmergencyDetails = user.EmergencyDetails,
+                TownshipCode = user.TownshipCode,
+                Role = user.Role,
+                UserStatus = user.UserStatus
+            };
+
+            return Result<UserResponseModel>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            var message = "An error occurred while updating the user for id " + id + ": " + ex.ToString();
             _logger.LogError(message);
             return Result<UserResponseModel>.Failure(message);
         }

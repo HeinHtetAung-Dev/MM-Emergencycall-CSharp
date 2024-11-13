@@ -61,4 +61,11 @@ public class UserController : ControllerBase
         var model = await _userService.GetUsersByUserStatusAsync(userStatus, pageNo, pageSize);
         return Ok(model);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateUserAsync(int id, UserRequestModel requestModel)
+    {
+        var model = await _userService.UpdateUserAsync(id, requestModel);
+        return Ok(model);
+    }
 }
