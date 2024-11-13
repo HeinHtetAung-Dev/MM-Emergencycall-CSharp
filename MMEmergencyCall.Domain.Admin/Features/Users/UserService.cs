@@ -121,7 +121,57 @@ public class UserService
                 Address = u.Address,
                 EmergencyType = u.EmergencyType,
                 EmergencyDetails = u.EmergencyDetails,
-                TownshipCode = u.TownshipCode
+                TownshipCode = u.TownshipCode,
+                Role = u.Role,
+                UserStatus = u.UserStatus
+            })
+            .ToList();
+
+        UserPaginationResponseModel model = new UserPaginationResponseModel();
+        model.Data = lst;
+        model.PageNo = pageNo;
+        model.PageSize = pageSize;
+        model.PageCount = pageCount;
+
+        return Result<UserPaginationResponseModel>.Success(model);
+    }
+
+    public async Task<Result<UserPaginationResponseModel>> GetUsersByRoleAsync(string role, int pageNo, int pageSize)
+    {
+        int rowCount = _context.Users.Count();
+
+        int pageCount = rowCount / pageSize;
+
+        if (pageNo < 1)
+        {
+            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        if (pageNo > pageCount)
+        {
+            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        var user = await _context
+            .Users.Where(u => u.Role == role)
+            .Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var lst = user
+            .Select(u => new UserResponseModel
+            {
+                UserId = u.UserId,
+                Name = u.Name,
+                Email = u.Email,
+                Password = u.Password,
+                PhoneNumber = u.PhoneNumber,
+                Address = u.Address,
+                EmergencyType = u.EmergencyType,
+                EmergencyDetails = u.EmergencyDetails,
+                TownshipCode = u.TownshipCode,
+                Role = u.Role,
+                UserStatus = u.UserStatus
             })
             .ToList();
 
