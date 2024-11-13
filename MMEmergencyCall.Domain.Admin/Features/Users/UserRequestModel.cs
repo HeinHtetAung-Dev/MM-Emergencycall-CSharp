@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace MMEmergencyCall.Domain.Admin.Features.Users;
 
-public class UserResponseModel
+public class UserRequestModel
 {
-    public int UserId { get; set; }
-
     public string Name { get; set; } = null!;
 
     public string Email { get; set; } = null!;
@@ -26,7 +24,5 @@ public class UserResponseModel
 
     public string TownshipCode { get; set; } = null!;
 
-    public string Role { get; set; }
-
-    public string UserStatus { get; set; } = "Pending";
+    public string Role { get; set; } = null!;
 }

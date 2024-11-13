@@ -22,4 +22,8 @@ public partial class User
     public string? EmergencyDetails { get; set; }
 
     public string TownshipCode { get; set; } = null!;
+
+    public string Role { get; set; } = null!;
+
+    public string UserStatus { get; set; } = "Pending";
 }

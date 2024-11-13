@@ -40,4 +40,11 @@ public class UserController : ControllerBase
         var model = await _userService.GetAllUsersWithPaginationAsync(pageNo, pageSize);
         return Ok(model);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateUserAsync(UserRequestModel requestModel)
+    {
+        var model = await _userService.CreateUserAsync(requestModel);
+        return Ok(model);
+    }
 }
