@@ -2,6 +2,8 @@
 global using Microsoft.EntityFrameworkCore;
 global using MMEmergencyCall.Domain.Admin.Features.StateRegions;
 global using MMEmergencyCall.Domain.Admin.Features.Users;
+global using MMEmergencyCall.Domain.Admin.Features.Register;
+global using MMEmergencyCall.Domain.Admin.Features.SignIn;
 global using MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 global using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 global using MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;

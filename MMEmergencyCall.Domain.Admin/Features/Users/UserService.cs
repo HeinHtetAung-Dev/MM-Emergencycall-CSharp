@@ -333,4 +333,17 @@ public class UserService
             return Result<UserResponseModel>.Failure(message);
         }
     }
+
+    public async Task<Result<bool>> IsExistAdmin(int id)
+    {
+        try
+        {
+            var isExist = await _context.Users.AnyAsync(x => x.UserId == id && x.Role.ToLower() == "admin");
+            return Result<bool>.Success(isExist);
+        }
+        catch (Exception ex)
+        {
+            return Result<bool>.Failure("Admin doesn't exist.");
+        }
+    }
 }
