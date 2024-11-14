@@ -19,16 +19,16 @@ Admin
 
 User
 
-[ ] Register
-[ ] Sign in
+[x] Register
+[x] Sign in
 [ ] Profile 
 	[ ] Deactivate
 	[ ] Delete Account
-[ ] Emergency Requests 
+[x] Emergency Requests 
 	Create - Created User Id,
 	List - Listing with Pagination (Status - Cancel, Open, Closed)
 	Update - Only Status
-[ ] Emergency Services
+[x] Emergency Services
 	Create with Pending (Search with Admin Approved)
 	[Feature] Update with Pending (Temporary Table) 
 [ ] Search 
