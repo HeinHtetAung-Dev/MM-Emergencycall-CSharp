@@ -346,4 +346,25 @@ public class UserService
             return Result<bool>.Failure("Admin doesn't exist.");
         }
     }
+
+    public async Task<Result<bool>> DeleteUserAsync(int id)
+    {
+        try
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
+            if (user is null)
+                return Result<bool>.Failure("User with id " + id + " not found.");
+
+            _context.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return Result<bool>.Success(true, "User is deleted successfully");
+        }
+        catch (Exception ex)
+        {
+            var message = "An error occurred while deleting the user for id " + id + ": " + ex.ToString();
+            _logger.LogError(message);
+            return Result<bool>.Failure(message);
+        }
+    }
 }
