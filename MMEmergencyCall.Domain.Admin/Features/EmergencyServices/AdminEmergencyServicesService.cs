@@ -24,15 +24,27 @@ public class AdminEmergencyServicesService
         _db = db;
     }
 
-    public async Task<
-        Result<List<AdminEmergencyServicesResponseModel>>
-    > GetEmergencyServicesByStatus(string status)
+    public async Task<Result<List<AdminEmergencyServicesResponseModel>>>
+        GetEmergencyServicesByStatus(string status)
     {
         try
         {
-            var emergencyServices = await _db
-                .EmergencyServices.Where(x => x.ServiceStatus == status)
-                .ToListAsync();
+            var enumServiceStatus = Enum.Parse<EnumServiceStatus>(status, true);
+            if(enumServiceStatus == EnumServiceStatus.None)
+            {
+                return Result<List<AdminEmergencyServicesResponseModel>>.Failure(
+                   "Invalid Emergency Service Status."
+               );
+            }
+
+            var query = _db.EmergencyServices.AsQueryable();
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(x => x.ServiceStatus == status);
+            }
+
+            var emergencyServices = await query.ToListAsync();
 
             if (emergencyServices == null)
             {
@@ -112,18 +124,18 @@ public class AdminEmergencyServicesService
                 .ToListAsync();
 
             var data = lst.Select(x => new AdminEmergencyServicesResponseModel
-                {
-                    ServiceId = x.ServiceId,
-                    UserId = x.UserId,
-                    ServiceGroup = x.ServiceGroup,
-                    ServiceType = x.ServiceType,
-                    ServiceName = x.ServiceName,
-                    PhoneNumber = x.PhoneNumber,
-                    Location = x.Location,
-                    Availability = x.Availability,
-                    TownshipCode = x.TownshipCode,
-                    ServiceStatus = x.ServiceStatus
-                })
+            {
+                ServiceId = x.ServiceId,
+                UserId = x.UserId,
+                ServiceGroup = x.ServiceGroup,
+                ServiceType = x.ServiceType,
+                ServiceName = x.ServiceName,
+                PhoneNumber = x.PhoneNumber,
+                Location = x.Location,
+                Availability = x.Availability,
+                TownshipCode = x.TownshipCode,
+                ServiceStatus = x.ServiceStatus
+            })
                 .ToList();
 
             var model = new AdminEmergencyServicesPaginationResponseModel()
