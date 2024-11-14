@@ -21,10 +21,12 @@ ServiceLifetime.Transient,
 ServiceLifetime.Transient);
 
 builder.AddRegisterService();
+builder.AddAdminRegisterService();
 builder.AddEmergencyServiceService();
 builder.AddEmergencyServiceType();
 builder.AddEmergencyRequest();
 builder.AddSigninService();
+builder.AddAdminSignInService();
 builder.AddStateRegionService();
 builder.AddUserService();
 builder.AddAdminEmergencyServicesService();
