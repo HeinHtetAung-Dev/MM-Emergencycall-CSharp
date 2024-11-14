@@ -69,4 +69,70 @@ public class AdminEmergencyServicesService
             return Result<List<AdminEmergencyServicesResponseModel>>.Failure(message);
         }
     }
+
+    public async Task<
+        Result<AdminEmergencyServicePaginationResponseModel>
+    > GetEmergencyServicesByStatusPaginationAsync(string status, int pageNo, int pageSize)
+    {
+        if (pageNo < 1 || pageSize < 1)
+        {
+            return Result<AdminEmergencyServicePaginationResponseModel>.Failure(
+                "Invalid page number or page size"
+            );
+        }
+
+        try
+        {
+            var servicesByStatus = await _db
+                .EmergencyServices.Where(x => x.ServiceStatus == status)
+                .ToListAsync();
+
+            int rowCount = servicesByStatus.Count();
+
+            int pageCount = rowCount / pageSize;
+
+            if (pageNo > pageCount)
+            {
+                return Result<AdminEmergencyServicePaginationResponseModel>.Failure(
+                    "Invalid page number"
+                );
+            }
+
+            var lst = await _db
+                .EmergencyServices.Where(x => x.ServiceStatus == status)
+                .Skip((pageNo - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var data = lst.Select(x => new AdminEmergencyServicesResponseModel
+                {
+                    ServiceId = x.ServiceId,
+                    UserId = x.UserId,
+                    ServiceGroup = x.ServiceGroup,
+                    ServiceType = x.ServiceType,
+                    ServiceName = x.ServiceName,
+                    PhoneNumber = x.PhoneNumber,
+                    Location = x.Location,
+                    Availability = x.Availability,
+                    TownshipCode = x.TownshipCode,
+                    ServiceStatus = x.ServiceStatus
+                })
+                .ToList();
+
+            var model = new AdminEmergencyServicePaginationResponseModel()
+            {
+                Data = data,
+                PageNo = pageNo,
+                PageSize = pageSize,
+                PageCount = pageCount
+            };
+
+            return Result<AdminEmergencyServicePaginationResponseModel>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return Result<AdminEmergencyServicePaginationResponseModel>.Failure(ex.ToString());
+        }
+    }
 }

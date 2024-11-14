@@ -9,9 +9,7 @@ public class AdminEmergencyServicesController : ControllerBase
 {
     private readonly AdminEmergencyServicesService _adminEmergencyServicesService;
 
-    public AdminEmergencyServicesController(
-        AdminEmergencyServicesService emergencyServiceService
-    )
+    public AdminEmergencyServicesController(AdminEmergencyServicesService emergencyServiceService)
     {
         _adminEmergencyServicesService = emergencyServiceService;
     }
@@ -22,6 +20,23 @@ public class AdminEmergencyServicesController : ControllerBase
         var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatus(
             serviceStatus
         );
+        return Ok(response);
+    }
+
+    [HttpGet("ServiceStatus/{serviceStatus}/{pageNo}/{pageSize}")]
+    [HttpGet("ServiceStatus/{serviceStatus}/pageNo/{pageNo}/pageSize/{pageSize}")]
+    public async Task<IActionResult> GetEmergencyServicesByStatusPaginationAsync(
+        string serviceStatus,
+        int pageNo,
+        int pageSize
+    )
+    {
+        var response =
+            await _adminEmergencyServicesService.GetEmergencyServicesByStatusPaginationAsync(
+                serviceStatus,
+                pageNo,
+                pageSize
+            );
         return Ok(response);
     }
 }
