@@ -16,7 +16,23 @@ Admin
 [ ] Township (CRUD)
 [x] Emergency Services
 [ ] Emergency Request (List with Pagination, Status Change (Closed, Rejected))
-[ ] User (CRUD)
 
 User
+
+[ ] Register
+[ ] Sign in
+[ ] Profile 
+	[ ] Deactivate
+	[ ] Delete Account
+[ ] Emergency Requests 
+	Create - Created User Id,
+	List - Listing with Pagination (Status - Cancel, Open, Closed)
+	Update - Only Status
+[ ] Emergency Services
+	Create with Pending (Search with Admin Approved)
+	[Feature] Update with Pending (Temporary Table) 
+[ ] Search 
+	Type, Township, Lat, Lon (with Pagination)
+	
+
 
