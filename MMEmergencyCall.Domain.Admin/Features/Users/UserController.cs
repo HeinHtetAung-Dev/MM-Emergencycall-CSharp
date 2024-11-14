@@ -4,7 +4,7 @@ namespace MMEmergencyCall.Domain.Admin.Features.Users;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UserController : ControllerBase
+public class UserController : BaseController
 {
     private readonly UserService _userService;
 
@@ -59,7 +59,15 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUsersByUserStatusAsync(string userStatus, int pageNo, int pageSize)
     {
         var model = await _userService.GetUsersByUserStatusAsync(userStatus, pageNo, pageSize);
-        return Ok(model);
+        //if (model.IsValidationError)
+        //    return BadRequest(model);
+
+        //if (model.IsError)
+        //    return InternalServerError(model);
+
+        //return Ok(model);
+
+        return Execute(model);
     }
 
     [HttpPut("{id}")]
