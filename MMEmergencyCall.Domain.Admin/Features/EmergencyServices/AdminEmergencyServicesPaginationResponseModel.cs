@@ -1,15 +1,14 @@
-﻿using MMEmergencyCall.Domain.Admin.Features.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MMEmergencyCall.Domain.Admin.Features.Users;
 
 namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 
-public class AdminEmergencyServicePaginationResponseModel
+public class AdminEmergencyServicesPaginationResponseModel
 {
-
     public int PageNo { get; set; }
 
     public int PageSize { get; set; }

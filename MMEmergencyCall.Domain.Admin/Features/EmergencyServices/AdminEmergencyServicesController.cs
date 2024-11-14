@@ -37,6 +37,7 @@ public class AdminEmergencyServicesController : ControllerBase
                 pageNo,
                 pageSize
             );
+
         return Ok(response);
     }
 }
