@@ -1,4 +1,6 @@
-﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
+﻿using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
+
+namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -35,28 +37,14 @@ public class EmergencyRequestController : BaseController
     [HttpPost]
     public async Task<IActionResult> AddEmergencyRequest(EmergencyRequestRequestModel request)
     {
-        //var validationResult = ValidateEmergencyRequest(request);
-        //if (validationResult != null)
-        //{
-        //    return validationResult;
-        //}
-
         var model = await _emergencyRequestService.AddEmergencyRequest(request);
         return Execute(model);
     }
 
-    //[HttpPut("{id}")]
-    //public async Task<IActionResult> UpdateEmergencyRequest(int id,EmergencyRequestRequestModel request)
-    //{
-    //    var validationResult = ValidateEmergencyRequest(request);
-    //    if (validationResult != null)
-    //    {
-    //        return validationResult;
-    //    }
-
-    //    var model = await _emergencyRequestService.UpdateEmergencyRequest(id, request);
-    //    return Execute(model);
-    //}
-
-    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
+    {
+        var model = await _emergencyRequestService.UpdateEmergencyRequestStatus(id, statusRequest);
+        return Execute(model);
+    }
 }
