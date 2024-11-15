@@ -107,11 +107,10 @@ public class EmergencyRequestService
             if (emergencyRequest is null)
             {
                 return Result<EmergencyRequestResponseModel>
-                        .Failure("Emergency Request with Id " + id + " not found.");
+                        .NotFoundError("Emergency Request with Id " + id + " not found.");
             }
 
-
-            var response = new EmergencyRequestResponseModel()
+            var model = new EmergencyRequestResponseModel()
             {
                 RequestId = emergencyRequest.RequestId,
                 UserId = emergencyRequest.UserId,
@@ -123,7 +122,8 @@ public class EmergencyRequestService
                 Notes = emergencyRequest.Notes,
                 TownshipCode = emergencyRequest.TownshipCode
             };
-            return Result<EmergencyRequestResponseModel>.Success(response);
+
+            return Result<EmergencyRequestResponseModel>.Success(model);
         }
         catch (Exception ex)
         {
@@ -137,13 +137,20 @@ public class EmergencyRequestService
     {
         try
         {
+            var validateResponse = await ValidateEmergencyRequestRequestModel(request);
+            
+            if(validateResponse is not null)
+            {
+                return validateResponse;
+            }
+
             var emergencyRequest = new EmergencyRequest()
             {
                 UserId = request.UserId,
                 ServiceId = request.ServiceId,
                 ProviderId = request.ProviderId,
                 RequestTime = request.RequestTime,
-                Status = request.Status,
+                Status = nameof(EnumEmergencyRequestStatus.Open),
                 ResponseTime = request.ResponseTime,
                 Notes = request.Notes,
                 TownshipCode = request.TownshipCode
@@ -152,7 +159,7 @@ public class EmergencyRequestService
             _db.EmergencyRequests.Add(emergencyRequest);
             await _db.SaveChangesAsync();
 
-            var response = new EmergencyRequestResponseModel()
+            var model = new EmergencyRequestResponseModel()
             {
                 RequestId = emergencyRequest.RequestId,
                 UserId = emergencyRequest.UserId,
@@ -164,7 +171,8 @@ public class EmergencyRequestService
                 Notes = emergencyRequest.Notes,
                 TownshipCode = emergencyRequest.TownshipCode
             };
-            return Result<EmergencyRequestResponseModel>.Success(response);
+
+            return Result<EmergencyRequestResponseModel>.Success(model);
         }
         catch (Exception ex)
         {
@@ -185,9 +193,8 @@ public class EmergencyRequestService
             if (existingEmergencyRequest is null)
             {
                 return Result<EmergencyRequestResponseModel>
-                      .Failure("Emergency Request with Id " + id + " not found.");
+                      .NotFoundError("Emergency Request with Id " + id + " not found.");
             }
-
 
             var emergencyRequest = new EmergencyRequest()
             {
@@ -196,7 +203,7 @@ public class EmergencyRequestService
                 ServiceId = request.ServiceId,
                 ProviderId = request.ProviderId,
                 RequestTime = request.RequestTime,
-                Status = request.Status,
+                //Status = request.Status,
                 ResponseTime = request.ResponseTime,
                 Notes = request.Notes,
                 TownshipCode = request.TownshipCode
@@ -228,5 +235,64 @@ public class EmergencyRequestService
             _logger.LogError(message);
             return Result<EmergencyRequestResponseModel>.Failure(message);
         }
+    }
+
+    private async Task<Result<EmergencyRequestResponseModel>> ValidateEmergencyRequestRequestModel
+        (EmergencyRequestRequestModel? request)
+    {
+        if (request is null)
+        {
+            return Result<EmergencyRequestResponseModel>
+                .ValidationError("Request model cannot be null.");
+        }
+
+        if (request.ProviderId < 1)
+        {
+            return Result<EmergencyRequestResponseModel>
+                .ValidationError("Invalid Provider Id.");
+        }
+
+        if(!await IsUserIdExist(request.UserId))
+        {
+            return Result<EmergencyRequestResponseModel>
+                .ValidationError("Invalid User Id.");
+        }
+
+        if (!await IsServiceIdExist(request.ServiceId))
+        {
+            return Result<EmergencyRequestResponseModel>
+                .ValidationError("Invalid Service Id.");
+        }
+
+        if (!await IsTownshipCodeExist(request.TownshipCode))
+        {
+            return Result<EmergencyRequestResponseModel>
+                .ValidationError("Invalid Township Code.");
+        }
+
+        return null;
+    }
+
+    private async Task<bool> IsUserIdExist(int userId)
+    {
+        var isUserIdExist =  await _db.Users.AnyAsync(x => x.UserId == userId);
+        return isUserIdExist;
+    }
+
+    //private async Task<bool> IsProviderIdExist(int providerId)
+    //{
+    //    var isProviderIdExist = await _db.
+    //}
+
+    private async Task<bool> IsServiceIdExist(int serviceId)
+    {
+        var isServiceIdExist = await _db.EmergencyServices.AnyAsync(x => x.ServiceId == serviceId);
+        return isServiceIdExist;
+    }
+
+    private async Task<bool> IsTownshipCodeExist(string townshipCode)
+    {
+        var isTownshipCodeExist = await _db.Townships.AnyAsync(x=>x.TownshipCode ==  townshipCode);
+        return isTownshipCodeExist;
     }
 }
