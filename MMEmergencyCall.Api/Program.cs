@@ -1,4 +1,5 @@
 using MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
+using MMEmergencyCall.Domain.Admin.Features.Townships;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,7 @@ builder.AddAdminSignInService();
 builder.AddStateRegionService();
 builder.AddUserService();
 builder.AddAdminEmergencyServicesService();
+builder.AddTownshipService();
 
 var app = builder.Build();
 
