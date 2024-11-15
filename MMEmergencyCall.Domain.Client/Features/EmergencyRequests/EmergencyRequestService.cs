@@ -41,7 +41,7 @@ public class EmergencyRequestService
                 if (!Enum.IsDefined(typeof(EnumEmergencyRequestStatus), status))
                 {
                     return Result<EmergencyRequestPaginationResponseModel>.ValidationError(
-                        "Invalid Emergency Service Status."
+                        "Invalid Emergency Request Status. Status should be Cancel, Open or Closed"
                     );
                 }
 
