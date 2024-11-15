@@ -11,6 +11,7 @@ public class Result<T>
     public bool IsSuccess { get; private set; }
     public bool IsError { get { return !IsSuccess; } }
     public bool IsValidationError { get { return ResultType == EnumResultType.ValidationError; } }
+    public bool IsNotFoundError { get { return ResultType == EnumResultType.NotFoundError; } }
     private EnumResultType ResultType { get; set; }
     public T? Data { get; private set; }
     public string? Message { get; private set; }
@@ -42,6 +43,13 @@ public class Result<T>
         item.ResultType = EnumResultType.ValidationError;
         return item;
     }
+
+    public static Result<T> NotFoundError(string errorMessage = "Data not found")
+    {
+        var item = new Result<T>(false, default, errorMessage);
+        item.ResultType = EnumResultType.NotFoundError;
+        return item;
+    }
 }
 
 public enum EnumResultType
@@ -49,5 +57,6 @@ public enum EnumResultType
     None,
     Success,
     Failure,
-    ValidationError
+    ValidationError,
+    NotFoundError
 }

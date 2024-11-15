@@ -12,6 +12,9 @@ public class BaseController : ControllerBase
         if (model.IsValidationError)
             return BadRequest(model);
 
+        if (model.IsNotFoundError)
+            return NotFound(model);
+
         if (model.IsError)
             return InternalServerError(model);
 
