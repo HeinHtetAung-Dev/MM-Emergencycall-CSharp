@@ -60,4 +60,38 @@ public class TownshipService
 
         return Result<TownshipPaginationResponseModel>.Success(model);
     }
+
+    public async Task<Result<TownshipResponseModel>> CreateTownshipAsync(TownshipRequestModel requestModel)
+    {
+        try
+        {
+            var township = new Township
+            {
+                TownshipCode = requestModel.TownshipCode,
+                TownshipNameEn = requestModel.TownshipNameEn,
+                TownshipNameMm = requestModel.TownshipNameMm,
+                StateRegionCode = requestModel.StateRegionCode
+            };
+
+            _context.Add(township);
+            await _context.SaveChangesAsync();
+
+            var model = new TownshipResponseModel
+            {
+                TownshipId = township.TownshipId,
+                TownshipCode = township.TownshipCode,
+                TownshipNameEn = township.TownshipNameEn,
+                TownshipNameMm = township.TownshipNameMm,
+                StateRegionCode = township.StateRegionCode
+            };
+
+            return Result<TownshipResponseModel>.Success(model, "Township is created successfully.");
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while creating the township requests: " + ex.Message;
+            _logger.LogError(message);
+            return Result<TownshipResponseModel>.Failure(message);
+        }
+    }
 }
