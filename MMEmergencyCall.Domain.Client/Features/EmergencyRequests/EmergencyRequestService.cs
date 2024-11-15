@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
+using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
@@ -138,8 +140,8 @@ public class EmergencyRequestService
         try
         {
             var validateResponse = await ValidateEmergencyRequestRequestModel(request);
-            
-            if(validateResponse is not null)
+
+            if (validateResponse is not null)
             {
                 return validateResponse;
             }
@@ -182,6 +184,8 @@ public class EmergencyRequestService
         }
     }
 
+    #region unused update service
+    //unused service
     public async Task<Result<EmergencyRequestResponseModel>> UpdateEmergencyRequest(int id,
         EmergencyRequestRequestModel request)
     {
@@ -237,6 +241,56 @@ public class EmergencyRequestService
         }
     }
 
+    #endregion
+
+    public async Task<Result<EmergencyRequestResponseModel>> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
+    {
+        try
+        {
+            if (!Enum.IsDefined(typeof(EnumEmergencyRequestStatus), statusRequest.Status))
+            {
+                return Result<EmergencyRequestResponseModel>.ValidationError(
+                    "Invalid Emergency Request Status. Status should be Cancel, Open or Closed"
+                );
+            }
+
+            var existingEmergencyRequest =
+                await _db.EmergencyRequests.FirstOrDefaultAsync(x => x.RequestId == id);
+
+            if (existingEmergencyRequest is null)
+            {
+                return Result<EmergencyRequestResponseModel>
+                      .NotFoundError("Emergency Request with Id " + id + " not found.");
+            }
+
+            existingEmergencyRequest.Status = statusRequest.Status;
+            _db.Entry(existingEmergencyRequest).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
+
+            var model = new EmergencyRequestResponseModel()
+            {
+                RequestId = existingEmergencyRequest.RequestId,
+                UserId = existingEmergencyRequest.UserId,
+                ServiceId = existingEmergencyRequest.ServiceId,
+                ProviderId = existingEmergencyRequest.ProviderId,
+                RequestTime = existingEmergencyRequest.RequestTime,
+                Status = existingEmergencyRequest.Status,
+                ResponseTime = existingEmergencyRequest.ResponseTime,
+                Notes = existingEmergencyRequest.Notes,
+                TownshipCode = existingEmergencyRequest.TownshipCode
+            };
+
+            return Result<EmergencyRequestResponseModel>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while updating the status of emergency request with id " + id + " : " +
+                             ex.Message;
+            _logger.LogError(message);
+            return Result<EmergencyRequestResponseModel>.Failure(message);
+        }
+    }
+
     private async Task<Result<EmergencyRequestResponseModel>> ValidateEmergencyRequestRequestModel
         (EmergencyRequestRequestModel? request)
     {
@@ -252,7 +306,7 @@ public class EmergencyRequestService
                 .ValidationError("Invalid Provider Id.");
         }
 
-        if(!await IsUserIdExist(request.UserId))
+        if (!await IsUserIdExist(request.UserId))
         {
             return Result<EmergencyRequestResponseModel>
                 .ValidationError("Invalid User Id.");
@@ -275,7 +329,7 @@ public class EmergencyRequestService
 
     private async Task<bool> IsUserIdExist(int userId)
     {
-        var isUserIdExist =  await _db.Users.AnyAsync(x => x.UserId == userId);
+        var isUserIdExist = await _db.Users.AnyAsync(x => x.UserId == userId);
         return isUserIdExist;
     }
 
@@ -292,7 +346,7 @@ public class EmergencyRequestService
 
     private async Task<bool> IsTownshipCodeExist(string townshipCode)
     {
-        var isTownshipCodeExist = await _db.Townships.AnyAsync(x=>x.TownshipCode ==  townshipCode);
+        var isTownshipCodeExist = await _db.Townships.AnyAsync(x => x.TownshipCode == townshipCode);
         return isTownshipCodeExist;
     }
 }
