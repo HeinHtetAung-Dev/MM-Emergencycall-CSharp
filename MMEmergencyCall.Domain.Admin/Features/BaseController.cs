@@ -5,24 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMEmergencyCall.Domain.Admin.Features
+namespace MMEmergencyCall.Domain.Admin.Features;
+
+public class BaseController : ControllerBase
 {
-    public class BaseController : ControllerBase
+    protected IActionResult InternalServerError(object? obj = null)
     {
-        public IActionResult InternalServerError(object? obj = null)
-        {
-            return StatusCode(500, obj);
-        }
+        return StatusCode(500, obj);
+    }
 
-        public IActionResult Execute<T>(Result<T> model)
-        {
-            if (model.IsValidationError)
-                return BadRequest(model);
+    public IActionResult Execute<T>(Result<T> model)
+    {
+        if (model.IsValidationError)
+            return BadRequest(model);
 
-            if (model.IsError)
-                return InternalServerError(model);
+        if (model.IsError)
+            return InternalServerError(model);
 
-            return Ok(model);
-        }
+        return Ok(model);
     }
 }
