@@ -3,7 +3,7 @@
 [Route("api/[controller]")]
 [ApiController]
 //[CustomAuthorize]
-public class EmergencyRequestController : ControllerBase
+public class EmergencyRequestController : BaseController
 {
     private readonly EmergencyRequestService _emergencyRequestService;
 
@@ -12,18 +12,24 @@ public class EmergencyRequestController : ControllerBase
         _emergencyRequestService = emergencyRequestService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetEmergencyRequests()
+    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
+    public async Task<IActionResult> GetEmergencyRequests(string? userId , string? serviceId, string? providerId,
+        string? status, string? townshipCode, int pageNo = 1, int pageSize = 10)
     {
-        var response = await _emergencyRequestService.GetEmergencyRequests();
-        return Ok(response);
+        if (pageNo <= 0 || pageSize <= 0)
+        {
+            return BadRequest("Page number and page size must be greater than zero.");
+        }
+
+        var model = await _emergencyRequestService.GetEmergencyRequests(pageNo, pageSize,userId,serviceId,providerId,status,townshipCode);
+        return Execute(model);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetEmergencyRequestById(int id)
     {
-        var response = await _emergencyRequestService.GetEmergencyRequestById(id);
-        return Ok(response);
+        var model = await _emergencyRequestService.GetEmergencyRequestById(id);
+        return Execute(model);
     }
 
     [HttpPost]
@@ -35,22 +41,22 @@ public class EmergencyRequestController : ControllerBase
             return validationResult;
         }
 
-        var response = await _emergencyRequestService.AddEmergencyRequest(request);
-        return Ok(response);
+        var model = await _emergencyRequestService.AddEmergencyRequest(request);
+        return Execute(model);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateEmergencyRequest(int id,EmergencyRequestRequestModel request)
-    {
-        var validationResult = ValidateEmergencyRequest(request);
-        if (validationResult != null)
-        {
-            return validationResult;
-        }
+    //[HttpPut("{id}")]
+    //public async Task<IActionResult> UpdateEmergencyRequest(int id,EmergencyRequestRequestModel request)
+    //{
+    //    var validationResult = ValidateEmergencyRequest(request);
+    //    if (validationResult != null)
+    //    {
+    //        return validationResult;
+    //    }
 
-        var response = await _emergencyRequestService.UpdateEmergencyRequest(id, request);
-        return Ok(response);
-    }
+    //    var model = await _emergencyRequestService.UpdateEmergencyRequest(id, request);
+    //    return Execute(model);
+    //}
 
     private IActionResult? ValidateEmergencyRequest(EmergencyRequestRequestModel? request)
     {
