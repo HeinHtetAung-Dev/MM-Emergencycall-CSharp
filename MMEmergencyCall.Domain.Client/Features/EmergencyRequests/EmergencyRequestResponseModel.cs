@@ -23,7 +23,6 @@ public class EmergencyRequestResponseModel
 
 public enum EnumEmergencyRequestStatus
 {
-    None,
     Cancel,
     Open,
     Closed

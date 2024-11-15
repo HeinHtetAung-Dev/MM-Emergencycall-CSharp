@@ -17,7 +17,7 @@ public class EmergencyRequestService
 
     public async Task<Result<EmergencyRequestPaginationResponseModel>> GetEmergencyRequests(int pageNo, int pageSize,
      string? userId = null, string? serviceId = null, string? providerId = null,
-     string? status = "None", string? townshipCode = null)
+     string? status = null, string? townshipCode = null)
     {
         try
         {
@@ -36,16 +36,15 @@ public class EmergencyRequestService
                 query = query.Where(x => x.ProviderId.ToString() == providerId);
             }
 
-            //var enumEmergencyRequestStatus = Enum.Parse<EnumEmergencyRequestStatus>(status, true);
-            //if (enumEmergencyRequestStatus == EnumEmergencyRequestStatus.None)
-            //{
-            //    return Result<EmergencyRequestPaginationResponseModel>.Failure(
-            //       "Invalid Emergency Service Status."
-            //   );
-            //}
-
             if (!string.IsNullOrEmpty(status))
             {
+                if (!Enum.IsDefined(typeof(EnumEmergencyRequestStatus), status))
+                {
+                    return Result<EmergencyRequestPaginationResponseModel>.ValidationError(
+                        "Invalid Emergency Service Status."
+                    );
+                }
+
                 query = query.Where(x => x.Status == status);
             }
 
