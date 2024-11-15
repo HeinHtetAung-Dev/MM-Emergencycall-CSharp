@@ -158,12 +158,19 @@ public class EmergencyServiceService
         try
         {
             var emergencyService = await _db.Set<EmergencyService>().FindAsync(id);
+
             if (emergencyService == null)
             {
                 return Result<EmergencyServiceResponseModel>.Failure(
                     "Emergency Service with id " + id + " not found."
                 );
             }
+
+            var status = emergencyService.ServiceStatus;
+            if (status != "Pending")
+                return Result<EmergencyServiceResponseModel>.Failure(
+                    "You can edit only Services with Pending status."
+                );
 
             emergencyService.ServiceType = requestModel.ServiceType;
             emergencyService.ServiceGroup = requestModel.ServiceGroup;
@@ -208,6 +215,10 @@ public class EmergencyServiceService
         var emergencyService = await _db.Set<EmergencyService>().FindAsync(id);
         if (emergencyService == null)
             return Result<bool>.Failure("Emergency Service not found.");
+
+        var status = emergencyService.ServiceStatus;
+        if (status != "Pending")
+            return Result<bool>.Failure("You can delete only Services with Pending status.");
 
         _db.Remove(emergencyService);
         await _db.SaveChangesAsync();

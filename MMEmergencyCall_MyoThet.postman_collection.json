@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "a60de45f-d07b-41b7-8ff0-3ab37109e442",
+		"name": "MMEmergencyCall_MyoThet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3430222"
+	},
+	"item": [
+		{
+			"name": "/api/EmergencyService/ServiceType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/EmergencyService/ServiceType",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"EmergencyService",
+						"ServiceType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/Admin/EmergencyServices/ServiceStatus/pending",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/Admin/EmergencyServices/ServiceStatus/pending",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"Admin",
+						"EmergencyServices",
+						"ServiceStatus",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/Admin/EmergencyServices/ServiceStatus/approved",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/Admin/EmergencyServices/ServiceStatus/approved",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"Admin",
+						"EmergencyServices",
+						"ServiceStatus",
+						"approved"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/Admin/EmergencyServices/ServiceStatus/rejected",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/Admin/EmergencyServices/ServiceStatus/rejected",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"Admin",
+						"EmergencyServices",
+						"ServiceStatus",
+						"rejected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/EmergencyService/ServiceType/Ambulance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/EmergencyService/ServiceType/Ambulance",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"EmergencyService",
+						"ServiceType",
+						"Ambulance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/EmergencyService/ServiceType/Fire",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/EmergencyService/ServiceType/Fire",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"EmergencyService",
+						"ServiceType",
+						"Fire"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/EmergencyService/ServiceType/Medical",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/EmergencyService/ServiceType/Medical",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"EmergencyService",
+						"ServiceType",
+						"Medical"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/EmergencyService/ServiceType/Police",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/EmergencyService/ServiceType/Police",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"EmergencyService",
+						"ServiceType",
+						"Police"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/EmergencyService/ServiceType/Rescue",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/EmergencyService/ServiceType/Rescue",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"EmergencyService",
+						"ServiceType",
+						"Rescue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/EmergencyService",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7179/api/EmergencyService",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7179",
+					"path": [
+						"api",
+						"EmergencyService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/EmergencyService/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7179/api/EmergencyService/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7179",
+					"path": [
+						"api",
+						"EmergencyService",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/EmergencyService",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"serviceType\": \"Rescue\",\r\n  \"serviceGroup\": \"Provider\",\r\n  \"serviceName\": \"Charity\",\r\n  \"phoneNumber\": \"09964557349\",\r\n  \"location\": \"Yangon\",\r\n  \"availability\": \"Y\",\r\n  \"townshipCode\": \"MMR017001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7179/api/EmergencyService",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7179",
+					"path": [
+						"api",
+						"EmergencyService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/Admin/EmergencyServices/ServiceStatus/approved/1/10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Service ID</th>\r",
+							"        <th>User ID</th>\r",
+							"        <th>Service Group</th>\r",
+							"        <th>Service Type</th>\r",
+							"        <th>Service Name</th>\r",
+							"        <th>Phone Number</th>\r",
+							"        <th>Location</th>\r",
+							"        <th>Availability</th>\r",
+							"        <th>Township Code</th>\r",
+							"        <th>Service Status</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response.data.data}}\r",
+							"        <tr>\r",
+							"            <td>{{serviceId}}</td>\r",
+							"            <td>{{userId}}</td>\r",
+							"            <td>{{serviceGroup}}</td>\r",
+							"            <td>{{serviceType}}</td>\r",
+							"            <td>{{serviceName}}</td>\r",
+							"            <td>{{phoneNumber}}</td>\r",
+							"            <td>{{location}}</td>\r",
+							"            <td>{{availability}}</td>\r",
+							"            <td>{{townshipCode}}</td>\r",
+							"            <td>{{serviceStatus}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return {response: pm.response.json()}\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7179/api/Admin/EmergencyServices/ServiceStatus/approved/1/10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7179",
+					"path": [
+						"api",
+						"Admin",
+						"EmergencyServices",
+						"ServiceStatus",
+						"approved",
+						"1",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
