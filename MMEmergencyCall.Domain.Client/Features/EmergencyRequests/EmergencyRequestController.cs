@@ -35,11 +35,11 @@ public class EmergencyRequestController : BaseController
     [HttpPost]
     public async Task<IActionResult> AddEmergencyRequest(EmergencyRequestRequestModel request)
     {
-        var validationResult = ValidateEmergencyRequest(request);
-        if (validationResult != null)
-        {
-            return validationResult;
-        }
+        //var validationResult = ValidateEmergencyRequest(request);
+        //if (validationResult != null)
+        //{
+        //    return validationResult;
+        //}
 
         var model = await _emergencyRequestService.AddEmergencyRequest(request);
         return Execute(model);
@@ -58,30 +58,5 @@ public class EmergencyRequestController : BaseController
     //    return Execute(model);
     //}
 
-    private IActionResult? ValidateEmergencyRequest(EmergencyRequestRequestModel? request)
-    {
-        if(request is null)
-        {
-            return BadRequest("Request model cannot be null");
-        }
-        if(request.UserId < 1)
-        {
-            return BadRequest("Invalid User Id");
-        }
-        if (request.ProviderId < 1)
-        {
-            return BadRequest("Invalid Provider Id");
-        }
-        if (request.ServiceId < 1)
-        {
-            return BadRequest("Invalid Service Id");
-        }
-
-        if(request.Status != "Pending" && request.Status != "Completed")
-        {
-            return BadRequest("Status should be either Pending or Completed");
-        }
-
-        return null;
-    }
+    
 }

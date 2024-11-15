@@ -10,8 +10,6 @@ public class EmergencyRequestRequestModel
 
     public DateTime RequestTime { get; set; }
 
-    public string Status { get; set; } = null!;
-
     public DateTime? ResponseTime { get; set; }
 
     public string? Notes { get; set; }
