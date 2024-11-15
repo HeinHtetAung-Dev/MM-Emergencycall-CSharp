@@ -9,13 +9,13 @@ dotnet ef dbcontext scaffold "Server=.;Database=MMEmergencyCall;User Id=sa;Passw
 
 Admin
 
-[ ] Admin / User (CRUD) (By Role)
-[x] Register
-[x] Sign in
-[x] States & Regions (CRUD) - need pagination
-[ ] Township (CRUD) - Su Sandar Lin
-[x] Emergency Services
-[ ] Emergency Request (List with Pagination, Status Change (Closed, Rejected))
+- [ ] Admin / User (CRUD) (By Role)
+- [x] Register
+- [x] Sign in
+- [x] States & Regions (CRUD) - need pagination
+- [ ] Township (CRUD) - Su Sandar Lin
+- [x] Emergency Services
+- [ ] Emergency Request (List with Pagination, Status Change (Closed, Rejected))
 
 User
 
