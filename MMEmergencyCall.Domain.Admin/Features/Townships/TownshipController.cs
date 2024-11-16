@@ -21,6 +21,13 @@ public class TownshipController : BaseController
         return Execute(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetByIdAsync(int id)
+    {
+        var model = await _townshipService.GetByIdAsync(id);
+        return Execute(model);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] TownshipRequestModel requestModel)
     {

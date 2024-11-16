@@ -61,6 +61,33 @@ public class TownshipService
         return Result<TownshipPaginationResponseModel>.Success(model);
     }
 
+    public async Task<Result<TownshipResponseModel>> GetByIdAsync(int id)
+    {
+        try
+        {
+            var township = await _context.Townships.FindAsync(id);
+            if (township is null)
+                return Result<TownshipResponseModel>.NotFoundError("Township with id " + id + " not found.");
+
+            var model = new TownshipResponseModel
+            {
+                TownshipId = township.TownshipId,
+                TownshipCode = township.TownshipCode,
+                TownshipNameEn = township.TownshipNameEn,
+                TownshipNameMm = township.TownshipNameMm,
+                StateRegionCode = township.StateRegionCode
+            };
+
+            return Result<TownshipResponseModel>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while getting the township requests for id " + id + " : " + ex.Message;
+            _logger.LogError(message);
+            return Result<TownshipResponseModel>.Failure(message);
+        }
+    }
+
     public async Task<Result<TownshipResponseModel>> CreateTownshipAsync(TownshipRequestModel requestModel)
     {
         try
@@ -101,7 +128,7 @@ public class TownshipService
         {
             var township = await _context.Townships.FindAsync(id);
             if (township is null)
-                return Result<TownshipResponseModel>.ValidationError("Township with id " + id + " not found.");
+                return Result<TownshipResponseModel>.NotFoundError("Township with id " + id + " not found.");
 
             township.TownshipCode = requestModel.TownshipCode;
             township.TownshipNameEn = requestModel.TownshipNameEn;
@@ -134,7 +161,7 @@ public class TownshipService
     {
         var township = await _context.Townships.FindAsync(id);
         if (township is null)
-            return Result<bool>.NotFoundError("Township not found.");
+            return Result<bool>.NotFoundError("Township with id " + id + " not found.");
 
         _context.Remove(township);
         await _context.SaveChangesAsync();
