@@ -20,3 +20,10 @@ public class EmergencyRequestResponseModel
 
     public string? TownshipCode { get; set; }
 }
+
+public enum EnumEmergencyRequestStatus
+{
+    Cancel,
+    Open,
+    Closed
+}
