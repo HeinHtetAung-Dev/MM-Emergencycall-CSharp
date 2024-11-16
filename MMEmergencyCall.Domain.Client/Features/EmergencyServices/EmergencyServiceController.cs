@@ -6,13 +6,21 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmergencyServiceController : ControllerBase
+    public class EmergencyServiceController : BaseController
     {
         private readonly EmergencyServiceService _emergencyServiceService;
 
         public EmergencyServiceController(EmergencyServiceService emergencyServiceService)
         {
             _emergencyServiceService = emergencyServiceService;
+        }
+
+        [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
+        public async Task<IActionResult> GetAllByPaginationAsync(int pageNo = 1, int pageSize = 10)
+        {
+            var model = await _emergencyServiceService
+                .GetAllEmergencyServiceWithPagination(pageNo, pageSize);
+            return Execute(model);
         }
 
         [HttpGet("{serviceId}")]
@@ -25,10 +33,9 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         [HttpGet("ServiceType/{serviceType}")]
         public async Task<IActionResult> GetEmergencyServiceByType(string serviceType)
         {
-            var response = await _emergencyServiceService.GetEmergencyServiceByServiceType(
-                serviceType
-            );
-            return Ok(response);
+            var model = await _emergencyServiceService
+                .GetEmergencyServiceByServiceType(serviceType);
+            return Execute(model);
         }
 
         [HttpPost]
@@ -36,15 +43,13 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             EmergencyServiceRequestModel requestModel
         )
         {
-            var response = await _emergencyServiceService.CreateEmergencyServiceAsync(requestModel);
-            return Ok(response);
+            var model = await _emergencyServiceService.CreateEmergencyServiceAsync(requestModel);
+            return Execute(model);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEmergencyService(
-            int id,
-            [FromBody] EmergencyServiceRequestModel requestModel
-        )
+        public async Task<IActionResult> UpdateEmergencyService(int id,
+            [FromBody] EmergencyServiceRequestModel requestModel)
         {
             Result<EmergencyServiceResponseModel> model = null;
 
@@ -76,9 +81,9 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             if (!model.IsSuccess)
                 return NotFound(model);
 
-            return Ok(model);
+            return Execute(model);
 
-            BadRequest:
+        BadRequest:
             return BadRequest(model);
         }
 
@@ -86,27 +91,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         public async Task<IActionResult> DeleteEmergencyService(int id)
         {
             var model = await _emergencyServiceService.DeleteEmergencyService(id);
-            if (!model.IsSuccess)
-                return NotFound(model);
-            return Ok(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllEmergencyServiceAsync()
-        {
-            var model = await _emergencyServiceService.GetAllEmergencyService();
-            return Ok(model);
-        }
-
-        [HttpGet("{pageNo}/{pageSize}")]
-        [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-        public async Task<IActionResult> GetAllByPaginationAsync(int pageNo, int pageSize)
-        {
-            var model = await _emergencyServiceService.GetAllEmergencyServiceWithPagination(
-                pageNo,
-                pageSize
-            );
-            return Ok(model);
+            return Execute(model);
         }
     }
 }
