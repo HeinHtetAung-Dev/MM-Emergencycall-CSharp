@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "83d378bf-9076-4315-8d9e-5b86a76fb41c",
+		"name": "MMEmergencyCall_SuSandarLin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5846584"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Township",
+					"item": [
+						{
+							"name": "GetTownships",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/Township/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Township",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": []
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "GetTownshipById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/Township?id=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Township"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/Township?id=1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Township"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "CreateTownship",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"townshipCode\": \"MMR013048\",\r\n  \"townshipNameEn\": \"Thingangyun (East)\",\r\n  \"townshipNameMm\": \"သင်္ဃန်းကျွန်း (အနောက်ပိုင်း)\",\r\n  \"stateRegionCode\": \"MMR013\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/Township",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Township"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"townshipCode\": \"MMR013048\",\r\n  \"townshipNameEn\": \"Thingangyun (East)\",\r\n  \"townshipNameMm\": \"သင်္ဃန်းကျွန်း (အနောက်ပိုင်း)\",\r\n  \"stateRegionCode\": \"MMR013\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/Township",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Township"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "UpdateTownship",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"townshipCode\": \"MMR013008\",\r\n  \"townshipNameEn\": \"Thingangyun (West)\",\r\n  \"townshipNameMm\": \"သင်္ဃန်းကျွန်း (အရှေ့ပိုင်း)\",\r\n  \"stateRegionCode\": \"MMR014\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7179/api/Township/353",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7179",
+									"path": [
+										"api",
+										"Township",
+										"353"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"townshipCode\": \"MMR013008\",\r\n  \"townshipNameEn\": \"Thingangyun (West)\",\r\n  \"townshipNameMm\": \"သင်္ဃန်းကျွန်း (အရှေ့ပိုင်း)\",\r\n  \"stateRegionCode\": \"MMR014\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7179/api/Township/353",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7179",
+											"path": [
+												"api",
+												"Township",
+												"353"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "DeleteTownship",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/Township/358",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Township",
+										"358"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/Township/358",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Township",
+												"358"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
