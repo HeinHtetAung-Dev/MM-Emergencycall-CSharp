@@ -22,6 +22,55 @@ public class EmergencyServiceService
         _db = db;
     }
 
+    public async Task<
+        Result<EmergencyServicePaginationResponseModel>
+    > GetAllEmergencyServiceWithPagination(int pageNo, int pageSize)
+    {
+        int rowCount = _db.EmergencyServices.Count();
+
+        int pageCount = rowCount / pageSize;
+        if (rowCount % pageSize > 0)
+            pageCount++;
+
+        if (pageNo < 1)
+        {
+            return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        if (pageNo > pageCount)
+        {
+            return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        var emergencyService = await _db
+            .EmergencyServices.Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var lst = emergencyService
+            .Select(sr => new EmergencyServiceResponseModel
+            {
+                ServiceId = sr.ServiceId,
+                ServiceType = sr.ServiceType,
+                ServiceGroup = sr.ServiceGroup,
+                ServiceName = sr.ServiceName,
+                PhoneNumber = sr.PhoneNumber,
+                Location = sr.Location,
+                Availability = sr.Availability,
+                TownshipCode = sr.TownshipCode,
+                ServiceStatus = sr.ServiceStatus
+            })
+            .ToList();
+
+        EmergencyServicePaginationResponseModel model = new();
+        model.Data = lst;
+        model.PageSize = pageSize;
+        model.PageNo = pageNo;
+        model.PageCount = pageCount;
+
+        return Result<EmergencyServicePaginationResponseModel>.Success(model);
+    }
+
     public async Task<Result<EmergencyServiceResponseModel>> GetEmergencyServiceById(int serviceId)
     {
         try
@@ -105,6 +154,67 @@ public class EmergencyServiceService
             _logger.LogError(message);
             return Result<List<EmergencyServiceResponseModel>>.Failure(message);
         }
+    }
+
+    public async Task<
+        Result<EmergencyServicePaginationResponseModel>
+    > GetServiceByServiceTypeWithPagination(string serviceType, int pageNo, int pageSize)
+    {
+        var emergencyServices = await _db
+            .EmergencyServices.Where(x => x.ServiceType == serviceType)
+            .ToListAsync();
+
+        if (emergencyServices == null)
+        {
+            return Result<EmergencyServicePaginationResponseModel>.Failure(
+                "Emergency Service with service type: " + serviceType + " not found."
+            );
+        }
+
+        int rowCount = emergencyServices.Count();
+
+        int pageCount = rowCount / pageSize;
+        if (rowCount % pageSize > 0)
+            pageCount++;
+
+        if (pageNo < 1)
+        {
+            return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        if (pageNo > pageCount)
+        {
+            return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
+        }
+
+        var emergencyService = await _db
+            .EmergencyServices.Where(x => x.ServiceType == serviceType)
+            .Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var lst = emergencyService
+            .Select(sr => new EmergencyServiceResponseModel
+            {
+                ServiceId = sr.ServiceId,
+                ServiceType = sr.ServiceType,
+                ServiceGroup = sr.ServiceGroup,
+                ServiceName = sr.ServiceName,
+                PhoneNumber = sr.PhoneNumber,
+                Location = sr.Location,
+                Availability = sr.Availability,
+                TownshipCode = sr.TownshipCode,
+                ServiceStatus = sr.ServiceStatus
+            })
+            .ToList();
+
+        EmergencyServicePaginationResponseModel model = new();
+        model.Data = lst;
+        model.PageSize = pageSize;
+        model.PageNo = pageNo;
+        model.PageCount = pageCount;
+
+        return Result<EmergencyServicePaginationResponseModel>.Success(model);
     }
 
     public async Task<Result<EmergencyServiceResponseModel>> CreateEmergencyServiceAsync(
@@ -223,76 +333,5 @@ public class EmergencyServiceService
         _db.Remove(emergencyService);
         await _db.SaveChangesAsync();
         return Result<bool>.Success(true, "Emergency Service deleted successfully.");
-    }
-
-    public async Task<Result<List<EmergencyService>>> GetAllEmergencyService()
-    {
-        var emergencyService = await _db.Set<EmergencyService>().ToListAsync();
-
-        var model = emergencyService
-            .Select(sr => new EmergencyServiceResponseModel
-            {
-                ServiceId = sr.ServiceId,
-                ServiceType = sr.ServiceType,
-                ServiceGroup = sr.ServiceGroup,
-                ServiceName = sr.ServiceName,
-                PhoneNumber = sr.PhoneNumber,
-                Location = sr.Location,
-                Availability = sr.Availability,
-                TownshipCode = sr.TownshipCode,
-                ServiceStatus = sr.ServiceStatus
-            })
-            .ToList();
-
-        return Result<List<EmergencyService>>.Success(emergencyService);
-    }
-
-    public async Task<
-        Result<EmergencyServicePaginationResponseModel>
-    > GetAllEmergencyServiceWithPagination(int pageNo, int pageSize)
-    {
-        int rowCount = _db.EmergencyServices.Count();
-
-        int pageCount = rowCount / pageSize;
-        if (rowCount % pageSize > 0)
-            pageCount++;
-
-        if (pageNo < 1)
-        {
-            return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
-        }
-
-        if (pageNo > pageCount)
-        {
-            return Result<EmergencyServicePaginationResponseModel>.Failure("Invalid PageNo.");
-        }
-
-        var emergencyService = await _db
-            .EmergencyServices.Skip((pageNo - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
-
-        var lst = emergencyService
-            .Select(sr => new EmergencyServiceResponseModel
-            {
-                ServiceId = sr.ServiceId,
-                ServiceType = sr.ServiceType,
-                ServiceGroup = sr.ServiceGroup,
-                ServiceName = sr.ServiceName,
-                PhoneNumber = sr.PhoneNumber,
-                Location = sr.Location,
-                Availability = sr.Availability,
-                TownshipCode = sr.TownshipCode,
-                ServiceStatus = sr.ServiceStatus
-            })
-            .ToList();
-
-        EmergencyServicePaginationResponseModel model = new();
-        model.Data = lst;
-        model.PageSize = pageSize;
-        model.PageNo = pageNo;
-        model.PageCount = pageCount;
-
-        return Result<EmergencyServicePaginationResponseModel>.Success(model);
     }
 }
