@@ -256,6 +256,894 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "GetUsersByPagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/User/1/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"1",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/1/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"1",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 10:55:28 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"userId\": 1,\n                \"name\": \"User_1\",\n                \"email\": \"User_1@gmail.com\",\n                \"password\": \"User_1@gmail.com\",\n                \"phoneNumber\": \"09-5.73559e+008\",\n                \"address\": \"Address_1\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR015008\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 2,\n                \"name\": \"User_2\",\n                \"email\": \"User_2@gmail.com\",\n                \"password\": \"User_2@gmail.com\",\n                \"phoneNumber\": \"09-3.77564e+008\",\n                \"address\": \"Address_2\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR003002\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 3,\n                \"name\": \"User_3\",\n                \"email\": \"User_3@gmail.com\",\n                \"password\": \"User_3@gmail.com\",\n                \"phoneNumber\": \"09-8.44637e+008\",\n                \"address\": \"Address_3\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR016007\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 4,\n                \"name\": \"User_5\",\n                \"email\": \"User_5@gmail.com\",\n                \"password\": \"User_4@gmail.com\",\n                \"phoneNumber\": \"09-2.82642e+008\",\n                \"address\": \"Address_5\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR013006\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 5,\n                \"name\": \"User_5\",\n                \"email\": \"User_5@gmail.com\",\n                \"password\": \"User_5@gmail.com\",\n                \"phoneNumber\": \"09-2.82642e+008\",\n                \"address\": \"Address_5\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR013006\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 6,\n                \"name\": \"User_6\",\n                \"email\": \"User_6@gmail.com\",\n                \"password\": \"User_6@gmail.com\",\n                \"phoneNumber\": \"09-7.25978e+008\",\n                \"address\": \"Address_6\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR009017\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 7,\n                \"name\": \"User_7\",\n                \"email\": \"User_7@gmail.com\",\n                \"password\": \"User_7@gmail.com\",\n                \"phoneNumber\": \"09-2.12544e+008\",\n                \"address\": \"Address_7\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR007004\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 8,\n                \"name\": \"User_8\",\n                \"email\": \"User_8@gmail.com\",\n                \"password\": \"User_8@gmail.com\",\n                \"phoneNumber\": \"09-3.25759e+008\",\n                \"address\": \"Address_8\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009024\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 9,\n                \"name\": \"User_9\",\n                \"email\": \"User_9@gmail.com\",\n                \"password\": \"User_9@gmail.com\",\n                \"phoneNumber\": \"09-6.74806e+008\",\n                \"address\": \"Address_9\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR003007\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 10,\n                \"name\": \"User_10\",\n                \"email\": \"User_10@gmail.com\",\n                \"password\": \"User_10@gmail.com\",\n                \"phoneNumber\": \"09-1.54985e+008\",\n                \"address\": \"Address_10\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR016005\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetUsersByPaginationWithLabel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{/User/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}{"
+									],
+									"path": [
+										"User",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 10:58:00 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"userId\": 1,\n                \"name\": \"User_1\",\n                \"email\": \"User_1@gmail.com\",\n                \"password\": \"User_1@gmail.com\",\n                \"phoneNumber\": \"09-5.73559e+008\",\n                \"address\": \"Address_1\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR015008\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 2,\n                \"name\": \"User_2\",\n                \"email\": \"User_2@gmail.com\",\n                \"password\": \"User_2@gmail.com\",\n                \"phoneNumber\": \"09-3.77564e+008\",\n                \"address\": \"Address_2\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR003002\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 3,\n                \"name\": \"User_3\",\n                \"email\": \"User_3@gmail.com\",\n                \"password\": \"User_3@gmail.com\",\n                \"phoneNumber\": \"09-8.44637e+008\",\n                \"address\": \"Address_3\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR016007\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 4,\n                \"name\": \"User_5\",\n                \"email\": \"User_5@gmail.com\",\n                \"password\": \"User_4@gmail.com\",\n                \"phoneNumber\": \"09-2.82642e+008\",\n                \"address\": \"Address_5\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR013006\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 5,\n                \"name\": \"User_5\",\n                \"email\": \"User_5@gmail.com\",\n                \"password\": \"User_5@gmail.com\",\n                \"phoneNumber\": \"09-2.82642e+008\",\n                \"address\": \"Address_5\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR013006\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 6,\n                \"name\": \"User_6\",\n                \"email\": \"User_6@gmail.com\",\n                \"password\": \"User_6@gmail.com\",\n                \"phoneNumber\": \"09-7.25978e+008\",\n                \"address\": \"Address_6\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR009017\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 7,\n                \"name\": \"User_7\",\n                \"email\": \"User_7@gmail.com\",\n                \"password\": \"User_7@gmail.com\",\n                \"phoneNumber\": \"09-2.12544e+008\",\n                \"address\": \"Address_7\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR007004\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 8,\n                \"name\": \"User_8\",\n                \"email\": \"User_8@gmail.com\",\n                \"password\": \"User_8@gmail.com\",\n                \"phoneNumber\": \"09-3.25759e+008\",\n                \"address\": \"Address_8\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009024\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 9,\n                \"name\": \"User_9\",\n                \"email\": \"User_9@gmail.com\",\n                \"password\": \"User_9@gmail.com\",\n                \"phoneNumber\": \"09-6.74806e+008\",\n                \"address\": \"Address_9\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR003007\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 10,\n                \"name\": \"User_10\",\n                \"email\": \"User_10@gmail.com\",\n                \"password\": \"User_10@gmail.com\",\n                \"phoneNumber\": \"09-1.54985e+008\",\n                \"address\": \"Address_10\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR016005\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetUsersByNormalUserRoleWithPagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/User/role/Normal%20User/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"role",
+										"Normal%20User",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/role/Normal%20User/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"role",
+												"Normal%20User",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:00:29 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"userId\": 11,\n                \"name\": \"User_11\",\n                \"email\": \"User_11@gmail.com\",\n                \"password\": \"User_11@gmail.com\",\n                \"phoneNumber\": \"09-4.86799e+008\",\n                \"address\": \"Address_11\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR017007\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 12,\n                \"name\": \"User_12\",\n                \"email\": \"User_12@gmail.com\",\n                \"password\": \"User_12@gmail.com\",\n                \"phoneNumber\": \"09-2.02957e+008\",\n                \"address\": \"Address_12\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009005\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 13,\n                \"name\": \"User_13\",\n                \"email\": \"User_13@gmail.com\",\n                \"password\": \"User_13@gmail.com\",\n                \"phoneNumber\": \"09-7.05358e+008\",\n                \"address\": \"Address_13\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009005\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 14,\n                \"name\": \"User_14\",\n                \"email\": \"User_14@gmail.com\",\n                \"password\": \"User_14@gmail.com\",\n                \"phoneNumber\": \"09-5.44591e+008\",\n                \"address\": \"Address_14\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR015019\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 15,\n                \"name\": \"User_15\",\n                \"email\": \"User_15@gmail.com\",\n                \"password\": \"User_15@gmail.com\",\n                \"phoneNumber\": \"09-2.15084e+008\",\n                \"address\": \"Address_15\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR015303\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 16,\n                \"name\": \"User_16\",\n                \"email\": \"User_16@gmail.com\",\n                \"password\": \"User_16@gmail.com\",\n                \"phoneNumber\": \"09-7.37477e+008\",\n                \"address\": \"Address_16\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR017008\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 17,\n                \"name\": \"User_17\",\n                \"email\": \"User_17@gmail.com\",\n                \"password\": \"User_17@gmail.com\",\n                \"phoneNumber\": \"09-9.86952e+008\",\n                \"address\": \"Address_17\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR010030\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 18,\n                \"name\": \"User_18\",\n                \"email\": \"User_18@gmail.com\",\n                \"password\": \"User_18@gmail.com\",\n                \"phoneNumber\": \"09-7.13543e+008\",\n                \"address\": \"Address_18\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR012011\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 19,\n                \"name\": \"User_19\",\n                \"email\": \"User_19@gmail.com\",\n                \"password\": \"User_19@gmail.com\",\n                \"phoneNumber\": \"09-6.78337e+008\",\n                \"address\": \"Address_19\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR015313\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 20,\n                \"name\": \"User_20\",\n                \"email\": \"User_20@gmail.com\",\n                \"password\": \"User_20@gmail.com\",\n                \"phoneNumber\": \"09-9.85633e+008\",\n                \"address\": \"Address_20\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009011\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Rejected\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetUsersByServiceProviderRoleWithPagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/User/role/Service%20Provider/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"role",
+										"Service%20Provider",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/role/Service%20Provider/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"role",
+												"Service%20Provider",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:04:05 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"userId\": 1,\n                \"name\": \"User_1\",\n                \"email\": \"User_1@gmail.com\",\n                \"password\": \"User_1@gmail.com\",\n                \"phoneNumber\": \"09-5.73559e+008\",\n                \"address\": \"Address_1\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR015008\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 2,\n                \"name\": \"User_2\",\n                \"email\": \"User_2@gmail.com\",\n                \"password\": \"User_2@gmail.com\",\n                \"phoneNumber\": \"09-3.77564e+008\",\n                \"address\": \"Address_2\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR003002\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 3,\n                \"name\": \"User_3\",\n                \"email\": \"User_3@gmail.com\",\n                \"password\": \"User_3@gmail.com\",\n                \"phoneNumber\": \"09-8.44637e+008\",\n                \"address\": \"Address_3\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR016007\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 4,\n                \"name\": \"User_5\",\n                \"email\": \"User_5@gmail.com\",\n                \"password\": \"User_4@gmail.com\",\n                \"phoneNumber\": \"09-2.82642e+008\",\n                \"address\": \"Address_5\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR013006\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 5,\n                \"name\": \"User_5\",\n                \"email\": \"User_5@gmail.com\",\n                \"password\": \"User_5@gmail.com\",\n                \"phoneNumber\": \"09-2.82642e+008\",\n                \"address\": \"Address_5\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR013006\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 6,\n                \"name\": \"User_6\",\n                \"email\": \"User_6@gmail.com\",\n                \"password\": \"User_6@gmail.com\",\n                \"phoneNumber\": \"09-7.25978e+008\",\n                \"address\": \"Address_6\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR009017\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 7,\n                \"name\": \"User_7\",\n                \"email\": \"User_7@gmail.com\",\n                \"password\": \"User_7@gmail.com\",\n                \"phoneNumber\": \"09-2.12544e+008\",\n                \"address\": \"Address_7\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR007004\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 8,\n                \"name\": \"User_8\",\n                \"email\": \"User_8@gmail.com\",\n                \"password\": \"User_8@gmail.com\",\n                \"phoneNumber\": \"09-3.25759e+008\",\n                \"address\": \"Address_8\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009024\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 9,\n                \"name\": \"User_9\",\n                \"email\": \"User_9@gmail.com\",\n                \"password\": \"User_9@gmail.com\",\n                \"phoneNumber\": \"09-6.74806e+008\",\n                \"address\": \"Address_9\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR003007\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 10,\n                \"name\": \"User_10\",\n                \"email\": \"User_10@gmail.com\",\n                \"password\": \"User_10@gmail.com\",\n                \"phoneNumber\": \"09-1.54985e+008\",\n                \"address\": \"Address_10\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR016005\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetUsersByAdminRoleWithPagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/User/role/Admin/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"role",
+										"Admin",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/role/Admin/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"role",
+												"Admin",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:07:58 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"userId\": 102,\n                \"name\": \"string\",\n                \"email\": \"string\",\n                \"password\": \"string\",\n                \"phoneNumber\": \"string\",\n                \"address\": \"string\",\n                \"emergencyType\": \"string\",\n                \"emergencyDetails\": \"string\",\n                \"townshipCode\": \"string\",\n                \"role\": \"admin\",\n                \"userStatus\": \"Approved\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetUsersByPendingUserStatusWithPagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/User/userStatus/Pending/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"userStatus",
+										"Pending",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/userStatus/Pending/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"userStatus",
+												"Pending",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:10:22 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"userId\": 1,\n                \"name\": \"User_1\",\n                \"email\": \"User_1@gmail.com\",\n                \"password\": \"User_1@gmail.com\",\n                \"phoneNumber\": \"09-5.73559e+008\",\n                \"address\": \"Address_1\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR015008\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 2,\n                \"name\": \"User_2\",\n                \"email\": \"User_2@gmail.com\",\n                \"password\": \"User_2@gmail.com\",\n                \"phoneNumber\": \"09-3.77564e+008\",\n                \"address\": \"Address_2\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR003002\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 3,\n                \"name\": \"User_3\",\n                \"email\": \"User_3@gmail.com\",\n                \"password\": \"User_3@gmail.com\",\n                \"phoneNumber\": \"09-8.44637e+008\",\n                \"address\": \"Address_3\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR016007\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 5,\n                \"name\": \"User_5\",\n                \"email\": \"User_5@gmail.com\",\n                \"password\": \"User_5@gmail.com\",\n                \"phoneNumber\": \"09-2.82642e+008\",\n                \"address\": \"Address_5\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR013006\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 6,\n                \"name\": \"User_6\",\n                \"email\": \"User_6@gmail.com\",\n                \"password\": \"User_6@gmail.com\",\n                \"phoneNumber\": \"09-7.25978e+008\",\n                \"address\": \"Address_6\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR009017\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 7,\n                \"name\": \"User_7\",\n                \"email\": \"User_7@gmail.com\",\n                \"password\": \"User_7@gmail.com\",\n                \"phoneNumber\": \"09-2.12544e+008\",\n                \"address\": \"Address_7\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR007004\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 8,\n                \"name\": \"User_8\",\n                \"email\": \"User_8@gmail.com\",\n                \"password\": \"User_8@gmail.com\",\n                \"phoneNumber\": \"09-3.25759e+008\",\n                \"address\": \"Address_8\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009024\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 9,\n                \"name\": \"User_9\",\n                \"email\": \"User_9@gmail.com\",\n                \"password\": \"User_9@gmail.com\",\n                \"phoneNumber\": \"09-6.74806e+008\",\n                \"address\": \"Address_9\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR003007\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            },\n            {\n                \"userId\": 10,\n                \"name\": \"User_10\",\n                \"email\": \"User_10@gmail.com\",\n                \"password\": \"User_10@gmail.com\",\n                \"phoneNumber\": \"09-1.54985e+008\",\n                \"address\": \"Address_10\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR016005\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Pending\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetUsersByApprovedUserStatusWithPagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/User/userStatus/Approved/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"userStatus",
+										"Approved",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/userStatus/Approved/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"userStatus",
+												"Approved",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:11:32 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"userId\": 4,\n                \"name\": \"User_5\",\n                \"email\": \"User_5@gmail.com\",\n                \"password\": \"User_4@gmail.com\",\n                \"phoneNumber\": \"09-2.82642e+008\",\n                \"address\": \"Address_5\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR013006\",\n                \"role\": \"Service Provider\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 11,\n                \"name\": \"User_11\",\n                \"email\": \"User_11@gmail.com\",\n                \"password\": \"User_11@gmail.com\",\n                \"phoneNumber\": \"09-4.86799e+008\",\n                \"address\": \"Address_11\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR017007\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 12,\n                \"name\": \"User_12\",\n                \"email\": \"User_12@gmail.com\",\n                \"password\": \"User_12@gmail.com\",\n                \"phoneNumber\": \"09-2.02957e+008\",\n                \"address\": \"Address_12\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009005\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 13,\n                \"name\": \"User_13\",\n                \"email\": \"User_13@gmail.com\",\n                \"password\": \"User_13@gmail.com\",\n                \"phoneNumber\": \"09-7.05358e+008\",\n                \"address\": \"Address_13\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009005\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 14,\n                \"name\": \"User_14\",\n                \"email\": \"User_14@gmail.com\",\n                \"password\": \"User_14@gmail.com\",\n                \"phoneNumber\": \"09-5.44591e+008\",\n                \"address\": \"Address_14\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR015019\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 15,\n                \"name\": \"User_15\",\n                \"email\": \"User_15@gmail.com\",\n                \"password\": \"User_15@gmail.com\",\n                \"phoneNumber\": \"09-2.15084e+008\",\n                \"address\": \"Address_15\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR015303\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 16,\n                \"name\": \"User_16\",\n                \"email\": \"User_16@gmail.com\",\n                \"password\": \"User_16@gmail.com\",\n                \"phoneNumber\": \"09-7.37477e+008\",\n                \"address\": \"Address_16\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR017008\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 17,\n                \"name\": \"User_17\",\n                \"email\": \"User_17@gmail.com\",\n                \"password\": \"User_17@gmail.com\",\n                \"phoneNumber\": \"09-9.86952e+008\",\n                \"address\": \"Address_17\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR010030\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 18,\n                \"name\": \"User_18\",\n                \"email\": \"User_18@gmail.com\",\n                \"password\": \"User_18@gmail.com\",\n                \"phoneNumber\": \"09-7.13543e+008\",\n                \"address\": \"Address_18\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR012011\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            },\n            {\n                \"userId\": 19,\n                \"name\": \"User_19\",\n                \"email\": \"User_19@gmail.com\",\n                \"password\": \"User_19@gmail.com\",\n                \"phoneNumber\": \"09-6.78337e+008\",\n                \"address\": \"Address_19\",\n                \"emergencyType\": \"Medical\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR015313\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Approved\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetUsersByRejectedUserStatusWithPagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/User/userStatus/Rejected/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"userStatus",
+										"Rejected",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/userStatus/Rejected/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"userStatus",
+												"Rejected",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:12:51 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"userId\": 20,\n                \"name\": \"User_20\",\n                \"email\": \"User_20@gmail.com\",\n                \"password\": \"User_20@gmail.com\",\n                \"phoneNumber\": \"09-9.85633e+008\",\n                \"address\": \"Address_20\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR009011\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Rejected\"\n            },\n            {\n                \"userId\": 25,\n                \"name\": \"User_25\",\n                \"email\": \"User_25@gmail.com\",\n                \"password\": \"User_25@gmail.com\",\n                \"phoneNumber\": \"09-7.41138e+008\",\n                \"address\": \"Address_25\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR005030\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Rejected\"\n            },\n            {\n                \"userId\": 30,\n                \"name\": \"User_30\",\n                \"email\": \"User_30@gmail.com\",\n                \"password\": \"User_30@gmail.com\",\n                \"phoneNumber\": \"09-5.92599e+008\",\n                \"address\": \"Address_30\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Severe injury accident\",\n                \"townshipCode\": \"MMR015006\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Rejected\"\n            },\n            {\n                \"userId\": 35,\n                \"name\": \"User_35\",\n                \"email\": \"User_35@gmail.com\",\n                \"password\": \"User_35@gmail.com\",\n                \"phoneNumber\": \"09-9.20859e+007\",\n                \"address\": \"Address_35\",\n                \"emergencyType\": \"Police\",\n                \"emergencyDetails\": \"Fire at apartment\",\n                \"townshipCode\": \"MMR017012\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Rejected\"\n            },\n            {\n                \"userId\": 40,\n                \"name\": \"User_40\",\n                \"email\": \"User_40@gmail.com\",\n                \"password\": \"User_40@gmail.com\",\n                \"phoneNumber\": \"09-2.37218e+008\",\n                \"address\": \"Address_40\",\n                \"emergencyType\": \"Fire\",\n                \"emergencyDetails\": \"Suspicious activity in neighborhood\",\n                \"townshipCode\": \"MMR010004\",\n                \"role\": \"Normal User\",\n                \"userStatus\": \"Rejected\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetUserById",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:14:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"userId\": 1,\n        \"name\": \"User_1\",\n        \"email\": \"User_1@gmail.com\",\n        \"password\": \"User_1@gmail.com\",\n        \"phoneNumber\": \"09-5.73559e+008\",\n        \"address\": \"Address_1\",\n        \"emergencyType\": \"Fire\",\n        \"emergencyDetails\": \"Severe injury accident\",\n        \"townshipCode\": \"MMR015008\",\n        \"role\": \"Service Provider\",\n        \"userStatus\": \"Pending\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "CreateUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"User_101\",\r\n  \"email\": \"User_101@gmail.com\",\r\n  \"password\": \"User_101@gmail.com\",\r\n  \"phoneNumber\": \"09-3.81592e+009\",\r\n  \"address\": \"Address_101\",\r\n  \"emergencyType\": \"Fire\",\r\n  \"emergencyDetails\": \"Severe injury accident\",\r\n  \"townshipCode\": \"MMR014005\",\r\n  \"role\": \"Normal User\",\r\n  \"userStatus\": \"Pending\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/User",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"User_101\",\r\n  \"email\": \"User_101@gmail.com\",\r\n  \"password\": \"User_101@gmail.com\",\r\n  \"phoneNumber\": \"09-3.81592e+009\",\r\n  \"address\": \"Address_101\",\r\n  \"emergencyType\": \"Fire\",\r\n  \"emergencyDetails\": \"Severe injury accident\",\r\n  \"townshipCode\": \"MMR014005\",\r\n  \"role\": \"Normal User\",\r\n  \"userStatus\": \"Pending\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/User",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:17:06 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"userId\": 104,\n        \"name\": \"User_101\",\n        \"email\": \"User_101@gmail.com\",\n        \"password\": \"User_101@gmail.com\",\n        \"phoneNumber\": \"09-3.81592e+009\",\n        \"address\": \"Address_101\",\n        \"emergencyType\": \"Fire\",\n        \"emergencyDetails\": \"Severe injury accident\",\n        \"townshipCode\": \"MMR014005\",\n        \"role\": \"Normal User\",\n        \"userStatus\": \"Pending\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateUser",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"User_101\",\r\n  \"email\": \"User_101@gmail.com\",\r\n  \"password\": \"User_101@gmail.com\",\r\n  \"phoneNumber\": \"09-3.81592e+009\",\r\n  \"address\": \"Address_101\",\r\n  \"emergencyType\": \"Fire\",\r\n  \"emergencyDetails\": \"Severe injury accident\",\r\n  \"townshipCode\": \"MMR014005\",\r\n  \"role\": \"Normal User\",\r\n  \"userStatus\": \"Pending\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/User/100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"100"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"User_101\",\r\n  \"email\": \"User_101@gmail.com\",\r\n  \"password\": \"User_101@gmail.com\",\r\n  \"phoneNumber\": \"09-3.81592e+009\",\r\n  \"address\": \"Address_101\",\r\n  \"emergencyType\": \"Fire\",\r\n  \"emergencyDetails\": \"Severe injury accident\",\r\n  \"townshipCode\": \"MMR014005\",\r\n  \"role\": \"Normal User\",\r\n  \"userStatus\": \"Pending\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/User/100",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"100"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:19:35 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"userId\": 100,\n        \"name\": \"User_101\",\n        \"email\": \"User_101@gmail.com\",\n        \"password\": \"User_100@gmail.com\",\n        \"phoneNumber\": \"09-3.81592e+009\",\n        \"address\": \"Address_101\",\n        \"emergencyType\": \"Fire\",\n        \"emergencyDetails\": \"Severe injury accident\",\n        \"townshipCode\": \"MMR014005\",\n        \"role\": \"Normal User\",\n        \"userStatus\": \"Pending\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "DeleteUser",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/User/100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"100"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/User/100",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"100"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 11:21:00 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": true,\n    \"message\": \"User is deleted successfully\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"User_1@gmail.com\",\r\n  \"password\": \"User_1@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Signin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SuccessResponseExample",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"User_1@gmail.com\",\r\n  \"password\": \"User_1@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/Signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Signin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 16 Nov 2024 11:26:57 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"userId\": 1,\n        \"name\": \"User_1\",\n        \"email\": \"User_1@gmail.com\",\n        \"sessionExpiredTime\": \"2024-11-16T18:31:58.1460942+07:00\",\n        \"token\": \"iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL45c6y8hfpYxOpvXS+Av+rNKqc8MQf3m+CO9MlsPtV4VojEyICleBPdepwrewQ/GMeD6Stqj0yXp0/up5aj8sXZ1uvC1xhoBdmMj8YBSEdh5h3FjOeXHgatnl2qnH1vtLMQ==\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+						}
+					]
 				}
 			]
 		}
