@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
@@ -24,22 +25,57 @@ public class AdminEmergencyServicesService
         _db = db;
     }
 
-    public async Task<Result<List<AdminEmergencyServicesResponseModel>>>
-        GetEmergencyServicesByStatus(string status)
+    public async Task<
+        Result<List<AdminEmergencyServicesResponseModel>>
+    > GetAllEmergencyServicesAsync()
     {
         try
         {
-            var enumServiceStatus = Enum.Parse<EnumServiceStatus>(status, true);
-            if(enumServiceStatus == EnumServiceStatus.None)
+            var lst = await _db.EmergencyServices.ToListAsync();
+
+            if (lst.Count == 0)
             {
-                return Result<List<AdminEmergencyServicesResponseModel>>.Failure(
-                   "Invalid Emergency Service Status."
-               );
+                return Result<List<AdminEmergencyServicesResponseModel>>.NotFoundError();
+            }
+
+            var model = lst.Select(m => new AdminEmergencyServicesResponseModel
+                {
+                    ServiceId = m.ServiceId,
+                    ServiceType = m.ServiceType,
+                    ServiceGroup = m.ServiceGroup,
+                    ServiceName = m.ServiceName,
+                    PhoneNumber = m.PhoneNumber,
+                    Location = m.Location,
+                    Availability = m.Availability,
+                    TownshipCode = m.TownshipCode,
+                    ServiceStatus = m.ServiceStatus,
+                })
+                .ToList();
+
+            return Result<List<AdminEmergencyServicesResponseModel>>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            return Result<List<AdminEmergencyServicesResponseModel>>.Failure(ex.ToString());
+        }
+    }
+
+    public async Task<
+        Result<List<AdminEmergencyServicesResponseModel>>
+    > GetEmergencyServicesByStatus(string status)
+    {
+        try
+        {
+            var serviceStatus = EnumServiceStatus.None;
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                serviceStatus = Enum.Parse<EnumServiceStatus>(status, true);
             }
 
             var query = _db.EmergencyServices.AsQueryable();
 
-            if (!string.IsNullOrEmpty(status))
+            if (serviceStatus != EnumServiceStatus.None)
             {
                 query = query.Where(x => x.ServiceStatus == status);
             }
@@ -71,6 +107,11 @@ public class AdminEmergencyServicesService
 
             return Result<List<AdminEmergencyServicesResponseModel>>.Success(model);
         }
+        catch (System.ArgumentException)
+        {
+            string message = "Service Status must be Pending, Approved or Rejected";
+            return Result<List<AdminEmergencyServicesResponseModel>>.Failure(message);
+        }
         catch (Exception ex)
         {
             string message =
@@ -93,17 +134,29 @@ public class AdminEmergencyServicesService
             );
         }
 
+        var serviceStatus = EnumServiceStatus.None;
+
+        if (!status.IsNullOrEmpty())
+        {
+            serviceStatus = Enum.Parse<EnumServiceStatus>(status, true);
+        }
+
         try
         {
-            var servicesByStatus = await _db
-                .EmergencyServices.Where(x => x.ServiceStatus == status)
-                .ToListAsync();
+            var query = _db.EmergencyServices.AsQueryable();
+
+            if (!serviceStatus.Equals(EnumServiceStatus.None))
+            {
+                query = query.Where(x => x.ServiceStatus == status);
+            }
+
+            var servicesByStatus = await query.ToListAsync();
 
             int rowCount = servicesByStatus.Count();
 
             if (rowCount is 0)
             {
-                return Result<AdminEmergencyServicesPaginationResponseModel>.Failure(
+                return Result<AdminEmergencyServicesPaginationResponseModel>.NotFoundError(
                     $"There is no data with the status: {status}"
                 );
             }
@@ -117,25 +170,21 @@ public class AdminEmergencyServicesService
                 );
             }
 
-            var lst = await _db
-                .EmergencyServices.Where(x => x.ServiceStatus == status)
-                .Skip((pageNo - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            var lst = await query.Skip((pageNo - 1) * pageSize).Take(pageSize).ToListAsync();
 
             var data = lst.Select(x => new AdminEmergencyServicesResponseModel
-            {
-                ServiceId = x.ServiceId,
-                UserId = x.UserId,
-                ServiceGroup = x.ServiceGroup,
-                ServiceType = x.ServiceType,
-                ServiceName = x.ServiceName,
-                PhoneNumber = x.PhoneNumber,
-                Location = x.Location,
-                Availability = x.Availability,
-                TownshipCode = x.TownshipCode,
-                ServiceStatus = x.ServiceStatus
-            })
+                {
+                    ServiceId = x.ServiceId,
+                    UserId = x.UserId,
+                    ServiceGroup = x.ServiceGroup,
+                    ServiceType = x.ServiceType,
+                    ServiceName = x.ServiceName,
+                    PhoneNumber = x.PhoneNumber,
+                    Location = x.Location,
+                    Availability = x.Availability,
+                    TownshipCode = x.TownshipCode,
+                    ServiceStatus = x.ServiceStatus
+                })
                 .ToList();
 
             var model = new AdminEmergencyServicesPaginationResponseModel()

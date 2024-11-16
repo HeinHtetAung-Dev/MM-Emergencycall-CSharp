@@ -2,7 +2,7 @@
 {
     [Route("api/EmergencyService/ServiceType")]
     [ApiController]
-    public class EmergencyServiceTypeController : ControllerBase
+    public class EmergencyServiceTypeController : BaseController
     {
         private readonly EmergencyServiceTypeService _emergencyServiceTypeService;
 
@@ -17,7 +17,7 @@
         public async Task<IActionResult> GetEmergencyServiceTypesAsync()
         {
             var response = await _emergencyServiceTypeService.GetServiceTypesAsync();
-            return Ok(response);
+            return Execute(response);
         }
     }
 }
