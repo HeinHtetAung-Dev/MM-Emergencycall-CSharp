@@ -1,0 +1,711 @@
+{
+	"info": {
+		"_postman_id": "a06ad869-9d7b-4030-857a-cce05029d5a7",
+		"name": "MMEmergencyCall_HninWuttYi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34689013"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "EmergencySevice",
+					"item": [
+						{
+							"name": "GetEmergencyServices",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EmergencyService/pageNo/1/pageSize/10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EmergencyService",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 12:46:50 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 11,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"serviceId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_1\",\n                \"phoneNumber\": \"09-5.03254e+008\",\n                \"location\": \"Location_1\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017001\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 2,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_2\",\n                \"phoneNumber\": \"09-7.7252e+008\",\n                \"location\": \"Location_2\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR013043\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 3,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_3\",\n                \"phoneNumber\": \"09-9.92677e+006\",\n                \"location\": \"Location_3\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 4,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Medical\",\n                \"serviceName\": \"Medical_Service_4\",\n                \"phoneNumber\": \"09-5.29952e+008\",\n                \"location\": \"Location_4\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015304\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 5,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Police\",\n                \"serviceName\": \"Police_Service_5\",\n                \"phoneNumber\": \"09-1.38093e+008\",\n                \"location\": \"Location_5\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR016001\",\n                \"serviceStatus\": \"Pending\"\n            },\n            {\n                \"serviceId\": 6,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_6\",\n                \"phoneNumber\": \"09-8.37415e+008\",\n                \"location\": \"Location_6\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR015318\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 7,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Medical\",\n                \"serviceName\": \"Medical_Service_7\",\n                \"phoneNumber\": \"09-3.28779e+008\",\n                \"location\": \"Location_7\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR017005\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 8,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_8\",\n                \"phoneNumber\": \"09-5.70761e+008\",\n                \"location\": \"Location_8\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 9,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_9\",\n                \"phoneNumber\": \"09-4.47579e+008\",\n                \"location\": \"Location_9\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017025\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 10,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_10\",\n                \"phoneNumber\": \"09-8.28774e+008\",\n                \"location\": \"Location_10\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR001012\",\n                \"serviceStatus\": \"Rejected\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								},
+								{
+									"name": "InvalidPageNumber",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/pageNo/12/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"pageNo",
+												"12",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 12:48:35 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": false,\n    \"isError\": true,\n    \"isValidationError\": true,\n    \"isNotFoundError\": false,\n    \"data\": null,\n    \"message\": \"Invalid PageNo.\"\n}"
+								},
+								{
+									"name": "InternalServerErrorExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/pageNo/1/pageSize/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 13:02:06 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": false,\n    \"isError\": true,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": null,\n    \"message\": \"An error occurred while getting emergency service\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetEmergencyServicesById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EmergencyService/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EmergencyService",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 13:04:14 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"serviceId\": 1,\n        \"serviceGroup\": \"EmergencyServices\",\n        \"serviceType\": \"Rescue\",\n        \"serviceName\": \"Rescue_Service_1\",\n        \"phoneNumber\": \"09-5.03254e+008\",\n        \"location\": \"Location_1\",\n        \"availability\": \"Y\",\n        \"townshipCode\": \"MMR017001\",\n        \"serviceStatus\": \"Approved\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								},
+								{
+									"name": "NotFoundResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/103",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"103"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 13:05:08 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": false,\n    \"isError\": true,\n    \"isValidationError\": false,\n    \"isNotFoundError\": true,\n    \"data\": null,\n    \"message\": \"Emergency Service with Id: 103 not found.\"\n}"
+								},
+								{
+									"name": "InternalServerErrorExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/103",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"103"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 13:05:08 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": false,\n    \"isError\": true,\n    \"isValidationError\": false,\n    \"isNotFoundError\": true,\n    \"data\": null,\n    \"message\": \"Emergency Service with Id: 103 not found.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "GetEmergencyServiceByType",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EmergencyService/ServiceType/Rescue?pageNo=1&pageSize=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EmergencyService",
+										"ServiceType",
+										"Rescue"
+									],
+									"query": [
+										{
+											"key": "pageNo",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/ServiceType/Rescue?pageNo=1&pageSize=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"ServiceType",
+												"Rescue"
+											],
+											"query": [
+												{
+													"key": "pageNo",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 14:30:58 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 2,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"serviceId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_1\",\n                \"phoneNumber\": \"09-5.03254e+008\",\n                \"location\": \"Location_1\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017001\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 2,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_2\",\n                \"phoneNumber\": \"09-7.7252e+008\",\n                \"location\": \"Location_2\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR013043\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 8,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_8\",\n                \"phoneNumber\": \"09-5.70761e+008\",\n                \"location\": \"Location_8\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 9,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_9\",\n                \"phoneNumber\": \"09-4.47579e+008\",\n                \"location\": \"Location_9\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017025\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 10,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_10\",\n                \"phoneNumber\": \"09-8.28774e+008\",\n                \"location\": \"Location_10\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR001012\",\n                \"serviceStatus\": \"Rejected\"\n            },\n            {\n                \"serviceId\": 18,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_18\",\n                \"phoneNumber\": \"09-8.20493e+008\",\n                \"location\": \"Location_18\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR013034\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 21,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_21\",\n                \"phoneNumber\": \"09-1.04267e+007\",\n                \"location\": \"Location_21\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR013017\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 24,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_24\",\n                \"phoneNumber\": \"09-1.73586e+008\",\n                \"location\": \"Location_24\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR005036\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 25,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_25\",\n                \"phoneNumber\": \"09-3.59222e+007\",\n                \"location\": \"Location_25\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR016003\",\n                \"serviceStatus\": \"Pending\"\n            },\n            {\n                \"serviceId\": 34,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_34\",\n                \"phoneNumber\": \"09-6.76365e+008\",\n                \"location\": \"Location_34\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR015303\",\n                \"serviceStatus\": \"Approved\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								},
+								{
+									"name": "NotFoundExample",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/ServiceType/OtherRescue?pageNo=1&pageSize=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"ServiceType",
+												"OtherRescue"
+											],
+											"query": [
+												{
+													"key": "pageNo",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 15:58:50 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": false,\n    \"isError\": true,\n    \"isValidationError\": false,\n    \"isNotFoundError\": true,\n    \"data\": null,\n    \"message\": \"Emergency Service with service type: OtherRescue not found.\"\n}"
+								},
+								{
+									"name": "InvalidPageNumber",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/ServiceType/Rescue?pageNo=14&pageSize=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"ServiceType",
+												"Rescue"
+											],
+											"query": [
+												{
+													"key": "pageNo",
+													"value": "14"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 16:07:28 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": false,\n    \"isError\": true,\n    \"isValidationError\": true,\n    \"isNotFoundError\": false,\n    \"data\": null,\n    \"message\": \"Invalid PageNo.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "CreateEmergencyService",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"serviceType\": \"Fire\",\r\n  \"serviceGroup\": \"EmergencyServices\",\r\n  \"serviceName\": \"Fire_Service_19 Test\",\r\n  \"phoneNumber\": \"09-7.19643e+006\",\r\n  \"location\": \"Location_19\",\r\n  \"availability\": \"Y\",\r\n  \"townshipCode\": \"MMR014009\",\r\n  \"serviceStatus\": \"Approved\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/EmergencyService",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EmergencyService"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"serviceType\": \"Fire\",\r\n  \"serviceGroup\": \"EmergencyServices\",\r\n  \"serviceName\": \"Fire_Service_19 Test\",\r\n  \"phoneNumber\": \"09-7.19643e+006\",\r\n  \"location\": \"Location_19\",\r\n  \"availability\": \"Y\",\r\n  \"townshipCode\": \"MMR014009\",\r\n  \"serviceStatus\": \"Approved\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 14:32:03 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"serviceId\": 103,\n        \"serviceGroup\": \"EmergencyServices\",\n        \"serviceType\": \"Fire\",\n        \"serviceName\": \"Fire_Service_19 Test\",\n        \"phoneNumber\": \"09-7.19643e+006\",\n        \"location\": \"Location_19\",\n        \"availability\": \"Y\",\n        \"townshipCode\": \"MMR014009\",\n        \"serviceStatus\": \"Pending\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateEmergencyServiceForPending",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"serviceType\": \"Ambulance\",\r\n  \"serviceGroup\": \"EmergencyServices\",\r\n  \"serviceName\": \"Ambulance_Service_35_Updated\",\r\n  \"phoneNumber\": \"09-7.19643e+006\",\r\n  \"location\": \"Location_35_Updated\",\r\n  \"availability\": \"Y\",\r\n  \"townshipCode\": \"MMR014009\",\r\n  \"serviceStatus\": \"Pending\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/EmergencyService/35",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EmergencyService",
+										"35"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"serviceType\": \"Ambulance\",\r\n  \"serviceGroup\": \"EmergencyServices\",\r\n  \"serviceName\": \"Ambulance_Service_35_Updated\",\r\n  \"phoneNumber\": \"09-7.19643e+006\",\r\n  \"location\": \"Location_35_Updated\",\r\n  \"availability\": \"Y\",\r\n  \"townshipCode\": \"MMR014009\",\r\n  \"serviceStatus\": \"Pending\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/35",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"35"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 14:32:40 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"serviceId\": 35,\n        \"serviceGroup\": \"EmergencyServices\",\n        \"serviceType\": \"Ambulance\",\n        \"serviceName\": \"Ambulance_Service_35_Updated\",\n        \"phoneNumber\": \"09-7.19643e+006\",\n        \"location\": \"Location_35_Updated\",\n        \"availability\": \"Y\",\n        \"townshipCode\": \"MMR014009\",\n        \"serviceStatus\": \"Pending\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "DeleteEmergencyService",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/EmergencyService/45",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"EmergencyService",
+										"45"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyService/45",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyService",
+												"45"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 15:23:06 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": true,\n    \"message\": \"Emergency Service deleted successfully.\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "portNumber",
+			"value": "7179",
+			"type": "default"
+		}
+	]
+}

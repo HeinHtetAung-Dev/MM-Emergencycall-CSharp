@@ -105,9 +105,15 @@ public class EmergencyServiceService
         }
     }
 
-    public async Task<Result<List<EmergencyServiceResponseModel>>> GetEmergencyServiceByServiceType(string serviceType)
+    public async Task<
+        Result<EmergencyServicePaginationResponseModel>
+    > GetServiceByServiceTypeWithPagination(string serviceType, int pageNo, int pageSize)
     {
-        try
+        var emergencyServices = await _db
+            .EmergencyServices.Where(x => x.ServiceType == serviceType)
+            .ToListAsync();
+        int rowCount = emergencyServices.Count();
+        if (rowCount == 0)
         {
             var emergencyServices = await _db
                 .EmergencyServices.Where(x => x.ServiceType == serviceType)
@@ -118,32 +124,54 @@ public class EmergencyServiceService
                 return Result<List<EmergencyServiceResponseModel>>
                     .NotFoundError("Emergency Service with service type: " + serviceType + " not found.");
             }
-
-            var model = emergencyServices
-                .Select(emergencyService => new EmergencyServiceResponseModel
-                {
-                    ServiceId = emergencyService.ServiceId,
-                    ServiceGroup = emergencyService.ServiceGroup,
-                    ServiceType = emergencyService.ServiceType,
-                    ServiceName = emergencyService.ServiceName,
-                    PhoneNumber = emergencyService.PhoneNumber,
-                    Location = emergencyService.Location,
-                    Availability = emergencyService.Availability,
-                    TownshipCode = emergencyService.TownshipCode,
-                    ServiceStatus = emergencyService.ServiceStatus
-                })
-                .ToList();
-
-            return Result<List<EmergencyServiceResponseModel>>.Success(model);
+          
+            return Result<EmergencyServicePaginationResponseModel>.NotFoundError(
+                "Emergency Service with service type: " + serviceType + " not found."
+            );
         }
-        catch (Exception ex)
+
+        int pageCount = rowCount / pageSize;
+        if (rowCount % pageSize > 0)
+            pageCount++;
+
+        if (pageNo < 1)
         {
-            string message =
-                "An error occurred while getting emergency service by service type: "
-                + ex.ToString();
-            _logger.LogError(message);
-            return Result<List<EmergencyServiceResponseModel>>.Failure(message);
+            return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
+
+        if (pageNo > pageCount)
+        {
+            return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
+        }
+
+        var emergencyService = await _db
+            .EmergencyServices.Where(x => x.ServiceType == serviceType)
+            .Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var lst = emergencyService
+            .Select(sr => new EmergencyServiceResponseModel
+            {
+                ServiceId = sr.ServiceId,
+                ServiceType = sr.ServiceType,
+                ServiceGroup = sr.ServiceGroup,
+                ServiceName = sr.ServiceName,
+                PhoneNumber = sr.PhoneNumber,
+                Location = sr.Location,
+                Availability = sr.Availability,
+                TownshipCode = sr.TownshipCode,
+                ServiceStatus = sr.ServiceStatus
+            })
+            .ToList();
+
+        EmergencyServicePaginationResponseModel model = new();
+        model.Data = lst;
+        model.PageSize = pageSize;
+        model.PageNo = pageNo;
+        model.PageCount = pageCount;
+
+        return Result<EmergencyServicePaginationResponseModel>.Success(model);
     }
 
     public async Task<Result<EmergencyServiceResponseModel>> CreateEmergencyServiceAsync(EmergencyServiceRequestModel request)

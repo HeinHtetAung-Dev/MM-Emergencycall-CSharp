@@ -9,8 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMEmergencyCall.Databases",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{BB3851DD-EA6B-49C2-991D-A016846E5A7C}"
 	ProjectSection(SolutionItems) = preProject
+		MMEmergencyCall_HninWuttYi.postman_collection.json = MMEmergencyCall_HninWuttYi.postman_collection.json
 		MMEmergencyCall_LinThit.postman_collection.json = MMEmergencyCall_LinThit.postman_collection.json
 		MMEmergencyCall_MyoThet.postman_collection.json = MMEmergencyCall_MyoThet.postman_collection.json
+		MMEmergencyCall_SuSandarLin.postman_collection.json = MMEmergencyCall_SuSandarLin.postman_collection.json
 		README.md = README.md
 		script.sql = script.sql
 	EndProjectSection

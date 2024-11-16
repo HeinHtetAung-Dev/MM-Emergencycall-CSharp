@@ -27,15 +27,22 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         public async Task<IActionResult> GetEmergencyServiceById(int serviceId)
         {
             var response = await _emergencyServiceService.GetEmergencyServiceById(serviceId);
-            return Ok(response);
+            return Execute(response);
         }
 
         [HttpGet("ServiceType/{serviceType}")]
-        public async Task<IActionResult> GetEmergencyServiceByType(string serviceType)
+        public async Task<IActionResult> GetServiceByServiceTypeWithPagination(
+            string serviceType,
+            int pageNo,
+            int pageSize
+        )
         {
-            var model = await _emergencyServiceService
-                .GetEmergencyServiceByServiceType(serviceType);
-            return Execute(model);
+            var response = await _emergencyServiceService.GetServiceByServiceTypeWithPagination(
+                serviceType,
+                pageNo,
+                pageSize
+            );
+            return Execute(response);
         }
 
         [HttpPost]
@@ -55,31 +62,37 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
 
             if (string.IsNullOrEmpty(requestModel.ServiceType))
             {
-                model = Result<EmergencyServiceResponseModel>.Failure("Service Type is required.");
+                model = Result<EmergencyServiceResponseModel>.ValidationError(
+                    "Service Type is required."
+                );
                 goto BadRequest;
             }
 
             if (string.IsNullOrEmpty(requestModel.ServiceGroup))
             {
-                model = Result<EmergencyServiceResponseModel>.Failure("Service Group is required.");
+                model = Result<EmergencyServiceResponseModel>.ValidationError(
+                    "Service Group is required."
+                );
                 goto BadRequest;
             }
 
             if (string.IsNullOrEmpty(requestModel.ServiceName))
             {
-                model = Result<EmergencyServiceResponseModel>.Failure("Service Name is required.");
+                model = Result<EmergencyServiceResponseModel>.ValidationError(
+                    "Service Name is required."
+                );
                 goto BadRequest;
             }
 
             if (string.IsNullOrEmpty(requestModel.PhoneNumber))
             {
-                model = Result<EmergencyServiceResponseModel>.Failure("Phone Number is required.");
+                model = Result<EmergencyServiceResponseModel>.ValidationError(
+                    "Phone Number is required."
+                );
                 goto BadRequest;
             }
 
             model = await _emergencyServiceService.UpdateEmergencyService(id, requestModel);
-            if (!model.IsSuccess)
-                return NotFound(model);
 
             return Execute(model);
 
