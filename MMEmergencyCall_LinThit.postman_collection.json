@@ -394,7 +394,13 @@
 							"name": "CreateEmergencyRequest",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Token",
+										"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL45c6y8hfpYxOpvXS+Av+rNJdepANn2HrNIhnQfI0OU0x0AVu19PQW9PyOeFQXkpM2q1oBT0fiJSDavB5d631pftQQAOH4OEgkJ7973Mtn1mYDK8zX9MXFPbW4khq9zMeKA==",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n  \"userId\": 1,\r\n  \"serviceId\": 1,\r\n  \"providerId\": 12451,\r\n  \"requestTime\": \"2024-11-15T17:54:36.974Z\",\r\n  \"responseTime\": \"2024-11-15T17:54:36.974Z\",\r\n  \"notes\": \"Testing\",\r\n  \"townshipCode\": \"MMR013038\"\r\n}",
@@ -420,7 +426,13 @@
 									"name": "SuccessResponseExample",
 									"originalRequest": {
 										"method": "POST",
-										"header": [],
+										"header": [
+											{
+												"key": "Token",
+												"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL45c6y8hfpYxOpvXS+Av+rNJdepANn2HrNIhnQfI0OU0x0AVu19PQW9PyOeFQXkpM2q1oBT0fiJSDavB5d631pftQQAOH4OEgkJ7973Mtn1mYDK8zX9MXFPbW4khq9zMeKA==",
+												"type": "text"
+											}
+										],
 										"body": {
 											"mode": "raw",
 											"raw": "{\r\n  \"userId\": 1,\r\n  \"serviceId\": 1,\r\n  \"providerId\": 12451,\r\n  \"requestTime\": \"2024-11-15T17:54:36.974Z\",\r\n  \"responseTime\": \"2024-11-15T17:54:36.974Z\",\r\n  \"notes\": \"Testing\",\r\n  \"townshipCode\": \"MMR013038\"\r\n}",
@@ -451,7 +463,7 @@
 										},
 										{
 											"key": "Date",
-											"value": "Fri, 15 Nov 2024 18:11:16 GMT"
+											"value": "Sat, 16 Nov 2024 17:17:47 GMT"
 										},
 										{
 											"key": "Server",
@@ -463,7 +475,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"requestId\": 201,\n        \"userId\": 1,\n        \"serviceId\": 1,\n        \"providerId\": 12451,\n        \"requestTime\": \"2024-11-15T17:54:36.974Z\",\n        \"status\": \"Open\",\n        \"responseTime\": \"2024-11-15T17:54:36.974Z\",\n        \"notes\": \"Testing\",\n        \"townshipCode\": \"MMR013038\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"requestId\": 202,\n        \"userId\": 1,\n        \"serviceId\": 1,\n        \"providerId\": 12451,\n        \"requestTime\": \"2024-11-15T17:54:36.974Z\",\n        \"status\": \"Open\",\n        \"responseTime\": \"2024-11-15T17:54:36.974Z\",\n        \"notes\": \"Testing\",\n        \"townshipCode\": \"MMR013038\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
 								},
 								{
 									"name": "BadRequestResponseExample",
@@ -513,6 +525,61 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"isSuccess\": false,\n    \"isError\": true,\n    \"isValidationError\": true,\n    \"isNotFoundError\": false,\n    \"data\": null,\n    \"message\": \"Invalid User Id.\"\n}"
+								},
+								{
+									"name": "UnauthorizedRequestExample",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "SomethingRandom",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"userId\": 1,\r\n  \"serviceId\": 1,\r\n  \"providerId\": 12451,\r\n  \"requestTime\": \"2024-11-15T17:54:36.974Z\",\r\n  \"responseTime\": \"2024-11-15T17:54:36.974Z\",\r\n  \"notes\": \"Testing\",\r\n  \"townshipCode\": \"MMR013038\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyRequest/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyRequest",
+												""
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 17:14:41 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "Invalid token."
 								},
 								{
 									"name": "InternalServerErrorExample",
@@ -569,10 +636,16 @@
 							"name": "UpdateEmergencyRequestStatus",
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "Token",
+										"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL45c6y8hfpYxOpvXS+Av+rNJdepANn2HrNIhnQfI0OU0x0AVu19PQW9PyOeFQXkpM2q1oBT0fiJSDavB5d631pftQQAOH4OEgkJ7973Mtn1mYDK8zX9MXFPbW4khq9zMeKA==",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"status\": \"Cancel\"\r\n}",
+									"raw": "{\r\n  \"status\": \"Closed\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -595,7 +668,13 @@
 									"name": "SuccessResponseExample",
 									"originalRequest": {
 										"method": "PUT",
-										"header": [],
+										"header": [
+											{
+												"key": "Token",
+												"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL45c6y8hfpYxOpvXS+Av+rNJdepANn2HrNIhnQfI0OU0x0AVu19PQW9PyOeFQXkpM2q1oBT0fiJSDavB5d631pftQQAOH4OEgkJ7973Mtn1mYDK8zX9MXFPbW4khq9zMeKA==",
+												"type": "text"
+											}
+										],
 										"body": {
 											"mode": "raw",
 											"raw": "{\r\n  \"status\": \"Closed\"\r\n}",
@@ -626,7 +705,7 @@
 										},
 										{
 											"key": "Date",
-											"value": "Fri, 15 Nov 2024 18:41:19 GMT"
+											"value": "Sat, 16 Nov 2024 17:16:50 GMT"
 										},
 										{
 											"key": "Server",
@@ -737,6 +816,61 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"isSuccess\": false,\n    \"isError\": true,\n    \"isValidationError\": false,\n    \"isNotFoundError\": true,\n    \"data\": null,\n    \"message\": \"Emergency Request with Id 10128402 not found.\"\n}"
+								},
+								{
+									"name": "UnauthorizedRequestExample",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Token",
+												"value": "SomethingRandom",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"status\": \"Cancel\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/EmergencyRequest/101",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"EmergencyRequest",
+												"101"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 16 Nov 2024 17:13:47 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "Invalid token."
 								},
 								{
 									"name": "InternalServerErrorExample",
