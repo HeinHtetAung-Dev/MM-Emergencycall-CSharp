@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MMEmergencyCall.Domain.Client.Middlewares;
 using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
@@ -46,6 +47,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         }
 
         [HttpPost]
+        [UserAuthorizeAttribute]
         public async Task<IActionResult> CreateEmergencyServiceAsync(
             EmergencyServiceRequestModel requestModel
         )
@@ -55,6 +57,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         }
 
         [HttpPut("{id}")]
+        [UserAuthorizeAttribute]
         public async Task<IActionResult> UpdateEmergencyService(int id,
             [FromBody] EmergencyServiceRequestModel requestModel)
         {
@@ -101,6 +104,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         }
 
         [HttpDelete("{id}")]
+        [UserAuthorizeAttribute]
         public async Task<IActionResult> DeleteEmergencyService(int id)
         {
             var model = await _emergencyServiceService.DeleteEmergencyService(id);
