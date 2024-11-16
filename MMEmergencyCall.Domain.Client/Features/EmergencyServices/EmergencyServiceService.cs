@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 
@@ -22,77 +23,62 @@ public class EmergencyServiceService
         _db = db;
     }
 
-    public async Task<
-        Result<EmergencyServicePaginationResponseModel>
-    > GetAllEmergencyServiceWithPagination(int pageNo, int pageSize)
+    public async Task<Result<EmergencyServicePaginationResponseModel>>
+        GetAllEmergencyServiceWithPagination(int pageNo, int pageSize)
     {
-        try
+        if (pageNo < 1)
         {
-            int rowCount = _db.EmergencyServices.Count();
-
-            int pageCount = rowCount / pageSize;
-            if (rowCount % pageSize > 0)
-                pageCount++;
-
-            if (pageNo < 1)
-            {
-                return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
-            }
-
-            if (pageNo > pageCount)
-            {
-                return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
-            }
-
-            var emergencyService = await _db
-                .EmergencyServices.Skip((pageNo - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            var lst = emergencyService
-                .Select(sr => new EmergencyServiceResponseModel
-                {
-                    ServiceId = sr.ServiceId,
-                    ServiceType = sr.ServiceType,
-                    ServiceGroup = sr.ServiceGroup,
-                    ServiceName = sr.ServiceName,
-                    PhoneNumber = sr.PhoneNumber,
-                    Location = sr.Location,
-                    Availability = sr.Availability,
-                    TownshipCode = sr.TownshipCode,
-                    ServiceStatus = sr.ServiceStatus
-                })
-                .ToList();
-
-            EmergencyServicePaginationResponseModel model = new();
-            model.Data = lst;
-            model.PageSize = pageSize;
-            model.PageNo = pageNo;
-            model.PageCount = pageCount;
-
-            return Result<EmergencyServicePaginationResponseModel>.Success(model);
+            return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
-        catch (Exception ex)
+
+        int totalRecords = await _db.EmergencyServices.CountAsync();
+
+        int pageCount = (int)Math.Ceiling(totalRecords / (double)pageSize);
+
+        if (pageNo > pageCount)
         {
-            string message =
-                "An error occurred while getting emergency service";
-            _logger.LogError(message);
-            return Result<EmergencyServicePaginationResponseModel>.Failure(message);
+            return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
+
+        var emergencyService = await _db
+            .EmergencyServices.Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var lst = emergencyService
+            .Select(sr => new EmergencyServiceResponseModel
+            {
+                ServiceId = sr.ServiceId,
+                ServiceType = sr.ServiceType,
+                ServiceGroup = sr.ServiceGroup,
+                ServiceName = sr.ServiceName,
+                PhoneNumber = sr.PhoneNumber,
+                Location = sr.Location,
+                Availability = sr.Availability,
+                TownshipCode = sr.TownshipCode,
+                ServiceStatus = sr.ServiceStatus
+            })
+            .ToList();
+
+        EmergencyServicePaginationResponseModel model = new();
+        model.Data = lst;
+        model.PageSize = pageSize;
+        model.PageNo = pageNo;
+        model.PageCount = pageCount;
+
+        return Result<EmergencyServicePaginationResponseModel>.Success(model);
     }
 
     public async Task<Result<EmergencyServiceResponseModel>> GetEmergencyServiceById(int serviceId)
     {
         try
         {
-            var emergencyService = await _db.EmergencyServices.FirstOrDefaultAsync(x =>
-                x.ServiceId == serviceId
-            );
-            if (emergencyService == null)
+            var emergencyService = await _db.EmergencyServices.FirstOrDefaultAsync(x => x.ServiceId == serviceId);
+
+            if (emergencyService is null)
             {
-                return Result<EmergencyServiceResponseModel>.NotFoundError(
-                    "Emergency Service with Id: " + serviceId + " not found."
-                );
+                return Result<EmergencyServiceResponseModel>
+                    .NotFoundError("Emergency Service with Id: " + serviceId + " not found.");
             }
 
             var model = new EmergencyServiceResponseModel
@@ -112,11 +98,8 @@ public class EmergencyServiceService
         }
         catch (Exception ex)
         {
-            string message =
-                "An error occurred while getting emergency service by ID for id "
-                + serviceId
-                + " : "
-                + ex.ToString();
+            string message = "An error occurred while getting emergency service by ID for id "
+                + serviceId + " : " + ex.ToString();
             _logger.LogError(message);
             return Result<EmergencyServiceResponseModel>.Failure(message);
         }
@@ -132,6 +115,16 @@ public class EmergencyServiceService
         int rowCount = emergencyServices.Count();
         if (rowCount == 0)
         {
+            var emergencyServices = await _db
+                .EmergencyServices.Where(x => x.ServiceType == serviceType)
+                .ToListAsync();
+
+            if (emergencyServices is null)
+            {
+                return Result<List<EmergencyServiceResponseModel>>
+                    .NotFoundError("Emergency Service with service type: " + serviceType + " not found.");
+            }
+          
             return Result<EmergencyServicePaginationResponseModel>.NotFoundError(
                 "Emergency Service with service type: " + serviceType + " not found."
             );
@@ -181,9 +174,7 @@ public class EmergencyServiceService
         return Result<EmergencyServicePaginationResponseModel>.Success(model);
     }
 
-    public async Task<Result<EmergencyServiceResponseModel>> CreateEmergencyServiceAsync(
-        EmergencyServiceRequestModel request
-    )
+    public async Task<Result<EmergencyServiceResponseModel>> CreateEmergencyServiceAsync(EmergencyServiceRequestModel request)
     {
         try
         {
@@ -233,18 +224,18 @@ public class EmergencyServiceService
         {
             var emergencyService = await _db.Set<EmergencyService>().FindAsync(id);
 
-            if (emergencyService == null)
+            if (emergencyService is null)
             {
-                return Result<EmergencyServiceResponseModel>.NotFoundError(
-                    "Emergency Service with id " + id + " not found."
-                );
+                return Result<EmergencyServiceResponseModel>
+                    .NotFoundError("Emergency Service with id " + id + " not found.");
             }
 
             var status = emergencyService.ServiceStatus;
             if (status != "Pending")
-                return Result<EmergencyServiceResponseModel>.ValidationError(
-                    "You can edit only Services with Pending status."
-                );
+            {
+                return Result<EmergencyServiceResponseModel>
+                    .ValidationError("You can edit only Services with Pending status.");
+            }
 
             emergencyService.ServiceType = requestModel.ServiceType;
             emergencyService.ServiceGroup = requestModel.ServiceGroup;
@@ -256,7 +247,7 @@ public class EmergencyServiceService
             emergencyService.ServiceStatus = requestModel.ServiceStatus;
 
             _db.Entry(emergencyService).State = EntityState.Modified;
-            var result = await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
 
             var model = new EmergencyServiceResponseModel
             {
@@ -270,6 +261,7 @@ public class EmergencyServiceService
                 TownshipCode = emergencyService.TownshipCode,
                 ServiceStatus = emergencyService.ServiceStatus,
             };
+
             return Result<EmergencyServiceResponseModel>.Success(model);
         }
         catch (Exception ex)
@@ -286,16 +278,35 @@ public class EmergencyServiceService
 
     public async Task<Result<bool>> DeleteEmergencyService(int id)
     {
-        var emergencyService = await _db.Set<EmergencyService>().FindAsync(id);
-        if (emergencyService == null)
-            return Result<bool>.NotFoundError("Emergency Service not found.");
+        try
+        {
+            var emergencyService = await _db.EmergencyServices.FindAsync(id);
 
-        var status = emergencyService.ServiceStatus;
-        if (status != "Pending")
-            return Result<bool>.ValidationError("You can delete only Services with Pending status.");
+            if (emergencyService is null)
+            {
+                return Result<bool>.NotFoundError("Emergency Service not found.");
+            }
 
-        _db.Remove(emergencyService);
-        await _db.SaveChangesAsync();
-        return Result<bool>.Success(true, "Emergency Service deleted successfully.");
+            var status = emergencyService.ServiceStatus;
+            if (status != "Pending")
+            {
+                return Result<bool>.Failure("You can delete only Services with Pending status.");
+            }
+
+            _db.Remove(emergencyService);
+            await _db.SaveChangesAsync();
+
+            return Result<bool>.Success(true, "Emergency Service deleted successfully.");
+        }
+        catch (Exception ex)
+        {
+            string message =
+                "An error occurred while updating the emergency service for id "
+                + id
+                + ": "
+                + ex.Message;
+            _logger.LogError(message);
+            return Result<bool>.Failure(message);
+        }
     }
 }

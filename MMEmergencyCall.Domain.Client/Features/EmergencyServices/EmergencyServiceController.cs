@@ -16,12 +16,10 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         }
 
         [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-        public async Task<IActionResult> GetAllByPaginationAsync(int pageNo, int pageSize)
+        public async Task<IActionResult> GetAllByPaginationAsync(int pageNo = 1, int pageSize = 10)
         {
-            var model = await _emergencyServiceService.GetAllEmergencyServiceWithPagination(
-                pageNo,
-                pageSize
-            );
+            var model = await _emergencyServiceService
+                .GetAllEmergencyServiceWithPagination(pageNo, pageSize);
             return Execute(model);
         }
 
@@ -52,15 +50,13 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             EmergencyServiceRequestModel requestModel
         )
         {
-            var response = await _emergencyServiceService.CreateEmergencyServiceAsync(requestModel);
-            return Execute(response);
+            var model = await _emergencyServiceService.CreateEmergencyServiceAsync(requestModel);
+            return Execute(model);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEmergencyService(
-            int id,
-            [FromBody] EmergencyServiceRequestModel requestModel
-        )
+        public async Task<IActionResult> UpdateEmergencyService(int id,
+            [FromBody] EmergencyServiceRequestModel requestModel)
         {
             Result<EmergencyServiceResponseModel> model = null;
 
@@ -100,7 +96,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
 
             return Execute(model);
 
-            BadRequest:
+        BadRequest:
             return BadRequest(model);
         }
 
@@ -110,18 +106,5 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             var model = await _emergencyServiceService.DeleteEmergencyService(id);
             return Execute(model);
         }
-
-        //[HttpGet("{pageNo}/{pageSize}")]
-        //public async Task<IActionResult> GetAllEmergencyServiceWithPagination(
-        //    int pageNo,
-        //    int pageSize
-        //)
-        //{
-        //    var model = await _emergencyServiceService.GetAllEmergencyServiceWithPagination(
-        //        pageNo,
-        //        pageSize
-        //    );
-        //    return Execute(model);
-        //}
     }
 }
