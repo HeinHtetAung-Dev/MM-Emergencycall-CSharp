@@ -5,7 +5,7 @@ namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 
 [Route("api/Admin/EmergencyServices")]
 [ApiController]
-public class AdminEmergencyServicesController : ControllerBase
+public class AdminEmergencyServicesController : BaseController
 {
     private readonly AdminEmergencyServicesService _adminEmergencyServicesService;
 
@@ -14,8 +14,17 @@ public class AdminEmergencyServicesController : ControllerBase
         _adminEmergencyServicesService = emergencyServiceService;
     }
 
+    [HttpGet]
+    //[HttpGet("ServiceStatus")]
+    public async Task<IActionResult> GetAllEmergencyServicesAsync()
+    {
+        var response = await _adminEmergencyServicesService.GetAllEmergencyServicesAsync();
+        return Execute(response);
+    }
+
+    [HttpGet("ServiceStatus")]
     [HttpGet("ServiceStatus/{serviceStatus}")]
-    public async Task<IActionResult> GetEmergencyServicesByStatus(string serviceStatus)
+    public async Task<IActionResult> GetEmergencyServicesByStatus(string? serviceStatus)
     {
         var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatus(
             serviceStatus
@@ -23,12 +32,13 @@ public class AdminEmergencyServicesController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("ServiceStatus/{pageNo}/{pageSize}")]
     [HttpGet("ServiceStatus/{serviceStatus}/{pageNo}/{pageSize}")]
     [HttpGet("ServiceStatus/{serviceStatus}/pageNo/{pageNo}/pageSize/{pageSize}")]
     public async Task<IActionResult> GetEmergencyServicesByStatusPaginationAsync(
-        string serviceStatus,
-        int pageNo,
-        int pageSize
+        string? serviceStatus,
+        int pageNo = 1,
+        int pageSize = 10
     )
     {
         var response =
@@ -38,6 +48,6 @@ public class AdminEmergencyServicesController : ControllerBase
                 pageSize
             );
 
-        return Ok(response);
+        return Execute(response);
     }
 }

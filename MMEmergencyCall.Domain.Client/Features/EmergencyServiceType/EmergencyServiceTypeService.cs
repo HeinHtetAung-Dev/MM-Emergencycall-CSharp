@@ -34,7 +34,7 @@ public class EmergencyServiceTypeService
             if (lst is null)
             {
                 string message = "There is no emergency service types found in the database";
-                return Result<List<string>>.Failure(message);
+                return Result<List<string>>.NotFoundError(message);
             }
 
             var model = Result<List<string>>.Success(lst);
