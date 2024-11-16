@@ -46,4 +46,30 @@ public class TownshipController : BaseController
 
         return Execute(model);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAsync(int id, TownshipRequestModel requestModel)
+    {
+        Result<TownshipResponseModel> model = null;
+        if (string.IsNullOrEmpty(requestModel.TownshipCode))
+        {
+            model = Result<TownshipResponseModel>.ValidationError("TownshipCode is required.");
+        }
+        if (string.IsNullOrEmpty(requestModel.TownshipNameEn))
+        {
+            model = Result<TownshipResponseModel>.ValidationError("TownshipNameEn is required.");
+        }
+        if (string.IsNullOrEmpty(requestModel.TownshipNameMm))
+        {
+            model = Result<TownshipResponseModel>.ValidationError("TownshipNameMm is required.");
+        }
+        if (string.IsNullOrEmpty(requestModel.StateRegionCode))
+        {
+            model = Result<TownshipResponseModel>.ValidationError("StateRegionCode is required.");
+        }
+
+        model = await _townshipService.UpdateTownshipAsync(id, requestModel);
+
+        return Execute(model);
+    }
 }

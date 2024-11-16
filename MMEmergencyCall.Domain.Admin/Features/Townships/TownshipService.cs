@@ -94,4 +94,39 @@ public class TownshipService
             return Result<TownshipResponseModel>.Failure(message);
         }
     }
+
+    public async Task<Result<TownshipResponseModel>> UpdateTownshipAsync(int id, TownshipRequestModel requestModel)
+    {
+        try
+        {
+            var township = await _context.Townships.FindAsync(id);
+            if (township is null)
+                return Result<TownshipResponseModel>.ValidationError("Township with id " + id + " not found.");
+
+            township.TownshipCode = requestModel.TownshipCode;
+            township.TownshipNameEn = requestModel.TownshipNameEn;
+            township.TownshipNameMm = requestModel.TownshipNameMm;
+            township.StateRegionCode = requestModel.StateRegionCode;
+
+            _context.Entry(township).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            var model = new TownshipResponseModel
+            {
+                TownshipId = township.TownshipId,
+                TownshipCode = township.TownshipCode,
+                TownshipNameEn = township.TownshipNameEn,
+                TownshipNameMm = township.TownshipNameMm,
+                StateRegionCode = township.StateRegionCode
+            };
+
+            return Result<TownshipResponseModel>.Success(model, "Township is updated successfully.");
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while updating the township requests for id " + id + " : " + ex.Message;
+            _logger.LogError(message);
+            return Result<TownshipResponseModel>.Failure(message);
+        }
+    }
 }
