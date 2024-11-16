@@ -1,10 +1,11 @@
-﻿using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
+﻿using Microsoft.AspNetCore.Authorization;
+using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
+using MMEmergencyCall.Domain.Client.Middlewares;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
 [Route("api/[controller]")]
 [ApiController]
-//[CustomAuthorize]
 public class EmergencyRequestController : BaseController
 {
     private readonly EmergencyRequestService _emergencyRequestService;
@@ -35,6 +36,7 @@ public class EmergencyRequestController : BaseController
     }
 
     [HttpPost]
+    [UserAuthorizeAttribute]
     public async Task<IActionResult> AddEmergencyRequest(EmergencyRequestRequestModel request)
     {
         var model = await _emergencyRequestService.AddEmergencyRequest(request);
@@ -42,6 +44,7 @@ public class EmergencyRequestController : BaseController
     }
 
     [HttpPut("{id}")]
+    [UserAuthorizeAttribute]
     public async Task<IActionResult> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
     {
         var model = await _emergencyRequestService.UpdateEmergencyRequestStatus(id, statusRequest);
