@@ -53,7 +53,7 @@ public class UserService
         {
             var user = await _context.Users.FindAsync(id);
             if (user is null)
-                return Result<UserResponseModel>.Failure("User not found.");
+                return Result<UserResponseModel>.NotFoundError("User not found.");
 
             var model = new UserResponseModel()
             {
@@ -90,7 +90,7 @@ public class UserService
         }
         catch (Exception ex)
         {
-            return Result<bool>.Failure("User doesn't exist.");
+            return Result<bool>.NotFoundError("User doesn't exist.");
         }
     }
 
@@ -102,12 +102,12 @@ public class UserService
 
         if (pageNo < 1)
         {
-            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+            return Result<UserPaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
         if (pageNo > pageCount)
         {
-            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+            return Result<UserPaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
         var user = await _context
@@ -149,12 +149,12 @@ public class UserService
 
         if (pageNo < 1)
         {
-            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+            return Result<UserPaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
         if (pageNo > pageCount)
         {
-            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+            return Result<UserPaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
         var user = await _context
@@ -197,12 +197,12 @@ public class UserService
 
         if (pageNo < 1)
         {
-            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+            return Result<UserPaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
         if (pageNo > pageCount)
         {
-            return Result<UserPaginationResponseModel>.Failure("Invalid PageNo.");
+            return Result<UserPaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
         var user = await _context
@@ -213,7 +213,7 @@ public class UserService
 
         if (user.Count() < 1)
         {
-            return Result<UserPaginationResponseModel>.Failure("No data found.");
+            return Result<UserPaginationResponseModel>.NotFoundError("No data found.");
         }
 
         var lst = user
@@ -294,7 +294,7 @@ public class UserService
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
             if (user is null)
             {
-                return Result<UserResponseModel>.Failure("User with id " + id + " not found.");
+                return Result<UserResponseModel>.NotFoundError("User with id " + id + " not found.");
             }
 
             user.Name = requestModel.Name;
@@ -343,7 +343,7 @@ public class UserService
         }
         catch (Exception ex)
         {
-            return Result<bool>.Failure("Admin doesn't exist.");
+            return Result<bool>.NotFoundError("Admin doesn't exist.");
         }
     }
 
@@ -353,7 +353,7 @@ public class UserService
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
             if (user is null)
-                return Result<bool>.Failure("User with id " + id + " not found.");
+                return Result<bool>.NotFoundError("User with id " + id + " not found.");
 
             _context.Remove(user);
             await _context.SaveChangesAsync();
