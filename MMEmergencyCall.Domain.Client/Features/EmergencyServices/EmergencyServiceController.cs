@@ -6,7 +6,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmergencyServiceController : ControllerBase
+    public class EmergencyServiceController : BaseController
     {
         private readonly EmergencyServiceService _emergencyServiceService;
 
@@ -22,14 +22,14 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
                 pageNo,
                 pageSize
             );
-            return Ok(model);
+            return Execute(model);
         }
 
         [HttpGet("{serviceId}")]
         public async Task<IActionResult> GetEmergencyServiceById(int serviceId)
         {
             var response = await _emergencyServiceService.GetEmergencyServiceById(serviceId);
-            return Ok(response);
+            return Execute(response);
         }
 
         [HttpGet("ServiceType/{serviceType}")]
@@ -44,7 +44,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
                 pageNo,
                 pageSize
             );
-            return Ok(response);
+            return Execute(response);
         }
 
         [HttpPost]
@@ -53,7 +53,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         )
         {
             var response = await _emergencyServiceService.CreateEmergencyServiceAsync(requestModel);
-            return Ok(response);
+            return Execute(response);
         }
 
         [HttpPut("{id}")]
@@ -66,33 +66,39 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
 
             if (string.IsNullOrEmpty(requestModel.ServiceType))
             {
-                model = Result<EmergencyServiceResponseModel>.Failure("Service Type is required.");
+                model = Result<EmergencyServiceResponseModel>.ValidationError(
+                    "Service Type is required."
+                );
                 goto BadRequest;
             }
 
             if (string.IsNullOrEmpty(requestModel.ServiceGroup))
             {
-                model = Result<EmergencyServiceResponseModel>.Failure("Service Group is required.");
+                model = Result<EmergencyServiceResponseModel>.ValidationError(
+                    "Service Group is required."
+                );
                 goto BadRequest;
             }
 
             if (string.IsNullOrEmpty(requestModel.ServiceName))
             {
-                model = Result<EmergencyServiceResponseModel>.Failure("Service Name is required.");
+                model = Result<EmergencyServiceResponseModel>.ValidationError(
+                    "Service Name is required."
+                );
                 goto BadRequest;
             }
 
             if (string.IsNullOrEmpty(requestModel.PhoneNumber))
             {
-                model = Result<EmergencyServiceResponseModel>.Failure("Phone Number is required.");
+                model = Result<EmergencyServiceResponseModel>.ValidationError(
+                    "Phone Number is required."
+                );
                 goto BadRequest;
             }
 
             model = await _emergencyServiceService.UpdateEmergencyService(id, requestModel);
-            if (!model.IsSuccess)
-                return NotFound(model);
 
-            return Ok(model);
+            return Execute(model);
 
             BadRequest:
             return BadRequest(model);
@@ -102,9 +108,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         public async Task<IActionResult> DeleteEmergencyService(int id)
         {
             var model = await _emergencyServiceService.DeleteEmergencyService(id);
-            if (!model.IsSuccess)
-                return NotFound(model);
-            return Ok(model);
+            return Execute(model);
         }
 
         //[HttpGet("{pageNo}/{pageSize}")]
@@ -117,7 +121,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         //        pageNo,
         //        pageSize
         //    );
-        //    return Ok(model);
+        //    return Execute(model);
         //}
     }
 }
