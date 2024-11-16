@@ -129,4 +129,16 @@ public class TownshipService
             return Result<TownshipResponseModel>.Failure(message);
         }
     }
+
+    public async Task<Result<bool>> DeleteAsync(int id)
+    {
+        var township = await _context.Townships.FindAsync(id);
+        if (township is null)
+            return Result<bool>.NotFoundError("Township not found.");
+
+        _context.Remove(township);
+        await _context.SaveChangesAsync();
+
+        return Result<bool>.Success(true, "Township is deleted successfully.");
+    }
 }

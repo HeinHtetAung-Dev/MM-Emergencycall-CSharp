@@ -72,4 +72,11 @@ public class TownshipController : BaseController
 
         return Execute(model);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        var model = await _townshipService.DeleteAsync(id);
+        return Execute(model);
+    }
 }
