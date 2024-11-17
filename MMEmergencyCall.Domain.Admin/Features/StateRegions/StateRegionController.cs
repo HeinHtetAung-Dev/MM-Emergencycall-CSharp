@@ -7,7 +7,7 @@ namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 [Route("api/[controller]")]
 [AdminAuthorizeAttribute]
 [ApiController]
-public class StateRegionController : ControllerBase
+public class StateRegionController : BaseController
 {
     private readonly StateRegionService _stateRegionService;
 
@@ -20,20 +20,14 @@ public class StateRegionController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var model = await _stateRegionService.GetAllAsync();
-        if (!model.IsSuccess)
-            return NotFound(model);
-
-        return Ok(model);
+        return Execute(model);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
         var model = await _stateRegionService.GetByIdAsync(id);
-        if (!model.IsSuccess)
-            return NotFound(model);
-
-        return Ok(model);
+        return Execute(model);
     }
 
     [HttpPost]
@@ -98,9 +92,6 @@ public class StateRegionController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var model = await _stateRegionService.DeleteAsync(id);
-        if (!model.IsSuccess)
-            return NotFound(model);
-
-        return Ok(model);
+        return Execute(model);
     }
 }
