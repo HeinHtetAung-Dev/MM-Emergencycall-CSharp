@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MMEmergencyCall.Domain.Admin.Middlewares;
 using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 
 [Route("api/[controller]")]
+[AdminAuthorizeAttribute]
 [ApiController]
 public class StateRegionController : ControllerBase
 {

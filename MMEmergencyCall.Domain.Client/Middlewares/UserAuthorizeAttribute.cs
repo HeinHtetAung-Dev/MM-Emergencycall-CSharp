@@ -15,7 +15,7 @@ public class UserAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
 
         if (dbContext == null)
         {
-            context.Result = new UnauthorizedObjectResult("Database context is not available.");
+            context.Result = new UnauthorizedObjectResult("Something went wrong.");
             return;
         }
 
