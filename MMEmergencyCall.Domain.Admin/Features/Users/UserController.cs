@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MMEmergencyCall.Domain.Admin.Middlewares;
 
 namespace MMEmergencyCall.Domain.Admin.Features.Users;
 
 [Route("api/[controller]")]
+[AdminAuthorizeAttribute]
 [ApiController]
 public class UserController : BaseController
 {

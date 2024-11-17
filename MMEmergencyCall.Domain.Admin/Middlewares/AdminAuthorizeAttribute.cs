@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MMEmergencyCall.Domain.Admin.Features.SignIn;
 using MMEmergencyCall.Shared;
-using MMEmergencyCall.Domain.Client.Features.Signin;
-using MMEmergencyCall.Domain.Admin.Features.Users;
 
-namespace MMEmergencyCall.Api.Middlewares;
+namespace MMEmergencyCall.Domain.Admin.Middlewares;
 
 public class AdminAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
 {
-    private readonly UserService _userService;
-    public AdminAuthorizeAttribute(UserService userService)
-    {
-        _userService = userService;
-    }
-
     public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
     {
+        var serviceProvider = context.HttpContext.RequestServices;
+        var dbContext = serviceProvider.GetService<AppDbContext>();
+
+        if (dbContext == null)
+        {
+            context.Result = new UnauthorizedObjectResult("Something went wrong.");
+            return;
+        }
+
         if (!context.HttpContext!.Request.Headers["Token"].Any())
         {
             context.Result = new UnauthorizedObjectResult(string.Empty);
@@ -24,12 +26,10 @@ public class AdminAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
 
         try
         {
-            var item = context.HttpContext!.Request.Headers["Token"]
-                .ToString()
-                .ToDecrypt()
-                .ToObject<SigninModel>();
+            var token = context.HttpContext.Request.Headers["Token"].ToString();
+            var item = token.ToDecrypt().ToObject<AdminSignInModel>();
 
-            if (!await IsExistAdmin(item.UserId))
+            if (!await IsExistAdmin(dbContext, item.UserId))
             {
                 context.Result = new UnauthorizedObjectResult("Admin does not exist.");
                 return;
@@ -47,11 +47,9 @@ public class AdminAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
             return;
         }
     }
-
-    private async Task<bool> IsExistAdmin(int userId)
+    private static async Task<bool> IsExistAdmin(AppDbContext dbContext, int userId)
     {
-        var user = await _userService.IsExistAdmin(userId);
-        return user is not null;
+        return await dbContext.Users.AnyAsync(u => u.UserId == userId);
     }
-}
 
+}
