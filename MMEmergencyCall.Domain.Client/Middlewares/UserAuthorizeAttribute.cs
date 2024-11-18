@@ -41,6 +41,8 @@ public class UserAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
                 context.Result = new UnauthorizedObjectResult("Session has expired.");
                 return;
             }
+
+            context.HttpContext.Items["UserId"] = item.UserId;
         }
         catch (Exception)
         {

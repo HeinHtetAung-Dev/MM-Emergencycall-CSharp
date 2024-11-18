@@ -5,6 +5,7 @@ using MMEmergencyCall.Domain.Client.Middlewares;
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
 [Route("api/[controller]")]
+[UserAuthorizeAttribute]
 [ApiController]
 public class EmergencyRequestController : BaseController
 {
@@ -16,38 +17,63 @@ public class EmergencyRequestController : BaseController
     }
 
     [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetEmergencyRequests(string? userId , string? serviceId, string? providerId,
+    public async Task<IActionResult> GetEmergencyRequests(string? serviceId, string? providerId,
         string? status, string? townshipCode, int pageNo = 1, int pageSize = 10)
     {
+        var currentUserId = HttpContext.GetCurrentUserId();
+
+        if (!currentUserId.HasValue) { 
+            return Unauthorized("Unauthorized Request");
+        }
+
         if (pageNo <= 0 || pageSize <= 0)
         {
             return BadRequest("Page number and page size must be greater than zero.");
         }
 
-        var model = await _emergencyRequestService.GetEmergencyRequests(pageNo, pageSize,userId,serviceId,providerId,status,townshipCode);
+        var model = await _emergencyRequestService.GetEmergencyRequests(pageNo, pageSize, currentUserId, serviceId,providerId,status,townshipCode);
         return Execute(model);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetEmergencyRequestById(int id)
     {
-        var model = await _emergencyRequestService.GetEmergencyRequestById(id);
+        var currentUserId = HttpContext.GetCurrentUserId();
+
+        if (!currentUserId.HasValue)
+        {
+            return Unauthorized("Unauthorized Request");
+        }
+
+        var model = await _emergencyRequestService.GetEmergencyRequestById(id,currentUserId);
         return Execute(model);
     }
 
     [HttpPost]
-    [UserAuthorizeAttribute]
     public async Task<IActionResult> AddEmergencyRequest(EmergencyRequestRequestModel request)
     {
-        var model = await _emergencyRequestService.AddEmergencyRequest(request);
+        var currentUserId = HttpContext.GetCurrentUserId();
+
+        if (!currentUserId.HasValue)
+        {
+            return Unauthorized("Unauthorized Request");
+        }
+
+        var model = await _emergencyRequestService.AddEmergencyRequest(request,currentUserId);
         return Execute(model);
     }
 
     [HttpPut("{id}")]
-    [UserAuthorizeAttribute]
     public async Task<IActionResult> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
     {
-        var model = await _emergencyRequestService.UpdateEmergencyRequestStatus(id, statusRequest);
+        var currentUserId = HttpContext.GetCurrentUserId();
+
+        if (!currentUserId.HasValue)
+        {
+            return Unauthorized("Unauthorized Request");
+        }
+
+        var model = await _emergencyRequestService.UpdateEmergencyRequestStatus(id, currentUserId,statusRequest);
         return Execute(model);
     }
 }
