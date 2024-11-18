@@ -17,10 +17,10 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         }
 
         [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-        public async Task<IActionResult> GetAllByPaginationAsync(int pageNo = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllByPaginationAsync(string? serviceType,int pageNo = 1, int pageSize = 10)
         {
             var model = await _emergencyServiceService
-                .GetAllEmergencyServiceWithPagination(pageNo, pageSize);
+                .GetEmergencyServices(serviceType, pageNo, pageSize);
             return Execute(model);
         }
 
@@ -31,20 +31,20 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             return Execute(response);
         }
 
-        [HttpGet("ServiceType/{serviceType}")]
-        public async Task<IActionResult> GetServiceByServiceTypeWithPagination(
-            string serviceType,
-            int pageNo,
-            int pageSize
-        )
-        {
-            var response = await _emergencyServiceService.GetServiceByServiceTypeWithPagination(
-                serviceType,
-                pageNo,
-                pageSize
-            );
-            return Execute(response);
-        }
+        //[HttpGet("ServiceType/{serviceType}")]
+        //public async Task<IActionResult> GetServiceByServiceTypeWithPagination(
+        //    string serviceType,
+        //    int pageNo,
+        //    int pageSize
+        //)
+        //{
+        //    var response = await _emergencyServiceService.GetServiceByServiceTypeWithPagination(
+        //        serviceType,
+        //        pageNo,
+        //        pageSize
+        //    );
+        //    return Execute(response);
+        //}
 
         [HttpPost]
         [UserAuthorizeAttribute]

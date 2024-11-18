@@ -24,14 +24,21 @@ public class EmergencyServiceService
     }
 
     public async Task<Result<EmergencyServicePaginationResponseModel>>
-        GetAllEmergencyServiceWithPagination(int pageNo, int pageSize)
+        GetEmergencyServices(string serviceType,int pageNo, int pageSize)
     {
         if (pageNo < 1)
         {
             return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
-        int totalRecords = await _db.EmergencyServices.CountAsync();
+        var query = _db.EmergencyServices.AsQueryable();
+
+        if (!string.IsNullOrEmpty(serviceType))
+        {
+            query = query.Where(x => x.ServiceType == serviceType);
+        }
+
+        int totalRecords = await query.CountAsync();
 
         int pageCount = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
@@ -40,10 +47,10 @@ public class EmergencyServiceService
             return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
-        var emergencyService = await _db
-            .EmergencyServices.Skip((pageNo - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        var emergencyService = await query
+                .Skip((pageNo - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
         var lst = emergencyService
             .Select(sr => new EmergencyServiceResponseModel
@@ -105,52 +112,52 @@ public class EmergencyServiceService
         }
     }
 
-    public async Task<Result<EmergencyServicePaginationResponseModel>> GetServiceByServiceTypeWithPagination(string serviceType, int pageNo, int pageSize)
-    {
-        var emergencyServicesQuery = _db.EmergencyServices.Where(x => x.ServiceType == serviceType);
-        int rowCount = await emergencyServicesQuery.CountAsync();
+    //public async Task<Result<EmergencyServicePaginationResponseModel>> GetServiceByServiceTypeWithPagination(string serviceType, int pageNo, int pageSize)
+    //{
+    //    var emergencyServicesQuery = _db.EmergencyServices.Where(x => x.ServiceType == serviceType);
+    //    int rowCount = await emergencyServicesQuery.CountAsync();
 
-        if (rowCount == 0)
-        {
-            return Result<EmergencyServicePaginationResponseModel>
-                .NotFoundError("Emergency Service with service type : " + serviceType + " not found.");
-        }
+    //    if (rowCount == 0)
+    //    {
+    //        return Result<EmergencyServicePaginationResponseModel>
+    //            .NotFoundError("Emergency Service with service type : " + serviceType + " not found.");
+    //    }
 
-        int pageCount = (int)Math.Ceiling((double)rowCount / pageSize);
+    //    int pageCount = (int)Math.Ceiling((double)rowCount / pageSize);
 
-        if (pageNo < 1 || pageNo > pageCount)
-        {
-            return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
-        }
+    //    if (pageNo < 1 || pageNo > pageCount)
+    //    {
+    //        return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
+    //    }
 
-        var emergencyServices = await emergencyServicesQuery
-            .Skip((pageNo - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+    //    var emergencyServices = await emergencyServicesQuery
+    //        .Skip((pageNo - 1) * pageSize)
+    //        .Take(pageSize)
+    //        .ToListAsync();
 
-        var responseList = emergencyServices.Select(sr => new EmergencyServiceResponseModel
-        {
-            ServiceId = sr.ServiceId,
-            ServiceType = sr.ServiceType,
-            ServiceGroup = sr.ServiceGroup,
-            ServiceName = sr.ServiceName,
-            PhoneNumber = sr.PhoneNumber,
-            Location = sr.Location,
-            Availability = sr.Availability,
-            TownshipCode = sr.TownshipCode,
-            ServiceStatus = sr.ServiceStatus
-        }).ToList();
+    //    var responseList = emergencyServices.Select(sr => new EmergencyServiceResponseModel
+    //    {
+    //        ServiceId = sr.ServiceId,
+    //        ServiceType = sr.ServiceType,
+    //        ServiceGroup = sr.ServiceGroup,
+    //        ServiceName = sr.ServiceName,
+    //        PhoneNumber = sr.PhoneNumber,
+    //        Location = sr.Location,
+    //        Availability = sr.Availability,
+    //        TownshipCode = sr.TownshipCode,
+    //        ServiceStatus = sr.ServiceStatus
+    //    }).ToList();
 
-        var model = new EmergencyServicePaginationResponseModel
-        {
-            Data = responseList,
-            PageSize = pageSize,
-            PageNo = pageNo,
-            PageCount = pageCount
-        };
+    //    var model = new EmergencyServicePaginationResponseModel
+    //    {
+    //        Data = responseList,
+    //        PageSize = pageSize,
+    //        PageNo = pageNo,
+    //        PageCount = pageCount
+    //    };
 
-        return Result<EmergencyServicePaginationResponseModel>.Success(model);
-    }
+    //    return Result<EmergencyServicePaginationResponseModel>.Success(model);
+    //}
 
     public async Task<Result<EmergencyServiceResponseModel>> CreateEmergencyServiceAsync(EmergencyServiceRequestModel request)
     {
