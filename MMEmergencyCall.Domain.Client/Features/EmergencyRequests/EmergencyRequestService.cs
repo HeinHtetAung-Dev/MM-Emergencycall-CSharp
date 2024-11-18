@@ -18,16 +18,16 @@ public class EmergencyRequestService
     }
 
     public async Task<Result<EmergencyRequestPaginationResponseModel>> GetEmergencyRequests(int pageNo, int pageSize,
-     string? userId = null, string? serviceId = null, string? providerId = null,
+     int? userId = null, string? serviceId = null, string? providerId = null,
      string? status = null, string? townshipCode = null)
     {
         try
         {
             var query = _db.EmergencyRequests.AsQueryable();
 
-            if (!string.IsNullOrEmpty(userId))
+            if (userId.HasValue)
             {
-                query = query.Where(x => x.UserId.ToString() == userId);
+                query = query.Where(x => x.UserId == userId.Value);
             }
             if (!string.IsNullOrEmpty(serviceId))
             {
@@ -100,11 +100,12 @@ public class EmergencyRequestService
     }
 
 
-    public async Task<Result<EmergencyRequestResponseModel>> GetEmergencyRequestById(int id)
+    public async Task<Result<EmergencyRequestResponseModel>> GetEmergencyRequestById(int id, int? userId)
     {
         try
         {
-            var emergencyRequest = await _db.EmergencyRequests.FirstOrDefaultAsync(x => x.RequestId == id);
+            var emergencyRequest = await _db.EmergencyRequests.Where(x=>x.RequestId == id && x.UserId == userId)
+                .FirstOrDefaultAsync();
 
             if (emergencyRequest is null)
             {
@@ -135,20 +136,27 @@ public class EmergencyRequestService
         }
     }
 
-    public async Task<Result<EmergencyRequestResponseModel>> AddEmergencyRequest(EmergencyRequestRequestModel request)
+    public async Task<Result<EmergencyRequestResponseModel>> AddEmergencyRequest(EmergencyRequestRequestModel request, int? currentUserId)
     {
         try
         {
-            var validateResponse = await ValidateEmergencyRequestRequestModel(request);
+            var validateRequestModelResponse = await ValidateEmergencyRequestRequestModel(request);
 
-            if (validateResponse is not null)
+            if (validateRequestModelResponse is not null)
             {
-                return validateResponse;
+                return validateRequestModelResponse;
+            }
+
+            var validateUserIdResponse = await ValidateUserId(currentUserId);
+            
+            if (validateUserIdResponse is not null)
+            {
+                return validateUserIdResponse;
             }
 
             var emergencyRequest = new EmergencyRequest()
             {
-                UserId = request.UserId,
+                UserId = (int)currentUserId,
                 ServiceId = request.ServiceId,
                 ProviderId = request.ProviderId,
                 RequestTime = request.RequestTime,
@@ -203,7 +211,7 @@ public class EmergencyRequestService
             var emergencyRequest = new EmergencyRequest()
             {
                 RequestId = id,
-                UserId = request.UserId,
+                //UserId = request.UserId,
                 ServiceId = request.ServiceId,
                 ProviderId = request.ProviderId,
                 RequestTime = request.RequestTime,
@@ -243,7 +251,7 @@ public class EmergencyRequestService
 
     #endregion
 
-    public async Task<Result<EmergencyRequestResponseModel>> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
+    public async Task<Result<EmergencyRequestResponseModel>> UpdateEmergencyRequestStatus(int id, int? userId,UpdateEmergencyRequestStatusRequest statusRequest)
     {
         try
         {
@@ -254,8 +262,15 @@ public class EmergencyRequestService
                 );
             }
 
+            var validateUserIdResponse = await ValidateUserId(userId);
+
+            if (validateUserIdResponse is not null)
+            {
+                return validateUserIdResponse;
+            }
+
             var existingEmergencyRequest =
-                await _db.EmergencyRequests.FirstOrDefaultAsync(x => x.RequestId == id);
+                await _db.EmergencyRequests.FirstOrDefaultAsync(x => x.RequestId == id && x.UserId == userId);
 
             if (existingEmergencyRequest is null)
             {
@@ -306,12 +321,6 @@ public class EmergencyRequestService
                 .ValidationError("Invalid Provider Id.");
         }
 
-        if (!await IsUserIdExist(request.UserId))
-        {
-            return Result<EmergencyRequestResponseModel>
-                .ValidationError("Invalid User Id.");
-        }
-
         if (!await IsServiceIdExist(request.ServiceId))
         {
             return Result<EmergencyRequestResponseModel>
@@ -322,6 +331,21 @@ public class EmergencyRequestService
         {
             return Result<EmergencyRequestResponseModel>
                 .ValidationError("Invalid Township Code.");
+        }
+
+        return null;
+    }
+
+    private async Task<Result<EmergencyRequestResponseModel>> ValidateUserId(int? currentUserId)
+    {
+        if (!currentUserId.HasValue)
+        {
+            return Result<EmergencyRequestResponseModel>.ValidationError("Invalid User");
+        }
+
+        if (!await IsUserIdExist((int)currentUserId))
+        {
+            return Result<EmergencyRequestResponseModel>.ValidationError("Invalid User");
         }
 
         return null;

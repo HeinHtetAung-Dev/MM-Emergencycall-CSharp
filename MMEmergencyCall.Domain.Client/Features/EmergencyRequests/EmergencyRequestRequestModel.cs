@@ -2,8 +2,6 @@
 
 public class EmergencyRequestRequestModel
 {
-    public int UserId { get; set; }
-
     public int ServiceId { get; set; }
 
     public int? ProviderId { get; set; }
