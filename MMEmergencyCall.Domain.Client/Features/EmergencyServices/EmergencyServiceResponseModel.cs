@@ -20,3 +20,11 @@ public class EmergencyServiceResponseModel
 
     public string? ServiceStatus { get; set; }
 }
+
+//public enum EnumServiceStatus
+//{
+//    None,
+//    Pending,
+//    Approved,
+//    Rejected
+//}
