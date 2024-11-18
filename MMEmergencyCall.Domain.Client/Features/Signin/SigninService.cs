@@ -21,19 +21,18 @@ public class SigninService
         _db = db;
     }
 
-    public async Task<SigninResponseModel> SigninAsync(SigninRequestModel requestModel)
+    public async Task<Result<SigninModel>> SigninAsync(SigninRequestModel requestModel)
     {
-        var user = await _db.Users.AsNoTracking()
-            .Where(u => u.Email == requestModel.Email
-                    && u.Password == requestModel.Password)
-            .FirstOrDefaultAsync();
+        var user = await _db.Users.Where(u => u.Email == requestModel.Email
+                   && u.Password == requestModel.Password)
+                  .FirstOrDefaultAsync();
 
         if (user is null)
         {
-            return new SigninResponseModel(Result<SigninModel>.Failure("Username or Password is incorrect."));
+            return Result<SigninModel>.ValidationError("Username or Password is incorrect.");
         }
 
-        SigninModel signin = new SigninModel
+        SigninModel signin = new()
         {
             Email = user.Email,
             Name = user.Name,
@@ -44,6 +43,6 @@ public class SigninService
         var token = signin.ToJson().ToEncrypt();
         signin.Token = token;
 
-        return new SigninResponseModel(Result<SigninModel>.Success(signin));
+        return Result<SigninModel>.Success(signin);
     }
 }
