@@ -16,23 +16,23 @@ public class AdminSigninService
         _db = db;
     }
 
-    public async Task<AdminSignInResponseModel> SigninAsync(AdminSigninRequestModel requestModel)
+    public async Task<Result<AdminSignInModel>> SigninAsync(AdminSigninRequestModel requestModel)
     {
         var email = requestModel.Email;
         var Password = requestModel.Password;
         
 
-        var user = await _db.Users.AsNoTracking()
-            .Where(u => u.Email == requestModel.Email
-                    && u.Password == requestModel.Password && u.Role.ToLower() == "admin")
-            .FirstOrDefaultAsync();
+        var user = await _db.Users
+                   .Where(u => u.Email == requestModel.Email
+                   && u.Password == requestModel.Password && u.Role.ToLower() == "admin")
+                   .FirstOrDefaultAsync();
 
         if (user is null)
         {
-            return new AdminSignInResponseModel(Result<AdminSignInModel>.Failure("Username or Password is incorrect."));
+            return Result<AdminSignInModel>.ValidationError("Username or Password is incorrect.");
         }
 
-        AdminSignInModel signin = new AdminSignInModel
+        AdminSignInModel signin = new()
         {
             Email = user.Email,
             Name = user.Name,
@@ -43,6 +43,6 @@ public class AdminSigninService
         var token = signin.ToJson().ToEncrypt();
         signin.Token = token;
 
-        return new AdminSignInResponseModel(Result<AdminSignInModel>.Success(signin));
+        return Result<AdminSignInModel>.Success(signin);
     }
 }

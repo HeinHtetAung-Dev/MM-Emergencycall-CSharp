@@ -3,7 +3,7 @@
 [Route("api/[controller]")]
 [ApiController
     ]
-public class SigninController : ControllerBase
+public class SigninController : BaseController
 {
     private readonly SigninService _signinService;
 
@@ -16,6 +16,6 @@ public class SigninController : ControllerBase
     public async Task<IActionResult> SigninAsync(SigninRequestModel requestModel)
     {
         var response = await _signinService.SigninAsync(requestModel);
-        return Ok(response.Result);
+        return Execute(response);
     }
 }
