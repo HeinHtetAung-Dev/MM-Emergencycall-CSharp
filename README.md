@@ -15,7 +15,7 @@ Admin
 - [x] States & Regions (CRUD) - need pagination
 - [ ] Township (CRUD) - Su Sandar Lin
 - [x] Emergency Services
-- [ ] Emergency Request (List with Pagination, Status Change (Closed, Rejected))
+- [x] Emergency Request (List with Pagination, Status Change (Closed, Rejected))
 
 User
 
