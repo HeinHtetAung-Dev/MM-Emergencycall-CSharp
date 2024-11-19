@@ -1,3 +1,4 @@
+using MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
 using MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 using MMEmergencyCall.Domain.Admin.Features.Townships;
 
@@ -32,6 +33,7 @@ builder.AddStateRegionService();
 builder.AddUserService();
 builder.AddAdminEmergencyServicesService();
 builder.AddTownshipService();
+builder.AddAdminEmergencyRequest();
 
 var app = builder.Build();
 
