@@ -15,13 +15,6 @@ public class UserController : BaseController
         _userService = userService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var model = await _userService.GetAllAsync();
-        return Execute(model);
-    }
-
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
