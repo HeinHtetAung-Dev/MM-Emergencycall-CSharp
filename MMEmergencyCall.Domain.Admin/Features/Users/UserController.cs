@@ -15,13 +15,6 @@ public class UserController : BaseController
         _userService = userService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var model = await _userService.GetAllAsync();
-        return Execute(model);
-    }
-
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
@@ -31,7 +24,7 @@ public class UserController : BaseController
 
     [HttpGet("{pageNo}/{pageSize}")]
     [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetAllByPiginationAsync(int pageNo, int pageSize)
+    public async Task<IActionResult> GetAllByPiginationAsync(int pageNo = 1, int pageSize = 10)
     {
         var model = await _userService.GetAllUsersWithPaginationAsync(pageNo, pageSize);
         return Execute(model);
@@ -45,14 +38,14 @@ public class UserController : BaseController
     }
 
     [HttpGet("role/{role}/pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetUsersByRoleAsync(string role, int pageNo, int pageSize)
+    public async Task<IActionResult> GetUsersByRoleAsync(string role, int pageNo = 1, int pageSize = 10)
     {
         var model = await _userService.GetUsersByRoleAsync(role, pageNo, pageSize);
         return Execute(model);
     }
 
     [HttpGet("userStatus/{userStatus}/pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetUsersByUserStatusAsync(string userStatus, int pageNo, int pageSize)
+    public async Task<IActionResult> GetUsersByUserStatusAsync(string userStatus, int pageNo = 1, int pageSize = 10)
     {
         var model = await _userService.GetUsersByUserStatusAsync(userStatus, pageNo, pageSize);
         return Execute(model);

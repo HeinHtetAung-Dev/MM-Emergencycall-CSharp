@@ -22,7 +22,7 @@ public class TownshipService
         _context = context;
     }
 
-    public async Task<Result<TownshipPaginationResponseModel>> GetAllAsync(int pageNo, int pageSize)
+    public async Task<Result<TownshipPaginationResponseModel>> GetAllAsync(int pageNo = 1, int pageSize = 10)
     {
         var rowCount = _context.Townships.Count();
 
