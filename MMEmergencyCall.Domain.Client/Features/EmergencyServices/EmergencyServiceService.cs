@@ -47,6 +47,8 @@ public class EmergencyServiceService
             return Result<EmergencyServicePaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
+        query = query.Where(x => x.ServiceStatus == EnumServiceStatus.Approved.ToString());
+
         var emergencyService = await query
                 .Skip((pageNo - 1) * pageSize)
                 .Take(pageSize)

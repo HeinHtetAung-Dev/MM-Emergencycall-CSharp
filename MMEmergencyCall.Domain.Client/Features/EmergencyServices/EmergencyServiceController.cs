@@ -7,11 +7,11 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmergencyServiceController : BaseController
+    public class EmergencyServicesController : BaseController
     {
         private readonly EmergencyServiceService _emergencyServiceService;
 
-        public EmergencyServiceController(EmergencyServiceService emergencyServiceService)
+        public EmergencyServicesController(EmergencyServiceService emergencyServiceService)
         {
             _emergencyServiceService = emergencyServiceService;
         }

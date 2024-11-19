@@ -934,12 +934,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/EmergencyService/pageNo/1/pageSize/10",
+									"raw": "{{baseUrl}}/EmergencyServices/pageNo/1/pageSize/10",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"EmergencyService",
+										"EmergencyServices",
 										"pageNo",
 										"1",
 										"pageSize",
@@ -954,12 +954,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/EmergencyService/pageNo/1/pageSize/10",
+											"raw": "{{baseUrl}}/EmergencyServices/pageNo/1/pageSize/10",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
-												"EmergencyService",
+												"EmergencyServices",
 												"pageNo",
 												"1",
 												"pageSize",
@@ -977,7 +977,7 @@
 										},
 										{
 											"key": "Date",
-											"value": "Sat, 16 Nov 2024 18:08:59 GMT"
+											"value": "Tue, 19 Nov 2024 17:22:44 GMT"
 										},
 										{
 											"key": "Server",
@@ -989,7 +989,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"serviceId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_1\",\n                \"phoneNumber\": \"09-5.03254e+008\",\n                \"location\": \"Location_1\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017001\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 2,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_2\",\n                \"phoneNumber\": \"09-7.7252e+008\",\n                \"location\": \"Location_2\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR013043\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 3,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_3\",\n                \"phoneNumber\": \"09-9.92677e+006\",\n                \"location\": \"Location_3\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 4,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Medical\",\n                \"serviceName\": \"Medical_Service_4\",\n                \"phoneNumber\": \"09-5.29952e+008\",\n                \"location\": \"Location_4\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015304\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 6,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_6\",\n                \"phoneNumber\": \"09-8.37415e+008\",\n                \"location\": \"Location_6\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR015318\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 7,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Medical\",\n                \"serviceName\": \"Medical_Service_7\",\n                \"phoneNumber\": \"09-3.28779e+008\",\n                \"location\": \"Location_7\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR017005\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 8,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_8\",\n                \"phoneNumber\": \"09-5.70761e+008\",\n                \"location\": \"Location_8\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 9,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_9\",\n                \"phoneNumber\": \"09-4.47579e+008\",\n                \"location\": \"Location_9\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017025\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 10,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_10\",\n                \"phoneNumber\": \"09-8.28774e+008\",\n                \"location\": \"Location_10\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR001012\",\n                \"serviceStatus\": \"Rejected\"\n            },\n            {\n                \"serviceId\": 11,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_11\",\n                \"phoneNumber\": \"09-1.28477e+008\",\n                \"location\": \"Location_11\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR006005\",\n                \"serviceStatus\": \"Approved\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"serviceId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_1\",\n                \"phoneNumber\": \"09-5.03254e+008\",\n                \"location\": \"Location_1\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017001\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 2,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_2\",\n                \"phoneNumber\": \"09-7.7252e+008\",\n                \"location\": \"Location_2\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR013043\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 3,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_3\",\n                \"phoneNumber\": \"09-9.92677e+006\",\n                \"location\": \"Location_3\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 4,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Medical\",\n                \"serviceName\": \"Medical_Service_4\",\n                \"phoneNumber\": \"09-5.29952e+008\",\n                \"location\": \"Location_4\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015304\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 6,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_6\",\n                \"phoneNumber\": \"09-8.37415e+008\",\n                \"location\": \"Location_6\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR015318\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 7,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Medical\",\n                \"serviceName\": \"Medical_Service_7\",\n                \"phoneNumber\": \"09-3.28779e+008\",\n                \"location\": \"Location_7\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR017005\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 8,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_8\",\n                \"phoneNumber\": \"09-5.70761e+008\",\n                \"location\": \"Location_8\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 9,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_9\",\n                \"phoneNumber\": \"09-4.47579e+008\",\n                \"location\": \"Location_9\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017025\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 11,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_11\",\n                \"phoneNumber\": \"09-1.28477e+008\",\n                \"location\": \"Location_11\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR006005\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 12,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_12\",\n                \"phoneNumber\": \"09-5.96933e+008\",\n                \"location\": \"Location_12\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR015312\",\n                \"serviceStatus\": \"Approved\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
 								}
 							]
 						},
@@ -999,23 +999,21 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/EmergencyService/ServiceType/Ambulance?pageNo=1&pageSize=10",
+									"raw": "{{baseUrl}}/EmergencyServices/pageNo/1/pageSize/10?serviceType=Ambulance",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"EmergencyService",
-										"ServiceType",
-										"Ambulance"
+										"EmergencyServices",
+										"pageNo",
+										"1",
+										"pageSize",
+										"10"
 									],
 									"query": [
 										{
-											"key": "pageNo",
-											"value": "1"
-										},
-										{
-											"key": "pageSize",
-											"value": "10"
+											"key": "serviceType",
+											"value": "Ambulance"
 										}
 									]
 								}
@@ -1027,23 +1025,21 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/EmergencyService/ServiceType/Ambulance?pageNo=1&pageSize=10",
+											"raw": "{{baseUrl}}/EmergencyServices/pageNo/1/pageSize/10?serviceType=Ambulance",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
-												"EmergencyService",
-												"ServiceType",
-												"Ambulance"
+												"EmergencyServices",
+												"pageNo",
+												"1",
+												"pageSize",
+												"10"
 											],
 											"query": [
 												{
-													"key": "pageNo",
-													"value": "1"
-												},
-												{
-													"key": "pageSize",
-													"value": "10"
+													"key": "serviceType",
+													"value": "Ambulance"
 												}
 											]
 										}
@@ -1058,7 +1054,7 @@
 										},
 										{
 											"key": "Date",
-											"value": "Sat, 16 Nov 2024 18:43:15 GMT"
+											"value": "Tue, 19 Nov 2024 17:21:12 GMT"
 										},
 										{
 											"key": "Server",
@@ -1070,7 +1066,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 2,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"serviceId\": 11,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_11\",\n                \"phoneNumber\": \"09-1.28477e+008\",\n                \"location\": \"Location_11\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR006005\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 22,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_22\",\n                \"phoneNumber\": \"09-8.0869e+008\",\n                \"location\": \"Location_22\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR013009\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 23,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_23\",\n                \"phoneNumber\": \"09-3.97712e+008\",\n                \"location\": \"Location_23\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR013010\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 26,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_26\",\n                \"phoneNumber\": \"09-2.79983e+008\",\n                \"location\": \"Location_26\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR010010\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 30,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_30\",\n                \"phoneNumber\": \"09-1.05603e+008\",\n                \"location\": \"Location_30\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR012006\",\n                \"serviceStatus\": \"Rejected\"\n            },\n            {\n                \"serviceId\": 33,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_33\",\n                \"phoneNumber\": \"09-2.09367e+008\",\n                \"location\": \"Location_33\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR014004\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 35,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_35\",\n                \"phoneNumber\": \"09-2.02086e+008\",\n                \"location\": \"Location_35\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR014019\",\n                \"serviceStatus\": \"Pending\"\n            },\n            {\n                \"serviceId\": 47,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_47\",\n                \"phoneNumber\": \"09-4.36041e+008\",\n                \"location\": \"Location_47\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR012004\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 49,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_49\",\n                \"phoneNumber\": \"09-3.40066e+008\",\n                \"location\": \"Location_49\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR012015\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 52,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_52\",\n                \"phoneNumber\": \"09-7.10211e+008\",\n                \"location\": \"Location_52\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR011001\",\n                \"serviceStatus\": \"Approved\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 2,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"serviceId\": 11,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_11\",\n                \"phoneNumber\": \"09-1.28477e+008\",\n                \"location\": \"Location_11\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR006005\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 22,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_22\",\n                \"phoneNumber\": \"09-8.0869e+008\",\n                \"location\": \"Location_22\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR013009\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 23,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_23\",\n                \"phoneNumber\": \"09-3.97712e+008\",\n                \"location\": \"Location_23\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR013010\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 26,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_26\",\n                \"phoneNumber\": \"09-2.79983e+008\",\n                \"location\": \"Location_26\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR010010\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 33,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_33\",\n                \"phoneNumber\": \"09-2.09367e+008\",\n                \"location\": \"Location_33\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR014004\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 47,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_47\",\n                \"phoneNumber\": \"09-4.36041e+008\",\n                \"location\": \"Location_47\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR012004\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 49,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_49\",\n                \"phoneNumber\": \"09-3.40066e+008\",\n                \"location\": \"Location_49\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR012015\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 52,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_52\",\n                \"phoneNumber\": \"09-7.10211e+008\",\n                \"location\": \"Location_52\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR011001\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 54,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_54\",\n                \"phoneNumber\": \"09-2.94186e+008\",\n                \"location\": \"Location_54\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR011004\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 62,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Ambulance\",\n                \"serviceName\": \"Ambulance_Service_62\",\n                \"phoneNumber\": \"09-7.40644e+008\",\n                \"location\": \"Location_62\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR005015\",\n                \"serviceStatus\": \"Approved\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
 								},
 								{
 									"name": "BadRequestExample",
