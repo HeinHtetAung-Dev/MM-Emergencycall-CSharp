@@ -12,7 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		MMEmergencyCall_Combined.postman_collection.json = MMEmergencyCall_Combined.postman_collection.json
 		MMEmergencyCall_HninWuttYi.postman_collection.json = MMEmergencyCall_HninWuttYi.postman_collection.json
 		MMEmergencyCall_LinThit.postman_collection.json = MMEmergencyCall_LinThit.postman_collection.json
-		MMEmergencyCall_MyoThet.postman_collection.json = MMEmergencyCall_MyoThet.postman_collection.json
 		MMEmergencyCall_SuSandarLin.postman_collection.json = MMEmergencyCall_SuSandarLin.postman_collection.json
 		README.md = README.md
 		script.sql = script.sql

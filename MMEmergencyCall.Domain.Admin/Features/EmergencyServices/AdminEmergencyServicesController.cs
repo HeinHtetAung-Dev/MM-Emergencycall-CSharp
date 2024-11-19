@@ -17,34 +17,30 @@ public class AdminEmergencyServicesController : BaseController
     }
 
     [HttpGet]
-    //[HttpGet("ServiceStatus")]
     public async Task<IActionResult> GetAllEmergencyServicesAsync()
     {
-        var response = await _adminEmergencyServicesService.GetAllEmergencyServicesAsync();
+        var response =
+            await _adminEmergencyServicesService.GetEmergencyServicesByStatusAsync(
+                string.Empty
+            );
+
         return Execute(response);
     }
 
-    [HttpGet("ServiceStatus")]
-    [HttpGet("ServiceStatus/{serviceStatus}")]
-    public async Task<IActionResult> GetEmergencyServicesByStatus(string? serviceStatus)
-    {
-        var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatus(
-            serviceStatus
-        );
-        return Ok(response);
-    }
-
     [HttpGet("ServiceStatus/{pageNo}/{pageSize}")]
+    [HttpGet("ServiceStatus/pageNo/{pageNo}/pageSize/{pageSize}")]
+
+    [HttpGet("ServiceStatus/{serviceStatus}")]
     [HttpGet("ServiceStatus/{serviceStatus}/{pageNo}/{pageSize}")]
     [HttpGet("ServiceStatus/{serviceStatus}/pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetEmergencyServicesByStatusPaginationAsync(
+    public async Task<IActionResult> GetEmergencyServicesByStatusAsync(
         string? serviceStatus,
         int pageNo = 1,
         int pageSize = 10
     )
     {
         var response =
-            await _adminEmergencyServicesService.GetEmergencyServicesByStatusPaginationAsync(
+            await _adminEmergencyServicesService.GetEmergencyServicesByStatusAsync(
                 serviceStatus,
                 pageNo,
                 pageSize
