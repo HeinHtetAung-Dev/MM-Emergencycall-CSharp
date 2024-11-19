@@ -13,7 +13,7 @@ Admin
 - [x] Register
 - [x] Sign in
 - [x] States & Regions (CRUD) - need pagination
-- [ ] Township (CRUD) - Su Sandar Lin
+- [x] Township (CRUD) - Su Sandar Lin
 - [x] Emergency Services
 - [x] Emergency Request (List with Pagination, Status Change (Closed, Rejected))
 
