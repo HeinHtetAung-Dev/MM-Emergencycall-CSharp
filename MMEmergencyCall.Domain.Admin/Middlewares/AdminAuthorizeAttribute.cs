@@ -40,6 +40,8 @@ public class AdminAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
                 context.Result = new UnauthorizedObjectResult("Session has expired.");
                 return;
             }
+
+            context.HttpContext.Items["UserId"] = item.UserId;
         }
         catch (Exception)
         {
@@ -47,9 +49,9 @@ public class AdminAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
             return;
         }
     }
+
     private static async Task<bool> IsExistAdmin(AppDbContext dbContext, int userId)
     {
         return await dbContext.Users.AnyAsync(u => u.UserId == userId);
     }
-
 }

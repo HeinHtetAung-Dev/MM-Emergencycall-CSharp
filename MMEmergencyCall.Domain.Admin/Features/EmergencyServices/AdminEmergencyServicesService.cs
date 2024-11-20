@@ -38,13 +38,13 @@ public class AdminEmergencyServicesService
 
         var serviceStatus = EnumServiceStatus.None;
 
-        if (!status.IsNullOrEmpty())
-        {
-            serviceStatus = Enum.Parse<EnumServiceStatus>(status, true);
-        }
-
         try
         {
+            if (!status.IsNullOrEmpty())
+            {
+                serviceStatus = Enum.Parse<EnumServiceStatus>(status, true);
+            }
+
             var query = _db.EmergencyServices.AsQueryable();
 
             if (!serviceStatus.Equals(EnumServiceStatus.None))
@@ -99,10 +99,59 @@ public class AdminEmergencyServicesService
 
             return Result<AdminEmergencyServicesPaginationResponseModel>.Success(model);
         }
+        catch (ArgumentException ex)
+        {
+            _logger.LogError(ex.ToString());
+            return Result<AdminEmergencyServicesPaginationResponseModel>.Failure(ex.ToString());
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex.ToString());
             return Result<AdminEmergencyServicesPaginationResponseModel>.Failure(ex.ToString());
         }
+    }
+
+    public async Task<
+        Result<AdminEmergencyServicesResponseModel>
+    > UpdateEmergencyServiceStatusAsync(int id, int userId, string serviceStatus)
+    {
+        if (!Enum.IsDefined(typeof(EnumServiceStatus), serviceStatus))
+        {
+            return Result<AdminEmergencyServicesResponseModel>.ValidationError(
+                "Invalid Emergency Service Status. Status should be Pending, Approved or Rejected"
+            );
+        }
+
+        var item = await _db.EmergencyServices.FirstOrDefaultAsync(x => x.ServiceId == id);
+        if (item is null)
+        {
+            return Result<AdminEmergencyServicesResponseModel>.NotFoundError(
+                "This is no Emergency Service with Id: " + id
+            );
+        }
+
+        //// Service should be updated by the created user
+        //item = await _db.EmergencyServices.FirstOrDefaultAsync(x =>
+        //    x.ServiceId == id && x.UserId == userId
+        //);
+
+        //if (item is null)
+        //{
+        //    return Result<AdminEmergencyServicesResponseModel>.NotFoundError(
+        //        "The Emergency Service you are trying to update is created by other user "
+        //    );
+        //}
+
+        item.ServiceStatus = serviceStatus;
+        _db.Entry(item).State = EntityState.Modified;
+        await _db.SaveChangesAsync();
+
+        var model = new AdminEmergencyServicesResponseModel()
+        {
+            ServiceId = id,
+            ServiceStatus = serviceStatus
+        };
+
+        return Result<AdminEmergencyServicesResponseModel>.Success(model);
     }
 }
