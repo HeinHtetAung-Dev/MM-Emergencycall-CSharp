@@ -15,6 +15,13 @@ Admin
 - [x] States & Regions (CRUD) - need pagination
 - [x] Township (CRUD) - Su Sandar Lin
 - [x] Emergency Services
+	- [ ] Create Service
+	- [x] Get All Services
+	- [x] Get Services By Status
+	- [x] Change Status
+	- [ ] Update Service
+	- [ ] Delete Service
+	
 - [x] Emergency Request (List with Pagination, Status Change (Closed, Rejected))
 
 User
