@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c7cb017f-13c6-4993-a581-750a36f24c52",
+		"_postman_id": "ff272e50-f95e-48f4-b9d5-7318c39ac12a",
 		"name": "MMEmergencyCall",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "3430222"
@@ -3539,6 +3539,91 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"pageNo\": 1,\n        \"pageSize\": 10,\n        \"pageCount\": 10,\n        \"isEndOfPage\": false,\n        \"data\": [\n            {\n                \"serviceId\": 1,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_1\",\n                \"phoneNumber\": \"09-5.03254e+008\",\n                \"location\": \"Location_1\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017001\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 2,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_2\",\n                \"phoneNumber\": \"09-7.7252e+008\",\n                \"location\": \"Location_2\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR013043\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 3,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_3\",\n                \"phoneNumber\": \"09-9.92677e+006\",\n                \"location\": \"Location_3\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 4,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Medical\",\n                \"serviceName\": \"Medical_Service_4\",\n                \"phoneNumber\": \"09-5.29952e+008\",\n                \"location\": \"Location_4\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015304\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 5,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Police\",\n                \"serviceName\": \"Police_Service_5\",\n                \"phoneNumber\": \"09-1.38093e+008\",\n                \"location\": \"Location_5\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR016001\",\n                \"serviceStatus\": \"Pending\"\n            },\n            {\n                \"serviceId\": 6,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Fire\",\n                \"serviceName\": \"Fire_Service_6\",\n                \"phoneNumber\": \"09-8.37415e+008\",\n                \"location\": \"Location_6\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR015318\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 7,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Medical\",\n                \"serviceName\": \"Medical_Service_7\",\n                \"phoneNumber\": \"09-3.28779e+008\",\n                \"location\": \"Location_7\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR017005\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 8,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_8\",\n                \"phoneNumber\": \"09-5.70761e+008\",\n                \"location\": \"Location_8\",\n                \"availability\": \"N\",\n                \"townshipCode\": \"MMR015018\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 9,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_9\",\n                \"phoneNumber\": \"09-4.47579e+008\",\n                \"location\": \"Location_9\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR017025\",\n                \"serviceStatus\": \"Approved\"\n            },\n            {\n                \"serviceId\": 10,\n                \"userId\": 1,\n                \"serviceGroup\": \"EmergencyServices\",\n                \"serviceType\": \"Rescue\",\n                \"serviceName\": \"Rescue_Service_10\",\n                \"phoneNumber\": \"09-8.28774e+008\",\n                \"location\": \"Location_10\",\n                \"availability\": \"Y\",\n                \"townshipCode\": \"MMR001012\",\n                \"serviceStatus\": \"Rejected\"\n            }\n        ]\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdateEmergencyServiceStatus",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "token",
+										"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL45G1Jt85dK6xe5Z8NR7ycOXAYRUwVleTmCrpVqMA6NmuCUZoEPvNwnEBdv+TS01Qimo0dk6hrk0dSQOQzaUDCzTrFzUuminzQjssAJZkAe2xN4BgQC8VNNoa6p1UA+H9JEtvpVz1XqttrmXFkOpGIPG5fGH+irr93hi8D6u1wtD6",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/Admin/EmergencyServices/5?serviceStatus=Approved",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Admin",
+										"EmergencyServices",
+										"5"
+									],
+									"query": [
+										{
+											"key": "serviceStatus",
+											"value": "Approved"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "token",
+												"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL45G1Jt85dK6xe5Z8NR7ycOXAYRUwVleTmCrpVqMA6NmuCUZoEPvNwnEBdv+TS01Qimo0dk6hrk0dSQOQzaUDCzTrFzUuminzQjssAJZkAe2xN4BgQC8VNNoa6p1UA+H9JEtvpVz1XqttrmXFkOpGIPG5fGH+irr93hi8D6u1wtD6",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/Admin/EmergencyServices/5?serviceStatus=Approved",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Admin",
+												"EmergencyServices",
+												"5"
+											],
+											"query": [
+												{
+													"key": "serviceStatus",
+													"value": "Approved"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 20 Nov 2024 17:53:00 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"serviceId\": 5,\n        \"userId\": 0,\n        \"serviceGroup\": null,\n        \"serviceType\": null,\n        \"serviceName\": null,\n        \"phoneNumber\": null,\n        \"location\": null,\n        \"availability\": null,\n        \"townshipCode\": null,\n        \"serviceStatus\": \"Approved\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
 								}
 							]
 						}
