@@ -22,13 +22,6 @@ public class UserController : BaseController
         return Execute(model);
     }
 
-    [HttpGet("{pageNo}/{pageSize}")]
-    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetAllByPiginationAsync(int pageNo = 1, int pageSize = 10)
-    {
-        var model = await _userService.GetAllUsersWithPaginationAsync(pageNo, pageSize);
-        return Execute(model);
-    }
 
     [HttpPost]
     public async Task<IActionResult> CreateUserAsync(UserRequestModel requestModel)
@@ -37,10 +30,10 @@ public class UserController : BaseController
         return Execute(model);
     }
 
-    [HttpGet("role/{role}/pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetUsersByRoleAsync(string role, int pageNo = 1, int pageSize = 10)
+    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
+    public async Task<IActionResult> GetUsersByRoleAsync(string? role, int pageNo = 1, int pageSize = 10)
     {
-        var model = await _userService.GetUsersByRoleAsync(role, pageNo, pageSize);
+        var model = await _userService.GetUsersByRoleAsync(pageNo, pageSize, role);
         return Execute(model);
     }
 

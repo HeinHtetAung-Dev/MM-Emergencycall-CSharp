@@ -141,7 +141,7 @@ public class UserService
         return Result<UserPaginationResponseModel>.Success(model);
     }
 
-    public async Task<Result<UserPaginationResponseModel>> GetUsersByRoleAsync(string role, int pageNo, int pageSize)
+    public async Task<Result<UserPaginationResponseModel>> GetUsersByRoleAsync(int pageNo, int pageSize, string? role)
     {
         int rowCount = _context.Users.Count();
 
@@ -157,8 +157,14 @@ public class UserService
             return Result<UserPaginationResponseModel>.ValidationError("Invalid PageNo.");
         }
 
-        var user = await _context
-            .Users.Where(u => u.Role == role)
+        var query = _context.Users.AsQueryable();
+
+        if (!string.IsNullOrEmpty(role))
+        {
+            query = query.Where(u => u.Role == role);
+        }
+
+        var user = await query
             .Skip((pageNo - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
