@@ -15,6 +15,13 @@ public class UserController : BaseController
         _userService = userService;
     }
 
+    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
+    public async Task<IActionResult> GetUsersByRoleAsync(string? role, string? userStatus, int pageNo = 1, int pageSize = 10)
+    {
+        var model = await _userService.GetUsersAsync(pageNo, pageSize, role, userStatus);
+        return Execute(model);
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
@@ -22,28 +29,13 @@ public class UserController : BaseController
         return Execute(model);
     }
 
-
     [HttpPost]
     public async Task<IActionResult> CreateUserAsync(UserRequestModel requestModel)
     {
         var model = await _userService.CreateUserAsync(requestModel);
         return Execute(model);
     }
-
-    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetUsersByRoleAsync(string? role, int pageNo = 1, int pageSize = 10)
-    {
-        var model = await _userService.GetUsersByRoleAsync(pageNo, pageSize, role);
-        return Execute(model);
-    }
-
-    [HttpGet("userStatus/{userStatus}/pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetUsersByUserStatusAsync(string userStatus, int pageNo = 1, int pageSize = 10)
-    {
-        var model = await _userService.GetUsersByUserStatusAsync(userStatus, pageNo, pageSize);
-        return Execute(model);
-    }
-
+        
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUserAsync(int id, UserRequestModel requestModel)
     {

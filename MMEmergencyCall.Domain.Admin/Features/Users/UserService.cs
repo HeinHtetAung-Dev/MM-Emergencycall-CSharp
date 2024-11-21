@@ -141,7 +141,7 @@ public class UserService
         return Result<UserPaginationResponseModel>.Success(model);
     }
 
-    public async Task<Result<UserPaginationResponseModel>> GetUsersByRoleAsync(int pageNo, int pageSize, string? role)
+    public async Task<Result<UserPaginationResponseModel>> GetUsersAsync(int pageNo, int pageSize, string? role, string? userStatus)
     {
         int rowCount = _context.Users.Count();
 
@@ -161,7 +161,12 @@ public class UserService
 
         if (!string.IsNullOrEmpty(role))
         {
-            query = query.Where(u => u.Role == role);
+            query = query.Where(ur => ur.Role == role);
+        }
+
+        if (!string.IsNullOrEmpty(userStatus))
+        {
+            query = query.Where(us => us.UserStatus == userStatus);
         }
 
         var user = await query
