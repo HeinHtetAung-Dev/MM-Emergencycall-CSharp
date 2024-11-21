@@ -27,7 +27,7 @@ public class AdminEmergencyServicesService
 
     public async Task<
         Result<AdminEmergencyServicesPaginationResponseModel>
-    > GetEmergencyServicesByStatusAsync(string status, int pageNo = 1, int pageSize = 10)
+    > GetEmergencyServicesByStatusAsync(int pageNo, int pageSize, string? status)
     {
         if (pageNo < 1 || pageSize < 1)
         {
@@ -64,6 +64,10 @@ public class AdminEmergencyServicesService
             }
 
             int pageCount = rowCount / pageSize;
+            if (rowCount % pageSize > 0)
+            {
+                pageCount++;
+            }
 
             if (pageNo > pageCount)
             {

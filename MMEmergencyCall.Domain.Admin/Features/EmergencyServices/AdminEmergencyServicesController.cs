@@ -16,31 +16,17 @@ public class AdminEmergencyServicesController : BaseController
         _adminEmergencyServicesService = emergencyServiceService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAllEmergencyServicesAsync()
-    {
-        var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatusAsync(
-            string.Empty
-        );
-
-        return Execute(response);
-    }
-
-    [HttpGet("ServiceStatus/{pageNo}/{pageSize}")]
-    [HttpGet("ServiceStatus/pageNo/{pageNo}/pageSize/{pageSize}")]
-    [HttpGet("ServiceStatus/{serviceStatus}")]
-    [HttpGet("ServiceStatus/{serviceStatus}/{pageNo}/{pageSize}")]
-    [HttpGet("ServiceStatus/{serviceStatus}/pageNo/{pageNo}/pageSize/{pageSize}")]
+    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
     public async Task<IActionResult> GetEmergencyServicesByStatusAsync(
-        string? serviceStatus,
-        int pageNo = 1,
-        int pageSize = 10
+        int pageNo,
+        int pageSize,
+        string? serviceStatus
     )
     {
         var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatusAsync(
-            serviceStatus,
-            pageNo,
-            pageSize
+            pageNo = 1,
+            pageSize = 10,
+            serviceStatus
         );
 
         return Execute(response);
