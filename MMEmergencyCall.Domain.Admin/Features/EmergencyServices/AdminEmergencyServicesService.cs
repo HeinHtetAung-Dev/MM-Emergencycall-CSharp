@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -157,5 +158,53 @@ public class AdminEmergencyServicesService
         };
 
         return Result<AdminEmergencyServicesResponseModel>.Success(model);
+    }
+
+    public async Task<Result<AdminEmergencyServicesResponseModel>> CreateEmergencyServiceAsync(
+        int currentUserId,
+        AdminEmergencyServicesRequestModel request
+    )
+    {
+        try
+        {
+            //TODO Check validation
+
+
+            var item = new EmergencyService()
+            {
+                UserId = currentUserId,
+                ServiceGroup = request.ServiceGroup,
+                ServiceType = request.ServiceType,
+                ServiceName = request.ServiceName,
+                PhoneNumber = request.PhoneNumber,
+                Location = request.Location,
+                Availability = request.Availability,
+                TownshipCode = request.TownshipCode,
+                ServiceStatus = EnumServiceStatus.Pending.ToString()
+            };
+
+            _db.EmergencyServices.Add(item);
+            await _db.SaveChangesAsync();
+
+            var response = new AdminEmergencyServicesResponseModel()
+            {
+                ServiceId = item.ServiceId,
+                UserId = item.UserId,
+                ServiceGroup = item.ServiceGroup,
+                ServiceType = item.ServiceType,
+                ServiceName = item.ServiceName,
+                PhoneNumber = item.PhoneNumber,
+                Location = item.Location,
+                Availability = item.Availability,
+                TownshipCode = item.TownshipCode,
+                ServiceStatus = item.ServiceStatus
+            };
+
+            return Result<AdminEmergencyServicesResponseModel>.Success(response);
+        }
+        catch (Exception ex)
+        {
+            return Result<AdminEmergencyServicesResponseModel>.Failure(ex.ToString());
+        }
     }
 }

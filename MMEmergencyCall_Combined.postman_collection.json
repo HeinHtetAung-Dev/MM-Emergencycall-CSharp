@@ -2810,6 +2810,95 @@
 									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"serviceId\": 5,\n        \"userId\": 0,\n        \"serviceGroup\": null,\n        \"serviceType\": null,\n        \"serviceName\": null,\n        \"phoneNumber\": null,\n        \"location\": null,\n        \"availability\": null,\n        \"townshipCode\": null,\n        \"serviceStatus\": \"Approved\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
 								}
 							]
+						},
+						{
+							"name": "CreateEmergencyService",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL4xzX/5mQQhShQtI1ZTDqd2/EC4Jv0f6j3te2rGGbqxs/TI5IcGOyBpmoQw5qtvK3Dcw+u+fGcAbUzHyWVcv2IYjM30Fr9UDFMhgZzcEPey+x4OnFR/YhY91vGkALRH3GIKc8fmPtF4Sd1thI+79Q6WGwYn1ETz2Vu65qOEhTCxn3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"serviceGroup\": \"EmergencyServices\",\r\n  \"serviceType\": \"Rescue\",\r\n  \"serviceName\": \"Rescue_Service_1\",\r\n  \"phoneNumber\": \"09964557349\",\r\n  \"location\": \"Yangon\",\r\n  \"availability\": \"Y\",\r\n  \"townshipCode\": \"MMR017001\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/Admin/EmergencyServices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Admin",
+										"EmergencyServices"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL4xzX/5mQQhShQtI1ZTDqd2/EC4Jv0f6j3te2rGGbqxs/TI5IcGOyBpmoQw5qtvK3Dcw+u+fGcAbUzHyWVcv2IYjM30Fr9UDFMhgZzcEPey+x4OnFR/YhY91vGkALRH3GIKc8fmPtF4Sd1thI+79Q6WGwYn1ETz2Vu65qOEhTCxn3",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"serviceGroup\": \"EmergencyServices\",\r\n  \"serviceType\": \"Rescue\",\r\n  \"serviceName\": \"Rescue_Service_1\",\r\n  \"phoneNumber\": \"09964557349\",\r\n  \"location\": \"Yangon\",\r\n  \"availability\": \"Y\",\r\n  \"townshipCode\": \"MMR017001\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/Admin/EmergencyServices",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Admin",
+												"EmergencyServices"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 21 Nov 2024 17:45:49 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"serviceId\": 102,\n        \"userId\": 1,\n        \"serviceGroup\": \"EmergencyServices\",\n        \"serviceType\": \"Rescue\",\n        \"serviceName\": \"Rescue_Service_1\",\n        \"phoneNumber\": \"09964557349\",\n        \"location\": \"Yangon\",\n        \"availability\": \"Y\",\n        \"townshipCode\": \"MMR017001\",\n        \"serviceStatus\": \"Pending\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
 						}
 					]
 				},

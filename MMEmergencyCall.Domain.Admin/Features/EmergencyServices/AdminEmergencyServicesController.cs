@@ -52,4 +52,25 @@ public class AdminEmergencyServicesController : BaseController
 
         return Execute(model);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateEmergencyServiceAsync(
+        AdminEmergencyServicesRequestModel request
+    )
+    {
+        var currentUserId = HttpContext.GetCurrentAdminId();
+
+        if (!currentUserId.HasValue)
+        {
+            return Unauthorized("Unauthorized Request");
+        }
+
+        var userId = Convert.ToInt32(currentUserId);
+
+        var response = await _adminEmergencyServicesService.CreateEmergencyServiceAsync(
+            userId,
+            request
+        );
+        return Execute(response);
+    }
 }
