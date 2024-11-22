@@ -28,3 +28,8 @@ public class UserRequestModel
 
     public string UserStatus { get; set; } = "Pending";
 }
+
+public class UserStatusRequestModel
+{
+    public string UserStatus { get; set; } = null!;
+}

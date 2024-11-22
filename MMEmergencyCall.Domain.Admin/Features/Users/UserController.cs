@@ -35,11 +35,18 @@ public class UserController : BaseController
         var model = await _userService.CreateUserAsync(requestModel);
         return Execute(model);
     }
-        
+
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUserAsync(int id, UserRequestModel requestModel)
     {
         var model = await _userService.UpdateUserAsync(id, requestModel);
+        return Execute(model);
+    }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdateUserStatusAsync(int id, UserStatusRequestModel statusRequest)
+    {
+        var model = await _userService.UpdateUserStatusAsync(id, statusRequest);
         return Execute(model);
     }
 
