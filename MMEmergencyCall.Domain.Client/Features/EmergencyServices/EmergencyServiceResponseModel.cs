@@ -3,6 +3,7 @@
 public class EmergencyServiceResponseModel
 {
     public int ServiceId { get; set; }
+    public int UserId { get; set; }
 
     public string ServiceGroup { get; set; } = null!;
 
