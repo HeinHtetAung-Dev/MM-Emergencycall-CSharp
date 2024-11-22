@@ -135,7 +135,7 @@ public class EmergencyRequestService
         }
     }
 
-    public async Task<Result<EmergencyRequestResponseModel>> AddEmergencyRequest(EmergencyRequestRequestModel request, int? currentUserId)
+    public async Task<Result<EmergencyRequestResponseModel>> AddEmergencyRequest(EmergencyRequestRequestModel request, int currentUserId)
     {
         try
         {
@@ -146,16 +146,15 @@ public class EmergencyRequestService
                 return validateRequestModelResponse;
             }
 
-            var validateUserIdResponse = await ValidateUserId(currentUserId);
-
-            if (validateUserIdResponse is not null)
+            if (!await IsUserIdExist(currentUserId))
             {
-                return validateUserIdResponse;
+                return Result<EmergencyRequestResponseModel>
+                    .ValidationError("Invalid User");
             }
 
             var emergencyRequest = new EmergencyRequest()
             {
-                UserId = (int)currentUserId,
+                UserId = currentUserId,
                 ServiceId = request.ServiceId,
                 ProviderId = request.ProviderId,
                 RequestTime = request.RequestTime,
@@ -245,6 +244,7 @@ public class EmergencyRequestService
         }
     }
 
+    #region privateMethods
     private async Task<Result<EmergencyRequestResponseModel>> ValidateEmergencyRequestRequestModel
         (EmergencyRequestRequestModel? request)
     {
@@ -297,4 +297,5 @@ public class EmergencyRequestService
         var isTownshipCodeExist = await _db.Townships.AnyAsync(x => x.TownshipCode == townshipCode);
         return isTownshipCodeExist;
     }
+    #endregion
 }
