@@ -17,10 +17,10 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         }
 
         [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-        public async Task<IActionResult> GetAllByPaginationAsync(string? serviceType,int pageNo = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllByPaginationAsync(int pageNo, int pageSize, string? serviceType)
         {
             var model = await _emergencyServiceService
-                .GetEmergencyServices(serviceType, pageNo, pageSize);
+                .GetEmergencyServices(pageNo, pageSize, serviceType);
             return Execute(model);
         }
 

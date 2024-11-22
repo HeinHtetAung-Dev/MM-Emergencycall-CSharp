@@ -24,7 +24,7 @@ public class EmergencyServiceService
     }
 
     public async Task<Result<EmergencyServicePaginationResponseModel>>
-        GetEmergencyServices(string serviceType,int pageNo, int pageSize)
+        GetEmergencyServices(int pageNo, int pageSize, string? serviceType)
     {
         if (pageNo < 1)
         {
@@ -58,6 +58,7 @@ public class EmergencyServiceService
             .Select(sr => new EmergencyServiceResponseModel
             {
                 ServiceId = sr.ServiceId,
+                UserId = sr.UserId,
                 ServiceType = sr.ServiceType,
                 ServiceGroup = sr.ServiceGroup,
                 ServiceName = sr.ServiceName,
