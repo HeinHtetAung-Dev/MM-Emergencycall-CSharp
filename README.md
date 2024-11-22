@@ -28,8 +28,8 @@ User
 
 - [x] Register
 - [x] Sign in
-- [ ] Profile 
-- 	[ ] Deactivate
+- [x] Profile 
+- 	[x] Deactivate
 - 	[ ] Delete Account
 - [x] Emergency Requests 
 - 	Create - Created User Id,
