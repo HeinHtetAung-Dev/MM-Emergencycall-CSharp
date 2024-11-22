@@ -45,7 +45,7 @@ public class EmergencyRequestController : BaseController
             return Unauthorized("Unauthorized Request");
         }
 
-        var model = await _emergencyRequestService.GetEmergencyRequestById(id,currentUserId);
+        var model = await _emergencyRequestService.GetEmergencyRequestById(id,currentUserId.Value);
         return Execute(model);
     }
 
@@ -73,7 +73,7 @@ public class EmergencyRequestController : BaseController
             return Unauthorized("Unauthorized Request");
         }
 
-        var model = await _emergencyRequestService.UpdateEmergencyRequestStatus(id, currentUserId,statusRequest);
+        var model = await _emergencyRequestService.UpdateEmergencyRequestStatus(id, currentUserId.Value,statusRequest);
         return Execute(model);
     }
 }

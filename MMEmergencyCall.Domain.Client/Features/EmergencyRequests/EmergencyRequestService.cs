@@ -99,12 +99,11 @@ public class EmergencyRequestService
         }
     }
 
-
     public async Task<Result<EmergencyRequestResponseModel>> GetEmergencyRequestById(int id, int? userId)
     {
         try
         {
-            var emergencyRequest = await _db.EmergencyRequests.Where(x=>x.RequestId == id && x.UserId == userId)
+            var emergencyRequest = await _db.EmergencyRequests.Where(x => x.RequestId == id && x.UserId == userId)
                 .FirstOrDefaultAsync();
 
             if (emergencyRequest is null)
@@ -148,7 +147,7 @@ public class EmergencyRequestService
             }
 
             var validateUserIdResponse = await ValidateUserId(currentUserId);
-            
+
             if (validateUserIdResponse is not null)
             {
                 return validateUserIdResponse;
@@ -192,66 +191,7 @@ public class EmergencyRequestService
         }
     }
 
-    #region unused update service
-    //unused service
-    public async Task<Result<EmergencyRequestResponseModel>> UpdateEmergencyRequest(int id,
-        EmergencyRequestRequestModel request)
-    {
-        try
-        {
-            var existingEmergencyRequest =
-                await _db.EmergencyRequests.AsNoTracking().FirstOrDefaultAsync(x => x.RequestId == id);
-
-            if (existingEmergencyRequest is null)
-            {
-                return Result<EmergencyRequestResponseModel>
-                      .NotFoundError("Emergency Request with Id " + id + " not found.");
-            }
-
-            var emergencyRequest = new EmergencyRequest()
-            {
-                RequestId = id,
-                //UserId = request.UserId,
-                ServiceId = request.ServiceId,
-                ProviderId = request.ProviderId,
-                RequestTime = request.RequestTime,
-                //Status = request.Status,
-                ResponseTime = request.ResponseTime,
-                Notes = request.Notes,
-                TownshipCode = request.TownshipCode
-            };
-
-            _db.Entry(emergencyRequest).State = EntityState.Modified;
-            //_db.EmergencyRequests.Update(emergencyRequest);
-            await _db.SaveChangesAsync();
-
-            var response = new EmergencyRequestResponseModel()
-            {
-                RequestId = emergencyRequest.RequestId,
-                UserId = emergencyRequest.UserId,
-                ServiceId = emergencyRequest.ServiceId,
-                ProviderId = emergencyRequest.ProviderId,
-                RequestTime = emergencyRequest.RequestTime,
-                Status = emergencyRequest.Status,
-                ResponseTime = emergencyRequest.ResponseTime,
-                Notes = emergencyRequest.Notes,
-                TownshipCode = emergencyRequest.TownshipCode
-            };
-
-            return Result<EmergencyRequestResponseModel>.Success(response);
-        }
-        catch (Exception ex)
-        {
-            string message = "An error occurred while updating the emergency request with id " + id + " : " +
-                             ex.Message;
-            _logger.LogError(message);
-            return Result<EmergencyRequestResponseModel>.Failure(message);
-        }
-    }
-
-    #endregion
-
-    public async Task<Result<EmergencyRequestResponseModel>> UpdateEmergencyRequestStatus(int id, int? userId,UpdateEmergencyRequestStatusRequest statusRequest)
+    public async Task<Result<EmergencyRequestResponseModel>> UpdateEmergencyRequestStatus(int id, int userId, UpdateEmergencyRequestStatusRequest statusRequest)
     {
         try
         {
@@ -262,15 +202,14 @@ public class EmergencyRequestService
                 );
             }
 
-            var validateUserIdResponse = await ValidateUserId(userId);
-
-            if (validateUserIdResponse is not null)
+            if (!await IsUserIdExist(userId))
             {
-                return validateUserIdResponse;
+                return Result<EmergencyRequestResponseModel>
+                    .ValidationError("Invalid User");
             }
 
-            var existingEmergencyRequest =
-                await _db.EmergencyRequests.FirstOrDefaultAsync(x => x.RequestId == id && x.UserId == userId);
+            var existingEmergencyRequest = await _db.EmergencyRequests
+                .FirstOrDefaultAsync(x => x.RequestId == id && x.UserId == userId);
 
             if (existingEmergencyRequest is null)
             {
@@ -331,21 +270,6 @@ public class EmergencyRequestService
         {
             return Result<EmergencyRequestResponseModel>
                 .ValidationError("Invalid Township Code.");
-        }
-
-        return null;
-    }
-
-    private async Task<Result<EmergencyRequestResponseModel>> ValidateUserId(int? currentUserId)
-    {
-        if (!currentUserId.HasValue)
-        {
-            return Result<EmergencyRequestResponseModel>.ValidationError("Invalid User");
-        }
-
-        if (!await IsUserIdExist((int)currentUserId))
-        {
-            return Result<EmergencyRequestResponseModel>.ValidationError("Invalid User");
         }
 
         return null;
