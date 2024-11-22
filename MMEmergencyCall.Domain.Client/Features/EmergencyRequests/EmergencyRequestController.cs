@@ -59,7 +59,7 @@ public class EmergencyRequestController : BaseController
             return Unauthorized("Unauthorized Request");
         }
 
-        var model = await _emergencyRequestService.AddEmergencyRequest(request,currentUserId);
+        var model = await _emergencyRequestService.AddEmergencyRequest(request,currentUserId.Value);
         return Execute(model);
     }
 
