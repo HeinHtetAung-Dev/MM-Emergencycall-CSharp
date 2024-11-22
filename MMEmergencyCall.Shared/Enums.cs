@@ -10,4 +10,14 @@
     }
 
     #endregion
+
+    #region User
+
+    public enum EnumUserStatus
+    {
+        Pending,
+        Deactivate,
+    }
+
+    #endregion
 }
