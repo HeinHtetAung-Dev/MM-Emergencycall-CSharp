@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Domain.Admin.Features.Users;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.Users;
 
 public class UserRequestModel
 {
@@ -27,4 +21,9 @@ public class UserRequestModel
     public string? Role { get; set; }
 
     public string UserStatus { get; set; } = "Pending";
+}
+
+public class UserStatusRequestModel
+{
+    public string UserStatus { get; set; } = null!;
 }

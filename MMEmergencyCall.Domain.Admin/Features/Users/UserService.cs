@@ -345,6 +345,42 @@ public class UserService
         }
     }
 
+    public async Task<Result<UserResponseModel>> UpdateUserStatusAsync(int id, UserStatusRequestModel statusRequest)
+    {
+        try
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
+            if (user is null)
+                return Result<UserResponseModel>.NotFoundError("User with Id " + id + " not found.");
+
+            user.UserStatus = statusRequest.UserStatus;
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            var model = new UserResponseModel()
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address,
+                EmergencyType = user.EmergencyType,
+                EmergencyDetails = user.EmergencyDetails,
+                TownshipCode = user.TownshipCode,
+                Role = user.Role,
+                UserStatus = user.UserStatus
+            };
+
+            return Result<UserResponseModel>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while updating the status of User with id " + id + " : " + ex.Message;
+            _logger.LogError(message);
+            return Result<UserResponseModel>.Failure(message);
+        }
+    }
+
     public async Task<Result<bool>> IsExistAdmin(int id)
     {
         try
