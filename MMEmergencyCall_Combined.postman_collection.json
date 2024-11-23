@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "db1dad96-bd56-4799-8a39-02e74a6be00b",
+		"_postman_id": "c59ab96b-819d-463b-8d1d-607b30c0d7e0",
 		"name": "MMEmergencyCall",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28078103"
+		"_exporter_id": "5846584"
 	},
 	"item": [
 		{
@@ -2560,6 +2560,95 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": true,\n    \"message\": \"User is deleted successfully\"\n}"
+								}
+							]
+						},
+						{
+							"name": "UpdatUserStatus",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "token",
+										"value": "iqvYzi/vIISf6XZQ5aVBUWeMdg3ruSNIXq1or+S+CL7WjfEpgBupuXfOMCLCxw5VVOrtI2xMmoQmR/xQ4Z+JWeDdFLOj9DHi6ughff8Cl3Fii5Ftxok7G7X0dj8z6kefoWRxrPFXkOgjBArd+IAlENzN3Ldvl4F8xAw7fD28Bj4znOSnuIfVJhsKD034OlT1g0qkiGjvk4r8H+sgaul9AkhhzitHtYlvAvXDyFoVnXuHnE7rGRgoAAK5nOAD0sUBPcQp0JqTOSSBre+l9rm/uemChHZnLzxaCyow5HOB+hPc6b3CtNdd/HQjJnrf9NG25vBYwnb6rEZLqRKHDXPaNdYt7lFgEeV4dDNHqVhWsLZ390sJ+Zr8SdJ0j5R+2/H4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userStatus\": \"Approved\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/User/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"User",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "token",
+												"value": "iqvYzi/vIISf6XZQ5aVBUWeMdg3ruSNIXq1or+S+CL7WjfEpgBupuXfOMCLCxw5VVOrtI2xMmoQmR/xQ4Z+JWeDdFLOj9DHi6ughff8Cl3Fii5Ftxok7G7X0dj8z6kefoWRxrPFXkOgjBArd+IAlENzN3Ldvl4F8xAw7fD28Bj4znOSnuIfVJhsKD034OlT1g0qkiGjvk4r8H+sgaul9AkhhzitHtYlvAvXDyFoVnXuHnE7rGRgoAAK5nOAD0sUBPcQp0JqTOSSBre+l9rm/uemChHZnLzxaCyow5HOB+hPc6b3CtNdd/HQjJnrf9NG25vBYwnb6rEZLqRKHDXPaNdYt7lFgEeV4dDNHqVhWsLZ390sJ+Zr8SdJ0j5R+2/H4",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"userStatus\": \"Approved\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/User/1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"User",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 23 Nov 2024 15:28:06 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"userId\": 1,\n        \"name\": \"User_1\",\n        \"email\": \"User_1@gmail.com\",\n        \"password\": null,\n        \"phoneNumber\": \"09-5.73559e+008\",\n        \"address\": \"Address_1\",\n        \"emergencyType\": \"Fire\",\n        \"emergencyDetails\": \"Severe injury accident\",\n        \"townshipCode\": \"MMR015008\",\n        \"role\": \"Service Provider\",\n        \"userStatus\": \"Approved\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
 								}
 							]
 						}
