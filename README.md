@@ -40,9 +40,9 @@ User
 - 	List - Listing with Pagination (Status - Cancel, Open, Closed)
 - 	[ ] Update - Only Status ( Need to change )
 - [x] Emergency Services
-- 	Create with Pending 
--	[ ] Search with Admin Approved
-- 	[Feature] Update with Pending (Temporary Table) 
+- 	[x] Create with Pending 
+-	[x] Search with Approved 
+- 	[x] Update with Pending 
 - [ ] Search 
 	Type, Township, Lat, Lon (with Pagination)
 	

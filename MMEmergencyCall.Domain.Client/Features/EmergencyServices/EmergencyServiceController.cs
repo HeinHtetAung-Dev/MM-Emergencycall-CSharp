@@ -19,6 +19,13 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
         public async Task<IActionResult> GetAllByPaginationAsync(int pageNo, int pageSize, string? serviceType)
         {
+            var currentUserId = HttpContext.GetCurrentUserId();
+
+            if (!currentUserId.HasValue)
+            {
+                return Unauthorized("Unauthorized Request");
+            }
+
             var model = await _emergencyServiceService
                 .GetEmergencyServices(pageNo, pageSize, serviceType);
             return Execute(model);
@@ -27,24 +34,15 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         [HttpGet("{serviceId}")]
         public async Task<IActionResult> GetEmergencyServiceById(int serviceId)
         {
+            var currentUserId = HttpContext.GetCurrentUserId();
+
+            if (!currentUserId.HasValue)
+            {
+                return Unauthorized("Unauthorized Request");
+            }
             var response = await _emergencyServiceService.GetEmergencyServiceById(serviceId);
             return Execute(response);
         }
-
-        //[HttpGet("ServiceType/{serviceType}")]
-        //public async Task<IActionResult> GetServiceByServiceTypeWithPagination(
-        //    string serviceType,
-        //    int pageNo,
-        //    int pageSize
-        //)
-        //{
-        //    var response = await _emergencyServiceService.GetServiceByServiceTypeWithPagination(
-        //        serviceType,
-        //        pageNo,
-        //        pageSize
-        //    );
-        //    return Execute(response);
-        //}
 
         [HttpPost]
         [UserAuthorizeAttribute]
@@ -52,6 +50,12 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             EmergencyServiceRequestModel requestModel
         )
         {
+            var currentUserId = HttpContext.GetCurrentUserId();
+
+            if (!currentUserId.HasValue)
+            {
+                return Unauthorized("Unauthorized Request");
+            }
             var model = await _emergencyServiceService.CreateEmergencyServiceAsync(requestModel);
             return Execute(model);
         }
@@ -61,6 +65,12 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         public async Task<IActionResult> UpdateEmergencyService(int id,
             [FromBody] EmergencyServiceRequestModel requestModel)
         {
+            var currentUserId = HttpContext.GetCurrentUserId();
+            if (!currentUserId.HasValue)
+            {
+                return Unauthorized("Unauthorized Request");
+            }
+
             Result<EmergencyServiceResponseModel> model = null;
 
             if (string.IsNullOrEmpty(requestModel.ServiceType))
@@ -107,6 +117,13 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         [UserAuthorizeAttribute]
         public async Task<IActionResult> DeleteEmergencyService(int id)
         {
+            var currentUserId = HttpContext.GetCurrentUserId();
+
+            if (!currentUserId.HasValue)
+            {
+                return Unauthorized("Unauthorized Request");
+            }
+
             var model = await _emergencyServiceService.DeleteEmergencyService(id);
             return Execute(model);
         }
