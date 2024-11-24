@@ -2,7 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
-public class RegisterController : ControllerBase
+public class RegisterController : BaseController
 {
     private readonly RegisterService _registerService;
 
@@ -14,6 +14,6 @@ public class RegisterController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Register(RegisterRequestModel requestModel)
     {
-        return Ok(await _registerService.RegisterUserAsync(requestModel)); 
+        return Execute(await _registerService.RegisterUserAsync(requestModel)); 
     }
 }
