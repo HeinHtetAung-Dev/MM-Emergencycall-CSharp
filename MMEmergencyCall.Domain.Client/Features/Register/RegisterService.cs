@@ -13,7 +13,7 @@ public class RegisterService
         _db = context;
     }
 
-    public async Task<RegisterResponseModel> RegisterUserAsync(RegisterRequestModel request)
+    public async Task<Result<RegisterModel>> RegisterUserAsync(RegisterRequestModel request)
     {
         try
         {
@@ -33,14 +33,26 @@ public class RegisterService
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
 
-            var model = new RegisterResponseModel(Result<User>.Success(user));
-            return model;
+            var model = new RegisterModel()
+            {
+                UserId = user.UserId,
+                Name = request.Name,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Address = request.Address,
+                TownshipCode = request.TownshipCode,
+                EmergencyType = request.EmergencyType,
+                EmergencyDetails = request.EmergencyDetails,
+                Role = user.Role,
+                UserStatus = user.UserStatus
+            };
+            return Result<RegisterModel>.Success(model);
         }
         catch (Exception ex)
         {
             string message = "An error occurred while registering the user: " + ex.ToString();
             _logger.LogError(message);
-            return new RegisterResponseModel(Result<User>.Failure(message));
+            return Result<RegisterModel>.Failure(message);
         }
     }
 }
