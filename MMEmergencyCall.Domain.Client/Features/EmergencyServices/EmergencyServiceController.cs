@@ -5,6 +5,7 @@ using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
 {
+    [UserAuthorizeAttribute]
     [Route("api/[controller]")]
     [ApiController]
     public class EmergencyServicesController : BaseController
