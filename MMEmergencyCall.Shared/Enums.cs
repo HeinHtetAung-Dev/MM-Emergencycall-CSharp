@@ -20,4 +20,14 @@
     }
 
     #endregion
+
+    #region Emergency Service
+    public enum EnumServiceStatus
+    {
+        None,
+        Pending,
+        Approved,
+        Rejected
+    }
+    #endregion
 }
