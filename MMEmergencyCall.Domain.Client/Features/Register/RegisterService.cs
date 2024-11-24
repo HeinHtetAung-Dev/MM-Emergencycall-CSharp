@@ -20,11 +20,14 @@ public class RegisterService
             var user = new User
             {
                 Name = request.Name,
+                Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
+                Password = request.Password,
                 Address = request.Address,
                 TownshipCode = request.TownshipCode,
                 EmergencyType = request.EmergencyType,
-                EmergencyDetails = request.EmergencyDetails
+                EmergencyDetails = request.EmergencyDetails,
+                Role = "Normal User"
             };
 
             _db.Users.Add(user);

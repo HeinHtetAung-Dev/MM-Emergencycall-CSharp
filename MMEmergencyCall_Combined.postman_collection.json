@@ -1952,6 +1952,86 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "Register",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"User_101\",\r\n  \"email\": \"User_101@gmail.com\",\r\n  \"phoneNumber\": \"09-5.73669e+008\",\r\n  \"password\": \"User_101@gmail.com\",\r\n  \"address\": \"Address_1\",\r\n  \"townshipCode\": \"MMR016007\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/Register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"User_101\",\r\n  \"email\": \"User_101@gmail.com\",\r\n  \"phoneNumber\": \"09-5.73669e+008\",\r\n  \"password\": \"User_101@gmail.com\",\r\n  \"address\": \"Address_1\",\r\n  \"townshipCode\": \"MMR016007\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/Register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Register"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 24 Nov 2024 16:51:21 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"result\": {\n        \"isSuccess\": true,\n        \"isError\": false,\n        \"isValidationError\": false,\n        \"isNotFoundError\": false,\n        \"data\": {\n            \"userId\": 115,\n            \"name\": \"User_101\",\n            \"email\": \"User_101@gmail.com\",\n            \"password\": \"User_101@gmail.com\",\n            \"phoneNumber\": \"09-5.73669e+008\",\n            \"address\": \"Address_1\",\n            \"emergencyType\": null,\n            \"emergencyDetails\": null,\n            \"townshipCode\": \"MMR016007\",\n            \"role\": \"Normal User\",\n            \"userStatus\": \"Pending\"\n        },\n        \"message\": \"Operation Successful.\"\n    }\n}"
+								}
+							]
+						}
+					]
 				}
 			]
 		},
