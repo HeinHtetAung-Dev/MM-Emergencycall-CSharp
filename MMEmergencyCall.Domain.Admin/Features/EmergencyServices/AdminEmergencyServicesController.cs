@@ -46,7 +46,6 @@ public class AdminEmergencyServicesController : BaseController
 
         var model = await _adminEmergencyServicesService.UpdateEmergencyServiceStatusAsync(
             id,
-            userId,
             serviceStatus
         );
 
@@ -72,5 +71,20 @@ public class AdminEmergencyServicesController : BaseController
             request
         );
         return Execute(response);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteEmergencyServiceAsync(int id)
+    {
+        var currentAdminId = HttpContext.GetCurrentAdminId();
+
+        if (currentAdminId is null)
+        {
+            return Unauthorized("Unauthorized Request");
+        }
+
+        var model = await _adminEmergencyServicesService.DeleteEmergencyServiceStatusAsync(id);
+
+        return Execute(model);
     }
 }

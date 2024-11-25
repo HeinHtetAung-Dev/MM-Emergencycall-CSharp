@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Azure.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MMEmergencyCall.Shared;
@@ -118,7 +112,7 @@ public class AdminEmergencyServicesService
 
     public async Task<
         Result<AdminEmergencyServicesResponseModel>
-    > UpdateEmergencyServiceStatusAsync(int id, int userId, string serviceStatus)
+    > UpdateEmergencyServiceStatusAsync(int id, string serviceStatus)
     {
         if (!Enum.IsDefined(typeof(EnumServiceStatus), serviceStatus))
         {
@@ -134,18 +128,6 @@ public class AdminEmergencyServicesService
                 "This is no Emergency Service with Id: " + id
             );
         }
-
-        //// Service should be updated by the created user
-        //item = await _db.EmergencyServices.FirstOrDefaultAsync(x =>
-        //    x.ServiceId == id && x.UserId == userId
-        //);
-
-        //if (item is null)
-        //{
-        //    return Result<AdminEmergencyServicesResponseModel>.NotFoundError(
-        //        "The Emergency Service you are trying to update is created by other user "
-        //    );
-        //}
 
         item.ServiceStatus = serviceStatus;
         _db.Entry(item).State = EntityState.Modified;
@@ -206,5 +188,30 @@ public class AdminEmergencyServicesService
         {
             return Result<AdminEmergencyServicesResponseModel>.Failure(ex.ToString());
         }
+    }
+
+    public async Task<
+        Result<AdminEmergencyServicesResponseModel>
+    > DeleteEmergencyServiceStatusAsync(int id)
+    {
+        var item = await _db.EmergencyServices.FirstOrDefaultAsync(x => x.ServiceId == id);
+        if (item is null)
+        {
+            return Result<AdminEmergencyServicesResponseModel>.NotFoundError(
+                "This is no Emergency Service with Id: " + id
+            );
+        }
+
+        item.ServiceStatus = EnumServiceStatus.Deleted.ToString();
+        _db.Entry(item).State = EntityState.Modified;
+        await _db.SaveChangesAsync();
+
+        var model = new AdminEmergencyServicesResponseModel()
+        {
+            ServiceId = id,
+            ServiceStatus = EnumServiceStatus.Deleted.ToString()
+        };
+
+        return Result<AdminEmergencyServicesResponseModel>.Success(model);
     }
 }

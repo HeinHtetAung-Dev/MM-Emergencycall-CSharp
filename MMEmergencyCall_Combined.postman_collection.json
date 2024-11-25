@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c59ab96b-819d-463b-8d1d-607b30c0d7e0",
+		"_postman_id": "08c3dde5-b8a6-4a33-bf0f-c5b1046ccbd4",
 		"name": "MMEmergencyCall",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "5846584"
+		"_exporter_id": "3430222"
 	},
 	"item": [
 		{
@@ -3209,6 +3209,120 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"serviceId\": 102,\n        \"userId\": 1,\n        \"serviceGroup\": \"EmergencyServices\",\n        \"serviceType\": \"Rescue\",\n        \"serviceName\": \"Rescue_Service_1\",\n        \"phoneNumber\": \"09964557349\",\n        \"location\": \"Yangon\",\n        \"availability\": \"Y\",\n        \"townshipCode\": \"MMR017001\",\n        \"serviceStatus\": \"Pending\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "DeleteEmergencyService",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL4y7/s5X5+1pMJv5fkhjoRsnHpmLmXO78G5dUzgKYCZz8tRJscfpqJomipTqJrXUCVrCP1+lPGe6C8qFE1bc83bMbo8deIDORhSg9N6a8MOdwoaR0LJ81yBTe3720Hcng8Hpbzzbqw0a4iqPm13zMdHnEVtUbuwTcarJowlkXmO26",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/Admin/EmergencyServices/5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"Admin",
+										"EmergencyServices",
+										"5"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "UnAuthorizedErrorRespnse",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/Admin/EmergencyServices/5",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Admin",
+												"EmergencyServices",
+												"5"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 25 Nov 2024 14:24:31 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										}
+									],
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "SuccessResponseExample",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "token",
+												"value": "iqvYzi/vIISf6XZQ5aVBUf9Pt7NCqtjv2i8ghg+0AE+mQiDZFUuVJUOGSdwPQs5lz7czHTNNzFH9308RRd8H/Q3hiWSoxseWInfBHW79RyM/zzRfRT4MjjIM8ZPp56BPliudXZpkJOzF9ki/2A1vPKLrStuDZsRAKPrrijSOieKEK4nxb2a+m7fpz/vIR8nHw36napL6QKgHFdGQLloL4y7/s5X5+1pMJv5fkhjoRsnHpmLmXO78G5dUzgKYCZz8tRJscfpqJomipTqJrXUCVrCP1+lPGe6C8qFE1bc83bMbo8deIDORhSg9N6a8MOdwoaR0LJ81yBTe3720Hcng8Hpbzzbqw0a4iqPm13zMdHnEVtUbuwTcarJowlkXmO26",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/Admin/EmergencyServices/5",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"Admin",
+												"EmergencyServices",
+												"5"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 25 Nov 2024 14:28:39 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"isSuccess\": true,\n    \"isError\": false,\n    \"isValidationError\": false,\n    \"isNotFoundError\": false,\n    \"data\": {\n        \"serviceId\": 5,\n        \"userId\": 0,\n        \"serviceGroup\": null,\n        \"serviceType\": null,\n        \"serviceName\": null,\n        \"phoneNumber\": null,\n        \"location\": null,\n        \"availability\": null,\n        \"townshipCode\": null,\n        \"serviceStatus\": \"Deleted\"\n    },\n    \"message\": \"Operation Successful.\"\n}"
 								}
 							]
 						}

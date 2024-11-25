@@ -34,5 +34,6 @@ public enum EnumServiceStatus
     None,
     Pending,
     Approved,
-    Rejected
+    Rejected,
+    Deleted
 }
