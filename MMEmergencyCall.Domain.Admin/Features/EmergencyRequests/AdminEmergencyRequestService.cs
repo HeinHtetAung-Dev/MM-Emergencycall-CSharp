@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Shared;
 
@@ -94,6 +95,54 @@ public class AdminEmergencyRequestService
             string message = "An error occurred while getting the emergency requests: " + ex.Message;
             _logger.LogError(message);
             return Result<AdminEmergencyRequestPaginationResponseModel>.Failure(message);
+        }
+    }
+
+    public async Task<Result<AdminEmergencyRequestResponseModel>> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
+    {
+        try
+        {
+            if (!Enum.IsDefined(typeof(EnumEmergencyRequestStatus), statusRequest.Status))
+            {
+                return Result<AdminEmergencyRequestResponseModel>.ValidationError(
+                    "Invalid Emergency Request Status. Status should be Cancel, Open or Closed"
+                );
+            }
+
+            var existingEmergencyRequest = await _db.EmergencyRequests
+                .FirstOrDefaultAsync(x => x.RequestId == id );
+
+            if (existingEmergencyRequest is null)
+            {
+                return Result<AdminEmergencyRequestResponseModel>
+                      .NotFoundError("Emergency Request with Id " + id + " not found.");
+            }
+
+            existingEmergencyRequest.Status = statusRequest.Status;
+            _db.Entry(existingEmergencyRequest).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
+
+            var model = new AdminEmergencyRequestResponseModel()
+            {
+                RequestId = existingEmergencyRequest.RequestId,
+                UserId = existingEmergencyRequest.UserId,
+                ServiceId = existingEmergencyRequest.ServiceId,
+                ProviderId = existingEmergencyRequest.ProviderId,
+                RequestTime = existingEmergencyRequest.RequestTime,
+                Status = existingEmergencyRequest.Status,
+                ResponseTime = existingEmergencyRequest.ResponseTime,
+                Notes = existingEmergencyRequest.Notes,
+                TownshipCode = existingEmergencyRequest.TownshipCode
+            };
+
+            return Result<AdminEmergencyRequestResponseModel>.Success(model);
+        }
+        catch (Exception ex)
+        {
+            string message = "An error occurred while updating the status of emergency request with id " + id + " : " +
+                             ex.Message;
+            _logger.LogError(message);
+            return Result<AdminEmergencyRequestResponseModel>.Failure(message);
         }
     }
 

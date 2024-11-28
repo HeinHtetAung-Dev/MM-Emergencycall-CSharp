@@ -28,4 +28,11 @@ public class AdminEmergencyRequestController : BaseController
             (pageNo, pageSize, userId, serviceId, providerId, status, townshipCode);
         return Execute(model);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
+    {
+        var model = await _adminEmergencyRequestService.UpdateEmergencyRequestStatus(id, statusRequest);
+        return Execute(model);
+    }
 }
