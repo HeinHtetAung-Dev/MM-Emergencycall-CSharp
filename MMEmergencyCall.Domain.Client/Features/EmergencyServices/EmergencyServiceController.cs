@@ -46,7 +46,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
         }
 
         [HttpGet("/api/EmergencyServices/Distance")]
-        public async Task<IActionResult> GetEmergencyServiceWithinDistanceAsync(string? TownshipCode, decimal lat, decimal lng, decimal maxDistanceInMile, int pageNo=1 , int PageSize=10)
+        public async Task<IActionResult> GetEmergencyServiceWithinDistanceAsync(string? TownshipCode, string? EmergencyType, decimal lat, decimal lng, decimal maxDistanceInMile, int pageNo=1 , int PageSize=10)
         {
             var currentUserId = HttpContext.GetCurrentUserId();
 
@@ -54,7 +54,7 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             {
                 return Unauthorized("Unauthorized Request");
             }
-            var response = await _emergencyServiceService.GetEmergencyServiceWithinDistanceAsync(TownshipCode, lat, lng, maxDistanceInMile, pageNo, PageSize);
+            var response = await _emergencyServiceService.GetEmergencyServiceWithinDistanceAsync(TownshipCode, EmergencyType, lat, lng, maxDistanceInMile, pageNo, PageSize);
             return Execute(response);
         }
 

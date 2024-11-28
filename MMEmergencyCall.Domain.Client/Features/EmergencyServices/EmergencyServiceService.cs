@@ -284,46 +284,50 @@ public class EmergencyServiceService
     }
 
 
-    public async Task<Result<EmergencyServicesListWithDistance>> GetEmergencyServiceWithinDistanceAsync(string TownshipCode, decimal lat, decimal lng, decimal maxDistanceInMile, int pageNo, int PageSize)
+    public async Task<Result<EmergencyServicesListWithDistance>> GetEmergencyServiceWithinDistanceAsync(string? townshipCode, string? emergencyType, decimal lat, decimal lng, decimal maxDistanceInMile, int pageNo, int PageSize)
     {
 
         var query = _db.EmergencyServices.AsQueryable();
 
-        if (!string.IsNullOrEmpty(TownshipCode))
+        if (!string.IsNullOrEmpty(townshipCode))
         {
-            query = query.Where(x => x.TownshipCode.ToUpper() == TownshipCode.ToUpper() && x.ServiceStatus == EnumServiceStatus.Approved.ToString());
+            query = query.Where(x => x.TownshipCode.ToUpper() == townshipCode.ToUpper() && x.ServiceStatus == EnumServiceStatus.Approved.ToString());
+        }
+        if (!string.IsNullOrEmpty(emergencyType))
+        {
+            query = query.Where(x => x.ServiceType.ToUpper() == emergencyType.ToUpper());
         }
 
-        var emergencyService = await query
+        var emergencyService = await query.Where(x => x.ServiceStatus == EnumServiceStatus.Approved.ToString())
                 .Skip((pageNo - 1) * PageSize)
                 .Take(PageSize)
                 .ToListAsync();
 
         List<EmergencyServicesWithDistance> EmergencyServicesWithinDistance = new List<EmergencyServicesWithDistance>();
-        if (!string.IsNullOrEmpty(lat.ToString()) && !string.IsNullOrEmpty(lng.ToString()) 
+        if (!string.IsNullOrEmpty(lat.ToString()) && !string.IsNullOrEmpty(lng.ToString())
             && maxDistanceInMile > 0)
-        
+
         {
             // Calculate distance and filter locations
-         EmergencyServicesWithinDistance = emergencyService
-            .Select(EmergencyServices => new EmergencyServicesWithDistance
-            {
-                ServiceId = EmergencyServices.ServiceId,
-                UserId = EmergencyServices.UserId,
-                ServiceGroup = EmergencyServices.ServiceGroup,
-                ServiceType = EmergencyServices.ServiceType,
-                ServiceName = EmergencyServices.ServiceName,
-                PhoneNumber = EmergencyServices.PhoneNumber,
-                Location = EmergencyServices.Location,
-                Availability = EmergencyServices.Availability,
-                TownshipCode = EmergencyServices.TownshipCode,
-                ServiceStatus = EmergencyServices.ServiceStatus,
-                Ltd = EmergencyServices.Ltd,
-                Lng = EmergencyServices.Lng,
-                Distance = CalculateDistance(lat, lng, EmergencyServices.Ltd, EmergencyServices.Lng)
-            })
-            .Where(location => location.Distance <= maxDistanceInMile)
-            .OrderBy(location => location.Distance).ToList();
+            EmergencyServicesWithinDistance = emergencyService
+               .Select(EmergencyServices => new EmergencyServicesWithDistance
+               {
+                   ServiceId = EmergencyServices.ServiceId,
+                   UserId = EmergencyServices.UserId,
+                   ServiceGroup = EmergencyServices.ServiceGroup,
+                   ServiceType = EmergencyServices.ServiceType,
+                   ServiceName = EmergencyServices.ServiceName,
+                   PhoneNumber = EmergencyServices.PhoneNumber,
+                   Location = EmergencyServices.Location,
+                   Availability = EmergencyServices.Availability,
+                   TownshipCode = EmergencyServices.TownshipCode,
+                   ServiceStatus = EmergencyServices.ServiceStatus,
+                   Ltd = EmergencyServices.Ltd,
+                   Lng = EmergencyServices.Lng,
+                   Distance = CalculateDistance(lat, lng, EmergencyServices.Ltd, EmergencyServices.Lng)
+               })
+               .Where(location => location.Distance <= maxDistanceInMile)
+               .OrderBy(location => location.Distance).ToList();
         }
         else
         {
@@ -349,7 +353,7 @@ public class EmergencyServiceService
 
         EmergencyServicesListWithDistance model = new();
         model.Data = EmergencyServicesWithinDistance;
-        if(EmergencyServicesWithinDistance is null || EmergencyServicesWithinDistance.Count <= 0)
+        if (EmergencyServicesWithinDistance is null || EmergencyServicesWithinDistance.Count <= 0)
         {
             return Result<EmergencyServicesListWithDistance>
                     .NotFoundError("We don't have emergencyservice in this location.");
