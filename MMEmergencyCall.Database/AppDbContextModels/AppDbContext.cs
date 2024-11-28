@@ -29,7 +29,7 @@ public partial class AppDbContext : DbContext
     {
         modelBuilder.Entity<EmergencyRequest>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__Emergenc__33A8517A65E25DA8");
+            entity.HasKey(e => e.RequestId).HasName("PK__Emergenc__33A8517A96B44B30");
 
             entity.HasIndex(e => e.ProviderId, "idx_ProviderId");
 
@@ -56,16 +56,24 @@ public partial class AppDbContext : DbContext
                 .HasMaxLength(1)
                 .IsUnicode(false)
                 .IsFixedLength();
+            entity.Property(e => e.Lng).HasColumnType("decimal(18, 4)");
+            entity.Property(e => e.Ltd)
+                .HasColumnType("decimal(18, 4)")
+                .HasColumnName("ltd");
             entity.Property(e => e.PhoneNumber).HasMaxLength(15);
             entity.Property(e => e.ServiceGroup).HasMaxLength(50);
             entity.Property(e => e.ServiceName).HasMaxLength(100);
+            entity.Property(e => e.ServiceStatus)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasDefaultValueSql("('Pending')");
             entity.Property(e => e.ServiceType).HasMaxLength(50);
             entity.Property(e => e.TownshipCode).HasMaxLength(200);
         });
 
         modelBuilder.Entity<StateRegion>(entity =>
         {
-            entity.HasKey(e => e.StateRegionId).HasName("PK__StateReg__D8A834D4628417AC");
+            entity.HasKey(e => e.StateRegionId).HasName("PK__StateReg__D8A834D4F243667F");
 
             entity.Property(e => e.StateRegionCode).HasMaxLength(50);
             entity.Property(e => e.StateRegionNameEn).HasMaxLength(200);
@@ -94,9 +102,9 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(200);
             entity.Property(e => e.Password).HasMaxLength(100);
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
-            entity.Property(e => e.TownshipCode)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            entity.Property(e => e.Role).HasMaxLength(100);
+            entity.Property(e => e.TownshipCode).HasMaxLength(100);
+            entity.Property(e => e.UserStatus).HasMaxLength(100);
         });
 
         OnModelCreatingPartial(modelBuilder);

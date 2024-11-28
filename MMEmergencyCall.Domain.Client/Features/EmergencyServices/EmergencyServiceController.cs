@@ -45,6 +45,19 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             return Execute(response);
         }
 
+        [HttpGet("/api/EmergencyServices/Distance")]
+        public async Task<IActionResult> GetEmergencyServiceWithinDistanceAsync(string? TownshipCode, decimal lat, decimal lng, decimal maxDistanceInMile, int pageNo=1 , int PageSize=10)
+        {
+            var currentUserId = HttpContext.GetCurrentUserId();
+
+            if (!currentUserId.HasValue)
+            {
+                return Unauthorized("Unauthorized Request");
+            }
+            var response = await _emergencyServiceService.GetEmergencyServiceWithinDistanceAsync(TownshipCode, lat, lng, maxDistanceInMile, pageNo, PageSize);
+            return Execute(response);
+        }
+
         [HttpPost]
         [UserAuthorizeAttribute]
         public async Task<IActionResult> CreateEmergencyServiceAsync(
@@ -128,5 +141,6 @@ namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
             var model = await _emergencyServiceService.DeleteEmergencyService(id);
             return Execute(model);
         }
+
     }
 }
