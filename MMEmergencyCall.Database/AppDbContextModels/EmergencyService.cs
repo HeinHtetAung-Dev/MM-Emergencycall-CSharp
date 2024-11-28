@@ -24,4 +24,8 @@ public partial class EmergencyService
     public string? TownshipCode { get; set; }
 
     public string? ServiceStatus { get; set; } = "Pending";
+
+    public decimal? Lng { get; set; }
+
+    public decimal? Ltd { get; set; }
 }

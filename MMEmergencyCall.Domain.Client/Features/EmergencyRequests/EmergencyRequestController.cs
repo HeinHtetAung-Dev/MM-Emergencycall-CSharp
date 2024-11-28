@@ -63,17 +63,17 @@ public class EmergencyRequestController : BaseController
         return Execute(model);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
-    {
-        var currentUserId = HttpContext.GetCurrentUserId();
+    //[HttpPut("{id}")]
+    //public async Task<IActionResult> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
+    //{
+    //    var currentUserId = HttpContext.GetCurrentUserId();
 
-        if (!currentUserId.HasValue)
-        {
-            return Unauthorized("Unauthorized Request");
-        }
+    //    if (!currentUserId.HasValue)
+    //    {
+    //        return Unauthorized("Unauthorized Request");
+    //    }
 
-        var model = await _emergencyRequestService.UpdateEmergencyRequestStatus(id, currentUserId.Value,statusRequest);
-        return Execute(model);
-    }
+    //    var model = await _emergencyRequestService.UpdateEmergencyRequestStatus(id, currentUserId.Value,statusRequest);
+    //    return Execute(model);
+    //}
 }

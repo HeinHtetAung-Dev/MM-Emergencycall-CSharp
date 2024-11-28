@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using MMEmergencyCall.Databases.AppDbContextModels;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -253,4 +254,109 @@ public class EmergencyServiceService
             return Result<bool>.Failure(message);
         }
     }
+
+    public Double ToRadians(decimal? angle)
+    {
+        var ToRadians = 0.00;
+        if (!String.IsNullOrEmpty(angle.ToString()))
+        {
+            ToRadians = Convert.ToDouble(angle) * Math.PI / 180.0;
+        }
+        return ToRadians;
+    }
+
+    public decimal CalculateDistance(decimal lat1, decimal lon1, decimal? lat2, decimal? lon2)
+    {
+        var distance = 0.00;
+        if (!String.IsNullOrEmpty(lat2.ToString()) && !String.IsNullOrEmpty(lon2.ToString()))
+        {
+            var R = 3958.8; // Radius of the Earth in mile
+            var dLat = ToRadians(lat2 - lat1);
+            var dLon = ToRadians(lon2 - lon1);
+            var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                    Math.Cos(ToRadians(lat1)) * Math.Cos(ToRadians(lat2)) *
+                    Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            distance = R * c; // Distance in kilometers
+        }
+
+        return Convert.ToDecimal(distance);
+    }
+
+
+    public async Task<Result<EmergencyServicesListWithDistance>> GetEmergencyServiceWithinDistanceAsync(string TownshipCode, decimal lat, decimal lng, decimal maxDistanceInMile, int pageNo, int PageSize)
+    {
+
+        var query = _db.EmergencyServices.AsQueryable();
+
+        if (!string.IsNullOrEmpty(TownshipCode))
+        {
+            query = query.Where(x => x.TownshipCode.ToUpper() == TownshipCode.ToUpper() && x.ServiceStatus == EnumServiceStatus.Approved.ToString());
+        }
+
+        var emergencyService = await query
+                .Skip((pageNo - 1) * PageSize)
+                .Take(PageSize)
+                .ToListAsync();
+
+        List<EmergencyServicesWithDistance> EmergencyServicesWithinDistance = new List<EmergencyServicesWithDistance>();
+        if (!string.IsNullOrEmpty(lat.ToString()) && !string.IsNullOrEmpty(lng.ToString()) 
+            && maxDistanceInMile > 0)
+        
+        {
+            // Calculate distance and filter locations
+         EmergencyServicesWithinDistance = emergencyService
+            .Select(EmergencyServices => new EmergencyServicesWithDistance
+            {
+                ServiceId = EmergencyServices.ServiceId,
+                UserId = EmergencyServices.UserId,
+                ServiceGroup = EmergencyServices.ServiceGroup,
+                ServiceType = EmergencyServices.ServiceType,
+                ServiceName = EmergencyServices.ServiceName,
+                PhoneNumber = EmergencyServices.PhoneNumber,
+                Location = EmergencyServices.Location,
+                Availability = EmergencyServices.Availability,
+                TownshipCode = EmergencyServices.TownshipCode,
+                ServiceStatus = EmergencyServices.ServiceStatus,
+                Ltd = EmergencyServices.Ltd,
+                Lng = EmergencyServices.Lng,
+                Distance = CalculateDistance(lat, lng, EmergencyServices.Ltd, EmergencyServices.Lng)
+            })
+            .Where(location => location.Distance <= maxDistanceInMile)
+            .OrderBy(location => location.Distance).ToList();
+        }
+        else
+        {
+            EmergencyServicesWithinDistance = emergencyService
+           .Select(EmergencyServices => new EmergencyServicesWithDistance
+           {
+               ServiceId = EmergencyServices.ServiceId,
+               UserId = EmergencyServices.UserId,
+               ServiceGroup = EmergencyServices.ServiceGroup,
+               ServiceType = EmergencyServices.ServiceType,
+               ServiceName = EmergencyServices.ServiceName,
+               PhoneNumber = EmergencyServices.PhoneNumber,
+               Location = EmergencyServices.Location,
+               Availability = EmergencyServices.Availability,
+               TownshipCode = EmergencyServices.TownshipCode,
+               ServiceStatus = EmergencyServices.ServiceStatus,
+               Ltd = EmergencyServices.Ltd,
+               Lng = EmergencyServices.Lng,
+               Distance = 0
+           })
+       .ToList();
+        }
+
+        EmergencyServicesListWithDistance model = new();
+        model.Data = EmergencyServicesWithinDistance;
+        if(EmergencyServicesWithinDistance is null || EmergencyServicesWithinDistance.Count <= 0)
+        {
+            return Result<EmergencyServicesListWithDistance>
+                    .NotFoundError("We don't have emergencyservice in this location.");
+        }
+
+        return Result<EmergencyServicesListWithDistance>.Success(model);
+
+    }
+
 }
