@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MMEmergencyCall.Databases.AppDbContextModels;
+using Geolocation;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices;
@@ -268,9 +269,10 @@ public class EmergencyServiceService
     public decimal CalculateDistance(decimal lat1, decimal lon1, decimal? lat2, decimal? lon2)
     {
         var distance = 0.00;
+        var location1 = new Coordinate(52.2296756, 21.0122287);
         if (!String.IsNullOrEmpty(lat2.ToString()) && !String.IsNullOrEmpty(lon2.ToString()))
         {
-            var R = 3958.8; // Radius of the Earth in mile
+            var R = 6371; // Radius of the Earth in mile
             var dLat = ToRadians(lat2 - lat1);
             var dLon = ToRadians(lon2 - lon1);
             var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
@@ -283,8 +285,18 @@ public class EmergencyServiceService
         return Convert.ToDecimal(distance);
     }
 
+    public decimal CalculateDistanceByUsingLibrary(decimal lat1, decimal lon1, decimal? lat2, decimal? lon2)
+    {
+        //var distance = 0.00;
+        var location1 = new Coordinate(Convert.ToDouble(lat1), Convert.ToDouble(lon1));
+        var location2 = new Coordinate(Convert.ToDouble(lat2), Convert.ToDouble(lon2));
+        var distance1 = GeoCalculator.GetDistance(location1, location2, 1); // 1 for kilometers
+        
+        return Convert.ToDecimal(distance1);
+    }
 
-    public async Task<Result<EmergencyServicesListWithDistance>> GetEmergencyServiceWithinDistanceAsync(string? townshipCode, string? emergencyType, decimal lat, decimal lng, decimal maxDistanceInMile, int pageNo, int PageSize)
+
+    public async Task<Result<EmergencyServicesListWithDistance>> GetEmergencyServiceWithinDistanceAsync(string? townshipCode, string? emergencyType, decimal lat, decimal lng, decimal maxDistanceInKm, int pageNo, int PageSize)
     {
 
         var query = _db.EmergencyServices.AsQueryable();
@@ -305,7 +317,7 @@ public class EmergencyServiceService
 
         List<EmergencyServicesWithDistance> EmergencyServicesWithinDistance = new List<EmergencyServicesWithDistance>();
         if (!string.IsNullOrEmpty(lat.ToString()) && !string.IsNullOrEmpty(lng.ToString())
-            && maxDistanceInMile > 0)
+            && maxDistanceInKm > 0)
 
         {
             // Calculate distance and filter locations
@@ -324,9 +336,9 @@ public class EmergencyServiceService
                    ServiceStatus = EmergencyServices.ServiceStatus,
                    Ltd = EmergencyServices.Ltd,
                    Lng = EmergencyServices.Lng,
-                   Distance = CalculateDistance(lat, lng, EmergencyServices.Ltd, EmergencyServices.Lng)
+                   Distance = CalculateDistanceByUsingLibrary(lat, lng, EmergencyServices.Ltd, EmergencyServices.Lng)
                })
-               .Where(location => location.Distance <= maxDistanceInMile)
+               .Where(location => location.Distance <= maxDistanceInKm)
                .OrderBy(location => location.Distance).ToList();
         }
         else

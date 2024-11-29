@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Geolocation" Version="1.2.1" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
