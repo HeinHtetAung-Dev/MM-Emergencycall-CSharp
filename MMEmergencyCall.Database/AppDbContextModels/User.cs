@@ -26,4 +26,8 @@ public partial class User
     public string? UserStatus { get; set; }
 
     public string Role { get; set; } = null!;
+
+    public string? IsVerified { get; set; }
+
+    public string? Otp { get; set; }
 }

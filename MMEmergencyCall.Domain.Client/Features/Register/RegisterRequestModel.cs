@@ -11,3 +11,21 @@ public class RegisterRequestModel
     public string? EmergencyType { get; set; }
     public string? EmergencyDetails { get; set; }
 }
+
+public class VerifyRequestModel
+{
+    public string Email { get; set; } = null!;
+    public string OTP { get; set; } = null!;
+}
+
+
+public enum EnumVerify
+{
+    Y,
+    N,
+}
+public enum EnumUserStatus
+{
+    Approved,
+    Pending,
+}
