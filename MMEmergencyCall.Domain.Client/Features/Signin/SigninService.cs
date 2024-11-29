@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MMEmergencyCall.Databases.AppDbContextModels;
+using MMEmergencyCall.Domain.Client.Features.Register;
 
 namespace MMEmergencyCall.Domain.Client.Features.Signin;
 
@@ -24,7 +25,7 @@ public class SigninService
     public async Task<Result<SigninModel>> SigninAsync(SigninRequestModel requestModel)
     {
         var user = await _db.Users.Where(u => u.Email == requestModel.Email
-                   && u.Password == requestModel.Password)
+                   && u.Password == requestModel.Password && u.IsVerified == EnumVerify.Y.ToString())
                   .FirstOrDefaultAsync();
 
         if (user is null)

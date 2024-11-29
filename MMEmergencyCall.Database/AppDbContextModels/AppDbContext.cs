@@ -56,9 +56,9 @@ public partial class AppDbContext : DbContext
                 .HasMaxLength(1)
                 .IsUnicode(false)
                 .IsFixedLength();
-            entity.Property(e => e.Lng).HasColumnType("decimal(18, 4)");
+            entity.Property(e => e.Lng).HasColumnType("decimal(18, 7)");
             entity.Property(e => e.Ltd)
-                .HasColumnType("decimal(18, 4)")
+                .HasColumnType("decimal(18, 7)")
                 .HasColumnName("ltd");
             entity.Property(e => e.PhoneNumber).HasMaxLength(15);
             entity.Property(e => e.ServiceGroup).HasMaxLength(50);
@@ -99,7 +99,14 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Address).HasMaxLength(300);
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.EmergencyType).HasMaxLength(50);
+            entity.Property(e => e.IsVerified)
+                .HasMaxLength(1)
+                .IsUnicode(false)
+                .IsFixedLength();
             entity.Property(e => e.Name).HasMaxLength(200);
+            entity.Property(e => e.Otp)
+                .HasMaxLength(50)
+                .HasColumnName("OTP");
             entity.Property(e => e.Password).HasMaxLength(100);
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
             entity.Property(e => e.Role).HasMaxLength(100);

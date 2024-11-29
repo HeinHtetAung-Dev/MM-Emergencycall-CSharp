@@ -16,4 +16,10 @@ public class RegisterController : BaseController
     {
         return Execute(await _registerService.RegisterUserAsync(requestModel)); 
     }
+
+    [HttpPost("/api/Client/Verify")]
+    public async Task<IActionResult> Verify(VerifyRequestModel requestModel)
+    {
+        return Execute(await _registerService.VerifyUserAsync(requestModel));
+    }
 }
