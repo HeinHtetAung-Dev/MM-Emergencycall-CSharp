@@ -317,7 +317,7 @@ public class EmergencyServiceService
 
         List<EmergencyServicesWithDistance> EmergencyServicesWithinDistance = new List<EmergencyServicesWithDistance>();
         if (!string.IsNullOrEmpty(lat.ToString()) && !string.IsNullOrEmpty(lng.ToString())
-            && maxDistanceInMile > 0)
+            && maxDistanceInKm > 0)
 
         {
             // Calculate distance and filter locations
