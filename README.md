@@ -47,8 +47,14 @@ User
 - 	[x] Create with Pending 
 -	[x] Search with Approved 
 - 	[x] Update with Pending 
-- [ ] Search 
+- [x] Search 
 	Type, Township, Lat, Lon (with Pagination)
+- [x] Dashboard
+    [ ] Top Ten request per user ( user, email, Township, times, service type, service) (Su Sandar Lin)
+    [ ] Top Ten request per Township (Township, times, service type, service)           (Hnin Wut Yi)
+    [ ] Total Active Users, Total Active Service Provider, Total Active Service         (Myo Thet)
+    [ ] Weekly Monthly Daily Per Request                                                (Hein Htet)
+    [ ] Top Ten service per Township                                                    (Hein Htet)
 	
 
 
