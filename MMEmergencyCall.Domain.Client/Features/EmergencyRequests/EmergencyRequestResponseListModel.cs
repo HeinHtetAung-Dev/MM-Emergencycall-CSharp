@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
+﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
 public class EmergencyRequestResponseListModel
 {

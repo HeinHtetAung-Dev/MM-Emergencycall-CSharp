@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Net.Mail;
 using System.Net;
-using MMEmergencyCall.Databases.AppDbContextModels;
-using System.Data;
-using static System.Net.WebRequestMethods;
 
 namespace MMEmergencyCall.Domain.Client.Features.Register;
 

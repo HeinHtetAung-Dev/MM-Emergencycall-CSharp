@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using MMEmergencyCall.Databases.AppDbContextModels;
-
-namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 
 public class StateRegionService
 {

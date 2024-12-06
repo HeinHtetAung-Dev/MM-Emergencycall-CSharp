@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MMEmergencyCall.Databases.AppDbContextModels;
 using MMEmergencyCall.Domain.Client.Features.Register;
 
 namespace MMEmergencyCall.Domain.Client.Features.Signin;

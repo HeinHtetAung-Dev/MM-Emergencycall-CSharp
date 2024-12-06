@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MMEmergencyCall.Domain.Admin.Features.Users;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 
 public class AdminEmergencyServicesPaginationResponseModel
 {

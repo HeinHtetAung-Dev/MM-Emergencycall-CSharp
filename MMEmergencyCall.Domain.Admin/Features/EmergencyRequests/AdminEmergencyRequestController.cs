@@ -1,7 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Middlewares;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
-
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
 
 [Route("api/admin/EmergencyRequest")]
 [AdminAuthorizeAttribute]

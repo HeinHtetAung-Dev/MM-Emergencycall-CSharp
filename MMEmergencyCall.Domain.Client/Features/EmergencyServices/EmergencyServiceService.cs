@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using MMEmergencyCall.Databases.AppDbContextModels;
+﻿using Microsoft.Extensions.Logging;
 using Geolocation;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Admin.Middlewares;
-
-namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 
 [Route("api/[controller]")]
 [AdminAuthorizeAttribute]

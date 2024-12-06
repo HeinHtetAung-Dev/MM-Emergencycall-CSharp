@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace MMEmergencyCall.Domain.Admin.Features.SignIn;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.SignIn;
 
 public class AdminSigninService
 {

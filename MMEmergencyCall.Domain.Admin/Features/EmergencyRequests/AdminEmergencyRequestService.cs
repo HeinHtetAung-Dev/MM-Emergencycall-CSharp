@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
 
 public class AdminEmergencyRequestService
 {

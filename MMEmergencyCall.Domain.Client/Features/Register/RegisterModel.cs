@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MMEmergencyCall.Domain.Client.Features.Register;
+﻿namespace MMEmergencyCall.Domain.Client.Features.Register;
 
 public class RegisterModel
 {

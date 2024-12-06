@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 
 public class AdminEmergencyServicesService
 {

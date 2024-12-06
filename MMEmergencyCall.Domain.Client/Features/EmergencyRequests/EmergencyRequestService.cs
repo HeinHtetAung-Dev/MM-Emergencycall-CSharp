@@ -1,6 +1,4 @@
-﻿using Azure;
-using Microsoft.Extensions.Logging;
-using MMEmergencyCall.Databases.AppDbContextModels;
+﻿using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;

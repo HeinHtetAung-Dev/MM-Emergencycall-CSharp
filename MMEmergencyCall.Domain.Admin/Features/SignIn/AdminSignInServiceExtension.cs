@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-
-namespace MMEmergencyCall.Domain.Admin.Features.SignIn;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.SignIn;
 
 public static class AdminSignInServiceExtension
 {

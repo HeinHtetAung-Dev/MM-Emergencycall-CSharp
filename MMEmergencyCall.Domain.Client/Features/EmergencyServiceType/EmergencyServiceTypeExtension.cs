@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;
+﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyServiceType;
 
 public static class EmergencyServiceTypeExtension
 {

@@ -1,12 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using MMEmergencyCall.Databases.AppDbContextModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Domain.Admin.Features.Register;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.Register;
 
 public class AdminRegisterService
 {
