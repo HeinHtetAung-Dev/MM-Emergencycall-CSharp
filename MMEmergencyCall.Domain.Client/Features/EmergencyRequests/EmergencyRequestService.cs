@@ -1,5 +1,4 @@
 ﻿using Azure;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
 using MMEmergencyCall.Domain.Client.Features.EmergencyServices;

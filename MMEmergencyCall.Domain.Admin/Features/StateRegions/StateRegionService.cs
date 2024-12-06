@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Databases.AppDbContextModels;
-using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 

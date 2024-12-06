@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Net.Mail;
 using System.Net;
-using Microsoft.EntityFrameworkCore;
 using MMEmergencyCall.Databases.AppDbContextModels;
 using System.Data;
 using static System.Net.WebRequestMethods;

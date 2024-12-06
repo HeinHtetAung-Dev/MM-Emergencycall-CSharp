@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Shared;
-
-namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 
 public class StateRegionResponseModel
 {

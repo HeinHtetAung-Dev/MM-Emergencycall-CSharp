@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Client.Features.Signin;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-
-namespace MMEmergencyCall.Domain.Client.Middlewares;
+﻿namespace MMEmergencyCall.Domain.Client.Middlewares;
 
 public class UserAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
 {

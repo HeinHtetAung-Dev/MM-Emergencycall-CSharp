@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using MMEmergencyCall.Domain.Client.Middlewares;
 using MMEmergencyCall.Shared;
 

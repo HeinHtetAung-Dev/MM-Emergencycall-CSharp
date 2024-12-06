@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
 

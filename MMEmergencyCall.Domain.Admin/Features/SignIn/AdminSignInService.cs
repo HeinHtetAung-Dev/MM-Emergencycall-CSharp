@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using MMEmergencyCall.Shared;
+﻿using Microsoft.Extensions.Logging;
 
 namespace MMEmergencyCall.Domain.Admin.Features.SignIn;
 

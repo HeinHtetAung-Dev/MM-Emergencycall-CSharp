@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using MMEmergencyCall.Shared;
 
 namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 

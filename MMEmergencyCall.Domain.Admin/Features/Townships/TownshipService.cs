@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MMEmergencyCall.Domain.Admin.Features.Users;
-using MMEmergencyCall.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;

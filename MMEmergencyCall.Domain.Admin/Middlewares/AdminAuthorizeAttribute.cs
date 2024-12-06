@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
-using MMEmergencyCall.Domain.Admin.Features.SignIn;
-using MMEmergencyCall.Shared;
-
-namespace MMEmergencyCall.Domain.Admin.Middlewares;
+﻿namespace MMEmergencyCall.Domain.Admin.Middlewares;
 
 public class AdminAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
 {
