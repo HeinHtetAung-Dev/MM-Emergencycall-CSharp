@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
-using MMEmergencyCall.Domain.Client.Middlewares;
 
 namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 

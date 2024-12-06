@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMEmergencyCall.Domain.Admin.Features.Register
+namespace MMEmergencyCall.Domain.Admin.Features.Register;
+
+public class AdminRegisterRequestModel
 {
-    public class AdminRegisterRequestModel
-    {
-        public string Name { get; set; } = null!;
-        public string PhoneNumber { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string Password { get; set; } = null!;
-        public string Address { get; set; } = null!;
-        public string TownshipCode { get; set; } = null!;
-        public string? EmergencyType { get; set; }
-        public string? EmergencyDetails { get; set; }
-    }
+    public string Name { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string Password { get; set; } = null!;
+    public string Address { get; set; } = null!;
+    public string TownshipCode { get; set; } = null!;
+    public string? EmergencyType { get; set; }
+    public string? EmergencyDetails { get; set; }
 }

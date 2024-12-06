@@ -1,145 +1,140 @@
-﻿using Microsoft.AspNetCore.Http;
-using MMEmergencyCall.Domain.Client.Middlewares;
-using MMEmergencyCall.Shared;
+﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 
-namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices
+[UserAuthorizeAttribute]
+[Route("api/[controller]")]
+[ApiController]
+public class EmergencyServicesController : BaseController
 {
-    [UserAuthorizeAttribute]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EmergencyServicesController : BaseController
+    private readonly EmergencyServiceService _emergencyServiceService;
+
+    public EmergencyServicesController(EmergencyServiceService emergencyServiceService)
     {
-        private readonly EmergencyServiceService _emergencyServiceService;
+        _emergencyServiceService = emergencyServiceService;
+    }
 
-        public EmergencyServicesController(EmergencyServiceService emergencyServiceService)
+    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
+    public async Task<IActionResult> GetAllByPaginationAsync(int pageNo, int pageSize, string? serviceType)
+    {
+        var currentUserId = HttpContext.GetCurrentUserId();
+
+        if (!currentUserId.HasValue)
         {
-            _emergencyServiceService = emergencyServiceService;
+            return Unauthorized("Unauthorized Request");
         }
 
-        [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-        public async Task<IActionResult> GetAllByPaginationAsync(int pageNo, int pageSize, string? serviceType)
+        var model = await _emergencyServiceService
+            .GetEmergencyServices(pageNo, pageSize, serviceType);
+        return Execute(model);
+    }
+
+    [HttpGet("{serviceId}")]
+    public async Task<IActionResult> GetEmergencyServiceById(int serviceId)
+    {
+        var currentUserId = HttpContext.GetCurrentUserId();
+
+        if (!currentUserId.HasValue)
         {
-            var currentUserId = HttpContext.GetCurrentUserId();
+            return Unauthorized("Unauthorized Request");
+        }
+        var response = await _emergencyServiceService.GetEmergencyServiceById(serviceId);
+        return Execute(response);
+    }
 
-            if (!currentUserId.HasValue)
-            {
-                return Unauthorized("Unauthorized Request");
-            }
+    [HttpGet("/api/EmergencyServices/Distance")]
+    public async Task<IActionResult> GetEmergencyServiceWithinDistanceAsync(string? TownshipCode, string? EmergencyType, decimal lat, decimal lng, decimal maxDistanceInKm, int pageNo=1 , int PageSize=10)
+    {
+        var currentUserId = HttpContext.GetCurrentUserId();
 
-            var model = await _emergencyServiceService
-                .GetEmergencyServices(pageNo, pageSize, serviceType);
-            return Execute(model);
+        if (!currentUserId.HasValue)
+        {
+            return Unauthorized("Unauthorized Request");
+        }
+        var response = await _emergencyServiceService.GetEmergencyServiceWithinDistanceAsync(TownshipCode, EmergencyType, lat, lng, maxDistanceInKm, pageNo, PageSize);
+        return Execute(response);
+    }
+
+    [HttpPost]
+    [UserAuthorizeAttribute]
+    public async Task<IActionResult> CreateEmergencyServiceAsync(
+        EmergencyServiceRequestModel requestModel
+    )
+    {
+        var currentUserId = HttpContext.GetCurrentUserId();
+
+        if (!currentUserId.HasValue)
+        {
+            return Unauthorized("Unauthorized Request");
+        }
+        var model = await _emergencyServiceService.CreateEmergencyServiceAsync(requestModel);
+        return Execute(model);
+    }
+
+    [HttpPut("{id}")]
+    [UserAuthorizeAttribute]
+    public async Task<IActionResult> UpdateEmergencyService(int id,
+        [FromBody] EmergencyServiceRequestModel requestModel)
+    {
+        var currentUserId = HttpContext.GetCurrentUserId();
+        if (!currentUserId.HasValue)
+        {
+            return Unauthorized("Unauthorized Request");
         }
 
-        [HttpGet("{serviceId}")]
-        public async Task<IActionResult> GetEmergencyServiceById(int serviceId)
-        {
-            var currentUserId = HttpContext.GetCurrentUserId();
+        Result<EmergencyServiceResponseModel> model = null;
 
-            if (!currentUserId.HasValue)
-            {
-                return Unauthorized("Unauthorized Request");
-            }
-            var response = await _emergencyServiceService.GetEmergencyServiceById(serviceId);
-            return Execute(response);
+        if (string.IsNullOrEmpty(requestModel.ServiceType))
+        {
+            model = Result<EmergencyServiceResponseModel>.ValidationError(
+                "Service Type is required."
+            );
+            goto BadRequest;
         }
 
-        [HttpGet("/api/EmergencyServices/Distance")]
-        public async Task<IActionResult> GetEmergencyServiceWithinDistanceAsync(string? TownshipCode, string? EmergencyType, decimal lat, decimal lng, decimal maxDistanceInKm, int pageNo=1 , int PageSize=10)
+        if (string.IsNullOrEmpty(requestModel.ServiceGroup))
         {
-            var currentUserId = HttpContext.GetCurrentUserId();
-
-            if (!currentUserId.HasValue)
-            {
-                return Unauthorized("Unauthorized Request");
-            }
-            var response = await _emergencyServiceService.GetEmergencyServiceWithinDistanceAsync(TownshipCode, EmergencyType, lat, lng, maxDistanceInKm, pageNo, PageSize);
-            return Execute(response);
+            model = Result<EmergencyServiceResponseModel>.ValidationError(
+                "Service Group is required."
+            );
+            goto BadRequest;
         }
 
-        [HttpPost]
-        [UserAuthorizeAttribute]
-        public async Task<IActionResult> CreateEmergencyServiceAsync(
-            EmergencyServiceRequestModel requestModel
-        )
+        if (string.IsNullOrEmpty(requestModel.ServiceName))
         {
-            var currentUserId = HttpContext.GetCurrentUserId();
-
-            if (!currentUserId.HasValue)
-            {
-                return Unauthorized("Unauthorized Request");
-            }
-            var model = await _emergencyServiceService.CreateEmergencyServiceAsync(requestModel);
-            return Execute(model);
+            model = Result<EmergencyServiceResponseModel>.ValidationError(
+                "Service Name is required."
+            );
+            goto BadRequest;
         }
 
-        [HttpPut("{id}")]
-        [UserAuthorizeAttribute]
-        public async Task<IActionResult> UpdateEmergencyService(int id,
-            [FromBody] EmergencyServiceRequestModel requestModel)
+        if (string.IsNullOrEmpty(requestModel.PhoneNumber))
         {
-            var currentUserId = HttpContext.GetCurrentUserId();
-            if (!currentUserId.HasValue)
-            {
-                return Unauthorized("Unauthorized Request");
-            }
+            model = Result<EmergencyServiceResponseModel>.ValidationError(
+                "Phone Number is required."
+            );
+            goto BadRequest;
+        }
 
-            Result<EmergencyServiceResponseModel> model = null;
+        model = await _emergencyServiceService.UpdateEmergencyService(id, requestModel);
 
-            if (string.IsNullOrEmpty(requestModel.ServiceType))
-            {
-                model = Result<EmergencyServiceResponseModel>.ValidationError(
-                    "Service Type is required."
-                );
-                goto BadRequest;
-            }
-
-            if (string.IsNullOrEmpty(requestModel.ServiceGroup))
-            {
-                model = Result<EmergencyServiceResponseModel>.ValidationError(
-                    "Service Group is required."
-                );
-                goto BadRequest;
-            }
-
-            if (string.IsNullOrEmpty(requestModel.ServiceName))
-            {
-                model = Result<EmergencyServiceResponseModel>.ValidationError(
-                    "Service Name is required."
-                );
-                goto BadRequest;
-            }
-
-            if (string.IsNullOrEmpty(requestModel.PhoneNumber))
-            {
-                model = Result<EmergencyServiceResponseModel>.ValidationError(
-                    "Phone Number is required."
-                );
-                goto BadRequest;
-            }
-
-            model = await _emergencyServiceService.UpdateEmergencyService(id, requestModel);
-
-            return Execute(model);
+        return Execute(model);
 
         BadRequest:
-            return BadRequest(model);
-        }
-
-        [HttpDelete("{id}")]
-        [UserAuthorizeAttribute]
-        public async Task<IActionResult> DeleteEmergencyService(int id)
-        {
-            var currentUserId = HttpContext.GetCurrentUserId();
-
-            if (!currentUserId.HasValue)
-            {
-                return Unauthorized("Unauthorized Request");
-            }
-
-            var model = await _emergencyServiceService.DeleteEmergencyService(id);
-            return Execute(model);
-        }
-
+        return BadRequest(model);
     }
+
+    [HttpDelete("{id}")]
+    [UserAuthorizeAttribute]
+    public async Task<IActionResult> DeleteEmergencyService(int id)
+    {
+        var currentUserId = HttpContext.GetCurrentUserId();
+
+        if (!currentUserId.HasValue)
+        {
+            return Unauthorized("Unauthorized Request");
+        }
+
+        var model = await _emergencyServiceService.DeleteEmergencyService(id);
+        return Execute(model);
+    }
+
 }
