@@ -51,12 +51,3 @@ public class Result<T>
         return item;
     }
 }
-
-public enum EnumResultType
-{
-    None,
-    Success,
-    Failure,
-    ValidationError,
-    NotFoundError
-}

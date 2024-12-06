@@ -28,12 +28,3 @@ public class AdminEmergencyServicesResponseModel
 
     public string? ServiceStatus { get; set; }
 }
-
-public enum EnumServiceStatus
-{
-    None,
-    Pending,
-    Approved,
-    Rejected,
-    Deleted
-}

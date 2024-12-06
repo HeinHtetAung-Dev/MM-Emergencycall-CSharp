@@ -23,8 +23,3 @@ public class EmergencyServiceRequestModel
 
     public string ServiceStatus { get; set; } = "Pending";
 }
-
-public class UpdateEmergencyRequestStatusRequest
-{
-    public string Status { get; set; } = null!;
-}

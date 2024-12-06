@@ -13,9 +13,3 @@ public class AdminSignInModel
 
     public string Token { get; set; } = null!;
 }
-
-public enum EnumVerify
-{
-    Y,
-    N,
-}
