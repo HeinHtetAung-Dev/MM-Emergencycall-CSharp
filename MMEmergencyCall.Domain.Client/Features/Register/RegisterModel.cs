@@ -23,5 +23,5 @@ public class RegisterModel
     public string UserStatus { get; set; }
 
     public string IsVerified { get; set; }
-    public string OTP { get; set; }
+    public string Otp { get; set; }
 }

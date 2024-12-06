@@ -41,7 +41,7 @@ public class EmergencyServicesController : BaseController
     }
 
     [HttpGet("/api/EmergencyServices/Distance")]
-    public async Task<IActionResult> GetEmergencyServiceWithinDistanceAsync(string? TownshipCode, string? EmergencyType, decimal lat, decimal lng, decimal maxDistanceInKm, int pageNo=1 , int PageSize=10)
+    public async Task<IActionResult> GetEmergencyServiceWithinDistanceAsync(string? townshipCode, string? emergencyType, decimal lat, decimal lng, decimal maxDistanceInKm, int pageNo=1 , int pageSize=10)
     {
         var currentUserId = HttpContext.GetCurrentUserId();
 
@@ -49,7 +49,7 @@ public class EmergencyServicesController : BaseController
         {
             return Unauthorized("Unauthorized Request");
         }
-        var response = await _emergencyServiceService.GetEmergencyServiceWithinDistanceAsync(TownshipCode, EmergencyType, lat, lng, maxDistanceInKm, pageNo, PageSize);
+        var response = await _emergencyServiceService.GetEmergencyServiceWithinDistanceAsync(townshipCode, emergencyType, lat, lng, maxDistanceInKm, pageNo, pageSize);
         return Execute(response);
     }
 

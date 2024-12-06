@@ -15,7 +15,7 @@ public class AdminSigninService
     public async Task<Result<AdminSignInModel>> SigninAsync(AdminSigninRequestModel requestModel)
     {
         var email = requestModel.Email;
-        var Password = requestModel.Password;
+        var password = requestModel.Password;
         
 
         var user = await _db.Users

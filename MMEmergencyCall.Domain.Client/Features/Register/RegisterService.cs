@@ -45,23 +45,23 @@ public class RegisterService
             {
                 return Result<RegisterModel>.ValidationError("Please use correct email format.");
             }
-            var CheckExistUser = await _db.Users.Where(x => x.Email == request.Email 
+            var checkExistUser = await _db.Users.Where(x => x.Email == request.Email 
                                         && x.IsVerified == EnumVerify.Y.ToString())
                                         .FirstOrDefaultAsync();
 
-            var CheckVerifyingUser = await _db.Users.Where(x => x.Email == request.Email 
+            var checkVerifyingUser = await _db.Users.Where(x => x.Email == request.Email 
                                             && x.IsVerified == EnumVerify.N.ToString())
                                           .FirstOrDefaultAsync();
 
-            if (CheckExistUser != null)
+            if (checkExistUser != null)
             {
                 return Result<RegisterModel>.ValidationError("This email is already registered. Please use another email.");
             }
-            else if (CheckVerifyingUser != null)
+            else if (checkVerifyingUser != null)
             {
                 user = new User
                 {
-                    UserId = CheckVerifyingUser.UserId,
+                    UserId = checkVerifyingUser.UserId,
                     Name = request.Name,
                     Email = request.Email,
                     PhoneNumber = request.PhoneNumber,
@@ -111,7 +111,7 @@ public class RegisterService
                 Role = user.Role,
                 UserStatus = user.UserStatus,
                 IsVerified = user.IsVerified,
-                OTP = user.Otp
+                Otp = user.Otp
             };
             return Result<RegisterModel>.Success(model, "Registration successful. Check your email for the OTP.");
         }
@@ -127,17 +127,17 @@ public class RegisterService
     {
         try
         {
-            var User = await _db.Users.Where(x => x.Email == request.Email 
+            var user = await _db.Users.Where(x => x.Email == request.Email 
                             && x.IsVerified == EnumVerify.N.ToString())
                             .FirstOrDefaultAsync();
 
-            if (User != null)
+            if (user != null)
             {
-                if (User.Email == request.Email && User.Otp == request.OTP)
+                if (user.Email == request.Email && user.Otp == request.Otp)
                 {
-                    User.IsVerified = EnumVerify.Y.ToString();
-                    User.UserStatus = EnumUserStatus.Approved.ToString();
-                    _db.Users.Update(User);
+                    user.IsVerified = EnumVerify.Y.ToString();
+                    user.UserStatus = EnumUserStatus.Approved.ToString();
+                    _db.Users.Update(user);
                     await _db.SaveChangesAsync();
                 }
                 else
@@ -152,18 +152,18 @@ public class RegisterService
 
             var model = new RegisterModel()
             {
-                UserId = User.UserId,
-                Name = User.Name,
-                Email = User.Email,
-                PhoneNumber = User.PhoneNumber,
-                Address = User.Address,
-                TownshipCode = User.TownshipCode,
-                EmergencyType = User.EmergencyType,
-                EmergencyDetails = User.EmergencyDetails,
-                Role = User.Role,
-                UserStatus = User.UserStatus,
-                IsVerified = User.IsVerified,
-                OTP = User.Otp
+                UserId = user.UserId,
+                Name = user.Name,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address,
+                TownshipCode = user.TownshipCode,
+                EmergencyType = user.EmergencyType,
+                EmergencyDetails = user.EmergencyDetails,
+                Role = user.Role,
+                UserStatus = user.UserStatus,
+                IsVerified = user.IsVerified,
+                Otp = user.Otp
             };
             return Result<RegisterModel>.Success(model, "Verification successful.");
         }

@@ -10,13 +10,14 @@ public class AdminRegisterService
         _logger = logger;
         _db = context;
     }
+    
     public async Task<AdminRegisterResponseModel> RegisterAdminAsync(AdminRegisterRequestModel request)
     {
         try
         {
-            var ExistUser = await _db.Users.AnyAsync(x => x.Email.ToLower() == request.Email.ToLower() ||
+            var existUser = await _db.Users.AnyAsync(x => x.Email.ToLower() == request.Email.ToLower() ||
                             x.PhoneNumber.ToLower() == request.PhoneNumber.ToLower());
-            if (!ExistUser)
+            if (!existUser)
             {
                 var user = new User
                 {
