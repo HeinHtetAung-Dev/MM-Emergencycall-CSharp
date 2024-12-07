@@ -140,5 +140,4 @@ public class AdminEmergencyRequestService
             return Result<AdminEmergencyRequestResponseModel>.Failure(message);
         }
     }
-
 }
