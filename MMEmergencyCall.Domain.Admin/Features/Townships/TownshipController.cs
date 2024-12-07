@@ -1,7 +1,7 @@
 ﻿namespace MMEmergencyCall.Domain.Admin.Features.Townships;
 
 [Route("api/[controller]")]
-[AdminAuthorizeAttribute]
+[AdminAuthorize]
 [ApiController]
 public class TownshipController : BaseController
 {

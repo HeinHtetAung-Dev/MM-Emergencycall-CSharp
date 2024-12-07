@@ -1,6 +1,6 @@
 ﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyServices;
 
-[UserAuthorizeAttribute]
+[UserAuthorize]
 [Route("api/[controller]")]
 [ApiController]
 public class EmergencyServicesController : BaseController
@@ -54,7 +54,7 @@ public class EmergencyServicesController : BaseController
     }
 
     [HttpPost]
-    [UserAuthorizeAttribute]
+    [UserAuthorize]
     public async Task<IActionResult> CreateEmergencyServiceAsync(
         EmergencyServiceRequestModel requestModel
     )
@@ -70,7 +70,7 @@ public class EmergencyServicesController : BaseController
     }
 
     [HttpPut("{id}")]
-    [UserAuthorizeAttribute]
+    [UserAuthorize]
     public async Task<IActionResult> UpdateEmergencyService(int id,
         [FromBody] EmergencyServiceRequestModel requestModel)
     {
@@ -123,7 +123,7 @@ public class EmergencyServicesController : BaseController
     }
 
     [HttpDelete("{id}")]
-    [UserAuthorizeAttribute]
+    [UserAuthorize]
     public async Task<IActionResult> DeleteEmergencyService(int id)
     {
         var currentUserId = HttpContext.GetCurrentUserId();

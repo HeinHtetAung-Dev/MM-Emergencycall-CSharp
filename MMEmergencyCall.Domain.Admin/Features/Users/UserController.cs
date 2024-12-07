@@ -1,7 +1,7 @@
 ﻿namespace MMEmergencyCall.Domain.Admin.Features.Users;
 
 [Route("api/[controller]")]
-[AdminAuthorizeAttribute]
+[AdminAuthorize]
 [ApiController]
 public class UserController : BaseController
 {

@@ -1,7 +1,7 @@
 ﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
 [Route("api/[controller]")]
-[UserAuthorizeAttribute]
+[UserAuthorize]
 [ApiController]
 public class EmergencyRequestController : BaseController
 {

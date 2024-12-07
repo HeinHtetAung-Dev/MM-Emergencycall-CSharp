@@ -1,7 +1,7 @@
 ﻿namespace MMEmergencyCall.Domain.Admin.Features.StateRegions;
 
 [Route("api/[controller]")]
-[AdminAuthorizeAttribute]
+[AdminAuthorize]
 [ApiController]
 public class StateRegionController : BaseController
 {
