@@ -30,10 +30,6 @@
 //Console.ReadLine();
 
 
-using Effortless.Net.Encryption;
-using System.Security.Cryptography;
-using System;
-using System.Security.Cryptography;
 using MMEmergencyCall.Shared;
 
 //// Generate a 32-byte key

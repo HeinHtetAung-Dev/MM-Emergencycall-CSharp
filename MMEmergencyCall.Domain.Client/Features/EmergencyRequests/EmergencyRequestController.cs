@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using MMEmergencyCall.Domain.Client.Features.EmergencyServices;
-using MMEmergencyCall.Domain.Client.Middlewares;
-
-namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
+﻿namespace MMEmergencyCall.Domain.Client.Features.EmergencyRequests;
 
 [Route("api/[controller]")]
-[UserAuthorizeAttribute]
+[UserAuthorize]
 [ApiController]
 public class EmergencyRequestController : BaseController
 {

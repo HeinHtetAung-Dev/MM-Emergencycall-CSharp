@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Shared;
+﻿namespace MMEmergencyCall.Shared;
 
 public class Result<T>
 {
@@ -50,13 +44,4 @@ public class Result<T>
         item.ResultType = EnumResultType.NotFoundError;
         return item;
     }
-}
-
-public enum EnumResultType
-{
-    None,
-    Success,
-    Failure,
-    ValidationError,
-    NotFoundError
 }

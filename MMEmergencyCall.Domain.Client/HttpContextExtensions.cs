@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace MMEmergencyCall.Domain.Client;
+﻿namespace MMEmergencyCall.Domain.Client;
 
 public static class HttpContextExtensions
 {

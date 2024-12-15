@@ -1,9 +1,7 @@
-﻿using MMEmergencyCall.Domain.Client.Middlewares;
-
-namespace MMEmergencyCall.Domain.Client.Features.Profile;
+﻿namespace MMEmergencyCall.Domain.Client.Features.Profile;
 
 [Route("api/[controller]")]
-[UserAuthorizeAttribute]
+[UserAuthorize]
 [ApiController]
 public class ProfileController : BaseController
 {

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
 
 public static class AdminEmergencyRequestExtension
 {

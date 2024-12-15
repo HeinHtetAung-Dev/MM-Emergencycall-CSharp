@@ -24,22 +24,3 @@ public class EmergencyServiceResponseModel
 
     public decimal? Ltd { get; set; }
 }
-
-public class EmergencyServicesWithDistance : EmergencyServiceResponseModel
-{
-    public decimal Distance { get; set; }
-}
-
-public class EmergencyServicesListWithDistance
-{
-    public List<EmergencyServicesWithDistance> Data { get; set; }
-}
-
-public enum EnumServiceStatus
-{
-    None,
-    Pending,
-    Approved,
-    Rejected
-}
-

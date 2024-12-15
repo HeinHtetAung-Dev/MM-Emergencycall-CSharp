@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Domain.Client.Features.Register;
+﻿namespace MMEmergencyCall.Domain.Client.Features.Register;
 
 public class RegisterModel
 {
@@ -29,5 +23,5 @@ public class RegisterModel
     public string UserStatus { get; set; }
 
     public string IsVerified { get; set; }
-    public string OTP { get; set; }
+    public string Otp { get; set; }
 }

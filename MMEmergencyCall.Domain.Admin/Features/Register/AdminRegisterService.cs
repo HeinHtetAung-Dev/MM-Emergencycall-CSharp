@@ -1,14 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using MMEmergencyCall.Databases.AppDbContextModels;
-using MMEmergencyCall.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Domain.Admin.Features.Register;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.Register;
 
 public class AdminRegisterService
 {
@@ -20,13 +10,14 @@ public class AdminRegisterService
         _logger = logger;
         _db = context;
     }
+    
     public async Task<AdminRegisterResponseModel> RegisterAdminAsync(AdminRegisterRequestModel request)
     {
         try
         {
-            var ExistUser = await _db.Users.AnyAsync(x => x.Email.ToLower() == request.Email.ToLower() ||
+            var existUser = await _db.Users.AnyAsync(x => x.Email.ToLower() == request.Email.ToLower() ||
                             x.PhoneNumber.ToLower() == request.PhoneNumber.ToLower());
-            if (!ExistUser)
+            if (!existUser)
             {
                 var user = new User
                 {

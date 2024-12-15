@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 
 public class AdminEmergencyServicesResponseModel
 {
@@ -27,13 +21,4 @@ public class AdminEmergencyServicesResponseModel
     public string? TownshipCode { get; set; }
 
     public string? ServiceStatus { get; set; }
-}
-
-public enum EnumServiceStatus
-{
-    None,
-    Pending,
-    Approved,
-    Rejected,
-    Deleted
 }

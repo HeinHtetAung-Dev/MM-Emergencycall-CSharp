@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-namespace MMEmergencyCall.Domain.Admin.Features.Register;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.Register;
 
 public static class AdminRegisterServiceExtension
 {

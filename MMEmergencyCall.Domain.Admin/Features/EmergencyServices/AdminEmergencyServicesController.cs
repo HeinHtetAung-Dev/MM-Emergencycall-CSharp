@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MMEmergencyCall.Domain.Admin.Middlewares;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 
 [Route("api/Admin/EmergencyServices")]
-[AdminAuthorizeAttribute]
+[AdminAuthorize]
 [ApiController]
 public class AdminEmergencyServicesController : BaseController
 {
