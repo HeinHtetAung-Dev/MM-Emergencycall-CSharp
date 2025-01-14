@@ -28,25 +28,25 @@ public class AdminEmergencyServicesController : BaseController
 		return Execute(response);
 	}
 
-	[HttpPatch("{id}")]
-	public async Task<IActionResult> UpdateEmergencyServiceStatusAsync(int id, string serviceStatus)
-	{
-		var currentAdminId = HttpContext.GetCurrentAdminId();
+	//[HttpPatch("{id}")]
+	//public async Task<IActionResult> UpdateEmergencyServiceStatusAsync(int id, string serviceStatus)
+	//{
+	//	var currentAdminId = HttpContext.GetCurrentAdminId();
 
-		if (currentAdminId is null)
-		{
-			return Unauthorized("Unauthorized Request");
-		}
+	//	if (currentAdminId is null)
+	//	{
+	//		return Unauthorized("Unauthorized Request");
+	//	}
 
-		var userId = Convert.ToInt32(currentAdminId);
+	//	var userId = Convert.ToInt32(currentAdminId);
 
-		var model = await _adminEmergencyServicesService.UpdateEmergencyServiceStatusAsync(
-			id,
-			serviceStatus
-		);
+	//	var model = await _adminEmergencyServicesService.UpdateEmergencyServiceStatusAsync(
+	//		id,
+	//		serviceStatus
+	//	);
 
-		return Execute(model);
-	}
+	//	return Execute(model);
+	//}
 
 	[HttpPost]
 	public async Task<IActionResult> CreateEmergencyServiceAsync(
