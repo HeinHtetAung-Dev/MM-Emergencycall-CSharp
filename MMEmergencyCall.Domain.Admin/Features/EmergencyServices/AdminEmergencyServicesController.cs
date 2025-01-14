@@ -5,82 +5,100 @@
 [ApiController]
 public class AdminEmergencyServicesController : BaseController
 {
-    private readonly AdminEmergencyServicesService _adminEmergencyServicesService;
+	private readonly AdminEmergencyServicesService _adminEmergencyServicesService;
 
-    public AdminEmergencyServicesController(AdminEmergencyServicesService emergencyServiceService)
-    {
-        _adminEmergencyServicesService = emergencyServiceService;
-    }
+	public AdminEmergencyServicesController(AdminEmergencyServicesService emergencyServiceService)
+	{
+		_adminEmergencyServicesService = emergencyServiceService;
+	}
 
-    [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
-    public async Task<IActionResult> GetEmergencyServicesByStatusAsync(
-        int pageNo,
-        int pageSize,
-        string? serviceStatus
-    )
-    {
-        var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatusAsync(
-            pageNo = 1,
-            pageSize = 10,
-            serviceStatus
-        );
+	[HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
+	public async Task<IActionResult> GetEmergencyServicesByStatusAsync(
+		int pageNo,
+		int pageSize,
+		string? serviceStatus
+	)
+	{
+		var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatusAsync(
+			pageNo = 1,
+			pageSize = 10,
+			serviceStatus
+		);
 
-        return Execute(response);
-    }
+		return Execute(response);
+	}
 
-    [HttpPatch("{id}")]
-    public async Task<IActionResult> UpdateEmergencyServiceStatusAsync(int id, string serviceStatus)
-    {
-        var currentAdminId = HttpContext.GetCurrentAdminId();
+	[HttpPatch("{id}")]
+	public async Task<IActionResult> UpdateEmergencyServiceStatusAsync(int id, string serviceStatus)
+	{
+		var currentAdminId = HttpContext.GetCurrentAdminId();
 
-        if (currentAdminId is null)
-        {
-            return Unauthorized("Unauthorized Request");
-        }
+		if (currentAdminId is null)
+		{
+			return Unauthorized("Unauthorized Request");
+		}
 
-        var userId = Convert.ToInt32(currentAdminId);
+		var userId = Convert.ToInt32(currentAdminId);
 
-        var model = await _adminEmergencyServicesService.UpdateEmergencyServiceStatusAsync(
-            id,
-            serviceStatus
-        );
+		var model = await _adminEmergencyServicesService.UpdateEmergencyServiceStatusAsync(
+			id,
+			serviceStatus
+		);
 
-        return Execute(model);
-    }
+		return Execute(model);
+	}
 
-    [HttpPost]
-    public async Task<IActionResult> CreateEmergencyServiceAsync(
-        AdminEmergencyServicesRequestModel request
-    )
-    {
-        var currentUserId = HttpContext.GetCurrentAdminId();
+	[HttpPost]
+	public async Task<IActionResult> CreateEmergencyServiceAsync(
+		AdminEmergencyServicesRequestModel request
+	)
+	{
+		var currentUserId = HttpContext.GetCurrentAdminId();
 
-        if (!currentUserId.HasValue)
-        {
-            return Unauthorized("Unauthorized Request");
-        }
+		if (!currentUserId.HasValue)
+		{
+			return Unauthorized("Unauthorized Request");
+		}
 
-        var userId = Convert.ToInt32(currentUserId);
+		var userId = Convert.ToInt32(currentUserId);
 
-        var response = await _adminEmergencyServicesService.CreateEmergencyServiceAsync(
-            userId,
-            request
-        );
-        return Execute(response);
-    }
+		var response = await _adminEmergencyServicesService.CreateEmergencyServiceAsync(
+			userId,
+			request
+		);
+		return Execute(response);
+	}
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteEmergencyServiceAsync(int id)
-    {
-        var currentAdminId = HttpContext.GetCurrentAdminId();
+	[HttpDelete("{id}")]
+	public async Task<IActionResult> DeleteEmergencyServiceAsync(int id)
+	{
+		var currentAdminId = HttpContext.GetCurrentAdminId();
 
-        if (currentAdminId is null)
-        {
-            return Unauthorized("Unauthorized Request");
-        }
+		if (currentAdminId is null)
+		{
+			return Unauthorized("Unauthorized Request");
+		}
 
-        var model = await _adminEmergencyServicesService.DeleteEmergencyServiceStatusAsync(id);
+		var model = await _adminEmergencyServicesService.DeleteEmergencyServiceStatusAsync(id);
 
-        return Execute(model);
-    }
+		return Execute(model);
+	}
+
+	[HttpPatch("{id}")]
+	public async Task<IActionResult> UpdateEmergencyServiceAsync(
+		int id, AdminEmergencyServicesRequestModel requestModel
+	)
+	{
+		var currentAdminId = HttpContext.GetCurrentAdminId();
+
+		if (currentAdminId is null)
+		{
+			return Unauthorized("Unauthorized Request");
+		}
+
+		var responseModel = await _adminEmergencyServicesService
+			.UpdateEmergencyServiceAsync(id, requestModel);
+
+		return Execute(responseModel);
+	}
 }
