@@ -46,11 +46,11 @@ public class RegisterService
                 return Result<RegisterModel>.ValidationError("Please use correct email format.");
             }
             var checkExistUser = await _db.Users.Where(x => x.Email == request.Email 
-                                        && x.UserStatus == EnumUserStatus.Activated.ToString())
+                                        && x.IsVerified == EnumVerify.Y.ToString())
                                         .FirstOrDefaultAsync();
 
             var checkVerifyingUser = await _db.Users.Where(x => x.Email == request.Email 
-                                            && x.UserStatus == EnumUserStatus.Pending.ToString())
+                                            && x.IsVerified == EnumVerify.N.ToString())
                                           .FirstOrDefaultAsync();
 
             if (checkExistUser != null)
@@ -73,6 +73,7 @@ public class RegisterService
                     UserStatus = EnumUserStatus.Pending.ToString(),
                     Role = "Normal User",
                     Otp = otp,
+                    IsVerified = EnumVerify.N.ToString()
                 };
                 _db.Users.Update(user);
             }
@@ -91,6 +92,7 @@ public class RegisterService
                     UserStatus = EnumUserStatus.Pending.ToString(),
                     Role = "Normal User",
                     Otp = otp,
+                    IsVerified = EnumVerify.N.ToString()
                 };
                 _db.Users.Add(user);
             }
@@ -108,6 +110,7 @@ public class RegisterService
                 EmergencyDetails = request.EmergencyDetails,
                 Role = user.Role,
                 UserStatus = user.UserStatus,
+                IsVerified = user.IsVerified,
                 Otp = user.Otp
             };
             return Result<RegisterModel>.Success(model, "Registration successful. Check your email for the OTP.");
@@ -125,14 +128,15 @@ public class RegisterService
         try
         {
             var user = await _db.Users.Where(x => x.Email == request.Email 
-                            && x.UserStatus == EnumUserStatus.Pending.ToString())
+                            && x.IsVerified == EnumVerify.N.ToString())
                             .FirstOrDefaultAsync();
 
             if (user != null)
             {
                 if (user.Email == request.Email && user.Otp == request.Otp)
                 {
-                    user.UserStatus = EnumUserStatus.Activated.ToString();
+                    user.IsVerified = EnumVerify.Y.ToString();
+                    user.UserStatus = EnumUserStatus.Approved.ToString();
                     _db.Users.Update(user);
                     await _db.SaveChangesAsync();
                 }
@@ -158,6 +162,7 @@ public class RegisterService
                 EmergencyDetails = user.EmergencyDetails,
                 Role = user.Role,
                 UserStatus = user.UserStatus,
+                IsVerified = user.IsVerified,
                 Otp = user.Otp
             };
             return Result<RegisterModel>.Success(model, "Verification successful.");

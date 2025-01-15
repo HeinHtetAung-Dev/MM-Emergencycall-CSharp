@@ -24,7 +24,7 @@ Admin
 	- [x] Get All Services
 	- [x] Get Services By Status
 	- [x] Change Status
-	- [x] Update Service 
+	- [ ] Update Service 
 	- [ ] Delete Service
 	
 - [x] Emergency Request (List with Pagination, Status Change (Closed, Rejected))

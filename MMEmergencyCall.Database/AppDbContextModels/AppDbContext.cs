@@ -97,6 +97,10 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Address).HasMaxLength(300);
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.EmergencyType).HasMaxLength(50);
+            entity.Property(e => e.IsVerified)
+                .HasMaxLength(1)
+                .IsUnicode(false)
+                .IsFixedLength();
             entity.Property(e => e.Name).HasMaxLength(200);
             entity.Property(e => e.Otp)
                 .HasMaxLength(50)

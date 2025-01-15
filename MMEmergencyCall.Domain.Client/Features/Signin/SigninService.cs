@@ -18,7 +18,7 @@ public class SigninService
     public async Task<Result<SigninModel>> SigninAsync(SigninRequestModel requestModel)
     {
         var user = await _db.Users.Where(u => u.Email == requestModel.Email
-                   && u.Password == requestModel.Password && u.UserStatus == EnumUserStatus.Activated.ToString())
+                   && u.Password == requestModel.Password && u.IsVerified == EnumVerify.Y.ToString())
                   .FirstOrDefaultAsync();
 
         if (user is null)

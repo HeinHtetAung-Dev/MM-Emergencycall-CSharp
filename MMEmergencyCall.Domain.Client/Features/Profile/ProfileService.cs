@@ -65,7 +65,7 @@ public class ProfileService
 
             //if(user.UserStatus != ) // Need to validate so only approve status can deactivate 
 
-            existingUser.UserStatus = nameof(EnumUserStatus.Deactivated);
+            existingUser.UserStatus = nameof(EnumUserStatus.Deactivate);
             _db.Entry(existingUser).State = EntityState.Modified;
             await _db.SaveChangesAsync();
 

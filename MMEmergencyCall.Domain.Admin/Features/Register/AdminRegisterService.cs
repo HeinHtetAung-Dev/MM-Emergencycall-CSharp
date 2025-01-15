@@ -29,7 +29,7 @@ public class AdminRegisterService
                     TownshipCode = request.TownshipCode,
                     EmergencyType = request.EmergencyType,
                     EmergencyDetails = request.EmergencyDetails,
-                    UserStatus = EnumUserStatus.Activated.ToString(),
+                    UserStatus = "Approved",
                     Role = "admin"
                 };
 
