@@ -257,4 +257,30 @@ public class AdminEmergencyServicesService
 		}
 	}
 
+	public async Task<Result<AdminEmergencyServicesResponseModel>> DeleteEmergencyServiceAsync(
+		int id,
+		AdminEmergencyServicesRequestModel requestModel
+	)
+	{
+		try
+		{
+			var item = await _db.EmergencyServices.FirstOrDefaultAsync(x => x.ServiceId == id);
+			if (item is null)
+			{
+				return Result<AdminEmergencyServicesResponseModel>.NotFoundError(
+					"This is no Emergency Service with Id: " + id
+				);
+			}
+
+			_db.Entry(item).State = EntityState.Deleted;
+			await _db.SaveChangesAsync();
+
+			return Result<AdminEmergencyServicesResponseModel>.Success(null);
+		}
+		catch (Exception ex)
+		{
+			return Result<AdminEmergencyServicesResponseModel>.Failure(ex.ToString());
+		}
+	}
+
 }

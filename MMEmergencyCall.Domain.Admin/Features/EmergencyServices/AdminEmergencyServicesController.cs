@@ -101,4 +101,22 @@ public class AdminEmergencyServicesController : BaseController
 
 		return Execute(responseModel);
 	}
+
+	[HttpDelete("{id}")]
+	public async Task<IActionResult> DeleteEmergencyServiceAsync(
+		int id, AdminEmergencyServicesRequestModel requestModel
+	)
+	{
+		var currentAdminId = HttpContext.GetCurrentAdminId();
+
+		if (currentAdminId is null)
+		{
+			return Unauthorized("Unauthorized Request");
+		}
+
+		var responseModel = await _adminEmergencyServicesService
+			.DeleteEmergencyServiceAsync(id, requestModel);
+
+		return Execute(responseModel);
+	}
 }
