@@ -20,7 +20,7 @@ public class AdminSigninService
 
         var user = await _db.Users
                    .Where(u => u.Email == requestModel.Email
-                   && u.Password == requestModel.Password && u.Role.ToLower() == "admin" && u.IsVerified == EnumVerify.Y.ToString())
+                   && u.Password == requestModel.Password && u.Role.ToLower() == "admin" && u.UserStatus == EnumUserStatus.Activated.ToString())
                    .FirstOrDefaultAsync();
 
         if (user is null)
