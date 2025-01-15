@@ -32,8 +32,8 @@ Admin
 User
 
 - [x] Register
-- 	[ ] Sent OPT Mail
--	[ ] Confirm OTP -> Active account
+- 	[x] Sent OTP Mail
+-	[x] Confirm OTP -> Active account
 - [x] Sign in
 - 	[ ] Don't allow delete status
 - [x] Profile 

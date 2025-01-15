@@ -84,7 +84,7 @@ public class AdminEmergencyServicesController : BaseController
 		return Execute(model);
 	}
 
-	[HttpPatch("{id}")]
+	[HttpPatch("update/{id}")]
 	public async Task<IActionResult> UpdateEmergencyServiceAsync(
 		int id, AdminEmergencyServicesRequestModel requestModel
 	)
