@@ -29,7 +29,8 @@ public class AdminRegisterService
                     TownshipCode = request.TownshipCode,
                     EmergencyType = request.EmergencyType,
                     EmergencyDetails = request.EmergencyDetails,
-                    UserStatus = "Approved",
+                    UserStatus = EnumUserStatus.Activated.ToString(),
+                    IsVerified = EnumVerify.Y.ToString(),
                     Role = "admin"
                 };
 

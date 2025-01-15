@@ -136,7 +136,7 @@ public class RegisterService
                 if (user.Email == request.Email && user.Otp == request.Otp)
                 {
                     user.IsVerified = EnumVerify.Y.ToString();
-                    user.UserStatus = EnumUserStatus.Approved.ToString();
+                    user.UserStatus = EnumUserStatus.Activated.ToString();
                     _db.Users.Update(user);
                     await _db.SaveChangesAsync();
                 }
