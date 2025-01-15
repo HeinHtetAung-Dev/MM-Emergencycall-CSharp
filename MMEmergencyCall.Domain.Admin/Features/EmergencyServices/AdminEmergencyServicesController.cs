@@ -20,9 +20,9 @@ public class AdminEmergencyServicesController : BaseController
 	)
 	{
 		var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatusAsync(
-			serviceStatus,
+			serviceStatus
 			pageNo,
-			pageSize
+			pageSize,
 		);
 
 		return Execute(response);
