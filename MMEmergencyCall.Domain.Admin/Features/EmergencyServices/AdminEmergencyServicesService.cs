@@ -17,7 +17,7 @@ public class AdminEmergencyServicesService
 
 	public async Task<
 		Result<AdminEmergencyServicesPaginationResponseModel>
-	> GetEmergencyServicesByStatusAsync(int pageNo, int pageSize, string? status)
+	> GetEmergencyServicesByStatusAsync(string? status, int pageNo = 1, int pageSize = 10)
 	{
 		if (pageNo < 1 || pageSize < 1)
 		{
@@ -275,7 +275,9 @@ public class AdminEmergencyServicesService
 			_db.Entry(item).State = EntityState.Deleted;
 			await _db.SaveChangesAsync();
 
-			return Result<AdminEmergencyServicesResponseModel>.Success(null);
+			AdminEmergencyServicesResponseModel model = new() { ServiceId = item.ServiceId };
+
+			return Result<AdminEmergencyServicesResponseModel>.Success(model);
 		}
 		catch (Exception ex)
 		{

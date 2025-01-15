@@ -20,9 +20,9 @@ public class AdminEmergencyServicesController : BaseController
 	)
 	{
 		var response = await _adminEmergencyServicesService.GetEmergencyServicesByStatusAsync(
-			pageNo = 1,
-			pageSize = 10,
 			serviceStatus
+			pageNo,
+			pageSize,
 		);
 
 		return Execute(response);
@@ -102,7 +102,7 @@ public class AdminEmergencyServicesController : BaseController
 		return Execute(responseModel);
 	}
 
-	[HttpDelete("{id}")]
+	[HttpDelete("delete/{id}")]
 	public async Task<IActionResult> DeleteEmergencyServiceAsync(
 		int id, AdminEmergencyServicesRequestModel requestModel
 	)
