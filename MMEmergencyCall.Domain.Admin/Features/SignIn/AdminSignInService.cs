@@ -33,6 +33,7 @@ public class AdminSigninService
             Email = user.Email,
             Name = user.Name,
             SessionExpiredTime = DateTime.Now.AddMinutes(5),
+            Role = user.Role,
             UserId = user.UserId
         };
 
