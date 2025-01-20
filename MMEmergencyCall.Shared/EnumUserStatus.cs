@@ -3,6 +3,7 @@
 public enum EnumUserStatus
 {
     Pending,
+    Deactivate,
     Activated,
     Deactivated,
 }

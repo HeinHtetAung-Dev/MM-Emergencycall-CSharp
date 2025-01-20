@@ -163,7 +163,7 @@ public class RegisterService
                 Role = user.Role,
                 UserStatus = user.UserStatus,
                 IsVerified = user.IsVerified,
-                Otp = user.Otp
+                
             };
             return Result<RegisterModel>.Success(model, "Verification successful.");
         }
