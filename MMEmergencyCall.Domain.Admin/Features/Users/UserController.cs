@@ -3,11 +3,11 @@
 [Route("api/[controller]")]
 [AdminAuthorize]
 [ApiController]
-public class UserController : BaseController
+public class DeleteUserServicesController : BaseController
 {
     private readonly UserService _userService;
 
-    public UserController(UserService userService)
+    public DeleteUserServicesController(UserService userService)
     {
         _userService = userService;
     }

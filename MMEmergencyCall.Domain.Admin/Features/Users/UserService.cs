@@ -382,11 +382,12 @@ public class UserService
     {
         try
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
+            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == id);
             if (user is null)
                 return Result<bool>.NotFoundError("User with id " + id + " not found.");
 
-            _context.Remove(user);
+            
+            _context.Entry(user).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
 
             return Result<bool>.Success(true, "User is deleted successfully");
