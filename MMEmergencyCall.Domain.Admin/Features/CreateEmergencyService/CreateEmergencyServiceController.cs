@@ -21,7 +21,7 @@ public class CreateEmergencyServiceController: BaseController
 
 	[HttpPost]
 	public async Task<IActionResult> CreateEmergencyServiceAsync(
-		EmergencyServiceRequestModel request
+		AdminEmergencyServiceRequestModel request
 	)
 	{
 		var currentUserId = HttpContext.GetCurrentAdminId();

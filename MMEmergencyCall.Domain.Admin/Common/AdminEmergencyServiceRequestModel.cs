@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MMEmergencyCall.Domain.Admin.Common;
 
-public class EmergencyServiceRequestModel
+public class AdminEmergencyServiceRequestModel
 {
 	public string ServiceGroup { get; set; } = null!;
 

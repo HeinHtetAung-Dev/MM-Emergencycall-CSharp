@@ -21,7 +21,7 @@ public class UpdateEmergencyServiceService
 
 	public async Task<Result<EmergencyServiceResponseModel>> UpdateEmergencyServiceAsync(
 	int id,
-	EmergencyServiceRequestModel requestModel
+	AdminEmergencyServiceRequestModel requestModel
 )
 	{
 		try

@@ -14,7 +14,7 @@ public class UpdateEmergencyServicecontroller : BaseController
 
 	[HttpPatch("{id}")]
 	public async Task<IActionResult> UpdateEmergencyServiceAsync(
-		int id, EmergencyServiceRequestModel requestModel
+		int id, AdminEmergencyServiceRequestModel requestModel
 	)
 	{
 		var currentAdminId = HttpContext.GetCurrentAdminId();

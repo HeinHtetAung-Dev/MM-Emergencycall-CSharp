@@ -1,6 +1,6 @@
 ﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequest;
 
-[Route("api/admin/EmergencyRequest")]
+[Route("api/admin/EmergencyRequestList")]
 [AdminAuthorize]
 [ApiController]
 public class EmergencyRequestController : BaseController
