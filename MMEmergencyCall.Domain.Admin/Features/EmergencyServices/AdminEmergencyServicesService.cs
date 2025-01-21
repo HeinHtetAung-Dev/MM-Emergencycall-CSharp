@@ -1,4 +1,7 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
+﻿using MMEmergencyCall.Domain.Admin.Features.EmergencyService;
+using TBLEmergencyService = MMEmergencyCall.Databases.AppDbContextModels.EmergencyService;
+
+namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
 
 public class AdminEmergencyServicesService
 {
@@ -147,7 +150,7 @@ public class AdminEmergencyServicesService
 			//TODO Check validation
 
 
-			var item = new EmergencyService()
+			var item = new TBLEmergencyService()
 			{
 				UserId = currentUserId,
 				ServiceGroup = request.ServiceGroup,
