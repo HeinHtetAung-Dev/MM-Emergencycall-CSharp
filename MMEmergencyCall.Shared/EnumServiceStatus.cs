@@ -2,8 +2,9 @@
 
 public enum EnumServiceStatus
 {
-    None,
-    Pending,
-    Approved,
-    Rejected
+	None,
+	Pending,
+	Approved,
+	Rejected,
+	Deleted
 }

@@ -36,7 +36,7 @@ public class UserAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
                 return;
             }
 
-            context.HttpContext.Items["UserId"] = item.UserId;
+			context.HttpContext.Items["UserId"] = item.UserId;
         }
         catch (Exception)
         {
@@ -46,6 +46,6 @@ public class UserAuthorizeAttribute : Attribute, IAsyncAuthorizationFilter
 
     private async Task<bool> IsUserExist(AppDbContext dbContext, int userId)
     {
-        return await dbContext.Users.AnyAsync(u => u.UserId == userId);
+        return await dbContext.Users.AnyAsync(u => u.UserId == userId && u.Role == "Normal User");
     }
 }
