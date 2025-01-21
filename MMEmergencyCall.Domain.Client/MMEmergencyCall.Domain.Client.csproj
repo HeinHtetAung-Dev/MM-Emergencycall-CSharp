@@ -28,7 +28,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Logout\" />
 	  <Folder Include="Features\EmergencyService\" />
 	  <Folder Include="Features\DeleteEmergencyRequest\" />
 	  <Folder Include="Features\EmergencyRequestHistory\" />

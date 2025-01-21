@@ -27,4 +27,5 @@ public partial class User
     public string? IsVerified { get; set; }
 
     public string? Otp { get; set; }
+    public object SessionToken { get; set; }
 }
