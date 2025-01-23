@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyService;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyService;
 
 [Route("api/admin/UpdateEmergencyService")]
 public class UpdateEmergencyServicecontroller : BaseController
@@ -14,7 +12,7 @@ public class UpdateEmergencyServicecontroller : BaseController
 
 	[HttpPatch("{id}")]
 	public async Task<IActionResult> UpdateEmergencyServiceAsync(
-		int id, AdminEmergencyServiceRequestModel requestModel
+		int id, UpdateEmergencyServiceRequestModel requestModel
 	)
 	{
 		var currentAdminId = HttpContext.GetCurrentAdminId();

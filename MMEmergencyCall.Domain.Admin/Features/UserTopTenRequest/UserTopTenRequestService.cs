@@ -1,12 +1,4 @@
-﻿using MMEmergencyCall.Databases.AppDbContextModels;
-using MMEmergencyCall.Domain.Admin.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Domain.Admin.Features.UserTopTenRequest;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.UserTopTenRequest;
 
 public class UserTopTenRequestService
 {
@@ -20,7 +12,7 @@ public class UserTopTenRequestService
 		_db = db;
 	}
 
-	public async Task<Result<List<EmergencyRequestResponseModel>>> GetTopTenRequestPerUser(int userId)
+	public async Task<Result<List<UserTopTenRequestResponseModel>>> GetTopTenRequestPerUser(int userId)
 	{
 		try
 		{
@@ -30,7 +22,7 @@ public class UserTopTenRequestService
 				.Take(10)
 			.ToListAsync();
 
-			var responseData = emergencyRequests.Select(x => new EmergencyRequestResponseModel
+			var responseData = emergencyRequests.Select(x => new UserTopTenRequestResponseModel
 			{
 				RequestId = x.RequestId,
 				UserId = x.UserId,
@@ -43,12 +35,12 @@ public class UserTopTenRequestService
 				TownshipCode = x.TownshipCode
 			}).ToList();
 
-			return Result<List<EmergencyRequestResponseModel>>.Success(responseData);
+			return Result<List<UserTopTenRequestResponseModel>>.Success(responseData);
 
 		}
 		catch (Exception ex)
 		{
-			return Result<List<EmergencyRequestResponseModel>>.Failure(ex.ToString());
+			return Result<List<UserTopTenRequestResponseModel>>.Failure(ex.ToString());
 		}
 	}
 }

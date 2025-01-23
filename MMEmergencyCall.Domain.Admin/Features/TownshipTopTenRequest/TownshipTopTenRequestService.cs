@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.TownshipTopTenRequest;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.TownshipTopTenRequest;
 
 public class TownshipTopTenRequestService
 {
@@ -14,7 +12,7 @@ public class TownshipTopTenRequestService
 		_db = db;
 	}
 
-	public async Task<Result<List<EmergencyRequestResponseModel>>> GetTopTenRequestPerUser(string townshipCode)
+	public async Task<Result<List<TownshipTopTenRequestResponseModel>>> GetTopTenRequestPerUser(string townshipCode)
 	{
 		try
 		{
@@ -24,7 +22,7 @@ public class TownshipTopTenRequestService
 				.Take(10)
 			.ToListAsync();
 
-			var responseData = emergencyRequests.Select(x => new EmergencyRequestResponseModel
+			var responseData = emergencyRequests.Select(x => new TownshipTopTenRequestResponseModel
 			{
 				RequestId = x.RequestId,
 				UserId = x.UserId,
@@ -37,12 +35,12 @@ public class TownshipTopTenRequestService
 				TownshipCode = x.TownshipCode
 			}).ToList();
 
-			return Result<List<EmergencyRequestResponseModel>>.Success(responseData);
+			return Result<List<TownshipTopTenRequestResponseModel>>.Success(responseData);
 
 		}
 		catch (Exception ex)
 		{
-			return Result<List<EmergencyRequestResponseModel>>.Failure(ex.ToString());
+			return Result<List<TownshipTopTenRequestResponseModel>>.Failure(ex.ToString());
 		}
 	}
 }

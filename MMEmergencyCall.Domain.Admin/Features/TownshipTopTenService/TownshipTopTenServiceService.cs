@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
-using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.TownshipTopTenService;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.TownshipTopTenService;
 
 public class TownshipTopTenServiceService
 {
@@ -13,7 +10,7 @@ public class TownshipTopTenServiceService
 		_db = db;
 	}
 
-	public async Task<Result<List<EmergencyServiceResponseModel>>> GetTownshipTopTenService(string townshipCode)
+	public async Task<Result<List<TownshipTopTenServiceResponseModel>>> GetTownshipTopTenService(string townshipCode)
 	{
 		try
 		{
@@ -51,15 +48,15 @@ SELECT
 FROM RankedServices
 WHERE RowNum <= 10;";
 
-			var responseData = await _db.Database.SqlQueryRaw<EmergencyServiceResponseModel>(query).ToListAsync();
+			var responseData = await _db.Database.SqlQueryRaw<TownshipTopTenServiceResponseModel>(query).ToListAsync();
 
             _logger.LogInformation(responseData.ToString());
 
-			return Result<List<EmergencyServiceResponseModel>>.Success(responseData);
+			return Result<List<TownshipTopTenServiceResponseModel>>.Success(responseData);
 		}
 		catch (Exception ex)
 		{
-			return Result<List<EmergencyServiceResponseModel>>.Failure(ex.ToString());
+			return Result<List<TownshipTopTenServiceResponseModel>>.Failure(ex.ToString());
 		}
 
 	}

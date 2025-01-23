@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.UpdateUser;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.UpdateUser;
 
 [Route("api/Admin/UpdateUser")]
 [AdminAuthorize]
@@ -15,7 +13,7 @@ public class UpdateUserController : BaseController
 	}
 
 	[HttpPut("{id}")]
-	public async Task<IActionResult> UpdateUserAsync(int id, UserModel requestModel)
+	public async Task<IActionResult> UpdateUserAsync(int id, UpdateUserRequestModel requestModel)
 	{
 		var model = await _updateUserService.UpdateUserAsync(id, requestModel);
 		return Execute(model);

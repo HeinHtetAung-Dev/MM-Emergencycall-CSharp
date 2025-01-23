@@ -1,11 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Domain.Admin.Features.CreateEmergencyService;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.CreateEmergencyService;
 
 [Route("api/admin/CreateEmergencyService")]
 [AdminAuthorize]
@@ -21,7 +14,7 @@ public class CreateEmergencyServiceController: BaseController
 
 	[HttpPost]
 	public async Task<IActionResult> CreateEmergencyServiceAsync(
-		AdminEmergencyServiceRequestModel request
+		CreateEmergencyServiceRequestModel request
 	)
 	{
 		var currentUserId = HttpContext.GetCurrentAdminId();

@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.CreateUser;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.CreateUser;
 
 public class CreateUserService
 {
@@ -14,7 +11,7 @@ public class CreateUserService
 		_context = context;
 	}
 
-	public async Task<Result<UserModel>> CreateUserAsync(CreateUserRequestModel request)
+	public async Task<Result<CreateUserResponseModel>> CreateUserAsync(CreateUserRequestModel request)
 	{
 		try
 		{
@@ -34,7 +31,7 @@ public class CreateUserService
 			_context.Users.Add(user);
 			await _context.SaveChangesAsync();
 
-			var model = new UserModel
+			var model = new CreateUserResponseModel
 			{
 				UserId = user.UserId,
 				Name = user.Name,
@@ -49,13 +46,13 @@ public class CreateUserService
 				UserStatus = user.UserStatus
 			};
 
-			return Result<UserModel>.Success(model);
+			return Result<CreateUserResponseModel>.Success(model);
 		}
 		catch (Exception ex)
 		{
 			var message = "An error occurred while creating User: " + ex.ToString();
 			_logger.LogError(message);
-			return Result<UserModel>.Failure(message);
+			return Result<CreateUserResponseModel>.Failure(message);
 		}
 	}
 }

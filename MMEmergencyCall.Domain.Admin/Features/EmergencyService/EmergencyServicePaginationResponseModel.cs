@@ -1,12 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-using MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyService;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyService;
 
 public class EmergencyServicesPaginationResponseModel
 {

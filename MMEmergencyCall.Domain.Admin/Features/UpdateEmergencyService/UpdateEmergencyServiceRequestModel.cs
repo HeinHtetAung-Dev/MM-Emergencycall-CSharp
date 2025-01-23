@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMEmergencyCall.Domain.Admin.Common;
+namespace MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyService;
 
-public class EmergencyServiceResponseModel
+public class UpdateEmergencyServiceRequestModel
 {
-	public int ServiceId { get; set; }
-
-	public int UserId { get; set; }
-
 	public string ServiceGroup { get; set; } = null!;
 
 	public string ServiceType { get; set; } = null!;
@@ -22,9 +19,8 @@ public class EmergencyServiceResponseModel
 
 	public string? Location { get; set; }
 
+	[MaxLength(1)]
 	public string? Availability { get; set; }
 
 	public string? TownshipCode { get; set; }
-
-	public string? ServiceStatus { get; set; }
 }

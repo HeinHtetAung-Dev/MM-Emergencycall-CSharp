@@ -1,31 +1,33 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-using EnumServiceStatus = MMEmergencyCall.Shared.EnumServiceStatus;
+﻿using EnumServiceStatus = MMEmergencyCall.Shared.EnumServiceStatus;
 
-namespace MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyServiceStatus
+namespace MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyServiceStatus;
+
+public class DeleteEmergencyServiceStatusService
 {
-	public class DeleteEmergencyServiceStatusService
+	private readonly ILogger<DeleteEmergencyServiceStatusService> _logger;
+
+	private readonly AppDbContext _db;
+
+	public DeleteEmergencyServiceStatusService(
+		ILogger<DeleteEmergencyServiceStatusService> logger,
+		AppDbContext db
+	)
 	{
-		private readonly ILogger<DeleteEmergencyServiceStatusService> _logger;
+		_logger = logger;
+		_db = db;
+	}
 
-		private readonly AppDbContext _db;
-
-		public DeleteEmergencyServiceStatusService(
-			ILogger<DeleteEmergencyServiceStatusService> logger,
-			AppDbContext db
-		)
+	public async Task<
+	Result<bool>
+> DeleteEmergencyServiceStatusAsync(int id)
+	{
+		try
 		{
-			_logger = logger;
-			_db = db;
-		}
 
-		public async Task<
-		Result<EmergencyServiceResponseModel>
-	> DeleteEmergencyServiceStatusAsync(int id)
-		{
 			var item = await _db.EmergencyServices.FirstOrDefaultAsync(x => x.ServiceId == id);
 			if (item is null)
 			{
-				return Result<EmergencyServiceResponseModel>.NotFoundError(
+				return Result<bool>.NotFoundError(
 					"This is no Emergency Service with Id: " + id
 				);
 			}
@@ -34,13 +36,12 @@ namespace MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyServiceStatus
 			_db.Entry(item).State = EntityState.Modified;
 			await _db.SaveChangesAsync();
 
-			var model = new EmergencyServiceResponseModel()
-			{
-				ServiceId = id,
-				ServiceStatus = EnumServiceStatus.Deleted.ToString()
-			};
+			return Result<bool>.Success(true);
 
-			return Result<EmergencyServiceResponseModel>.Success(model);
+		}
+		catch (Exception ex)
+		{
+			return Result<bool>.Failure(ex.ToString());
 		}
 	}
 }

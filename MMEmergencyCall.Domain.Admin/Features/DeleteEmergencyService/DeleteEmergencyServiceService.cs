@@ -1,8 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-using MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
-using EnumServiceStatus = MMEmergencyCall.Shared.EnumServiceStatus;
-
-namespace MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyService;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyService;
 
 public class DeleteEmergencyServiceService
 {
@@ -19,7 +15,7 @@ public class DeleteEmergencyServiceService
 		_db = db;
 	}
 
-	public async Task<Result<EmergencyServiceResponseModel>> DeleteEmergencyServiceAsync(
+	public async Task<Result<bool>> DeleteEmergencyServiceAsync(
 		int id
 	)
 	{
@@ -28,7 +24,7 @@ public class DeleteEmergencyServiceService
 			var item = await _db.EmergencyServices.FirstOrDefaultAsync(x => x.ServiceId == id);
 			if (item is null)
 			{
-				return Result<EmergencyServiceResponseModel>.NotFoundError(
+				return Result<bool>.NotFoundError(
 					"This is no Emergency Service with Id: " + id
 				);
 			}
@@ -36,13 +32,11 @@ public class DeleteEmergencyServiceService
 			_db.Entry(item).State = EntityState.Deleted;
 			await _db.SaveChangesAsync();
 
-			EmergencyServiceResponseModel model = new() { ServiceId = item.ServiceId };
-
-			return Result<EmergencyServiceResponseModel>.Success(model);
+			return Result<bool>.Success(true);
 		}
 		catch (Exception ex)
 		{
-			return Result<EmergencyServiceResponseModel>.Failure(ex.ToString());
+			return Result<bool>.Failure(ex.ToString());
 		}
 	}
 }

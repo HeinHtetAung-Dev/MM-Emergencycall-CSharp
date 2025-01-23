@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.UpdateUser;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.UpdateUser;
 
 public class UpdateUserService
 {
@@ -13,14 +11,14 @@ public class UpdateUserService
 		_context = context;
 	}
 
-	public async Task<Result<UserModel>> UpdateUserAsync(int id, UserModel requestModel)
+	public async Task<Result<UpdateUserResponseModel>> UpdateUserAsync(int id, UpdateUserRequestModel requestModel)
 	{
 		try
 		{
 			var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
 			if (user is null)
 			{
-				return Result<UserModel>.NotFoundError("User with id " + id + " not found.");
+				return Result<UpdateUserResponseModel>.NotFoundError("User with id " + id + " not found.");
 			}
 
 			user.Name = requestModel.Name;
@@ -36,7 +34,7 @@ public class UpdateUserService
 			_context.Entry(user).State = EntityState.Modified;
 			var result = await _context.SaveChangesAsync();
 
-			var model = new UserModel
+			var model = new UpdateUserResponseModel
 			{
 				UserId = user.UserId,
 				Name = user.Name,
@@ -50,13 +48,13 @@ public class UpdateUserService
 				UserStatus = user.UserStatus
 			};
 
-			return Result<UserModel>.Success(model);
+			return Result<UpdateUserResponseModel>.Success(model);
 		}
 		catch (Exception ex)
 		{
 			var message = "An error occurred while updating the user for id " + id + ": " + ex.ToString();
 			_logger.LogError(message);
-			return Result<UserModel>.Failure(message);
+			return Result<UpdateUserResponseModel>.Failure(message);
 		}
 	}
 }

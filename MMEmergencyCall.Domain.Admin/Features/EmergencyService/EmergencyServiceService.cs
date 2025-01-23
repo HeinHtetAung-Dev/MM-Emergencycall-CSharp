@@ -1,11 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-using MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EnumServiceStatus = MMEmergencyCall.Shared.EnumServiceStatus;
+﻿using EnumServiceStatus = MMEmergencyCall.Shared.EnumServiceStatus;
 
 namespace MMEmergencyCall.Domain.Admin.Features.EmergencyService;
 

@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.UserList
+﻿namespace MMEmergencyCall.Domain.Admin.Features.UserList
 {
 	public class UserListService
 	{
@@ -13,7 +11,7 @@ namespace MMEmergencyCall.Domain.Admin.Features.UserList
 			_context = context;
 		}
 
-		public async Task<Result<UserListResponseModel>> GetUsersAsync(int pageNo, int pageSize, string? role, string? userStatus)
+		public async Task<Result<UserListPaginationResponseModel>> GetUsersAsync(int pageNo, int pageSize, string? role, string? userStatus)
 		{
 			int rowCount = _context.Users.Count();
 
@@ -21,12 +19,12 @@ namespace MMEmergencyCall.Domain.Admin.Features.UserList
 
 			if (pageNo < 1)
 			{
-				return Result<UserListResponseModel>.ValidationError("Invalid PageNo.");
+				return Result<UserListPaginationResponseModel>.ValidationError("Invalid PageNo.");
 			}
 
 			if (pageNo > pageCount)
 			{
-				return Result<UserListResponseModel>.ValidationError("Invalid PageNo.");
+				return Result<UserListPaginationResponseModel>.ValidationError("Invalid PageNo.");
 			}
 
 			var query = _context.Users.AsQueryable();
@@ -47,7 +45,7 @@ namespace MMEmergencyCall.Domain.Admin.Features.UserList
 				.ToListAsync();
 
 			var lst = user
-				.Select(u => new UserModel
+				.Select(u => new UserListResponseModel
 				{
 					UserId = u.UserId,
 					Name = u.Name,
@@ -63,13 +61,13 @@ namespace MMEmergencyCall.Domain.Admin.Features.UserList
 				})
 				.ToList();
 
-			UserListResponseModel model = new ();
+			UserListPaginationResponseModel model = new ();
 			model.Data = lst;
 			model.PageNo = pageNo;
 			model.PageSize = pageSize;
 			model.PageCount = pageCount;
 
-			return Result<UserListResponseModel>.Success(model);
+			return Result<UserListPaginationResponseModel>.Success(model);
 		}
 	}
 }

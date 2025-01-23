@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.UserById;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.UserById;
 
 public class UserByIdService
 {
@@ -13,15 +11,15 @@ public class UserByIdService
 		_context = context;
 	}
 
-	public async Task<Result<UserModel>> GetByIdAsync(int id)
+	public async Task<Result<UserByIdResponseModel>> GetByIdAsync(int id)
 	{
 		try
 		{
 			var user = await _context.Users.FindAsync(id);
 			if (user is null)
-				return Result<UserModel>.NotFoundError("User not found.");
+				return Result<UserByIdResponseModel>.NotFoundError("User not found.");
 
-			var model = new UserModel()
+			var model = new UserByIdResponseModel()
 			{
 
 				UserId = user.UserId,
@@ -37,13 +35,13 @@ public class UserByIdService
 				UserStatus = user.UserStatus
 			};
 
-			return Result<UserModel>.Success(model);
+			return Result<UserByIdResponseModel>.Success(model);
 		}
 		catch (Exception ex)
 		{
 			string message = "An error occurred while getting the user requests for id " + id + " : " + ex.Message;
 			_logger.LogError(message);
-			return Result<UserModel>.Failure(message);
+			return Result<UserByIdResponseModel>.Failure(message);
 		}
 	}
 }

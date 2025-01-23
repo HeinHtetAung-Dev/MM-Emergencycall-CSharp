@@ -1,5 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-using TBLEmergencyService = MMEmergencyCall.Databases.AppDbContextModels.EmergencyService;
+﻿using TBLEmergencyService = MMEmergencyCall.Databases.AppDbContextModels.EmergencyService;
 using EnumServiceStatus = MMEmergencyCall.Shared.EnumServiceStatus;
 
 namespace MMEmergencyCall.Domain.Admin.Features.CreateEmergencyService;
@@ -19,15 +18,14 @@ public class CreateEmergencyServiceService
 		_db = db;
 	}
 
-	public async Task<Result<EmergencyServiceResponseModel>> CreateEmergencyServiceAsync(
+	public async Task<Result<CreateEmergencyServiceResponseModel>> CreateEmergencyServiceAsync(
 	int currentUserId,
-	AdminEmergencyServiceRequestModel request
+	CreateEmergencyServiceRequestModel request
 )
 	{
 		try
 		{
 			//TODO Check validation
-
 
 			var item = new TBLEmergencyService()
 			{
@@ -45,7 +43,7 @@ public class CreateEmergencyServiceService
 			_db.EmergencyServices.Add(item);
 			await _db.SaveChangesAsync();
 
-			var response = new EmergencyServiceResponseModel()
+			var response = new CreateEmergencyServiceResponseModel()
 			{
 				ServiceId = item.ServiceId,
 				UserId = item.UserId,
@@ -59,11 +57,11 @@ public class CreateEmergencyServiceService
 				ServiceStatus = item.ServiceStatus
 			};
 
-			return Result<EmergencyServiceResponseModel>.Success(response);
+			return Result<CreateEmergencyServiceResponseModel>.Success(response);
 		}
 		catch (Exception ex)
 		{
-			return Result<EmergencyServiceResponseModel>.Failure(ex.ToString());
+			return Result<CreateEmergencyServiceResponseModel>.Failure(ex.ToString());
 		}
 	}
 }

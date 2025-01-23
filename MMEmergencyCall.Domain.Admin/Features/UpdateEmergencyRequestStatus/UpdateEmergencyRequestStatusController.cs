@@ -15,7 +15,7 @@ public class UpdateEmergencyRequestStatusController : BaseController
 	}
 
 	[HttpPut("{id}")]
-	public async Task<IActionResult> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequest statusRequest)
+	public async Task<IActionResult> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequestModel statusRequest)
 	{
 		var model = await _updateEmergencyRequestStatusService.UpdateEmergencyRequestStatus(id, statusRequest);
 		return Execute(model);

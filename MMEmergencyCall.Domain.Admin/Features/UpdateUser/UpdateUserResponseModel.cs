@@ -1,6 +1,12 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.UserList;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class UserListResponseModel
+namespace MMEmergencyCall.Domain.Admin.Features.UpdateUser;
+
+public class UpdateUserResponseModel
 {
 	public int UserId { get; set; }
 

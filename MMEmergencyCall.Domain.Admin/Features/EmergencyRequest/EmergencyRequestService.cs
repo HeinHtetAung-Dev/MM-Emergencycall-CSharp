@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Common;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequest;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequest;
 
 public class EmergencyRequestService
 {
@@ -64,7 +62,7 @@ string? status = null, string? townshipCode = null)
 				.Take(pageSize)
 				.ToListAsync();
 
-			var responseData = emergencyRequests.Select(x => new EmergencyRequestResponseModel
+			var responseData = emergencyRequests.Select(x => new EmergencyRequestModel
 			{
 				RequestId = x.RequestId,
 				UserId = x.UserId,

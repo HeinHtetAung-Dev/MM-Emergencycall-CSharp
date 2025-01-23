@@ -1,6 +1,6 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.UserList;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.UpdateUser;
 
-public class UserListResponseModel
+public class UpdateUserRequestModel
 {
 	public int UserId { get; set; }
 
