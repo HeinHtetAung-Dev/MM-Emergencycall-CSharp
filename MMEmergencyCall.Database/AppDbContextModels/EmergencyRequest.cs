@@ -1,4 +1,7 @@
-﻿namespace MMEmergencyCall.Databases.AppDbContextModels;
+﻿using System;
+using System.Collections.Generic;
+
+namespace MMEmergencyCall.Databases.AppDbContextModels;
 
 public partial class EmergencyRequest
 {

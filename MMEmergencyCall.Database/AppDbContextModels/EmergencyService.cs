@@ -1,4 +1,7 @@
-﻿namespace MMEmergencyCall.Databases.AppDbContextModels;
+﻿using System;
+using System.Collections.Generic;
+
+namespace MMEmergencyCall.Databases.AppDbContextModels;
 
 public partial class EmergencyService
 {
@@ -20,7 +23,7 @@ public partial class EmergencyService
 
     public string? TownshipCode { get; set; }
 
-    public string? ServiceStatus { get; set; } = "Pending";
+    public string? ServiceStatus { get; set; }
 
     public decimal? Lng { get; set; }
 

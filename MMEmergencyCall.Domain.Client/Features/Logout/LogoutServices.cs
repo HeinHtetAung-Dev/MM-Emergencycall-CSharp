@@ -30,7 +30,7 @@ public class LogoutService
         }
 
        
-        user.SessionToken = null;
+        //user.SessionToken = null;
         await _db.SaveChangesAsync();
 
         _logger.LogInformation($"User {user.Name} logged out successfully.");

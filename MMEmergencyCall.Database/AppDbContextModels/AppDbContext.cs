@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace MMEmergencyCall.Databases.AppDbContextModels;
 
@@ -17,6 +19,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<EmergencyService> EmergencyServices { get; set; }
 
+    public virtual DbSet<Session> Sessions { get; set; }
+
     public virtual DbSet<StateRegion> StateRegions { get; set; }
 
     public virtual DbSet<Township> Townships { get; set; }
@@ -27,13 +31,7 @@ public partial class AppDbContext : DbContext
     {
         modelBuilder.Entity<EmergencyRequest>(entity =>
         {
-            entity.HasKey(e => e.RequestId).HasName("PK__Emergenc__33A8517A96B44B30");
-
-            entity.HasIndex(e => e.ProviderId, "idx_ProviderId");
-
-            entity.HasIndex(e => e.ServiceId, "idx_ServiceId");
-
-            entity.HasIndex(e => e.UserId, "idx_UserId");
+            entity.HasKey(e => e.RequestId).HasName("PK__Emergenc__33A8517A6F44C3A7");
 
             entity.Property(e => e.Notes).HasColumnType("text");
             entity.Property(e => e.RequestTime)
@@ -48,15 +46,13 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.ServiceId).HasName("PK__Emergenc__C51BB00A372E00BB");
 
-            entity.HasIndex(e => e.ServiceType, "idx_ServiceType");
-
             entity.Property(e => e.Availability)
                 .HasMaxLength(1)
                 .IsUnicode(false)
                 .IsFixedLength();
-            entity.Property(e => e.Lng).HasColumnType("decimal(18, 7)");
+            entity.Property(e => e.Lng).HasColumnType("decimal(18, 4)");
             entity.Property(e => e.Ltd)
-                .HasColumnType("decimal(18, 7)")
+                .HasColumnType("decimal(18, 4)")
                 .HasColumnName("ltd");
             entity.Property(e => e.PhoneNumber).HasMaxLength(15);
             entity.Property(e => e.ServiceGroup).HasMaxLength(50);
@@ -69,9 +65,16 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.TownshipCode).HasMaxLength(200);
         });
 
+        modelBuilder.Entity<Session>(entity =>
+        {
+            entity.Property(e => e.SessionId).ValueGeneratedNever();
+            entity.Property(e => e.ExpireTime).HasColumnType("datetime");
+            entity.Property(e => e.LogoutTime).HasColumnType("datetime");
+        });
+
         modelBuilder.Entity<StateRegion>(entity =>
         {
-            entity.HasKey(e => e.StateRegionId).HasName("PK__StateReg__D8A834D4F243667F");
+            entity.HasKey(e => e.StateRegionId).HasName("PK__StateReg__D8A834D42EDDBAA2");
 
             entity.Property(e => e.StateRegionCode).HasMaxLength(50);
             entity.Property(e => e.StateRegionNameEn).HasMaxLength(200);
@@ -92,24 +95,25 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C78D5D195");
 
-            entity.HasIndex(e => e.PhoneNumber, "idx_PhoneNumber");
-
             entity.Property(e => e.Address).HasMaxLength(300);
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.EmergencyType).HasMaxLength(50);
             entity.Property(e => e.IsVerified)
                 .HasMaxLength(1)
-                .IsUnicode(false)
-                .IsFixedLength();
+                .IsUnicode(false);
             entity.Property(e => e.Name).HasMaxLength(200);
             entity.Property(e => e.Otp)
                 .HasMaxLength(50)
+                .IsUnicode(false)
                 .HasColumnName("OTP");
             entity.Property(e => e.Password).HasMaxLength(100);
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
             entity.Property(e => e.Role).HasMaxLength(100);
             entity.Property(e => e.TownshipCode).HasMaxLength(100);
-            entity.Property(e => e.UserStatus).HasMaxLength(100);
+            entity.Property(e => e.UserStatus)
+                .HasMaxLength(11)
+                .IsUnicode(false)
+                .HasDefaultValueSql("('Pending')");
         });
 
         OnModelCreatingPartial(modelBuilder);

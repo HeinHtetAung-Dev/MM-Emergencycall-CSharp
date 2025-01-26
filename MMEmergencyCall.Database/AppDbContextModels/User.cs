@@ -1,4 +1,7 @@
-﻿namespace MMEmergencyCall.Databases.AppDbContextModels;
+﻿using System;
+using System.Collections.Generic;
+
+namespace MMEmergencyCall.Databases.AppDbContextModels;
 
 public partial class User
 {
@@ -20,12 +23,11 @@ public partial class User
 
     public string TownshipCode { get; set; } = null!;
 
-    public string? UserStatus { get; set; }
-
     public string Role { get; set; } = null!;
+
+    public string? UserStatus { get; set; }
 
     public string? IsVerified { get; set; }
 
     public string? Otp { get; set; }
-    public object SessionToken { get; set; }
 }
