@@ -10,7 +10,7 @@ public class TownshipTopTenServiceController : BaseController
 		_townshipTopTenService = townshipTopTenServiceService;
 	}
 
-	[HttpGet]
+	[HttpGet("{townshipCode}")]
 	public async Task<IActionResult> GetTownshipTopTenService(string townshipCode)
 	{
 		var response = await _townshipTopTenService.GetTownshipTopTenService(townshipCode);

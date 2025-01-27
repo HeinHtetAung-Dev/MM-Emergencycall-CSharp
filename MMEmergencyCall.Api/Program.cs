@@ -1,6 +1,4 @@
-using MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
-using MMEmergencyCall.Domain.Admin.Features.EmergencyServices;
-using MMEmergencyCall.Domain.Admin.Features.Townships;
+using MMEmergencyCall.Domain.Admin;
 using MMEmergencyCall.Domain.Client.Features.Profile;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,18 +21,13 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 ServiceLifetime.Transient,
 ServiceLifetime.Transient);
 
+builder.AddAdminServices();
+
 builder.AddRegisterService();
-builder.AddAdminRegisterService();
 builder.AddEmergencyServiceService();
 builder.AddEmergencyServiceType();
 builder.AddEmergencyRequest();
 builder.AddSigninService();
-builder.AddAdminSignInService();
-builder.AddStateRegionService();
-builder.AddUserService();
-builder.AddAdminEmergencyServicesService();
-builder.AddTownshipService();
-builder.AddAdminEmergencyRequest();
 builder.AddProfile();
 
 var app = builder.Build();

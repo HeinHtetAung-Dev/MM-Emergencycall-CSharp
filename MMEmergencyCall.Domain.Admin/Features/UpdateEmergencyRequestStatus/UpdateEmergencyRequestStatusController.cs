@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Features.EmergencyRequests;
-
-namespace MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyRequestStatus;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyRequestStatus;
 
 [Route("api/admin/[controller]")]
 [AdminAuthorize]

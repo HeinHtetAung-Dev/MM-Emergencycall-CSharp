@@ -19,7 +19,7 @@ public class UserTopTenRequestController : BaseController
 		_userTopTenRequestService = userTopTenRequestService;
 	}
 
-	[HttpGet]
+	[HttpGet("{userId}")]
 	public async Task<IActionResult> GetTopTenRequestPerUser(int userId)
 	{
 		var result = await _userTopTenRequestService.GetTopTenRequestPerUser(userId);

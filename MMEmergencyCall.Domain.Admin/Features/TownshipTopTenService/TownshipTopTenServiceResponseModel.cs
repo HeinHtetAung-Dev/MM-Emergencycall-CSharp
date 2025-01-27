@@ -21,4 +21,5 @@ public class TownshipTopTenServiceResponseModel
 	public string? TownshipCode { get; set; }
 
 	public string? ServiceStatus { get; set; }
+	public int RequestCount { get; set; }
 }

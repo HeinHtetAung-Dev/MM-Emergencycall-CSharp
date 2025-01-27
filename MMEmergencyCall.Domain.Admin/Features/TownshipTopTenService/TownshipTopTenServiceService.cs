@@ -15,42 +15,41 @@ public class TownshipTopTenServiceService
 		try
 		{
 
-			string query = $@"WITH RankedServices AS (
+			string query = $@"SET NOCOUNT ON;
+
     SELECT 
-        ServiceId,
-        UserId,
-        ServiceGroup,
-        ServiceType,
-        ServiceName,
-        PhoneNumber,
-        Location,
-        Availability,
-        TownshipCode,
-        ServiceStatus,
-        Lng,
-        Ltd,
-        ROW_NUMBER() OVER (PARTITION BY TownshipCode ORDER BY ServiceId) AS RowNum
-    FROM EmergencyService
-)
-SELECT 
-    ServiceId,
-    UserId,
-    ServiceGroup,
-    ServiceType,
-    ServiceName,
-    PhoneNumber,
-    Location,
-    Availability,
-    TownshipCode,
-    ServiceStatus,
-    Lng,
-    Ltd
-FROM RankedServices
-WHERE RowNum <= 10;";
+           es.[ServiceId],
+		   es.[UserId],
+		   es.[ServiceType],
+           es.[ServiceName],
+		   es.[PhoneNumber],
+		   es.[Location],
+		   es.[Availability],
+		   es.[ServiceStatus],
+           COUNT(er.[RequestId]) AS RequestCount
+    FROM [dbo].[EmergencyRequests] er
+    INNER JOIN [dbo].[EmergencyServices] es
+        ON er.[ServiceId] = es.[ServiceId]
+    WHERE er.[TownshipCode] = @TownshipCode
+    GROUP BY 
+	es.[ServiceId], 
+	es.[ServiceName], 
+	es.[UserId],
+	es.[ServiceType],
+	es.[PhoneNumber],
+	es.[Location],
+	es.[ServiceStatus],
+	es.[Availability]
+    ORDER BY COUNT(er.[RequestId]) DESC;";
 
-			var responseData = await _db.Database.SqlQueryRaw<TownshipTopTenServiceResponseModel>(query).ToListAsync();
+			var responseData = await _db.Database
+				.SqlQueryRaw<TownshipTopTenServiceResponseModel>(
+				query,
+				new { TownShipCode = townshipCode }
+				)
+				.ToListAsync();
 
-            _logger.LogInformation(responseData.ToString());
+			_logger.LogInformation(responseData.ToString());
 
 			return Result<List<TownshipTopTenServiceResponseModel>>.Success(responseData);
 		}
