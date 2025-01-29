@@ -1,6 +1,4 @@
-﻿using MMEmergencyCall.Domain.Admin.Features.EmergencyRequest;
-
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequestList;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequestList;
 
 public class EmergencyRequestListService
 {
