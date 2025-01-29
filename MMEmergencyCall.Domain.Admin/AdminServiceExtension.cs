@@ -2,6 +2,7 @@
 using MMEmergencyCall.Domain.Admin.Features.CompleteCloseCancelEmergencyRequest;
 using MMEmergencyCall.Domain.Admin.Features.CreateEmergencyService;
 using MMEmergencyCall.Domain.Admin.Features.CreateUser;
+using MMEmergencyCall.Domain.Admin.Features.Dashboard;
 using MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyService;
 using MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyServiceStatus;
 using MMEmergencyCall.Domain.Admin.Features.DeleteUser;
@@ -55,8 +56,9 @@ public static class AdminServiceExtension
 		// Code Setup
 		builder.Services.AddScoped<StateRegionService>();
 		builder.Services.AddScoped<TownshipService>();
-		
+
 		// Dashboard Features
+		builder.Services.AddScoped<DashboardService>();
 		builder.Services.AddScoped<UserTopTenRequestService>();
 		builder.Services.AddScoped<TownshipTopTenRequestService>();
 		builder.Services.AddScoped<TownshipTopTenServiceService>();

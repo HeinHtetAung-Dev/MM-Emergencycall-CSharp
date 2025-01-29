@@ -1,3 +1,4 @@
+using MMEmergencyCall.Databases.Dapper;
 using MMEmergencyCall.Domain.Admin;
 using MMEmergencyCall.Domain.Client.Features.Profile;
 
@@ -15,11 +16,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+	opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+	opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 },
 ServiceLifetime.Transient,
 ServiceLifetime.Transient);
+
+builder.AddDapperContext();
 
 builder.AddAdminServices();
 
