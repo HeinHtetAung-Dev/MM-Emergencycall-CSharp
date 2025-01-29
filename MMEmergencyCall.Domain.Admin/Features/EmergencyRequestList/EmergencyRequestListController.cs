@@ -1,13 +1,13 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequest;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequestList;
 
 [Route("api/admin/EmergencyRequestList")]
 [AdminAuthorize]
 [ApiController]
-public class EmergencyRequestController : BaseController
+public class EmergencyRequestListController : BaseController
 {
-	private readonly EmergencyRequestService _emergencyRequestService;
+	private readonly EmergencyRequestListService _emergencyRequestService;
 
-	public EmergencyRequestController(EmergencyRequestService emergencyRequestService)
+	public EmergencyRequestListController(EmergencyRequestListService emergencyRequestService)
 	{
 		_emergencyRequestService = emergencyRequestService;
 	}

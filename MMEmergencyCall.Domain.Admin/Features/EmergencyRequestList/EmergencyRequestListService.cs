@@ -1,17 +1,19 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequest;
+﻿using MMEmergencyCall.Domain.Admin.Features.EmergencyRequest;
 
-public class EmergencyRequestService
+namespace MMEmergencyCall.Domain.Admin.Features.EmergencyRequestList;
+
+public class EmergencyRequestListService
 {
-	private readonly ILogger<EmergencyRequestService> _logger;
+	private readonly ILogger<EmergencyRequestListService> _logger;
 	private readonly AppDbContext _db;
 
-	public EmergencyRequestService(ILogger<EmergencyRequestService> logger, AppDbContext db)
+	public EmergencyRequestListService(ILogger<EmergencyRequestListService> logger, AppDbContext db)
 	{
 		_logger = logger;
 		_db = db;
 	}
 
-	public async Task<Result<EmergencyRequestPaginationResponseModel>> GetEmergencyRequests(int pageNo, int pageSize,
+	public async Task<Result<EmergencyRequestListPaginationResponseModel>> GetEmergencyRequests(int pageNo, int pageSize,
 int? userId = null, string? serviceId = null, string? providerId = null,
 string? status = null, string? townshipCode = null)
 	{
@@ -36,7 +38,7 @@ string? status = null, string? townshipCode = null)
 			{
 				if (!Enum.IsDefined(typeof(EnumEmergencyRequestStatus), status))
 				{
-					return Result<EmergencyRequestPaginationResponseModel>.ValidationError(
+					return Result<EmergencyRequestListPaginationResponseModel>.ValidationError(
 						"Invalid Emergency Request Status. Status should be Cancel, Open or Closed"
 					);
 				}
@@ -62,7 +64,7 @@ string? status = null, string? townshipCode = null)
 				.Take(pageSize)
 				.ToListAsync();
 
-			var responseData = emergencyRequests.Select(x => new EmergencyRequestModel
+			var responseData = emergencyRequests.Select(x => new EmergencyRequestListModel
 			{
 				RequestId = x.RequestId,
 				UserId = x.UserId,
@@ -75,7 +77,7 @@ string? status = null, string? townshipCode = null)
 				TownshipCode = x.TownshipCode
 			}).ToList();
 
-			var model = new EmergencyRequestPaginationResponseModel
+			var model = new EmergencyRequestListPaginationResponseModel
 			{
 				PageNo = pageNo,
 				PageSize = pageSize,
@@ -83,13 +85,13 @@ string? status = null, string? townshipCode = null)
 				Data = responseData
 			};
 
-			return Result<EmergencyRequestPaginationResponseModel>.Success(model);
+			return Result<EmergencyRequestListPaginationResponseModel>.Success(model);
 		}
 		catch (Exception ex)
 		{
 			string message = "An error occurred while getting the emergency requests: " + ex.Message;
 			_logger.LogError(message);
-			return Result<EmergencyRequestPaginationResponseModel>.Failure(message);
+			return Result<EmergencyRequestListPaginationResponseModel>.Failure(message);
 		}
 	}
 }

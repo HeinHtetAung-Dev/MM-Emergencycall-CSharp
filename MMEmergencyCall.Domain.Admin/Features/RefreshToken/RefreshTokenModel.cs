@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MMEmergencyCall.Domain.Admin.Features.RefreshToken;
 
-public class TokenModel
+public class RefreshTokenModel
 {
 	public int UserId { get; set; }
 

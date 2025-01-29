@@ -6,7 +6,8 @@ public enum EnumEmergencyRequestStatus
 {
     Cancel,
     Open,
-    Closed
+    Closed,
+    Completed
 }
 
 #endregion

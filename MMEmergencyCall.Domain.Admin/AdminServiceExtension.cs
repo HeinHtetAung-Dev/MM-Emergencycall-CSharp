@@ -3,8 +3,8 @@ using MMEmergencyCall.Domain.Admin.Features.CreateUser;
 using MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyService;
 using MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyServiceStatus;
 using MMEmergencyCall.Domain.Admin.Features.DeleteUser;
-using MMEmergencyCall.Domain.Admin.Features.EmergencyRequest;
-using MMEmergencyCall.Domain.Admin.Features.EmergencyService;
+using MMEmergencyCall.Domain.Admin.Features.EmergencyRequestList;
+using MMEmergencyCall.Domain.Admin.Features.EmergencyServiceList;
 using MMEmergencyCall.Domain.Admin.Features.RefreshToken;
 using MMEmergencyCall.Domain.Admin.Features.Register;
 using MMEmergencyCall.Domain.Admin.Features.Signout;
@@ -29,14 +29,14 @@ public static class AdminServiceExtension
 	{
 		// Emergency Service Features
 		builder.Services.AddScoped<CreateEmergencyServiceService>();
-		builder.Services.AddScoped<EmergencyServiceService>();
+		builder.Services.AddScoped<EmergencyServiceListService>();
 		builder.Services.AddScoped<UpdateEmergencyServiceStatusService>();
 		builder.Services.AddScoped<DeleteEmergencyServiceStatusService>();
 		builder.Services.AddScoped<UpdateEmergencyServiceService>();
 		builder.Services.AddScoped<DeleteEmergencyServiceService>();
 
 		// Emergency Request Features
-		builder.Services.AddScoped<EmergencyRequestService>();
+		builder.Services.AddScoped<EmergencyRequestListService>();
 		builder.Services.AddScoped<UpdateEmergencyRequestStatusService>();
 
 		// User(Service Provider) Features

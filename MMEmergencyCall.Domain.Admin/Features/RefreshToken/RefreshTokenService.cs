@@ -15,7 +15,7 @@ public class RefreshTokenService
 		{
 			DateTime expireTime = DateTime.Now.AddMinutes(5);
 
-			var requestTokenModel = token.ToDecrypt().ToObject<TokenModel>();
+			var requestTokenModel = token.ToDecrypt().ToObject<RefreshTokenModel>();
 
 			var session = await _db.Sessions
 				.FirstOrDefaultAsync(x => x.SessionId == requestTokenModel.SessionId);
@@ -25,7 +25,7 @@ public class RefreshTokenService
 			_db.Entry(session).State = EntityState.Modified;
 			await _db.SaveChangesAsync();
 
-			TokenModel ResponseTokenModel = new()
+			RefreshTokenModel ResponseTokenModel = new()
 			{
 				UserId = requestTokenModel.UserId,
 				SessionId = requestTokenModel.SessionId,

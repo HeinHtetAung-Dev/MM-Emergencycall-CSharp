@@ -14,7 +14,7 @@ public class AdminSignoutService
 	{
 		try
 		{
-			var requestTokenModel = token.ToDecrypt().ToObject<TokenModel>();
+			var requestTokenModel = token.ToDecrypt().ToObject<SignoutRefreshTokenModel>();
 
 			var session = await _db.Sessions
 				.FirstOrDefaultAsync(x => x.SessionId == requestTokenModel.SessionId);

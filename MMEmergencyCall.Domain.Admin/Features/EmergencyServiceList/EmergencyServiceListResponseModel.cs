@@ -1,6 +1,6 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyService;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServiceList;
 
-public class EmergencyServiceResponseModel
+public class EmergencyServiceListResponseModel
 {
 	public int ServiceId { get; set; }
 

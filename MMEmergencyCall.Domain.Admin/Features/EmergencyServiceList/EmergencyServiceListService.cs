@@ -1,15 +1,15 @@
 ﻿using EnumServiceStatus = MMEmergencyCall.Shared.EnumServiceStatus;
 
-namespace MMEmergencyCall.Domain.Admin.Features.EmergencyService;
+namespace MMEmergencyCall.Domain.Admin.Features.EmergencyServiceList;
 
-public class EmergencyServiceService
+public class EmergencyServiceListService
 {
-	private readonly ILogger<EmergencyServiceService> _logger;
+	private readonly ILogger<EmergencyServiceListService> _logger;
 
 	private readonly AppDbContext _db;
 
-	public EmergencyServiceService(
-		ILogger<EmergencyServiceService> logger,
+	public EmergencyServiceListService(
+		ILogger<EmergencyServiceListService> logger,
 		AppDbContext db
 	)
 	{
@@ -18,12 +18,12 @@ public class EmergencyServiceService
 	}
 
 	public async Task<
-		Result<EmergencyServicesPaginationResponseModel>
+		Result<EmergencyServicesListPaginationResponseModel>
 	> GetEmergencyServicesByStatusAsync(string? status, int pageNo = 1, int pageSize = 10)
 	{
 		if (pageNo < 1 || pageSize < 1)
 		{
-			return Result<EmergencyServicesPaginationResponseModel>.Failure(
+			return Result<EmergencyServicesListPaginationResponseModel>.Failure(
 				"Invalid page number or page size"
 			);
 		}
@@ -50,7 +50,7 @@ public class EmergencyServiceService
 
 			if (rowCount is 0)
 			{
-				return Result<EmergencyServicesPaginationResponseModel>.NotFoundError(
+				return Result<EmergencyServicesListPaginationResponseModel>.NotFoundError(
 					$"There is no data with the status: {status}"
 				);
 			}
@@ -63,14 +63,14 @@ public class EmergencyServiceService
 
 			if (pageNo > pageCount)
 			{
-				return Result<EmergencyServicesPaginationResponseModel>.Failure(
+				return Result<EmergencyServicesListPaginationResponseModel>.Failure(
 					"Invalid page number"
 				);
 			}
 
 			var lst = await query.Skip((pageNo - 1) * pageSize).Take(pageSize).ToListAsync();
 
-			var data = lst.Select(x => new EmergencyServiceResponseModel
+			var data = lst.Select(x => new EmergencyServiceListResponseModel
 			{
 				ServiceId = x.ServiceId,
 				UserId = x.UserId,
@@ -85,7 +85,7 @@ public class EmergencyServiceService
 			})
 				.ToList();
 
-			var model = new EmergencyServicesPaginationResponseModel()
+			var model = new EmergencyServicesListPaginationResponseModel()
 			{
 				Data = data,
 				PageNo = pageNo,
@@ -93,17 +93,17 @@ public class EmergencyServiceService
 				PageCount = pageCount
 			};
 
-			return Result<EmergencyServicesPaginationResponseModel>.Success(model);
+			return Result<EmergencyServicesListPaginationResponseModel>.Success(model);
 		}
 		catch (ArgumentException ex)
 		{
 			_logger.LogError(ex.ToString());
-			return Result<EmergencyServicesPaginationResponseModel>.Failure(ex.ToString());
+			return Result<EmergencyServicesListPaginationResponseModel>.Failure(ex.ToString());
 		}
 		catch (Exception ex)
 		{
 			_logger.LogError(ex.ToString());
-			return Result<EmergencyServicesPaginationResponseModel>.Failure(ex.ToString());
+			return Result<EmergencyServicesListPaginationResponseModel>.Failure(ex.ToString());
 		}
 	}
 }
