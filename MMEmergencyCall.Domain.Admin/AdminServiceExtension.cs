@@ -1,4 +1,6 @@
-﻿using MMEmergencyCall.Domain.Admin.Features.CreateEmergencyService;
+﻿using MMEmergencyCall.Domain.Admin.Features.ApproveRejectEmergencyService;
+using MMEmergencyCall.Domain.Admin.Features.CompleteCloseCancelEmergencyRequest;
+using MMEmergencyCall.Domain.Admin.Features.CreateEmergencyService;
 using MMEmergencyCall.Domain.Admin.Features.CreateUser;
 using MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyService;
 using MMEmergencyCall.Domain.Admin.Features.DeleteEmergencyServiceStatus;
@@ -13,9 +15,7 @@ using MMEmergencyCall.Domain.Admin.Features.TotalActive;
 using MMEmergencyCall.Domain.Admin.Features.Townships;
 using MMEmergencyCall.Domain.Admin.Features.TownshipTopTenRequest;
 using MMEmergencyCall.Domain.Admin.Features.TownshipTopTenService;
-using MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyRequestStatus;
 using MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyService;
-using MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyServiceStatus;
 using MMEmergencyCall.Domain.Admin.Features.UpdateUser;
 using MMEmergencyCall.Domain.Admin.Features.UserById;
 using MMEmergencyCall.Domain.Admin.Features.UserList;
@@ -30,14 +30,14 @@ public static class AdminServiceExtension
 		// Emergency Service Features
 		builder.Services.AddScoped<CreateEmergencyServiceService>();
 		builder.Services.AddScoped<EmergencyServiceListService>();
-		builder.Services.AddScoped<UpdateEmergencyServiceStatusService>();
+		builder.Services.AddScoped<ApproveRejectEmergencyServiceService>();
 		builder.Services.AddScoped<DeleteEmergencyServiceStatusService>();
 		builder.Services.AddScoped<UpdateEmergencyServiceService>();
 		builder.Services.AddScoped<DeleteEmergencyServiceService>();
 
 		// Emergency Request Features
 		builder.Services.AddScoped<EmergencyRequestListService>();
-		builder.Services.AddScoped<UpdateEmergencyRequestStatusService>();
+		builder.Services.AddScoped<CompleteCloseCancelEmergencyRequestService>();
 
 		// User(Service Provider) Features
 		builder.Services.AddScoped<CreateUserService>();

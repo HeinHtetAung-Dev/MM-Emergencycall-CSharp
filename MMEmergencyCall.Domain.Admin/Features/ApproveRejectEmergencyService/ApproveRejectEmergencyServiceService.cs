@@ -1,15 +1,15 @@
 ﻿using EnumServiceStatus = MMEmergencyCall.Shared.EnumServiceStatus;
 
-namespace MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyServiceStatus;
+namespace MMEmergencyCall.Domain.Admin.Features.ApproveRejectEmergencyService;
 
-public class UpdateEmergencyServiceStatusService
+public class ApproveRejectEmergencyServiceService
 {
-	private readonly ILogger<UpdateEmergencyServiceStatusService> _logger;
+	private readonly ILogger<ApproveRejectEmergencyServiceService> _logger;
 
 	private readonly AppDbContext _db;
 
-	public UpdateEmergencyServiceStatusService(
-		ILogger<UpdateEmergencyServiceStatusService> logger,
+	public ApproveRejectEmergencyServiceService(
+		ILogger<ApproveRejectEmergencyServiceService> logger,
 		AppDbContext db
 	)
 	{

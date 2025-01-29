@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyRequestStatus;
+namespace MMEmergencyCall.Domain.Admin.Features.CompleteCloseCancelEmergencyRequest;
 
-public class UpdateEmergencyRequestStatusRequestModel
+public class CompleteCloseCancelEmergencyRequestRequestModel
 {
 	public string Status { get; set; } = null!;
 }

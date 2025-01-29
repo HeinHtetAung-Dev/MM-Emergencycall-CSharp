@@ -1,17 +1,17 @@
-﻿namespace MMEmergencyCall.Domain.Admin.Features.UpdateEmergencyRequestStatus;
+﻿namespace MMEmergencyCall.Domain.Admin.Features.CompleteCloseCancelEmergencyRequest;
 
-public class UpdateEmergencyRequestStatusService
+public class CompleteCloseCancelEmergencyRequestService
 {
-	private readonly ILogger<UpdateEmergencyRequestStatusService> _logger;
+	private readonly ILogger<CompleteCloseCancelEmergencyRequestService> _logger;
 	private readonly AppDbContext _db;
 
-	public UpdateEmergencyRequestStatusService(ILogger<UpdateEmergencyRequestStatusService> logger, AppDbContext db)
+	public CompleteCloseCancelEmergencyRequestService(ILogger<CompleteCloseCancelEmergencyRequestService> logger, AppDbContext db)
 	{
 		_logger = logger;
 		_db = db;
 	}
 
-	public async Task<Result<bool>> UpdateEmergencyRequestStatus(int id, UpdateEmergencyRequestStatusRequestModel statusRequest)
+	public async Task<Result<bool>> UpdateEmergencyRequestStatus(int id, CompleteCloseCancelEmergencyRequestRequestModel statusRequest)
 	{
 		try
 		{
@@ -34,19 +34,6 @@ public class UpdateEmergencyRequestStatusService
 			existingEmergencyRequest.Status = statusRequest.Status;
 			_db.Entry(existingEmergencyRequest).State = EntityState.Modified;
 			await _db.SaveChangesAsync();
-
-			//var model = new EmergencyRequestResponseModel()
-			//{
-			//	RequestId = existingEmergencyRequest.RequestId,
-			//	UserId = existingEmergencyRequest.UserId,
-			//	ServiceId = existingEmergencyRequest.ServiceId,
-			//	ProviderId = existingEmergencyRequest.ProviderId,
-			//	RequestTime = existingEmergencyRequest.RequestTime,
-			//	Status = existingEmergencyRequest.Status,
-			//	ResponseTime = existingEmergencyRequest.ResponseTime,
-			//	Notes = existingEmergencyRequest.Notes,
-			//	TownshipCode = existingEmergencyRequest.TownshipCode
-			//};
 
 			return Result<bool>.Success(true);
 		}
