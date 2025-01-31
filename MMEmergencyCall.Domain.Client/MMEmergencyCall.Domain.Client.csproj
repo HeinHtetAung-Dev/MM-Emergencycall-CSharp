@@ -30,9 +30,7 @@
 	<ItemGroup>
 	  <Folder Include="Features\EmergencyService\" />
 	  <Folder Include="Features\DeleteEmergencyRequest\" />
-	  <Folder Include="Features\EmergencyRequestHistory\" />
 	  <Folder Include="Features\EmergencyRequestPendingList\" />
-	  <Folder Include="Features\SubmitEmergencyRequest\" />
 	</ItemGroup>
 
 </Project>
